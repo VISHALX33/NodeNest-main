@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api', // adjust if you're using a proxy
+  baseURL: 'https://notenest-backend-zoab.onrender.com/api', // adjust if you're using a proxy
 });
 
 API.interceptors.request.use((config) => {
