@@ -17,7 +17,7 @@ const app = express();
 app.use(cors({
   origin: [
     'http://localhost:5173', // local dev
-    'https://notenests.netlify.app/' // deployed frontend
+    'https://notenests.netlify.app' // deployed frontend
   ],
   credentials: true,
 }));
