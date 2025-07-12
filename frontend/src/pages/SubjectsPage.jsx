@@ -12,19 +12,24 @@ export default function SubjectsPage() {
   }, [semesterId]);
 
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-4">Subjects</h1>
-      <div className="space-y-2">
-        {subjects.map((sub) => (
-          <div
-            key={sub._id}
-            className="p-3 border rounded shadow hover:bg-green-50 cursor-pointer"
-            onClick={() => navigate(`/subjects/${sub._id}`)}
-          >
-            {sub.title}
-          </div>
-        ))}
-      </div>
+    <div className="max-w-2xl mx-auto p-4">
+      <h1 className="text-3xl font-bold text-center mb-6 text-purple-700">📚 Subjects</h1>
+
+      {subjects.length === 0 ? (
+        <p className="text-gray-500 text-center">No subjects found for this semester.</p>
+      ) : (
+        <div className="grid grid-cols-1 gap-4">
+          {subjects.map((sub) => (
+            <div
+              key={sub._id}
+              className="p-4 bg-white rounded-2xl shadow-md border hover:shadow-lg transition duration-200 cursor-pointer hover:bg-purple-50"
+              onClick={() => navigate(`/subjects/${sub._id}`)}
+            >
+              <p className="text-lg font-semibold text-purple-800">{sub.title}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

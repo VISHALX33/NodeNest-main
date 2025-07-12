@@ -24,24 +24,38 @@ export default function ChatPage() {
 
   return (
     <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4 text-center">Global Chat</h2>
-      <div className="bg-gray-100 p-4 h-[400px] overflow-y-auto rounded mb-4">
-        {messages.map(msg => (
-          <div key={msg._id} className="mb-2">
-            <strong>{msg.user.name}:</strong> {msg.text}
-            <div className="text-xs text-gray-500">{new Date(msg.createdAt).toLocaleString()}</div>
-          </div>
-        ))}
+      <h2 className="text-3xl font-bold mb-6 text-center text-indigo-700">💬 Global Chat Room</h2>
+
+      <div className="bg-white border border-indigo-100 p-4 h-[400px] overflow-y-auto rounded-2xl shadow-sm mb-4">
+        {messages.length === 0 ? (
+          <p className="text-gray-400 text-center mt-10">No messages yet. Be the first to say hi 👋</p>
+        ) : (
+          messages.map((msg) => (
+            <div key={msg._id} className="mb-3">
+              <div className="bg-indigo-50 p-2 rounded-lg">
+                <p className="font-semibold text-indigo-700">{msg.user.name}</p>
+                <p className="text-gray-800">{msg.text}</p>
+              </div>
+              <p className="text-xs text-gray-500 mt-1 ml-1">
+                {new Date(msg.createdAt).toLocaleString()}
+              </p>
+            </div>
+          ))
+        )}
       </div>
 
       <form onSubmit={sendMessage} className="flex gap-2">
         <input
-          className="flex-1 border p-2 rounded"
+          className="flex-1 border border-indigo-200 rounded-full px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
           placeholder="Type your message..."
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
         />
-        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Send</button>
+        <button
+          className="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition-all duration-200 shadow-sm"
+        >
+          Send
+        </button>
       </form>
     </div>
   );

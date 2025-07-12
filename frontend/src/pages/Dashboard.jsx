@@ -11,16 +11,20 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="p-4 grid grid-cols-2 gap-4">
-      {semesters.map((s) => (
-        <div
-          key={s._id}
-          className="bg-white p-4 shadow rounded text-center cursor-pointer hover:bg-blue-100"
-          onClick={() => navigate(`/semesters/${s._id}`)}
-        >
-          {s.title}
-        </div>
-      ))}
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold text-center mb-6 text-indigo-700">Select Your Semester</h1>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+        {semesters.map((s) => (
+          <div
+            key={s._id}
+            className="bg-white rounded-2xl shadow-md text-center py-6 px-4 cursor-pointer border border-gray-200 hover:bg-indigo-50 transition-all"
+            onClick={() => navigate(`/semesters/${s._id}`)}
+          >
+            <span className="text-lg font-semibold text-gray-700">{s.title}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
