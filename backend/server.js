@@ -9,17 +9,26 @@ import uploadRoutes from './routes/uploadRoutes.js';
 import chatRoutes from './routes/chatRoutes.js';
 // import downloadRoutes from './routes/downloadRoutes.js';
 
+dotenv.config();
 
 const app = express();
 
-app.use(cors());
+// ✅ FIX: Configure CORS properly
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // local dev
+    'https://notenests.netlify.app/' // deployed frontend
+  ],
+  credentials: true,
+}));
+
+// ✅ Parse JSON body
 app.use(express.json());
 
+// ✅ Serve static files (e.g., uploaded PDFs)
 app.use('/uploads', express.static(path.join(process.cwd(), '/uploads')));
 
-
-dotenv.config();
-
+// ✅ API routes
 app.use('/api/users', userRoutes);
 app.use('/api/semesters', semesterRoutes);
 app.use('/api/upload', uploadRoutes);
@@ -31,4 +40,5 @@ mongoose.connect(process.env.MONGO_URI)
     app.listen(process.env.PORT || 5000, () => {
       console.log('Server is running on port 5000');
     });
-  }).catch(err => console.log(err));
+  })
+  .catch(err => console.log(err));

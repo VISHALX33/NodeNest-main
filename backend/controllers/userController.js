@@ -20,7 +20,7 @@ export const registerUser = async (req, res) => {
   const newUser = await User.create({
     name, email, phone,
     password: hashedPassword,
-    collegeStudent, gender
+    collegeStudent, gender ,image 
   });
 
   const token = generateToken(newUser);
@@ -54,6 +54,7 @@ export const updateProfile = async (req, res) => {
     user.phone = req.body.phone || user.phone;
     user.gender = req.body.gender || user.gender;
     user.collegeStudent = req.body.collegeStudent ?? user.collegeStudent;
+    //user.image = req.body.image || user.image; // ✅ new line
 
     const updatedUser = await user.save();
     res.status(200).json(updatedUser);
@@ -61,6 +62,7 @@ export const updateProfile = async (req, res) => {
     res.status(404).json({ message: 'User not found' });
   }
 };
+
 
 export const deleteAccount = async (req, res) => {
   const user = await User.findById(req.user._id);
