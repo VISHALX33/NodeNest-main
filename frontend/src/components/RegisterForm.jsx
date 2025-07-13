@@ -46,7 +46,7 @@ export default function RegisterForm() {
         value={formData.name}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
       />
       <input
         type="email"
@@ -55,7 +55,7 @@ export default function RegisterForm() {
         value={formData.email}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
       />
       <input
         type="tel"
@@ -64,7 +64,7 @@ export default function RegisterForm() {
         value={formData.phone}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
       />
       <input
         type="password"
@@ -73,16 +73,16 @@ export default function RegisterForm() {
         value={formData.password}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
       />
 
-      <label className="flex items-center text-sm">
+      <label className="flex items-center text-sm text-gray-700">
         <input
           type="checkbox"
           name="collegeStudent"
           checked={formData.collegeStudent}
           onChange={handleChange}
-          className="mr-2 rounded focus:ring-indigo-400"
+          className="mr-2 accent-green-500"
         />
         I am a college student
       </label>
@@ -92,7 +92,7 @@ export default function RegisterForm() {
         value={formData.gender}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full px-4 py-2 border border-green-200 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
       >
         <option value="">Select Gender</option>
         <option value="Male">Male</option>
@@ -103,10 +103,10 @@ export default function RegisterForm() {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full py-2 rounded-lg text-white transition duration-200 ${
+        className={`w-full py-2 rounded-lg text-white font-semibold transition duration-200 ${
           loading
-            ? 'bg-indigo-400 cursor-not-allowed'
-            : 'bg-indigo-600 hover:bg-indigo-700'
+            ? 'bg-green-300 cursor-not-allowed'
+            : 'bg-green-600 hover:bg-green-700'
         }`}
       >
         {loading ? 'Registering...' : 'Register'}

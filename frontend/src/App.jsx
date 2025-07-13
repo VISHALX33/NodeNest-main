@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import ChatPage from './pages/ChatPage';
 import MyPDFsPage from './pages/MyPDFsPage';
 import PrivateRoute from './components/PrivateRoute';
-
+import MyTasks from './pages/MyTasks';
 function Layout({ children }) {
   return (
     <>
@@ -76,6 +76,13 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/tasks"
+          element={<PrivateRoute>
+            <Layout><MyTasks /></Layout>
+          </PrivateRoute>}
+        />
+
       </Routes>
     </BrowserRouter>
   );

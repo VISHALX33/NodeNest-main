@@ -6,9 +6,9 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-6 border border-gray-200">
-        <h1 className="text-3xl font-bold text-center text-indigo-600">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-white to-green-100 p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 space-y-6 border border-green-200">
+        <h1 className="text-3xl font-bold text-center text-green-700">
           {isLogin ? 'Login to Your Account' : 'Create a New Account'}
         </h1>
 
@@ -18,7 +18,7 @@ export default function AuthPage() {
           {isLogin ? "Don't have an account?" : 'Already registered?'}{' '}
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="text-indigo-600 hover:underline font-medium transition-colors"
+            className="text-green-600 hover:underline font-medium transition-colors"
           >
             {isLogin ? 'Register here' : 'Login here'}
           </button>

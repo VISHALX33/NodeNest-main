@@ -40,25 +40,28 @@ export default function NotesPage() {
 
   return (
     <div className="max-w-5xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6 text-center text-indigo-700">Unit-wise Notes</h1>
+      <h1 className="text-3xl font-bold mb-6 text-center text-green-700">
+        Unit-wise Notes
+      </h1>
 
       {loading ? (
         <div className="text-center text-gray-500">Loading...</div>
       ) : notes.length === 0 ? (
         <div className="text-center text-gray-500">No notes found for this subject.</div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {notes.map(note => (
             <div
               key={note._id}
-              className="bg-white shadow-md rounded-lg p-4 hover:bg-indigo-50 transition"
+              className="bg-white border border-green-100 shadow-sm rounded-2xl p-4 hover:shadow-md transition duration-300 hover:border-green-200"
             >
-              <div className="text-gray-800 font-semibold text-lg mb-1">{note.title}</div>
-              <div className="text-sm text-gray-600">Semester: {note.semesterName}</div>
-              <div className="text-sm text-gray-600 mb-3">Subject: {note.subjectName}</div>
+              <h2 className="text-lg font-semibold text-green-800 mb-1">{note.title}</h2>
+              <p className="text-sm text-gray-600">Semester: {note.semesterName}</p>
+              <p className="text-sm text-gray-600 mb-4">Subject: {note.subjectName}</p>
+
               <button
                 onClick={() => handleDownload(note)}
-                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-1.5 rounded-full text-sm w-full"
+                className="w-full bg-green-600 hover:bg-green-700 text-white text-sm font-medium px-4 py-2 rounded-full transition"
               >
                 View PDF
               </button>
