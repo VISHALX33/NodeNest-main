@@ -7,7 +7,7 @@ import userRoutes from './routes/userRoutes.js';
 import semesterRoutes from './routes/semesterRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import chatRoutes from './routes/chatRoutes.js';
-// import downloadRoutes from './routes/downloadRoutes.js';
+import userPdfRoutes from './routes/userPdfRoutes.js';
 
 dotenv.config();
 
@@ -33,7 +33,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/semesters', semesterRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/chat', chatRoutes);
-// app.use('/api/downloads', downloadRoutes);
+app.use('/api/user-pdfs', userPdfRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {

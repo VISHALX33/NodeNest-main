@@ -7,24 +7,34 @@ const generateToken = (user) => {
 };
 
 export const registerUser = async (req, res) => {
-  const { name, email, phone, password, collegeStudent, gender } = req.body;
+  try {
+    const { name, email, phone, password, collegeStudent, gender } = req.body;
 
-  if (!name || !email || !phone || !password || !gender) {
-    return res.status(400).json({ message: 'All fields are required' });
+    if (!name || !email || !phone || !password || !gender) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = await User.create({
+      name,
+      email,
+      phone,
+      password: hashedPassword,
+      collegeStudent,
+      gender,
+    });
+
+    const token = generateToken(newUser);
+    res.status(201).json({ token, user: { ...newUser._doc, password: undefined } });
+  } catch (error) {
+    console.error('Register Error:', error.message);
+    res.status(500).json({ message: 'Server Error. Please try again later.' });
   }
-
-  const existingUser = await User.findOne({ email });
-  if (existingUser) return res.status(400).json({ message: 'User already exists' });
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = await User.create({
-    name, email, phone,
-    password: hashedPassword,
-    collegeStudent, gender ,image 
-  });
-
-  const token = generateToken(newUser);
-  res.status(201).json({ token, user: { ...newUser._doc, password: undefined } });
 };
 
 export const loginUser = async (req, res) => {
@@ -39,6 +49,7 @@ export const loginUser = async (req, res) => {
   const token = generateToken(user);
   res.json({ token, user: { ...user._doc, password: undefined } });
 };
+
 export const getProfile = async (req, res) => {
   if (req.user) {
     res.status(200).json(req.user);
@@ -54,15 +65,22 @@ export const updateProfile = async (req, res) => {
     user.phone = req.body.phone || user.phone;
     user.gender = req.body.gender || user.gender;
     user.collegeStudent = req.body.collegeStudent ?? user.collegeStudent;
-    //user.image = req.body.image || user.image; // ✅ new line
+    user.location = req.body.location || user.location;
+    user.bio = req.body.bio || user.bio;
+    user.image = req.body.image || user.image;
+
+    if (req.body.password) {
+      user.password = await bcrypt.hash(req.body.password, 10);
+    }
 
     const updatedUser = await user.save();
-    res.status(200).json(updatedUser);
+    const userObj = updatedUser.toObject();
+    delete userObj.password;
+    res.status(200).json(userObj);
   } else {
     res.status(404).json({ message: 'User not found' });
   }
 };
-
 
 export const deleteAccount = async (req, res) => {
   const user = await User.findById(req.user._id);
