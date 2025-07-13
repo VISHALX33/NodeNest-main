@@ -7,7 +7,8 @@ import ProfilePage from './pages/ProfilePage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatPage from './pages/ChatPage';
-// import MyPDFsPage from './pages/MyPDFsPage';
+import MyPDFsPage from './pages/MyPDFsPage';
+import PrivateRoute from './components/PrivateRoute';
 
 function Layout({ children }) {
   return (
@@ -23,33 +24,58 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public Login Page */}
         <Route path="/" element={<AuthPage />} />
+
+        {/* Protected Routes */}
         <Route
           path="/dashboard"
-          element={<Layout><Dashboard /></Layout>}
+          element={
+            <PrivateRoute>
+              <Layout><Dashboard /></Layout>
+            </PrivateRoute>
+          }
         />
         <Route
           path="/semesters/:semesterId"
-          element={<Layout><SubjectsPage /></Layout>}
+          element={
+            <PrivateRoute>
+              <Layout><SubjectsPage /></Layout>
+            </PrivateRoute>
+          }
         />
         <Route
           path="/subjects/:subjectId"
-          element={<Layout><NotesPage /></Layout>}
+          element={
+            <PrivateRoute>
+              <Layout><NotesPage /></Layout>
+            </PrivateRoute>
+          }
         />
         <Route
           path="/profile"
-          element={<Layout><ProfilePage /></Layout>}
+          element={
+            <PrivateRoute>
+              <Layout><ProfilePage /></Layout>
+            </PrivateRoute>
+          }
         />
         <Route
           path="/chat"
-          element={<Layout><ChatPage /></Layout>}
+          element={
+            <PrivateRoute>
+              <Layout><ChatPage /></Layout>
+            </PrivateRoute>
+          }
         />
-{/* 
         <Route
-          path="/mypdfs"
-          element={<Layout><MyPDFsPage /></Layout>}
-        /> */}
-
+          path="/mypdf"
+          element={
+            <PrivateRoute>
+              <Layout><MyPDFsPage /></Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

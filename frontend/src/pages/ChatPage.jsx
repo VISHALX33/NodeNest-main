@@ -6,16 +6,24 @@ export default function ChatPage() {
   const [text, setText] = useState('');
 
   const fetchMessages = async () => {
-    const res = await API.get('/chat');
-    setMessages(res.data);
+    try {
+      const res = await API.get('/chat');
+      setMessages(res.data);
+    } catch (err) {
+      console.error('Error fetching messages:', err);
+    }
   };
 
   const sendMessage = async (e) => {
     e.preventDefault();
     if (!text.trim()) return;
-    await API.post('/chat', { text });
-    setText('');
-    fetchMessages();
+    try {
+      await API.post('/chat', { text });
+      setText('');
+      fetchMessages();
+    } catch (err) {
+      console.error('Error sending message:', err);
+    }
   };
 
   useEffect(() => {
@@ -30,17 +38,20 @@ export default function ChatPage() {
         {messages.length === 0 ? (
           <p className="text-gray-400 text-center mt-10">No messages yet. Be the first to say hi 👋</p>
         ) : (
-          messages.map((msg) => (
-            <div key={msg._id} className="mb-3">
-              <div className="bg-indigo-50 p-2 rounded-lg">
-                <p className="font-semibold text-indigo-700">{msg.user.name}</p>
-                <p className="text-gray-800">{msg.text}</p>
+          messages.map((msg) => {
+            const userName = msg.user?.name || 'Unknown User';
+            return (
+              <div key={msg._id} className="mb-3">
+                <div className="bg-indigo-50 p-2 rounded-lg">
+                  <p className="font-semibold text-indigo-700">{userName}</p>
+                  <p className="text-gray-800">{msg.text}</p>
+                </div>
+                <p className="text-xs text-gray-500 mt-1 ml-1">
+                  {new Date(msg.createdAt).toLocaleString()}
+                </p>
               </div>
-              <p className="text-xs text-gray-500 mt-1 ml-1">
-                {new Date(msg.createdAt).toLocaleString()}
-              </p>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
 
@@ -52,6 +63,7 @@ export default function ChatPage() {
           onChange={(e) => setText(e.target.value)}
         />
         <button
+          type="submit"
           className="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition-all duration-200 shadow-sm"
         >
           Send
