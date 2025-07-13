@@ -8,7 +8,7 @@ import semesterRoutes from './routes/semesterRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import chatRoutes from './routes/chatRoutes.js';
 import userPdfRoutes from './routes/userPdfRoutes.js';
-
+import taskRoutes from './routes/taskRoutes.js';
 dotenv.config();
 
 const app = express();
@@ -34,6 +34,7 @@ app.use('/api/semesters', semesterRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/user-pdfs', userPdfRoutes);
+app.use('/api/tasks', taskRoutes);
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
