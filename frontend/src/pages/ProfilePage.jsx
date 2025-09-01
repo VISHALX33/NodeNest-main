@@ -56,15 +56,6 @@ export default function ProfilePage() {
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10">
         {/* Profile Avatar and Name */}
         <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-md w-full lg:w-1/3">
-          <img
-            src={
-              imageFile
-                ? URL.createObjectURL(imageFile)
-                : form.image || 'https://i.pravatar.cc/150'
-            }
-            alt="Profile"
-            className="w-28 h-28 rounded-full border-4 border-emerald-500 object-cover shadow"
-          />
           <h2 className="mt-4 text-xl font-bold text-emerald-700">{form.name || 'User Name'}</h2>
           {edit && (
             <>

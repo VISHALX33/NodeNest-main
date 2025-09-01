@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import setting from '../assets/setting.png';
 import { FaTasks } from 'react-icons/fa';
 import API from '../axios';
 
@@ -44,7 +45,7 @@ export default function Navbar() {
 
           {/* Avatar */}
           <img
-            src={user.image}
+            src= {setting}
             alt="User"
             onClick={() => setShowDropdown(!showDropdown)}
             className="w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer transition duration-200 hover:ring-2 hover:ring-white"
