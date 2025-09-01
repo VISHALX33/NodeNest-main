@@ -10,6 +10,10 @@ import ChatPage from './pages/ChatPage';
 import MyPDFsPage from './pages/MyPDFsPage';
 import PrivateRoute from './components/PrivateRoute';
 import MyTasks from './pages/MyTasks';
+import Team from "./pages/Team";
+
+
+
 function Layout({ children }) {
   return (
     <>
@@ -82,6 +86,11 @@ function App() {
             <Layout><MyTasks /></Layout>
           </PrivateRoute>}
         />
+       
+        <Route 
+        path="/team" element={<PrivateRoute>
+            <Layout><Team /></Layout>
+          </PrivateRoute>} />
 
       </Routes>
     </BrowserRouter>

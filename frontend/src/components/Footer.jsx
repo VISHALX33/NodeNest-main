@@ -41,6 +41,11 @@ export default function Footer() {
                 <li><Link to="/tasks" className="hover:text-green-600">My Tasks</Link></li>
                 <li><Link to="/mypdf" className="hover:text-green-600">Notes</Link></li>
                 <li><Link to="/chat" className="hover:text-green-600">Chat</Link></li>
+                {/* Add under Explore or Support section */}
+<li>
+  <Link to="/team" className="hover:text-green-600">Our Team</Link>
+</li>
+
               </ul>
             </div>
 
@@ -104,6 +109,16 @@ export default function Footer() {
             <FaUser size={20} />
             Profile
           </Link>
+          <Link
+  to="/team"
+  className={`flex flex-col items-center text-xs ${
+    pathname === '/team' ? 'text-green-600 font-semibold' : 'text-gray-500'
+  }`}
+>
+  <FaUser size={20} />
+  Team
+</Link>
+
         </div>
       )}
     </>
