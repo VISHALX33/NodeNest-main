@@ -146,9 +146,7 @@ export default function ProfilePage() {
             <button onClick={handleLogout} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium shadow">
               Logout
             </button>
-            <button onClick={handleDelete} className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium shadow">
-              Delete Account
-            </button>
+            
           </div>
         </div>
       </div>
