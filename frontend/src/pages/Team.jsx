@@ -1,11 +1,11 @@
 import React from "react";
-import vishal from '../assets/vishalp.png';
+import vishalImg from '../assets/vishalp.png';
 export default function Team() {
   const teamMembers = [
     {
       name: "Vishal Prajapati",
       role: "Full Stack Developer",
-      image: vishal, // replace with your actual image
+      image: vishalImg, // replace with your actual image
     },
     // Add more members here later if needed
   ];
@@ -36,3 +36,4 @@ export default function Team() {
     </div>
   );
 }
+/////////////12346 password
