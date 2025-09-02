@@ -1,6 +1,8 @@
 import React from "react";
 import vishalImg from '../assets/Vishalp.png';
 import Rishabh from '../assets/Rishabh.jpg';
+import Krishna from '../assets/Krishna.jpg';
+import Aditya from '../assets/Aditya.jpg';
 export default function Team() {
   const teamMembers = [
     {
@@ -21,12 +23,12 @@ export default function Team() {
     {
       name: "Krishna Sharma",
       role: "Documentation Support",
-      image: 'https://via.placeholder.com/150', 
+      image: Krishna, 
     },
     {
       name: "Aditya Vaishnav ",
       role: "Documentation Support",
-      image:  'https://via.placeholder.com/150', 
+      image: Aditya, 
     },
     // Add more members here later if needed
   ];
