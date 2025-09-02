@@ -1,5 +1,6 @@
 import React from "react";
 import vishalImg from '../assets/Vishalp.png';
+import Rishabh from '../assets/Rishabh.jpg';
 export default function Team() {
   const teamMembers = [
     {
@@ -7,15 +8,35 @@ export default function Team() {
       role: "Founder & Developer",
       image: vishalImg, 
     },
+    {
+      name: "Mohit Dad",
+      role: "Growth & Marketing",
+      image: 'https://via.placeholder.com/150', 
+    },
+    {
+      name: "Rishabh Mishra ",
+      role: "Documentation Support",
+      image: Rishabh, 
+    },
+    {
+      name: "Krishna Sharma",
+      role: "Documentation Support",
+      image: 'https://via.placeholder.com/150', 
+    },
+    {
+      name: "Aditya Vaishnav ",
+      role: "Documentation Support",
+      image:  'https://via.placeholder.com/150', 
+    },
     // Add more members here later if needed
   ];
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
-        Meet Our Team
+        Contributers 
       </h1>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {teamMembers.map((member, index) => (
           <div
             key={index}

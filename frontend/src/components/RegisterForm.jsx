@@ -11,7 +11,7 @@ export default function RegisterForm() {
     collegeStudent: false,
     gender: '',
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // buffer state
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -22,8 +22,35 @@ export default function RegisterForm() {
     }));
   };
 
+  const validateForm = () => {
+    if (formData.name.trim().length < 3) {
+      alert('Name must be at least 3 characters long');
+      return false;
+    }
+    if (!formData.email.endsWith('@gmail.com')) {
+      alert('Email must be a valid Gmail address');
+      return false;
+    }
+    if (!/^\d{10}$/.test(formData.phone)) {
+      alert('Phone number must be 10 digits');
+      return false;
+    }
+    if (formData.password.length < 6) {
+      alert('Password must be at least 6 characters');
+      return false;
+    }
+    if (!formData.gender) {
+      alert('Please select your gender');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent multiple clicks
+    if (!validateForm()) return; // stop if validation fails
+
     setLoading(true);
     try {
       const res = await API.post('/users/register', formData);
@@ -33,7 +60,7 @@ export default function RegisterForm() {
       console.error('Registration Error:', err.response?.data || err.message);
       alert(err.response?.data?.message || 'Registration failed');
     } finally {
-      setLoading(false);
+      setLoading(false); // re-enable after request
     }
   };
 

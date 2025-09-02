@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import setting from '../assets/setting.png';
-import { FaTasks } from 'react-icons/fa';
+import { FaTasks , FaCog } from 'react-icons/fa';
 import API from '../axios';
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setUser(null);
-    navigate('/login');
+    navigate('/');
   };
 
   return (
@@ -44,11 +44,10 @@ export default function Navbar() {
           </Link>
 
           {/* Avatar */}
-          <img
-            src= {setting}
-            alt="User"
+          <FaCog
+            size={28}
+            className="cursor-pointer transition duration-200 hover:rotate-90"
             onClick={() => setShowDropdown(!showDropdown)}
-            className="w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer transition duration-200 hover:ring-2 hover:ring-white"
           />
 
           {/* Dropdown Menu */}

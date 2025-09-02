@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
   const [data, setData] = useState({ email: '', password: '' });
+  const [loading, setLoading] = useState(false); // buffer state
   const navigate = useNavigate();
 
   const handleChange = (e) =>
@@ -11,12 +12,17 @@ export default function LoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return; // prevent multiple clicks
+    setLoading(true);
+
     try {
       const res = await API.post('/users/login', data);
       localStorage.setItem('token', res.data.token);
       navigate('/dashboard');
     } catch (err) {
       alert(err.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false); // re-enable button after response
     }
   };
 
@@ -25,7 +31,7 @@ export default function LoginForm() {
       <div className="text-center mb-2">
         <h2 className="text-2xl font-bold text-green-700">Welcome Back</h2>
         <p className="text-sm text-gray-600 mt-1">
-          Please login 
+          Please login
         </p>
       </div>
 
@@ -47,9 +53,14 @@ export default function LoginForm() {
       />
       <button
         type="submit"
-        className="w-full py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition"
+        disabled={loading} // disable while loading
+        className={`w-full py-2 rounded-lg font-semibold transition ${
+          loading
+            ? 'bg-gray-400 cursor-not-allowed'
+            : 'bg-green-600 hover:bg-green-700 text-white'
+        }`}
       >
-        Login
+        {loading ? 'Logging in...' : 'Login'}
       </button>
     </form>
   );

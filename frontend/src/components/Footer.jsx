@@ -30,7 +30,7 @@ export default function Footer() {
               <div className="mt-3 flex space-x-4 text-green-600">
                 <a href="#"><FaFacebook className="hover:text-green-800" /></a>
                 <a href="#"><FaTwitter className="hover:text-green-800" /></a>
-                <a href="#"><FaLinkedin className="hover:text-green-800" /></a>
+                <a href="https://www.linkedin.com/in/vishal-prajapati-445799289/"><FaLinkedin className="hover:text-green-800" /></a>
               </div>
             </div>
 
@@ -43,7 +43,7 @@ export default function Footer() {
                 <li><Link to="/chat" className="hover:text-green-600">Chat</Link></li>
                 {/* Add under Explore or Support section */}
 <li>
-  <Link to="/team" className="hover:text-green-600">Our Team</Link>
+  <Link to="/team" className="hover:text-green-600">Contributers</Link>
 </li>
 
               </ul>
@@ -116,7 +116,7 @@ export default function Footer() {
   }`}
 >
   <FaUser size={20} />
-  Team
+  Contributers
 </Link>
 
         </div>
