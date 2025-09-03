@@ -30,15 +30,22 @@ export default function MyPDFsPage() {
       ) : downloads.length === 0 ? (
 
         <div>
-          <div className="text-center text-gray-500">Under Consturction !! </div>
-          <div className="text-center text-gray-500">if any one want to contribute then contact me on Linkedin !! </div>
+          <div className="text-center text-gray-500">Under Construction !!</div>
+          <div className="text-center text-gray-500">
+            If anyone wants to contribute, then contact me on LinkedIn !!
+          </div>
           <div className="flex justify-center mt-4">
-            <a href="https://www.linkedin.com/in/vishal-prajapati-445799289/" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-800">
+            <a
+              href="https://www.linkedin.com/in/vishal-prajapati-445799289/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:text-green-800"
+            >
               <FaLinkedin size={40} />
             </a>
           </div>
         </div>
-        
+
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {downloads.map((file, index) => (

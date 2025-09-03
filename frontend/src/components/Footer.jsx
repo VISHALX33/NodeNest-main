@@ -6,7 +6,8 @@ import {
   FaUser,
   FaFacebook,
   FaTwitter,
-  FaLinkedin
+  FaLinkedin,
+  FaUsers
 } from 'react-icons/fa';
 
 export default function Footer() {
@@ -42,9 +43,9 @@ export default function Footer() {
                 <li><Link to="/mypdf" className="hover:text-green-600">Notes</Link></li>
                 <li><Link to="/chat" className="hover:text-green-600">Chat</Link></li>
                 {/* Add under Explore or Support section */}
-<li>
-  <Link to="/team" className="hover:text-green-600">Contributers</Link>
-</li>
+                <li>
+                  <Link to="/team" className="hover:text-green-600">Contributors</Link>
+                </li>
 
               </ul>
             </div>
@@ -75,49 +76,44 @@ export default function Footer() {
         <div className="fixed bottom-0 w-full bg-white border-t border-green-200 flex justify-around items-center py-2 shadow-lg z-50">
           <Link
             to="/dashboard"
-            className={`flex flex-col items-center text-xs ${
-              pathname === '/dashboard' ? 'text-green-600 font-semibold' : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/dashboard' ? 'text-green-600 font-semibold' : 'text-gray-500'
+              }`}
           >
             <FaHome size={20} />
             Home
           </Link>
           <Link
             to="/chat"
-            className={`flex flex-col items-center text-xs ${
-              pathname === '/chat' ? 'text-green-600 font-semibold' : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/chat' ? 'text-green-600 font-semibold' : 'text-gray-500'
+              }`}
           >
             <FaRegCommentDots size={20} />
             Chat
           </Link>
           <Link
             to="/mypdf"
-            className={`flex flex-col items-center text-xs ${
-              pathname === '/mypdf' ? 'text-green-600 font-semibold' : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/mypdf' ? 'text-green-600 font-semibold' : 'text-gray-500'
+              }`}
           >
             <FaFileAlt size={20} />
             Notes
           </Link>
           <Link
             to="/profile"
-            className={`flex flex-col items-center text-xs ${
-              pathname === '/profile' ? 'text-green-600 font-semibold' : 'text-gray-500'
-            }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/profile' ? 'text-green-600 font-semibold' : 'text-gray-500'
+              }`}
           >
             <FaUser size={20} />
             Profile
           </Link>
           <Link
-  to="/team"
-  className={`flex flex-col items-center text-xs ${
-    pathname === '/team' ? 'text-green-600 font-semibold' : 'text-gray-500'
-  }`}
->
-  <FaUser size={20} />
-  Contributers
-</Link>
+            to="/team"
+            className={`flex flex-col items-center text-xs ${pathname === '/team' ? 'text-green-600 font-semibold' : 'text-gray-500'
+              }`}
+          >
+            <FaUsers size={20} />
+            Contributors
+          </Link>
 
         </div>
       )}

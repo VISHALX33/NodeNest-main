@@ -3,6 +3,7 @@ import vishalImg from '../assets/Vishalp.png';
 import Rishabh from '../assets/Rishabh.jpg';
 import Krishna from '../assets/Krishna.jpg';
 import Aditya from '../assets/Aditya.jpg';
+import Mohit from '../assets/Mohit.jpg';
 export default function Team() {
   const teamMembers = [
     {
@@ -13,7 +14,7 @@ export default function Team() {
     {
       name: "Mohit Dad",
       role: "Growth & Marketing",
-      image: 'https://via.placeholder.com/150', 
+      image: Mohit, 
     },
     {
       name: "Rishabh Mishra ",
@@ -36,7 +37,7 @@ export default function Team() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
-        Contributers 
+        Contributors 
       </h1>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {teamMembers.map((member, index) => (

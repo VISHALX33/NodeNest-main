@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import setting from '../assets/setting.png';
-import { FaTasks , FaCog } from 'react-icons/fa';
+import { FaTasks, FaCog , FaQuestionCircle } from 'react-icons/fa';
 import API from '../axios';
 
 export default function Navbar() {
@@ -35,6 +34,14 @@ export default function Navbar() {
       {user ? (
         <div className="relative flex items-center gap-5">
           {/* Tasks Icon */}
+
+          <Link
+            to="/how-it-works"
+            title="How It Works"
+            className="text-white hover:text-white/90 transition"
+          >
+            <FaQuestionCircle size={22} />
+          </Link>
           <Link
             to="/tasks"
             title="My Tasks"
@@ -42,6 +49,7 @@ export default function Navbar() {
           >
             <FaTasks size={22} />
           </Link>
+
 
           {/* Avatar */}
           <FaCog
@@ -71,7 +79,7 @@ export default function Navbar() {
         </div>
       ) : (
         <Link
-          to="/login"
+          to="/"
           className="bg-white text-green-600 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-green-50 transition"
         >
           Login

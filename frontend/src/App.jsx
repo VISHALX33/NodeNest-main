@@ -11,7 +11,7 @@ import MyPDFsPage from './pages/MyPDFsPage';
 import PrivateRoute from './components/PrivateRoute';
 import MyTasks from './pages/MyTasks';
 import Team from "./pages/Team";
-
+import HowItWorks from './pages/HowItWorks';
 
 
 function Layout({ children }) {
@@ -69,6 +69,14 @@ function App() {
           element={
             <PrivateRoute>
               <Layout><ChatPage /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/how-it-works"
+          element={
+            <PrivateRoute>
+              <Layout><HowItWorks/></Layout>
             </PrivateRoute>
           }
         />
