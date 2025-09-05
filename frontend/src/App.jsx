@@ -1,18 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import AuthPage from './pages/AuthPage';
-import Dashboard from './pages/Dashboard';
-import SubjectsPage from './pages/SubjectsPage';
-import NotesPage from './pages/NotesPage';
-import ProfilePage from './pages/ProfilePage';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import ChatPage from './pages/ChatPage';
-import MyPDFsPage from './pages/MyPDFsPage';
-import PrivateRoute from './components/PrivateRoute';
-import MyTasks from './pages/MyTasks';
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AuthPage from "./pages/AuthPage";
+import Dashboard from "./pages/Dashboard";
+import SubjectsPage from "./pages/SubjectsPage";
+import NotesPage from "./pages/NotesPage";
+import ProfilePage from "./pages/ProfilePage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import ChatPage from "./pages/ChatPage";
+import MyPDFsPage from "./pages/MyPDFsPage";
+import PrivateRoute from "./components/PrivateRoute";
+import MyTasks from "./pages/MyTasks";
 import Team from "./pages/Team";
-import HowItWorks from './pages/HowItWorks';
-
+import HowItWorks from "./pages/HowItWorks";
 
 function Layout({ children }) {
   return (
@@ -25,18 +25,36 @@ function Layout({ children }) {
 }
 
 function App() {
+  useEffect(() => {
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp;
+
+      tg.ready(); // tells Telegram your app is ready
+      tg.expand(); // expand to full screen
+
+      console.log("User data:", tg.initDataUnsafe?.user);
+
+      // Example main button
+      tg.MainButton.setText("Confirm");
+      tg.MainButton.onClick(() => {
+        alert("Main button clicked!");
+      });
+      tg.MainButton.show();
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* Public Login Page */}
         <Route path="/" element={<AuthPage />} />
 
-        {/* Protected Routes */}
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Layout><Dashboard /></Layout>
+              <Layout>
+                <Dashboard />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -44,7 +62,9 @@ function App() {
           path="/semesters/:semesterId"
           element={
             <PrivateRoute>
-              <Layout><SubjectsPage /></Layout>
+              <Layout>
+                <SubjectsPage />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -52,7 +72,9 @@ function App() {
           path="/subjects/:subjectId"
           element={
             <PrivateRoute>
-              <Layout><NotesPage /></Layout>
+              <Layout>
+                <NotesPage />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -60,7 +82,9 @@ function App() {
           path="/profile"
           element={
             <PrivateRoute>
-              <Layout><ProfilePage /></Layout>
+              <Layout>
+                <ProfilePage />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -68,7 +92,9 @@ function App() {
           path="/chat"
           element={
             <PrivateRoute>
-              <Layout><ChatPage /></Layout>
+              <Layout>
+                <ChatPage />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -76,7 +102,9 @@ function App() {
           path="/how-it-works"
           element={
             <PrivateRoute>
-              <Layout><HowItWorks/></Layout>
+              <Layout>
+                <HowItWorks />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -84,22 +112,33 @@ function App() {
           path="/mypdf"
           element={
             <PrivateRoute>
-              <Layout><MyPDFsPage /></Layout>
+              <Layout>
+                <MyPDFsPage />
+              </Layout>
             </PrivateRoute>
           }
         />
         <Route
           path="/tasks"
-          element={<PrivateRoute>
-            <Layout><MyTasks /></Layout>
-          </PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <Layout>
+                <MyTasks />
+              </Layout>
+            </PrivateRoute>
+          }
         />
-       
-        <Route 
-        path="/team" element={<PrivateRoute>
-            <Layout><Team /></Layout>
-          </PrivateRoute>} />
 
+        <Route
+          path="/team"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Team />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
