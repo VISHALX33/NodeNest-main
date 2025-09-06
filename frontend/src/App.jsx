@@ -12,13 +12,9 @@ import MyPDFsPage from "./pages/MyPDFsPage";
 import PrivateRoute from "./components/PrivateRoute";
 import MyTasks from "./pages/MyTasks";
 import Team from "./pages/Team";
-<<<<<<< HEAD
-import HowItWorks from './pages/HowItWorks';
-import Soon from './pages/Soon';
-import VerifyEmail from './pages/VerifyEmail';
-=======
 import HowItWorks from "./pages/HowItWorks";
->>>>>>> 42cf915a0e3c7fcc3729cd338651fc7c6700c0e9
+import Soon from "./pages/Soon";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function Layout({ children }) {
   return (
@@ -64,6 +60,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/semesters/:semesterId"
           element={
@@ -74,6 +71,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/subjects/:subjectId"
           element={
@@ -84,6 +82,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/profile"
           element={
@@ -94,6 +93,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/chat"
           element={
@@ -104,6 +104,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/how-it-works"
           element={
@@ -114,6 +115,7 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/mypdf"
           element={
@@ -124,14 +126,18 @@ function App() {
             </PrivateRoute>
           }
         />
+
         <Route
           path="/soon"
           element={
             <PrivateRoute>
-              <Layout><Soon /></Layout>
+              <Layout>
+                <Soon />
+              </Layout>
             </PrivateRoute>
           }
         />
+
         <Route
           path="/tasks"
           element={
@@ -143,10 +149,8 @@ function App() {
           }
         />
 
-<<<<<<< HEAD
         <Route path="/verify-email" element={<VerifyEmail />} />
-        
-=======
+
         <Route
           path="/team"
           element={
@@ -157,7 +161,6 @@ function App() {
             </PrivateRoute>
           }
         />
->>>>>>> 42cf915a0e3c7fcc3729cd338651fc7c6700c0e9
       </Routes>
     </BrowserRouter>
   );
