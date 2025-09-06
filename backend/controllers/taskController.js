@@ -3,9 +3,8 @@ import Task from '../models/Task.js';
 
 export const createTask = async (req, res) => {
   const { title } = req.body;
-
   if (!title) return res.status(400).json({ message: 'Task title is required' });
-
+  
   const task = await Task.create({ user: req.user._id, title });
   res.status(201).json(task);
 };

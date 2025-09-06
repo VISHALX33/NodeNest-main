@@ -13,14 +13,16 @@ const userSchema = new mongoose.Schema({
   collegeStudent: { type: Boolean, default: false },
   gender: { type: String, enum: ['Male', 'Female', 'Other'], required: true },
 
-  // 🆕 New Fields
-  image: { type: String, default: '' },
-  location: { type: String, default: '' },
-  bio: { type: String, default: '' },
+  // 🆕 Verification fields
+  isVerified: { type: Boolean, default: false },
+  emailOtp: { type: String }, // store OTP temporarily
+  emailOtpExpires: { type: Date },
 
+  // 🆕 Unique user ID
   user_uni_id: { type: String, unique: true },
 }, { timestamps: true });
 
+// Pre-save hook to auto-generate unique user ID
 userSchema.pre('save', async function (next) {
   if (!this.isNew) return next();
 
