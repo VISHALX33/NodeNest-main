@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaTasks, FaCog , FaQuestionCircle } from 'react-icons/fa';
+import { FaTasks, FaCog , FaQuestionCircle ,FaBell } from 'react-icons/fa';
 import API from '../axios';
 
 export default function Navbar() {
@@ -34,6 +34,13 @@ export default function Navbar() {
       {user ? (
         <div className="relative flex items-center gap-5">
           {/* Tasks Icon */}
+          <Link
+            to="/soon"
+            title="Coming Soon"
+            className="text-white hover:text-white/90 transition"
+          >
+            <FaBell size={22} />
+          </Link>
 
           <Link
             to="/how-it-works"
@@ -49,6 +56,7 @@ export default function Navbar() {
           >
             <FaTasks size={22} />
           </Link>
+          
 
 
           {/* Avatar */}

@@ -12,7 +12,8 @@ import PrivateRoute from './components/PrivateRoute';
 import MyTasks from './pages/MyTasks';
 import Team from "./pages/Team";
 import HowItWorks from './pages/HowItWorks';
-
+import Soon from './pages/Soon';
+import VerifyEmail from './pages/VerifyEmail';
 
 function Layout({ children }) {
   return (
@@ -89,6 +90,14 @@ function App() {
           }
         />
         <Route
+          path="/soon"
+          element={
+            <PrivateRoute>
+              <Layout><Soon /></Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/tasks"
           element={<PrivateRoute>
             <Layout><MyTasks /></Layout>
@@ -100,6 +109,8 @@ function App() {
             <Layout><Team /></Layout>
           </PrivateRoute>} />
 
+        <Route path="/verify-email" element={<VerifyEmail />} />
+        
       </Routes>
     </BrowserRouter>
   );

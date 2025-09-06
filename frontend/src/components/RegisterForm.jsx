@@ -53,13 +53,14 @@ export default function RegisterForm() {
 
     setLoading(true);
     try {
-      const res = await API.post('/users/register', formData);
-      localStorage.setItem('token', res.data.token);
-      navigate('/dashboard');
+      await API.post('/users/register', formData);
+      alert("OTP sent to your email. Please verify.");
+      navigate('/verify-email', { state: { email: formData.email } });
+
     } catch (err) {
-      console.error('Registration Error:', err.response?.data || err.message);
       alert(err.response?.data?.message || 'Registration failed');
-    } finally {
+    }
+    finally {
       setLoading(false); // re-enable after request
     }
   };
@@ -130,11 +131,10 @@ export default function RegisterForm() {
       <button
         type="submit"
         disabled={loading}
-        className={`w-full py-2 rounded-lg text-white font-semibold transition duration-200 ${
-          loading
-            ? 'bg-green-300 cursor-not-allowed'
-            : 'bg-green-600 hover:bg-green-700'
-        }`}
+        className={`w-full py-2 rounded-lg text-white font-semibold transition duration-200 ${loading
+          ? 'bg-green-300 cursor-not-allowed'
+          : 'bg-green-600 hover:bg-green-700'
+          }`}
       >
         {loading ? 'Registering...' : 'Register'}
       </button>
