@@ -80,18 +80,34 @@ export const registerUser = async (req, res) => {
   to: email,
   subject: "Verify Your Email for NoteNest",
   html: `
-    <div style="font-family: Arial, sans-serif; color: #333;">
-      <h2 style="color: #16a34a;">Hello ${name || "User"},</h2>
-      <p>Thank you for registering on <strong>NoteNest</strong>.</p>
-      <p>Your <strong>OTP</strong> to verify your email is:</p>
-      <h1 style="color: #16a34a; font-size: 28px;">${otp}</h1>
-      <p>This OTP will expire in <strong>15 minutes</strong>.</p>
-      <p>If you did not request this, please ignore this email.</p>
-      <hr />
-      <p style="font-size: 12px; color: #888;">NoteNest &copy; ${new Date().getFullYear()}</p>
+    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; max-width: 600px; margin: auto; padding: 20px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+      <!-- Header -->
+      <h2 style="color: #16a34a; text-align: center;">Hello ${name || "User"}!</h2>
+      <p style="text-align: center; font-size: 16px;">
+        Welcome to <strong>NoteNest</strong> – your smart study companion.
+      </p>
+
+      <!-- OTP Section -->
+      <div style="background-color: #ecfdf5; padding: 20px; margin: 20px 0; border-radius: 12px; text-align: center; border: 1px solid #16a34a;">
+        <p style="margin: 0; font-size: 16px;">Your <strong>OTP</strong> to verify your email is:</p>
+        <h1 style="color: #16a34a; font-size: 32px; margin: 10px 0 0;">${otp}</h1>
+      </div>
+
+      <p style="font-size: 14px; text-align: center; color: #555;">
+        This OTP is valid for <strong>15 minutes</strong>.<br />
+        If you did not request this, please ignore this email.
+      </p>
+
+      <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
+
+      <!-- Footer -->
+      <p style="font-size: 12px; text-align: center; color: #888;">
+        &copy; ${new Date().getFullYear()} NoteNest. All rights reserved.
+      </p>
     </div>
   `,
 });
+
 
 
       res.status(201).json({ message: 'OTP sent to email. Please verify before login.' });
