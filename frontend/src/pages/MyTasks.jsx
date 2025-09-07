@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import API from '../axios';
+import API from '../utils/axios';
 import {
   MdDelete,
   MdEdit,

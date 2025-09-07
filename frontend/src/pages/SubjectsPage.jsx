@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import API from '../axios';
+import API from '../utils/axios';
 
 export default function SubjectsPage() {
   const { semesterId } = useParams();

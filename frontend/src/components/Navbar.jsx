@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaTasks, FaCog , FaQuestionCircle ,FaBell } from 'react-icons/fa';
-import API from '../axios';
+import { FaTasks, FaCog , FaQuestionCircle ,FaBell, FaRobot } from 'react-icons/fa';
+import API from '../utils/axios';
+
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -56,9 +57,14 @@ export default function Navbar() {
           >
             <FaTasks size={22} />
           </Link>
+          <Link
+            to="/chatbot"
+            title="chatbot"
+            className="text-white hover:text-white/90 transition"
+          >
+            <FaRobot size={22} />
+          </Link>
           
-
-
           {/* Avatar */}
           <FaCog
             size={28}

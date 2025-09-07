@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import API from "../axios";
+import API from "../utils/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function VerifyEmail() {

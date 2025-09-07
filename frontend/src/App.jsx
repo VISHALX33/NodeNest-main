@@ -15,6 +15,7 @@ import Team from "./pages/Team";
 import HowItWorks from "./pages/HowItWorks";
 import Soon from "./pages/Soon";
 import VerifyEmail from "./pages/VerifyEmail";
+import Chatbot from "./pages/chatbot";
 
 function Layout({ children }) {
   return (
@@ -104,6 +105,17 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/chatbot"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Chatbot/>
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
 
         <Route
           path="/how-it-works"

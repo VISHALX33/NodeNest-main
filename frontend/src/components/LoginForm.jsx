@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import API from '../axios';
+import API from '../utils/axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function LoginForm() {
