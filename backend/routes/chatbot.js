@@ -12,7 +12,12 @@ router.post("/", async (req, res) => {
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
-        contents: [{ parts: [{ text: message }] }],
+        contents: [
+          {
+            role: "user", // ✅ must be "user" or "model"
+            parts: [{ text: message }],
+          },
+        ],
       },
       {
         headers: { "Content-Type": "application/json" },
@@ -22,9 +27,10 @@ router.post("/", async (req, res) => {
     const reply =
       response.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
       "No response";
+
     res.json({ reply });
   } catch (error) {
-    console.error(error.response?.data || error.message);
+    console.error("Gemini API error:", error.response?.data || error.message);
     res.status(500).json({
       error:
         error.response?.data?.error?.message ||
