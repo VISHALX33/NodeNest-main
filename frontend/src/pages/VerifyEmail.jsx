@@ -6,6 +6,7 @@ export default function VerifyEmail() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(15 * 60); // 15 minutes in seconds
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -15,8 +16,30 @@ export default function VerifyEmail() {
     }
   }, [location.state]);
 
+  // Countdown timer effect
+  useEffect(() => {
+    if (timeLeft <= 0) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft]);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+  };
+
   const handleVerify = async (e) => {
     e.preventDefault();
+    if (timeLeft <= 0) {
+      alert("OTP expired. Please request a new one.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await API.post("/users/verify-otp", { email, otp });
@@ -43,6 +66,11 @@ export default function VerifyEmail() {
           Enter the OTP sent to your email to complete registration.
         </p>
 
+        {/* Countdown Timer */}
+        <p className="text-center text-red-500 font-medium">
+          OTP expires in: {formatTime(timeLeft)}
+        </p>
+
         <input
           type="email"
           placeholder="Email"
@@ -60,12 +88,14 @@ export default function VerifyEmail() {
         />
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || timeLeft <= 0}
           className={`w-full py-3 rounded-lg text-white font-semibold transition duration-200 ${
-            loading ? "bg-green-300 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
+            loading || timeLeft <= 0
+              ? "bg-green-300 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700"
           }`}
         >
-          {loading ? "Verifying..." : "Verify Email"}
+          {timeLeft <= 0 ? "OTP Expired" : loading ? "Verifying..." : "Verify Email"}
         </button>
       </form>
     </div>
