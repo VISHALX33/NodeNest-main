@@ -42,11 +42,7 @@ export default function Footer() {
                 <li><Link to="/tasks" className="hover:text-green-600">My Tasks</Link></li>
                 <li><Link to="/mypdf" className="hover:text-green-600">Notes</Link></li>
                 <li><Link to="/chat" className="hover:text-green-600">Chat</Link></li>
-                {/* Add under Explore or Support section */}
-                <li>
-                  <Link to="/team" className="hover:text-green-600">Contributors</Link>
-                </li>
-
+                <li><Link to="/team" className="hover:text-green-600">Contributors</Link></li>
               </ul>
             </div>
 
@@ -62,8 +58,9 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold text-green-700 mb-2">Support</h3>
               <ul className="space-y-1">
+                <li><Link to="/about" className="hover:text-green-600">About Us</Link></li>
+                <li><Link to="/contact" className="hover:text-green-600">Contact Us</Link></li>
                 <li><a href="#" className="hover:text-green-600">Help Center</a></li>
-                <li><a href="#" className="hover:text-green-600">Contact Us</a></li>
                 <li><a href="#" className="hover:text-green-600">Careers</a></li>
               </ul>
             </div>
@@ -76,45 +73,39 @@ export default function Footer() {
         <div className="fixed bottom-0 w-full bg-white border-t border-green-200 flex justify-around items-center py-2 shadow-lg z-50">
           <Link
             to="/dashboard"
-            className={`flex flex-col items-center text-xs ${pathname === '/dashboard' ? 'text-green-600 font-semibold' : 'text-gray-500'
-              }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/dashboard' ? 'text-green-600 font-semibold' : 'text-gray-500'}`}
           >
             <FaHome size={20} />
             Home
           </Link>
           <Link
             to="/chat"
-            className={`flex flex-col items-center text-xs ${pathname === '/chat' ? 'text-green-600 font-semibold' : 'text-gray-500'
-              }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/chat' ? 'text-green-600 font-semibold' : 'text-gray-500'}`}
           >
             <FaRegCommentDots size={20} />
             Chat
           </Link>
           <Link
             to="/mypdf"
-            className={`flex flex-col items-center text-xs ${pathname === '/mypdf' ? 'text-green-600 font-semibold' : 'text-gray-500'
-              }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/mypdf' ? 'text-green-600 font-semibold' : 'text-gray-500'}`}
           >
             <FaFileAlt size={20} />
             Notes
           </Link>
           <Link
             to="/profile"
-            className={`flex flex-col items-center text-xs ${pathname === '/profile' ? 'text-green-600 font-semibold' : 'text-gray-500'
-              }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/profile' ? 'text-green-600 font-semibold' : 'text-gray-500'}`}
           >
             <FaUser size={20} />
             Profile
           </Link>
           <Link
             to="/team"
-            className={`flex flex-col items-center text-xs ${pathname === '/team' ? 'text-green-600 font-semibold' : 'text-gray-500'
-              }`}
+            className={`flex flex-col items-center text-xs ${pathname === '/team' ? 'text-green-600 font-semibold' : 'text-gray-500'}`}
           >
             <FaUsers size={20} />
             Contributors
           </Link>
-
         </div>
       )}
     </>
