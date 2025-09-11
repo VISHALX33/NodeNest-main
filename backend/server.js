@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import fs from "fs";
+
 import path from "path";
 import userRoutes from "./routes/userRoutes.js";
 import semesterRoutes from "./routes/semesterRoutes.js";
@@ -10,6 +12,8 @@ import chatRoutes from "./routes/chatRoutes.js";
 import userPdfRoutes from "./routes/userPdfRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import chatbot from "./routes/chatbot.js";
+import projectRoutes from "./routes/projectRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 
@@ -40,6 +44,15 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/user-pdfs", userPdfRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/chatbot", chatbot); // 👈 now /api/chatbot works
+app.use("/api/projects", projectRoutes);
+app.use("/api/orders", orderRoutes);
+
+
+// Ensure uploads/projects folder exists, add in server.js after mongoose connect:
+const projectsDir = path.join(process.cwd(), 'uploads/projects');
+if (!fs.existsSync(projectsDir)) {
+  fs.mkdirSync(projectsDir, { recursive: true });
+}
 
 mongoose
   .connect(process.env.MONGO_URI)

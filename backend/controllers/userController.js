@@ -8,36 +8,6 @@ const generateToken = (user) => {
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
 };
 
-// export const registerUser = async (req, res) => {
-//   try {
-//     const { name, email, phone, password, collegeStudent, gender } = req.body;
-
-//     if (!name || !email || !phone || !password || !gender) {
-//       return res.status(400).json({ message: 'All fields are required' });
-//     }
-
-//     const existingUser = await User.findOne({ email });
-//     if (existingUser) {
-//       return res.status(400).json({ message: 'User already exists' });
-//     }
-
-//     const hashedPassword = await bcrypt.hash(password, 10);
-//     const newUser = await User.create({
-//       name,
-//       email,
-//       phone,
-//       password: hashedPassword,
-//       collegeStudent,
-//       gender,
-//     });
-
-//     const token = generateToken(newUser);
-//     res.status(201).json({ token, user: { ...newUser._doc, password: undefined } });
-//   } catch (error) {
-//     console.error('Register Error:', error.message);
-//     res.status(500).json({ message: 'Server Error. Please try again later.' });
-//   }
-// };
 
 export const registerUser = async (req, res) => {
   try {
@@ -129,18 +99,6 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// export const loginUser = async (req, res) => {
-//   const { email, password } = req.body;
-
-//   const user = await User.findOne({ email });
-//   if (!user) return res.status(400).json({ message: 'Invalid credentials' });
-
-//   const isMatch = await bcrypt.compare(password, user.password);
-//   if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
-
-//   const token = generateToken(user);
-//   res.json({ token, user: { ...user._doc, password: undefined } });
-// };
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
