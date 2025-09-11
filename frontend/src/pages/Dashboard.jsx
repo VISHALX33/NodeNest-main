@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaRobot } from "react-icons/fa";
 import NoteNestLogo from "/NoteNestLogo.png";
 import Chatbot from "./chatbot"; // ✅ import your chatbot
+import ProjectService from "./projectService";
 
 export default function Dashboard() {
   const [semesters, setSemesters] = useState([]);
@@ -54,6 +55,10 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+      <br />
+      <hr />
+      <br />
+      <ProjectService />
 
 
       {/* Floating Chatbot Icon */}

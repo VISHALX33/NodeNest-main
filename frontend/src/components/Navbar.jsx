@@ -1,104 +1,203 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FaTasks, FaCog , FaQuestionCircle ,FaBell, FaRobot } from 'react-icons/fa';
-import API from '../utils/axios';
 
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  FaTasks,
+  FaCog,
+  FaQuestionCircle,
+  FaBell,
+  FaRobot,
+  FaBars,
+  FaTimes,
+  FaInfoCircle,
+  FaEnvelope,
+  FaShoppingCart,
+  FaStore
+} from "react-icons/fa";
+import API from "../utils/axios";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
-    API.get('/users')
-      .then(res => setUser(res.data))
-      .catch(() => setUser(null)); // Ignore if not logged in
+    API.get("/users")
+      .then((res) => setUser(res.data))
+      .catch(() => setUser(null));
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setUser(null);
-    navigate('/');
+    navigate("/");
   };
 
   return (
-    <nav className="bg-gradient-to-r from-green-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
-      {/* Logo */}
-      <h1
-        className="text-2xl font-extrabold tracking-wide cursor-pointer"
-        onClick={() => navigate('/dashboard')}
+    <>
+      {/* Navbar */}
+      <nav className="bg-gradient-to-r from-green-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
+        {/* Logo */}
+        <h1
+          className="text-2xl font-extrabold tracking-wide cursor-pointer"
+          onClick={() => navigate("/dashboard")}
+        >
+          NoteNest
+        </h1>
+
+        {/* Desktop Menu */}
+        {user ? (
+          <div className="hidden md:flex relative items-center gap-5">
+            <Link to="/soon" title="Coming Soon">
+              <FaBell size={22} />
+            </Link>
+            <Link to="/project-services" title="Project Services">
+              <FaStore size={22} />
+            </Link>
+            
+            <Link to="/how-it-works" title="How It Works">
+              <FaQuestionCircle size={22} />
+            </Link>
+            <Link to="/tasks" title="My Tasks">
+              <FaTasks size={22} />
+            </Link>
+            <Link to="/chatbot" title="Chatbot">
+              <FaRobot size={22} />
+            </Link>
+            <Link to="/about" title="About Us">
+              <FaInfoCircle size={22} />
+            </Link>
+            <Link to="/contact" title="Contact Us">
+              <FaEnvelope size={22} />
+            </Link>
+            <Link to="/my-bookings" title="Coming Soon">
+              <FaShoppingCart size={22} />
+            </Link>
+
+            {/* Avatar */}
+            <FaCog
+              size={28}
+              className="cursor-pointer transition duration-200 hover:rotate-90"
+              onClick={() => setShowDropdown(!showDropdown)}
+            />
+
+            {/* Dropdown Menu */}
+            {showDropdown && (
+              <div className="absolute top-14 right-0 bg-white text-gray-800 rounded-md shadow-lg w-40 py-2 z-50">
+                <Link
+                  to="/profile"
+                  className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                  onClick={() => setShowDropdown(false)}
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2 hover:bg-red-100 text-sm text-red-600"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <Link
+            to="/"
+            className="hidden md:block bg-white text-green-600 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-green-50 transition"
+          >
+            Login
+          </Link>
+        )}
+
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden text-white"
+          onClick={() => setIsSidebarOpen(true)}
+        >
+          <FaBars size={24} />
+        </button>
+      </nav>
+
+      {/* Sidebar (Mobile) */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 z-50`}
       >
-        NoteNest
-      </h1>
+        {/* Header */}
+        <div className="flex justify-between items-center px-6 py-4 border-b">
+          <h2 className="text-xl font-bold text-green-600">Menu</h2>
+          <button
+            className="text-gray-600"
+            onClick={() => setIsSidebarOpen(false)}
+          >
+            <FaTimes size={22} />
+          </button>
+        </div>
 
-      {/* User Section */}
-      {user ? (
-        <div className="relative flex items-center gap-5">
-          {/* Tasks Icon */}
-          <Link
-            to="/soon"
-            title="Coming Soon"
-            className="text-white hover:text-white/90 transition"
-          >
-            <FaBell size={22} />
+        {/* Menu Items */}
+        <div className="flex flex-col p-6 gap-6 text-gray-800">
+          <Link to="/soon" onClick={() => setIsSidebarOpen(false)}>
+            <FaBell className="inline mr-2" /> Notifications
           </Link>
-
-          <Link
-            to="/how-it-works"
-            title="How It Works"
-            className="text-white hover:text-white/90 transition"
-          >
-            <FaQuestionCircle size={22} />
+          <Link to="/project-services" onClick={() => setIsSidebarOpen(false)}>
+            <FaStore className="inline mr-2" /> project Services
           </Link>
-          <Link
-            to="/tasks"
-            title="My Tasks"
-            className="text-white hover:text-white/90 transition"
-          >
-            <FaTasks size={22} />
+          <Link to="/how-it-works" onClick={() => setIsSidebarOpen(false)}>
+            <FaQuestionCircle className="inline mr-2" /> How It Works
           </Link>
-          <Link
-            to="/chatbot"
-            title="chatbot"
-            className="text-white hover:text-white/90 transition"
-          >
-            <FaRobot size={22} />
+          <Link to="/tasks" onClick={() => setIsSidebarOpen(false)}>
+            <FaTasks className="inline mr-2" /> My Tasks
+          </Link>
+          <Link to="/chatbot" onClick={() => setIsSidebarOpen(false)}>
+            <FaRobot className="inline mr-2" /> Chatbot
+          </Link>
+          <Link to="/about" onClick={() => setIsSidebarOpen(false)}>
+            <FaInfoCircle className="inline mr-2" /> About
+          </Link>
+          <Link to="/contact" onClick={() => setIsSidebarOpen(false)}>
+            <FaEnvelope className="inline mr-2" /> Contact
+          </Link>
+          <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}>
+            <FaShoppingCart className="inline mr-2" /> My orders
           </Link>
           
-          {/* Avatar */}
-          <FaCog
-            size={28}
-            className="cursor-pointer transition duration-200 hover:rotate-90"
-            onClick={() => setShowDropdown(!showDropdown)}
-          />
 
-          {/* Dropdown Menu */}
-          {showDropdown && (
-            <div className="absolute top-14 right-0 bg-white text-gray-800 rounded-md shadow-lg w-40 py-2 z-50">
-              <Link
-                to="/profile"
-                className="block px-4 py-2 hover:bg-gray-100 text-sm"
-                onClick={() => setShowDropdown(false)}
-              >
-                Profile
+          {user ? (
+            <>
+              <Link to="/profile" onClick={() => setIsSidebarOpen(false)}>
+                <FaCog className="inline mr-2" /> Profile
               </Link>
               <button
-                onClick={handleLogout}
-                className="w-full text-left px-4 py-2 hover:bg-red-100 text-sm text-red-600"
+                onClick={() => {
+                  handleLogout();
+                  setIsSidebarOpen(false);
+                }}
+                className="flex items-center gap-2 text-red-600 hover:text-red-700"
               >
-                Logout
+                <FaTimes /> Logout
               </button>
-            </div>
+            </>
+          ) : (
+            <Link
+              to="/"
+              className="bg-green-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-green-700 transition"
+              onClick={() => setIsSidebarOpen(false)}
+            >
+              Login
+            </Link>
           )}
         </div>
-      ) : (
-        <Link
-          to="/"
-          className="bg-white text-green-600 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-green-50 transition"
-        >
-          Login
-        </Link>
-      )}
-    </nav>
+      </div>
+
+      {/* Overlay when sidebar is open */}
+      {isSidebarOpen && (
+  <div
+    className="fixed inset-0 backdrop-blur-sm bg-black/20 z-40 transition-opacity"
+    onClick={() => setIsSidebarOpen(false)}
+  />
+)}
+    </>
   );
 }

@@ -13,9 +13,16 @@ import PrivateRoute from "./components/PrivateRoute";
 import MyTasks from "./pages/MyTasks";
 import Team from "./pages/Team";
 import HowItWorks from "./pages/HowItWorks";
-import Soon from "./pages/Soon";
+import Soon from "./pages/Notifications";
 import VerifyEmail from "./pages/VerifyEmail";
 import Chatbot from "./pages/chatbot";
+import EasyProjects from "./pages/EasyProjects";
+import MediumProjects from "./pages/MediumProjects";
+import HardProjects from "./pages/HardProjects";
+import MyBookings from "./pages/MyBookings";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+import ProjectService from "./pages/projectService";
 
 function Layout({ children }) {
   return (
@@ -94,6 +101,26 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/contact"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ContactUs />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <AboutUs />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path="/chat"
@@ -127,6 +154,51 @@ function App() {
             </PrivateRoute>
           }
         />
+        
+        <Route
+          path="/easy-projects"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <EasyProjects />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/medium-projects"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <MediumProjects />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/hard-projects"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <HardProjects />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/my-bookings"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <MyBookings />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
 
         <Route
           path="/mypdf"
@@ -145,6 +217,16 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <Soon />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/project-services"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ProjectService /> 
               </Layout>
             </PrivateRoute>
           }
