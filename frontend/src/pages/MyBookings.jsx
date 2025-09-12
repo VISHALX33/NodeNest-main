@@ -1,4 +1,3 @@
-
 // frontend/src/pages/MyBookings.jsx
 import React, { useState, useEffect } from "react";
 import API from "../utils/axios";
@@ -8,10 +7,9 @@ import {
   FaCalendarAlt, 
   FaCreditCard, 
   FaDownload, 
-  FaShoppingBag, 
   FaInfoCircle,
   FaSpinner,
-  FaBoxOpen
+  FaShoppingBag
 } from "react-icons/fa";
 
 const MyBookings = () => {
@@ -19,7 +17,6 @@ const MyBookings = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -66,7 +63,7 @@ const MyBookings = () => {
 
   const formatDate = (dateString) => {
     if (!dateString) return "Not specified";
-    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    const options = { year: "numeric", month: "short", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
@@ -86,7 +83,6 @@ const MyBookings = () => {
 
       {orders.length === 0 ? (
         <div className="max-w-md mx-auto bg-white rounded-2xl shadow-md p-8 text-center border-t-4 border-green-500">
-          <div className="text-5xl mb-4 text-gray-400"><FaBoxOpen className="inline" /></div>
           <h2 className="text-xl font-semibold text-gray-700 mb-2">No bookings yet</h2>
           <p className="text-gray-500 mb-6">You haven't placed any orders. Start by exploring our projects!</p>
           <button
@@ -97,108 +93,108 @@ const MyBookings = () => {
           </button>
         </div>
       ) : (
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {orders.map((order) => (
-            <div key={order._id} className="bg-white rounded-2xl shadow-md overflow-hidden border-t-4 border-green-500 hover:shadow-lg transition-shadow duration-200">
-              <div className="bg-green-50 px-4 py-3 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-800 truncate flex items-center">
-                  <FaShoppingBag className="text-green-600 mr-2" size={16} />
-                  {order.project?.name || "Project"}
-                </h2>
-                <p className="text-xs text-gray-500 mt-1">ID: {order.orderId || "N/A"}</p>
+            <div 
+              key={order._id} 
+              className="max-w-sm mx-auto bg-green-600 rounded-2xl shadow-lg text-white p-4"
+            >
+              {/* Header */}
+              <div className="bg-white text-black rounded-xl p-4 mb-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="font-bold text-lg flex items-center gap-2">
+                    <FaShoppingBag className="text-green-600" />
+                    {order.project?.name || "Project"}
+                  </h2>
+                  <p className="text-xs text-gray-600">ID: {order.orderId || "N/A"}</p>
+                </div>
               </div>
-              
-              <div className="p-4">
-                {/* Customer Info */}
-                <div className="mb-4">
-                  <div className="flex items-center text-sm text-gray-500 mb-1">
-                    <FaUser className="text-green-600 mr-2" size={14} />
-                    Customer
-                  </div>
-                  <div className="text-sm font-medium text-gray-800 truncate">{order.userDetails?.name || "Not provided"}</div>
-                  <div className="text-xs text-gray-600">{order.userDetails?.phone || "No phone"}</div>
+
+              {/* Customer Info */}
+              <div className="bg-white text-black rounded-xl p-4 mb-4">
+                <div className="grid grid-cols-2 gap-2 text-sm">
+                  <p className="font-semibold flex items-center gap-1"><FaUser /> Name:</p>
+                  <p>{order.userDetails?.name || "N/A"}</p>
+
+                  <p className="font-semibold">Phone:</p>
+                  <p>{order.userDetails?.phone || "N/A"}</p>
+
+                  <p className="font-semibold flex items-center gap-1"><FaCalendarAlt /> Ordered:</p>
+                  <p>{formatDate(order.createdAt)}</p>
+
+                  <p className="font-semibold">Delivery:</p>
+                  <p>{formatDate(order.deliveryDate)}</p>
+
+                  <p className="font-semibold">Plan:</p>
+                  <p className="capitalize">{order.planType || "N/A"}</p>
                 </div>
-                
-                {/* Booking Details */}
-                <div className="mb-4">
-                  <div className="flex items-center text-sm text-gray-500 mb-1">
-                    <FaCalendarAlt className="text-green-600 mr-2" size={14} />
-                    Booking Details
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-sm">
-                    <div className="text-gray-500">Ordered:</div>
-                    <div className="text-gray-800">{formatDate(order.createdAt)}</div>
-                    <div className="text-gray-500">deliveryDate:</div>
-                    <div className="text-gray-800">{formatDate(order.deliveryDate)}</div>
-                    <div className="text-gray-500">Plan:</div>
-                    <div className="capitalize text-gray-800">{order.planType || "N/A"}</div>
-                  </div>
-                </div>
-                
-                {/* Payment Info */}
-                <div className="mb-4">
-                  <div className="flex items-center text-sm text-gray-500 mb-1">
-                    <FaCreditCard className="text-green-600 mr-2" size={14} />
-                    Payment
-                  </div>
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-md font-semibold text-green-600">₹{order.totalAmount || order.basePrice || "N/A"}</span>
-                    <span className={`text-xs px-2 py-1 rounded-full ${
-                      order.paymentStatus === "completed" 
-                        ? "bg-green-100 text-green-800" 
+              </div>
+
+              {/* Payment */}
+              <div className="bg-white text-black rounded-xl p-4 mb-4">
+                <p className="font-semibold flex items-center gap-1 mb-2"><FaCreditCard /> Payment</p>
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-green-600">₹{order.totalAmount || order.basePrice || "N/A"}</span>
+                  <span
+                    className={`text-xs px-2 py-1 rounded-full ${
+                      order.paymentStatus === "completed"
+                        ? "bg-green-100 text-green-800"
                         : "bg-yellow-100 text-yellow-800"
-                    }`}>
-                      {order.paymentStatus === "completed" ? "Paid" : "Pending"}
-                    </span>
-                  </div>
-                  <div className="text-sm mt-2">
-                    Status: <span className={`font-medium ${
-                      order.orderStatus === "delivered" 
-                        ? "text-green-600" 
-                        : order.orderStatus === "in_progress" 
-                        ? "text-blue-600" 
+                    }`}
+                  >
+                    {order.paymentStatus === "completed" ? "Paid" : "Pending"}
+                  </span>
+                </div>
+                <p className="text-sm mt-2">
+                  Status:{" "}
+                  <span
+                    className={`font-medium ${
+                      order.orderStatus === "delivered"
+                        ? "text-green-600"
+                        : order.orderStatus === "in_progress"
+                        ? "text-blue-600"
                         : "text-yellow-600"
-                    }`}>
-                      {order.orderStatus === "delivered" 
-                        ? "Delivered" 
-                        : order.orderStatus === "in_progress" 
-                        ? "In Progress" 
-                        : "Pending"}
-                    </span>
+                    }`}
+                  >
+                    {order.orderStatus === "delivered"
+                      ? "Delivered"
+                      : order.orderStatus === "in_progress"
+                      ? "In Progress"
+                      : "Pending"}
+                  </span>
+                </p>
+              </div>
+
+              {/* Action */}
+              <div className="space-y-3">
+                {order.orderStatus === "delivered" && order.projectFiles && order.projectFiles.length > 0 ? (
+                  <button
+                    onClick={() => handleDownload(order._id, order.projectFiles[0])}
+                    disabled={downloading}
+                    className={`w-full flex items-center justify-center gap-2 bg-white text-black font-medium py-2 rounded-xl shadow hover:bg-gray-100 transition ${
+                      downloading && "cursor-not-allowed"
+                    }`}
+                  >
+                    {downloading ? (
+                      <>
+                        <FaSpinner className="animate-spin" />
+                        Downloading...
+                      </>
+                    ) : (
+                      <>
+                        <FaDownload />
+                        Download Project
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <div className="bg-gray-100 text-black p-2 rounded-md text-sm flex items-start gap-2">
+                    <FaInfoCircle className="text-blue-600 mt-0.5" />
+                    {order.orderStatus === "in_progress"
+                      ? "Your project is currently in progress"
+                      : "Pending delivery - we'll notify you when ready"}
                   </div>
-                </div>
-                
-                {/* Action Button */}
-                <div className="mt-4">
-                  {order.orderStatus === "delivered" && order.projectFiles && order.projectFiles.length > 0 ? (
-                    <button
-                      onClick={() => handleDownload(order._id, order.projectFiles[0])}
-                      disabled={downloading}
-                      className={`w-full flex items-center justify-center px-4 py-2 rounded-lg text-white font-medium ${
-                        downloading ? "bg-green-400 cursor-not-allowed" : "bg-green-600 hover:bg-green-700"
-                      } transition duration-200`}
-                    >
-                      {downloading ? (
-                        <>
-                          <FaSpinner className="animate-spin mr-2" />
-                          Downloading
-                        </>
-                      ) : (
-                        <>
-                          <FaDownload className="mr-2" />
-                          Download
-                        </>
-                      )}
-                    </button>
-                  ) : (
-                    <div className="bg-blue-50 p-3 rounded-lg text-sm text-blue-700 flex items-start">
-                      <FaInfoCircle className="text-blue-500 mr-2 mt-0.5 flex-shrink-0" />
-                      {order.orderStatus === "in_progress"
-                        ? "Your project is currently in progress"
-                        : "Pending delivery - we'll notify you when ready"}
-                    </div>
-                  )}
-                </div>
+                )}
               </div>
             </div>
           ))}

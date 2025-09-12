@@ -12,7 +12,8 @@ import {
   FaBookOpen,
   FaInfoCircle,
   FaEnvelope,
-  FaQuestionCircle
+  FaQuestionCircle,
+  FaStore
 } from 'react-icons/fa';
 
 export default function Footer() {
@@ -115,12 +116,13 @@ export default function Footer() {
             <FaRegCommentDots size={20} />
             <span className="mt-1">Chat</span>
           </Link>
+         
           <Link
-            to="/mypdf"
+            to="/project-services"
             className={`flex flex-col items-center text-xs ${pathname === '/mypdf' ? 'text-green-600 font-semibold' : 'text-gray-500'} transition-colors`}
           >
-            <FaFileAlt size={20} />
-            <span className="mt-1">Notes</span>
+            <FaStore size={20} />
+            <span className="mt-1">Projects</span>
           </Link>
           <Link
             to="/profile"
