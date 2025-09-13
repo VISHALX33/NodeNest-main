@@ -118,7 +118,7 @@ const MediumProjects = () => {
           contact: formData.phone,
         },
         theme: {
-          color: "#facc15", // Yellow theme for medium
+          color: "#facc15", // green theme for medium
         },
       };
 
@@ -133,7 +133,7 @@ const MediumProjects = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-yellow-600 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-green-600 mb-6 text-center">
         🟡 Medium Projects
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -144,7 +144,7 @@ const MediumProjects = () => {
             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
           >
             <div className="text-4xl text-center mb-4">{project.icon}</div>
-            <h2 className="text-xl font-semibold text-yellow-600 text-center">
+            <h2 className="text-xl font-semibold text-green-600 text-center">
               {project.name}
             </h2>
           </div>
@@ -165,7 +165,7 @@ const MediumProjects = () => {
             value={formData.name}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-yellow-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
           <input
             name="email"
@@ -174,7 +174,7 @@ const MediumProjects = () => {
             value={formData.email}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-yellow-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
           <input
             name="phone"
@@ -182,7 +182,7 @@ const MediumProjects = () => {
             value={formData.phone}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-yellow-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
           <input
             name="deadline"
@@ -190,7 +190,7 @@ const MediumProjects = () => {
             value={formData.deadline}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-yellow-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
 
           {/* Plan Type */}
@@ -202,7 +202,7 @@ const MediumProjects = () => {
                 value="student"
                 checked={formData.planType === "student"}
                 onChange={handleFormChange}
-                className="mr-2 accent-yellow-500"
+                className="mr-2 accent-green-500"
               />
               Student
             </label>
@@ -213,7 +213,7 @@ const MediumProjects = () => {
                 value="business"
                 checked={formData.planType === "business"}
                 onChange={handleFormChange}
-                className="mr-2 accent-yellow-500"
+                className="mr-2 accent-green-500"
               />
               Business
             </label>
@@ -224,7 +224,7 @@ const MediumProjects = () => {
             placeholder="Additional Requirements"
             value={formData.requirements}
             onChange={handleFormChange}
-            className="w-full px-4 py-2 border border-yellow-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
 
           <button
@@ -232,8 +232,8 @@ const MediumProjects = () => {
             disabled={loading}
             className={`w-full py-2 rounded-lg text-white font-semibold ${
               loading
-                ? "bg-yellow-300 cursor-not-allowed"
-                : "bg-yellow-500 hover:bg-yellow-600"
+                ? "bg-green-300 cursor-not-allowed"
+                : "bg-green-500 hover:bg-green-600"
             }`}
           >
             {loading ? "Processing..." : "Pay "}

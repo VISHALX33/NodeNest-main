@@ -23,6 +23,8 @@ import MyBookings from "./pages/MyBookings";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import ProjectService from "./pages/projectService";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 function Layout({ children }) {
   return (
@@ -244,7 +246,8 @@ function App() {
         />
 
         <Route path="/verify-email" element={<VerifyEmail />} />
-
+         <Route path="/forgot-password" element={<ForgotPassword />} />
+<Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route
           path="/team"
           element={

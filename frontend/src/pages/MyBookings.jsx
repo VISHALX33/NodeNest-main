@@ -139,7 +139,7 @@ const MyBookings = () => {
                     className={`text-xs px-2 py-1 rounded-full ${
                       order.paymentStatus === "completed"
                         ? "bg-green-100 text-green-800"
-                        : "bg-yellow-100 text-yellow-800"
+                        : "bg-yellow-100 text-green-800"
                     }`}
                   >
                     {order.paymentStatus === "completed" ? "Paid" : "Pending"}

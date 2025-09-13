@@ -144,7 +144,7 @@ const HardProjects = () => {
             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
           >
             <div className="text-4xl text-center mb-4">{project.icon}</div>
-            <h2 className="text-xl font-semibold text-red-600 text-center">
+            <h2 className="text-xl font-semibold text-green-600 text-center">
               {project.name}
             </h2>
           </div>
@@ -165,7 +165,7 @@ const HardProjects = () => {
             value={formData.name}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-red-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
           <input
             name="email"
@@ -174,7 +174,7 @@ const HardProjects = () => {
             value={formData.email}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-red-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
           <input
             name="phone"
@@ -182,7 +182,7 @@ const HardProjects = () => {
             value={formData.phone}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-red-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
           <input
             name="deadline"
@@ -190,7 +190,7 @@ const HardProjects = () => {
             value={formData.deadline}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-red-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
 
           {/* Plan Type */}
@@ -202,7 +202,7 @@ const HardProjects = () => {
                 value="student"
                 checked={formData.planType === "student"}
                 onChange={handleFormChange}
-                className="mr-2 accent-red-500"
+                className="mr-2 accent-green-500"
               />
               Student
             </label>
@@ -213,7 +213,7 @@ const HardProjects = () => {
                 value="business"
                 checked={formData.planType === "business"}
                 onChange={handleFormChange}
-                className="mr-2 accent-red-500"
+                className="mr-2 accent-green-500"
               />
               Business
             </label>
@@ -224,7 +224,7 @@ const HardProjects = () => {
             placeholder="Additional Requirements"
             value={formData.requirements}
             onChange={handleFormChange}
-            className="w-full px-4 py-2 border border-red-200 rounded-lg"
+            className="w-full px-4 py-2 border border-green-200 rounded-lg"
           />
 
           <button
@@ -232,8 +232,8 @@ const HardProjects = () => {
             disabled={loading}
             className={`w-full py-2 rounded-lg text-white font-semibold ${
               loading
-                ? "bg-red-300 cursor-not-allowed"
-                : "bg-red-600 hover:bg-red-700"
+                ? "bg-green-300 cursor-not-allowed"
+                : "bg-green-600 hover:bg-green-700"
             }`}
           >
             {loading ? "Processing..." : "Pay "}
