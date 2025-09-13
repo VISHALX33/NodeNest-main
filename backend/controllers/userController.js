@@ -176,3 +176,110 @@ export const deleteAccount = async (req, res) => {
     res.status(404).json({ message: 'User not found' });
   }
 };
+
+// Forgot Password - Send Reset Email
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ message: "User not found" });
+
+    // Generate reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const resetTokenHash = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+    // Save token + expiry in DB
+    user.resetPasswordToken = resetTokenHash;
+    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // 15 min
+    await user.save();
+
+    // const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    const resetUrl = `${process.env.CLIENT_URL || "http://localhost:5000"}/reset-password/${resetToken}`;
+
+    // Send email
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+  await transporter.sendMail({
+  from: `"NoteNest" <${process.env.EMAIL_USER}>`,
+  to: email,
+  subject: " Password Reset Request - NoteNest",
+  html: `
+    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      
+      <!-- Header -->
+      <div style="background: #16a34a; padding: 20px; text-align: center; color: #fff;">
+        <h1 style="margin: 0; font-size: 22px;">NoteNest</h1>
+      </div>
+      
+      <!-- Body -->
+      <div style="padding: 30px; color: #333;">
+        <h2 style="color: #16a34a; margin-top: 0;">Reset Your Password</h2>
+        <p style="font-size: 15px; line-height: 1.6;">
+          We received a request to reset your password. Click the button below to set up a new password:
+        </p>
+        
+        <!-- Button -->
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${resetUrl}" 
+             style="display:inline-block; padding: 14px 28px; background: #16a34a; color: #ffffff; 
+                    font-weight: bold; border-radius: 6px; text-decoration: none; font-size: 16px;">
+             Reset Password
+          </a>
+        </div>
+        
+        <p style="font-size: 14px; color: #555;">
+          If you did not request a password reset, you can safely ignore this email.  
+          This link will expire in <strong>1 hour</strong>.
+        </p>
+      </div>
+      
+      <!-- Footer -->
+      <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #777;">
+        © ${new Date().getFullYear()} NoteNest. All rights reserved.
+      </div>
+    </div>
+  `,
+});
+
+
+    res.json({ message: "Password reset email sent!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Reset Password
+export const resetPassword = async (req, res) => {
+  const { token } = req.params;
+  const { password } = req.body;
+
+  try {
+    const resetTokenHash = crypto.createHash("sha256").update(token).digest("hex");
+
+    const user = await User.findOne({
+      resetPasswordToken: resetTokenHash,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) return res.status(400).json({ message: "Invalid or expired token" });
+
+    // Hash new password
+    user.password = await bcrypt.hash(password, 10);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.json({ message: "Password reset successful! Please login." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};

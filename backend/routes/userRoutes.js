@@ -6,6 +6,8 @@ import {
   updateProfile,
   deleteAccount,
   verifyEmailOtp,
+  forgotPassword, 
+  resetPassword
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -17,5 +19,6 @@ router.post('/verify-otp', verifyEmailOtp);  // ✅ New route
 router.get('/', protect, getProfile);
 router.put('/', protect, updateProfile);
 router.delete('/', protect, deleteAccount);
-
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 export default router;

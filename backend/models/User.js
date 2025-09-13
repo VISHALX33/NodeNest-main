@@ -15,11 +15,15 @@ const userSchema = new mongoose.Schema({
 
   // 🆕 Verification fields
   isVerified: { type: Boolean, default: false },
-  emailOtp: { type: String }, // store OTP temporarily
+  emailOtp: { type: String },
   emailOtpExpires: { type: Date },
 
   // 🆕 Unique user ID
   user_uni_id: { type: String, unique: true },
+
+  // 🆕 Password reset fields
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date },
 }, { timestamps: true });
 
 // Pre-save hook to auto-generate unique user ID

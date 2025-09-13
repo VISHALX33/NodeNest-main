@@ -16,6 +16,7 @@ import projectRoutes from "./routes/projectRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
+console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
 
 const app = express();
 
@@ -43,7 +44,7 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/user-pdfs", userPdfRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/api/chatbot", chatbot); // 👈 now /api/chatbot works
+app.use("/api/chatbot", chatbot); 
 app.use("/api/projects", projectRoutes);
 app.use("/api/orders", orderRoutes);
 
