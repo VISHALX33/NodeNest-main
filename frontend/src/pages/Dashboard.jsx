@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaRobot } from "react-icons/fa";
 import NoteNestLogo from "/NoteNestLogo.png";
 import Chatbot from "./chatbot"; // ✅ import your chatbot
-import ProjectService from "./projectService";
+import ProjectService from "../projects/projectService";
 
 export default function Dashboard() {
   const [semesters, setSemesters] = useState([]);
