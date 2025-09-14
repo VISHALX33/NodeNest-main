@@ -25,6 +25,7 @@ import ContactUs from "./header/ContactUs";
 import ProjectService from "./projects/projectService";
 import ForgotPassword from "./login/ForgotPassword";
 import ResetPassword from "./login/ResetPassword";
+import InstallButton from "./components/InstallButton";
 
 function Layout({ children }) {
   return (
@@ -139,7 +140,7 @@ function App() {
           element={
             <PrivateRoute>
               <Layout>
-                <Chatbot/>
+                <Chatbot />
               </Layout>
             </PrivateRoute>
           }
@@ -156,7 +157,7 @@ function App() {
             </PrivateRoute>
           }
         />
-        
+
         <Route
           path="/easy-projects"
           element={
@@ -228,7 +229,7 @@ function App() {
           element={
             <PrivateRoute>
               <Layout>
-                <ProjectService /> 
+                <ProjectService />
               </Layout>
             </PrivateRoute>
           }
@@ -246,8 +247,18 @@ function App() {
         />
 
         <Route path="/verify-email" element={<VerifyEmail />} />
-         <Route path="/forgot-password" element={<ForgotPassword />} />
-<Route path="/reset-password/:token" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
+        
+        <Route
+          path="/install"
+          element={
+            <Layout>
+              <InstallButton />
+            </Layout>
+          }
+        />
+
         <Route
           path="/team"
           element={

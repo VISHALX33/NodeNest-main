@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -12,7 +11,8 @@ import {
   FaInfoCircle,
   FaEnvelope,
   FaShoppingCart,
-  FaStore
+  FaStore,
+  FaDownload
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -22,11 +22,34 @@ export default function Navbar() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // PWA install prompt
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [isInstallVisible, setIsInstallVisible] = useState(false);
+
   useEffect(() => {
     API.get("/users")
       .then((res) => setUser(res.data))
       .catch(() => setUser(null));
   }, []);
+
+  useEffect(() => {
+    const handler = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setIsInstallVisible(true);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log("User choice:", outcome);
+    setDeferredPrompt(null);
+    setIsInstallVisible(false);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -55,7 +78,6 @@ export default function Navbar() {
             <Link to="/project-services" title="Project Services">
               <FaStore size={22} />
             </Link>
-            
             <Link to="/how-it-works" title="How It Works">
               <FaQuestionCircle size={22} />
             </Link>
@@ -74,6 +96,16 @@ export default function Navbar() {
             <Link to="/my-bookings" title="Coming Soon">
               <FaShoppingCart size={22} />
             </Link>
+
+            {/* Download App button (Desktop) */}
+            {isInstallVisible && (
+              <button
+                onClick={handleInstall}
+                className="bg-white text-green-600 text-sm px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-green-50 transition"
+              >
+                <FaDownload /> Download App
+              </button>
+            )}
 
             {/* Avatar */}
             <FaCog
@@ -142,7 +174,7 @@ export default function Navbar() {
             <FaBell className="inline mr-2" /> Notifications
           </Link>
           <Link to="/project-services" onClick={() => setIsSidebarOpen(false)}>
-            <FaStore className="inline mr-2" /> project Services
+            <FaStore className="inline mr-2" /> Project Services
           </Link>
           <Link to="/how-it-works" onClick={() => setIsSidebarOpen(false)}>
             <FaQuestionCircle className="inline mr-2" /> How It Works
@@ -160,8 +192,9 @@ export default function Navbar() {
             <FaEnvelope className="inline mr-2" /> Contact
           </Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}>
-            <FaShoppingCart className="inline mr-2" /> My orders
+            <FaShoppingCart className="inline mr-2" /> My Orders
           </Link>
+
           
 
           {user ? (
@@ -188,16 +221,31 @@ export default function Navbar() {
               Login
             </Link>
           )}
+
+          {/* Download App button (Mobile) */}
+          {isInstallVisible && (
+            <button
+              onClick={() => {
+                handleInstall();
+                setIsSidebarOpen(false);
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+            >
+              <FaDownload /> Download App
+            </button>
+          )}
         </div>
+        
       </div>
+      
 
       {/* Overlay when sidebar is open */}
       {isSidebarOpen && (
-  <div
-    className="fixed inset-0 backdrop-blur-sm bg-black/20 z-40 transition-opacity"
-    onClick={() => setIsSidebarOpen(false)}
-  />
-)}
+        <div
+          className="fixed inset-0 backdrop-blur-sm bg-black/20 z-40 transition-opacity"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
     </>
   );
 }
