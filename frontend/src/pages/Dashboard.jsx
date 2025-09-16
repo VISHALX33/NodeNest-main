@@ -31,6 +31,9 @@ export default function Dashboard() {
           <br />
           <br />
           <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+            Free RTU notes of all semester !!  
+          </h2>
+          <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
             Select your semester to get free notes!
           </h2>
         </div>
