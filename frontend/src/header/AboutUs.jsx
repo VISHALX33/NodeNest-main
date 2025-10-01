@@ -3,13 +3,13 @@ import React from "react";
 const AboutUs = () => {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
         📖 About NoteNest
       </h1>
 
       <div className="bg-white shadow-md rounded-2xl p-8">
         <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-          Welcome to <span className="font-semibold text-green-600">NoteNest</span> – 
+          Welcome to <span className="font-semibold text-emerald-600">NoteNest</span> – 
           your one-stop platform for sharing and accessing notes effortlessly.  
           Built with the vision of making learning collaborative, NoteNest allows 
           students to upload, share, and download study material categorized by 
@@ -25,7 +25,7 @@ const AboutUs = () => {
 
         <p className="text-lg text-gray-700 leading-relaxed">
           Our mission is simple: 
-          <span className="text-green-600 font-semibold">
+          <span className="text-emerald-600 font-semibold">
             make knowledge sharing accessible, reliable, and free for everyone.
           </span>
         </p>

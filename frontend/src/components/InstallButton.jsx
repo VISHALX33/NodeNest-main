@@ -26,7 +26,7 @@ export default function InstallButton() {
     deferredPrompt && (
       <button
         onClick={handleInstall}
-        className="px-4 py-2 bg-blue-600 text-white rounded-lg shadow-md"
+        className="px-4 py-2 bg-emerald-600 text-white rounded-lg shadow-md"
       >
         📥 Install App
       </button>

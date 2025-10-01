@@ -19,7 +19,7 @@ export default function Notifications() {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
         🔔 Notifications & Updates
       </h1>
 
@@ -34,7 +34,7 @@ export default function Notifications() {
               key={note._id}
               className="bg-white shadow-md rounded-2xl p-5 hover:shadow-lg transition"
             >
-              <h2 className="text-lg font-semibold text-green-600 mb-2">
+              <h2 className="text-lg font-semibold text-emerald-600 mb-2">
                 {note.title}
               </h2>
               <p className="text-gray-700 text-sm mb-3">{note.message}</p>

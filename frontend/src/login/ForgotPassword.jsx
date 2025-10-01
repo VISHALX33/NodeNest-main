@@ -15,18 +15,18 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50">
+    <div className="min-h-screen flex items-center justify-center bg-emerald-50">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold text-green-700 mb-4">Forgot Password</h2>
+        <h2 className="text-2xl font-bold text-emerald-700 mb-4">Forgot Password</h2>
         <input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-400 mb-4"
+          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-400 mb-4"
         />
-        <button type="submit" className="w-full py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
+        <button type="submit" className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg">
           Send Reset Link
         </button>
       </form>

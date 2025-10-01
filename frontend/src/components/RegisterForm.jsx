@@ -82,7 +82,7 @@ export default function RegisterForm() {
         value={formData.name}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+        className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
       />
 
       {/* Email */}
@@ -93,7 +93,7 @@ export default function RegisterForm() {
         value={formData.email}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+        className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
       />
 
       {/* Phone */}
@@ -104,7 +104,7 @@ export default function RegisterForm() {
         value={formData.phone}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+        className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
       />
 
       {/* Password with toggle */}
@@ -116,12 +116,12 @@ export default function RegisterForm() {
           value={formData.password}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 pr-10"
+          className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 pr-10"
         />
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-2.5 text-gray-500 hover:text-green-600"
+          className="absolute right-3 top-2.5 text-gray-500 hover:text-emerald-600"
         >
           {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>
@@ -136,12 +136,12 @@ export default function RegisterForm() {
           value={formData.confirmPassword}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 pr-10"
+          className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 pr-10"
         />
         <button
           type="button"
           onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-          className="absolute right-3 top-2.5 text-gray-500 hover:text-green-600"
+          className="absolute right-3 top-2.5 text-gray-500 hover:text-emerald-600"
         >
           {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
         </button>
@@ -154,7 +154,7 @@ export default function RegisterForm() {
           name="collegeStudent"
           checked={formData.collegeStudent}
           onChange={handleChange}
-          className="mr-2 accent-green-500"
+          className="mr-2 accent-emerald-500"
         />
         I am a college student
       </label>
@@ -165,7 +165,7 @@ export default function RegisterForm() {
         value={formData.gender}
         onChange={handleChange}
         required
-        className="w-full px-4 py-2 border border-green-200 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-400"
+        className="w-full px-4 py-2 border border-emerald-200 rounded-lg bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-400"
       >
         <option value="">Select Gender</option>
         <option value="Male">Male</option>
@@ -179,8 +179,8 @@ export default function RegisterForm() {
         disabled={loading}
         className={`w-full py-2 rounded-lg text-white font-semibold transition duration-200 ${
           loading
-            ? "bg-green-300 cursor-not-allowed"
-            : "bg-green-600 hover:bg-green-700"
+            ? "bg-emerald-300 cursor-not-allowed"
+            : "bg-emerald-600 hover:bg-emerald-700"
         }`}
       >
         {loading ? "Registering..." : "Register"}

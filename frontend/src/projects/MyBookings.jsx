@@ -70,7 +70,7 @@ const MyBookings = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-6 py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-500 mb-4"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500 mb-4"></div>
         <p className="text-gray-600">Loading your bookings...</p>
       </div>
     );
@@ -78,16 +78,16 @@ const MyBookings = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 px-6 py-12">
-      <h1 className="text-3xl font-bold text-center text-green-700 mb-2">My Bookings</h1>
+      <h1 className="text-3xl font-bold text-center text-emerald-700 mb-2">My Bookings</h1>
       <p className="text-gray-600 text-center mb-8">View and manage all your project orders</p>
 
       {orders.length === 0 ? (
-        <div className="max-w-md mx-auto bg-white rounded-2xl shadow-md p-8 text-center border-t-4 border-green-500">
+        <div className="max-w-md mx-auto bg-white rounded-2xl shadow-md p-8 text-center border-t-4 border-emerald-500">
           <h2 className="text-xl font-semibold text-gray-700 mb-2">No bookings yet</h2>
           <p className="text-gray-500 mb-6">You haven't placed any orders. Start by exploring our projects!</p>
           <button
             onClick={() => navigate("/easy-projects")}
-            className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200"
           >
             Browse Projects
           </button>
@@ -97,13 +97,13 @@ const MyBookings = () => {
           {orders.map((order) => (
             <div 
               key={order._id} 
-              className="max-w-sm mx-auto bg-green-600 rounded-2xl shadow-lg text-white p-4"
+              className="max-w-sm mx-auto bg-emerald-600 rounded-2xl shadow-lg text-white p-4"
             >
               {/* Header */}
               <div className="bg-white text-black rounded-xl p-4 mb-4">
                 <div className="flex items-center justify-between">
                   <h2 className="font-bold text-lg flex items-center gap-2">
-                    <FaShoppingBag className="text-green-600" />
+                    <FaShoppingBag className="text-emerald-600" />
                     {order.project?.name || "Project"}
                   </h2>
                   <p className="text-xs text-gray-600">ID: {order.orderId || "N/A"}</p>
@@ -134,12 +134,12 @@ const MyBookings = () => {
               <div className="bg-white text-black rounded-xl p-4 mb-4">
                 <p className="font-semibold flex items-center gap-1 mb-2"><FaCreditCard /> Payment</p>
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-green-600">₹{order.totalAmount || order.basePrice || "N/A"}</span>
+                  <span className="font-bold text-emerald-600">₹{order.totalAmount || order.basePrice || "N/A"}</span>
                   <span
                     className={`text-xs px-2 py-1 rounded-full ${
                       order.paymentStatus === "completed"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-yellow-100 text-green-800"
+                        ? "bg-emerald-100 text-emerald-800"
+                        : "bg-yellow-100 text-emerald-800"
                     }`}
                   >
                     {order.paymentStatus === "completed" ? "Paid" : "Pending"}
@@ -150,9 +150,9 @@ const MyBookings = () => {
                   <span
                     className={`font-medium ${
                       order.orderStatus === "delivered"
-                        ? "text-green-600"
+                        ? "text-emerald-600"
                         : order.orderStatus === "in_progress"
-                        ? "text-blue-600"
+                        ? "text-emerald-600"
                         : "text-yellow-600"
                     }`}
                   >
@@ -189,7 +189,7 @@ const MyBookings = () => {
                   </button>
                 ) : (
                   <div className="bg-gray-100 text-black p-2 rounded-md text-sm flex items-start gap-2">
-                    <FaInfoCircle className="text-blue-600 mt-0.5" />
+                    <FaInfoCircle className="text-emerald-600 mt-0.5" />
                     {order.orderStatus === "in_progress"
                       ? "Your project is currently in progress"
                       : "Pending delivery - we'll notify you when ready"}

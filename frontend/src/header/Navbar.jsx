@@ -60,7 +60,7 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-gradient-to-r from-green-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
+      <nav className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
         {/* Logo */}
         <h1
           className="text-2xl font-extrabold tracking-wide cursor-pointer"
@@ -101,7 +101,7 @@ export default function Navbar() {
             {isInstallVisible && (
               <button
                 onClick={handleInstall}
-                className="bg-white text-green-600 text-sm px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-green-50 transition"
+                className="bg-white text-emerald-600 text-sm px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-emerald-50 transition"
               >
                 <FaDownload /> Download App
               </button>
@@ -136,7 +136,7 @@ export default function Navbar() {
         ) : (
           <Link
             to="/"
-            className="hidden md:block bg-white text-green-600 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-green-50 transition"
+            className="hidden md:block bg-white text-emerald-600 text-sm font-medium px-4 py-1.5 rounded-full hover:bg-emerald-50 transition"
           >
             Login
           </Link>
@@ -159,7 +159,7 @@ export default function Navbar() {
       >
         {/* Header */}
         <div className="flex justify-between items-center px-6 py-4 border-b">
-          <h2 className="text-xl font-bold text-green-600">Menu</h2>
+          <h2 className="text-xl font-bold text-emerald-600">Menu</h2>
           <button
             className="text-gray-600"
             onClick={() => setIsSidebarOpen(false)}
@@ -215,7 +215,7 @@ export default function Navbar() {
           ) : (
             <Link
               to="/"
-              className="bg-green-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-green-700 transition"
+              className="bg-emerald-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-emerald-700 transition"
               onClick={() => setIsSidebarOpen(false)}
             >
               Login
@@ -229,7 +229,7 @@ export default function Navbar() {
                 handleInstall();
                 setIsSidebarOpen(false);
               }}
-              className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition"
+              className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition"
             >
               <FaDownload /> Download App
             </button>

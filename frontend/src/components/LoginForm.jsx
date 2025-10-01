@@ -33,22 +33,22 @@ export default function LoginForm() {
   return (
     <>
       {/* Hero Section */}
-      <div className="bg-green-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-green-200">
+      <div className="bg-emerald-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
         <div className="flex-1">
-          <h2 className="text-3xl md:text-4xl font-bold text-green-800 leading-snug">
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 leading-snug">
             Discover Smart Study & Services with{" "}
-            <span className="text-green-900">NoteNest</span>
+            <span className="text-emerald-900">NoteNest</span>
           </h2>
-          <p className="mt-3 text-green-700 text-sm max-w-md">
+          <p className="mt-3 text-emerald-700 text-sm max-w-md">
             One platform to download notes, manage tasks, chat with peers, and
             book services — all in one place.
           </p>
           <br />
           <br />
-          <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+          <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
             Free RTU notes of all semester!!
           </h2>
-          <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+          <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
             Select your semester to get free notes!!
           </h2>
         </div>
@@ -64,7 +64,7 @@ export default function LoginForm() {
       {/* Login Form */}
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="text-center mb-2">
-          <h2 className="text-2xl font-bold text-green-700">Welcome Back</h2>
+          <h2 className="text-2xl font-bold text-emerald-700">Welcome Back</h2>
           <p className="text-sm text-gray-600 mt-1">Please login</p>
         </div>
 
@@ -74,7 +74,7 @@ export default function LoginForm() {
           placeholder="Enter your email"
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
 
         {/* 👁️ Password with toggle */}
@@ -85,7 +85,7 @@ export default function LoginForm() {
             placeholder="Enter your password"
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 pr-10"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400 pr-10"
           />
           <button
             type="button"
@@ -98,7 +98,7 @@ export default function LoginForm() {
 
         {/* Forgot password link (just under password field) */}
         <div className="text-right">
-          <Link to="/forgot-password" className="text-sm text-green-600 hover:underline">
+          <Link to="/forgot-password" className="text-sm text-emerald-600 hover:underline">
             Forgot Password?
           </Link>
         </div>
@@ -109,7 +109,7 @@ export default function LoginForm() {
           className={`w-full py-2 rounded-lg font-semibold transition ${
             loading
               ? "bg-gray-400 cursor-not-allowed"
-              : "bg-green-600 hover:bg-green-700 text-white"
+              : "bg-emerald-600 hover:bg-emerald-700 text-white"
           }`}
         >
           {loading ? "Logging in..." : "Login"}

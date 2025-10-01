@@ -19,7 +19,7 @@ const ContactUs = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
         📩 Contact Us
       </h1>
 
@@ -27,7 +27,7 @@ const ContactUs = () => {
         <p className="text-gray-700 mb-6 text-center">
           Have questions, feedback, or suggestions?  
           We’d love to hear from you! Fill out the form below or reach us at{" "}
-          <span className="text-green-600 font-semibold">support@notenest.com</span>
+          <span className="text-emerald-600 font-semibold">support@notenest.com</span>
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -38,7 +38,7 @@ const ContactUs = () => {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
 
           <input
@@ -48,7 +48,7 @@ const ContactUs = () => {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
 
           <textarea
@@ -57,19 +57,19 @@ const ContactUs = () => {
             value={formData.message}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
             rows="4"
           />
 
           <button
             type="submit"
-            className="w-full py-2 rounded-lg text-white font-semibold bg-green-600 hover:bg-green-700"
+            className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-600 hover:bg-emerald-700"
           >
             Send Message
           </button>
         </form>
         <p className="mt-6 text-sm text-gray-500 text-center">
-  🔒 <span className="font-semibold">Refunds & Support:</span> For billing issues or refund requests, write to us at <span className="text-green-600">notesea.help@gmail.com</span> with your Order ID. We aim to resolve payment-related queries within 5–7 working days.
+  🔒 <span className="font-semibold">Refunds & Support:</span> For billing issues or refund requests, write to us at <span className="text-emerald-600">notesea.help@gmail.com</span> with your Order ID. We aim to resolve payment-related queries within 5–7 working days.
 </p>
 
       </div>

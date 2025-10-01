@@ -52,7 +52,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto my-10 p-6 bg-gradient-to-tr from-emerald-100 via-white to-green-100 rounded-3xl shadow-xl">
+    <div className="max-w-4xl mx-auto my-10 p-6 bg-gradient-to-tr from-emerald-100 via-white to-emerald-100 rounded-3xl shadow-xl">
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-10">
         {/* Profile Avatar and Name */}
         <div className="flex flex-col items-center bg-white p-6 rounded-2xl shadow-md w-full lg:w-1/3">

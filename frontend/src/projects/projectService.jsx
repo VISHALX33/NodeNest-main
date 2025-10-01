@@ -49,7 +49,7 @@ export default function ProjectService() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
          Project Development Services
       </h1>
 
@@ -59,11 +59,11 @@ export default function ProjectService() {
       </p>
 
       {/* ✅ New Section: Plan Benefits */}
-      <div className="bg-green-50 p-6 rounded-2xl mb-10 shadow-md">
-        <h2 className="text-2xl font-semibold text-green-700 mb-4 text-center">Why Choose Our Plans?</h2>
+      <div className="bg-emerald-50 p-6 rounded-2xl mb-10 shadow-md">
+        <h2 className="text-2xl font-semibold text-emerald-700 mb-4 text-center">Why Choose Our Plans?</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="p-4 bg-white rounded-xl shadow-sm">
-            <h3 className="text-xl font-semibold text-green-600 mb-2">🎓 Student Plan</h3>
+            <h3 className="text-xl font-semibold text-emerald-600 mb-2">🎓 Student Plan</h3>
             <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
               <li>Affordable pricing for learners.</li>
               <li>Focus on learning & building hands-on projects.</li>
@@ -72,7 +72,7 @@ export default function ProjectService() {
             </ul>
           </div>
           <div className="p-4 bg-white rounded-xl shadow-sm">
-            <h3 className="text-xl font-semibold text-green-600 mb-2">🏢 Business Plan</h3>
+            <h3 className="text-xl font-semibold text-emerald-600 mb-2">🏢 Business Plan</h3>
             <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
               <li>Designed for startups & companies.</li>
               <li>Advanced features with scalable architecture.</li>
@@ -90,7 +90,7 @@ export default function ProjectService() {
             className="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition flex flex-col justify-between"
           >
             <div>
-              <h2 className="text-xl font-semibold text-green-600 mb-3 text-center">
+              <h2 className="text-xl font-semibold text-emerald-600 mb-3 text-center">
                 {category.level}
               </h2>
               <p className="text-gray-500 text-sm text-center mb-4">
@@ -99,7 +99,7 @@ export default function ProjectService() {
               <ul className="space-y-2 text-gray-700 text-sm mb-6">
                 {category.projects.map((project) => (
                   <li key={project._id} className="flex items-start gap-2">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mt-2"></span>
+                    <span className="w-2 h-2 bg-emerald-500 rounded-full mt-2"></span>
                     {project.name}
                   </li>
                 ))}
@@ -109,20 +109,20 @@ export default function ProjectService() {
             <div className="border-t pt-4 text-sm">
               <p className="text-gray-600 mb-1">
                 <b>🎓 Student Plan:</b>{' '}
-                <span className="text-green-600 font-semibold">
+                <span className="text-emerald-600 font-semibold">
                   ₹{Math.min(...category.projects.map(p => p.studentPrice))} – ₹{Math.max(...category.projects.map(p => p.studentPrice))}
                 </span>
               </p>
               <p className="text-gray-600">
                 <b>🏢 Business Plan:</b>{' '}
-                <span className="text-green-600 font-semibold">
+                <span className="text-emerald-600 font-semibold">
                   ₹{Math.min(...category.projects.map(p => p.businessPrice))} – ₹{Math.max(...category.projects.map(p => p.businessPrice))}
                 </span>
               </p>
             </div>
 
             <Link to={category.link}>
-              <button className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700">
+              <button className="mt-4 w-full bg-emerald-600 text-white py-2 rounded-lg hover:bg-emerald-700">
                 See All
               </button>
             </Link>

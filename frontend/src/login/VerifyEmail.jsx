@@ -54,12 +54,12 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-emerald-50 p-4">
       <form
         onSubmit={handleVerify}
         className="space-y-6 p-8 w-full max-w-md bg-white shadow-lg rounded-xl"
       >
-        <h2 className="text-2xl font-extrabold text-center text-green-700">
+        <h2 className="text-2xl font-extrabold text-center text-emerald-700">
           Verify Your Email
         </h2>
         <p className="text-center text-gray-600 text-sm">
@@ -76,7 +76,7 @@ export default function VerifyEmail() {
           placeholder="Email"
           value={email}
           readOnly
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
         <input
           type="text"
@@ -84,15 +84,15 @@ export default function VerifyEmail() {
           value={otp}
           onChange={(e) => setOtp(e.target.value)}
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
         <button
           type="submit"
           disabled={loading || timeLeft <= 0}
           className={`w-full py-3 rounded-lg text-white font-semibold transition duration-200 ${
             loading || timeLeft <= 0
-              ? "bg-green-300 cursor-not-allowed"
-              : "bg-green-600 hover:bg-green-700"
+              ? "bg-emerald-300 cursor-not-allowed"
+              : "bg-emerald-600 hover:bg-emerald-700"
           }`}
         >
           {timeLeft <= 0 ? "OTP Expired" : loading ? "Verifying..." : "Verify Email"}

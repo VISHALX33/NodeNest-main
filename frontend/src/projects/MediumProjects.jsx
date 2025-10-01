@@ -118,7 +118,7 @@
 //           contact: formData.phone,
 //         },
 //         theme: {
-//           color: "#facc15", // green theme for medium
+//           color: "#facc15", // emerald theme for medium
 //         },
 //       };
 
@@ -133,7 +133,7 @@
 
 //   return (
 //     <div className="max-w-6xl mx-auto px-6 py-10">
-//       <h1 className="text-3xl font-bold text-green-600 mb-6 text-center">
+//       <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
 //         🟡 Medium Projects
 //       </h1>
 //       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -144,7 +144,7 @@
 //             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
 //           >
 //             <div className="text-4xl text-center mb-4">{project.icon}</div>
-//             <h2 className="text-xl font-semibold text-green-600 text-center">
+//             <h2 className="text-xl font-semibold text-emerald-600 text-center">
 //               {project.name}
 //             </h2>
 //           </div>
@@ -165,7 +165,7 @@
 //             value={formData.name}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 //           <input
 //             name="email"
@@ -174,7 +174,7 @@
 //             value={formData.email}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 //           <input
 //             name="phone"
@@ -182,7 +182,7 @@
 //             value={formData.phone}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 //           <input
 //             name="deadline"
@@ -190,7 +190,7 @@
 //             value={formData.deadline}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 
 //           {/* Plan Type */}
@@ -202,7 +202,7 @@
 //                 value="student"
 //                 checked={formData.planType === "student"}
 //                 onChange={handleFormChange}
-//                 className="mr-2 accent-green-500"
+//                 className="mr-2 accent-emerald-500"
 //               />
 //               Student
 //             </label>
@@ -213,7 +213,7 @@
 //                 value="business"
 //                 checked={formData.planType === "business"}
 //                 onChange={handleFormChange}
-//                 className="mr-2 accent-green-500"
+//                 className="mr-2 accent-emerald-500"
 //               />
 //               Business
 //             </label>
@@ -224,7 +224,7 @@
 //             placeholder="Additional Requirements"
 //             value={formData.requirements}
 //             onChange={handleFormChange}
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 
 //           <button
@@ -232,8 +232,8 @@
 //             disabled={loading}
 //             className={`w-full py-2 rounded-lg text-white font-semibold ${
 //               loading
-//                 ? "bg-green-300 cursor-not-allowed"
-//                 : "bg-green-500 hover:bg-green-600"
+//                 ? "bg-emerald-300 cursor-not-allowed"
+//                 : "bg-emerald-500 hover:bg-emerald-600"
 //             }`}
 //           >
 //             {loading ? "Processing..." : "Pay "}
@@ -377,7 +377,7 @@
 //           contact: formData.phone,
 //         },
 //         theme: {
-//           color: "#facc15", // green theme for medium
+//           color: "#facc15", // emerald theme for medium
 //         },
 //       };
 
@@ -399,7 +399,7 @@
 
 //   return (
 //     <div className="max-w-6xl mx-auto px-6 py-10">
-//       <h1 className="text-3xl font-bold text-green-600 mb-6 text-center">
+//       <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
 //         🟡 Medium Projects
 //       </h1>
 //       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -410,13 +410,13 @@
 //             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
 //           >
 //             <div className="text-4xl text-center mb-4">{project.icon}</div>
-//             <h2 className="text-xl font-semibold text-green-600 text-center">
+//             <h2 className="text-xl font-semibold text-emerald-600 text-center">
 //               {project.name}
 //             </h2>
 //             <div className="text-center mt-2">
-//               <span className="text-green-500 font-medium">₹{project.studentPrice}</span>
+//               <span className="text-emerald-500 font-medium">₹{project.studentPrice}</span>
 //               <span className="mx-2">|</span>
-//               <span className="text-blue-500 font-medium">₹{project.businessPrice}</span>
+//               <span className="text-emerald-500 font-medium">₹{project.businessPrice}</span>
 //             </div>
 //           </div>
 //         ))}
@@ -433,27 +433,27 @@
 //             {/* Left Column - Media */}
 //             <div className="md:w-1/2 p-6">
 //               <div className="mb-6">
-//                 <h2 className="text-2xl font-bold text-green-600 mb-2">{selectedProject.name}</h2>
+//                 <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
 //                 <div className="flex items-center gap-4 mb-4">
-//                   <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+//                   <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
 //                     Student: ₹{selectedProject.studentPrice}
 //                   </span>
-//                   <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+//                   <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
 //                     Business: ₹{selectedProject.businessPrice}
 //                   </span>
 //                 </div>
 //               </div>
               
 //               {/* Tabs for Image/Video */}
-//               <div className="flex border-b border-green-200 mb-4">
+//               <div className="flex border-b border-emerald-200 mb-4">
 //                 <button
-//                   className={`py-2 px-4 font-medium ${activeTab === 'preview' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500'}`}
+//                   className={`py-2 px-4 font-medium ${activeTab === 'preview' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
 //                   onClick={() => setActiveTab('preview')}
 //                 >
 //                   Preview
 //                 </button>
 //                 <button
-//                   className={`py-2 px-4 font-medium ${activeTab === 'details' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500'}`}
+//                   className={`py-2 px-4 font-medium ${activeTab === 'details' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
 //                   onClick={() => setActiveTab('details')}
 //                 >
 //                   Details
@@ -461,7 +461,7 @@
 //               </div>
               
 //               {/* Media Content */}
-//               <div className="h-80 overflow-hidden rounded-lg bg-gray-100 border border-green-200">
+//               <div className="h-80 overflow-hidden rounded-lg bg-gray-100 border border-emerald-200">
 //                 {activeTab === 'preview' ? (
 //                   selectedProject.videoLink ? (
 //                     <div className="h-full">
@@ -487,12 +487,12 @@
 //                   )
 //                 ) : (
 //                   <div className="p-4 h-full overflow-y-auto">
-//                     <h3 className="text-lg font-semibold mb-3 text-green-600">Project Features</h3>
+//                     <h3 className="text-lg font-semibold mb-3 text-emerald-600">Project Features</h3>
 //                     <ul className="space-y-2">
 //                       {selectedProject.features && selectedProject.features.length > 0 ? (
 //                         selectedProject.features.map((feature, index) => (
 //                           <li key={index} className="flex items-start">
-//                             <span className="text-green-500 mr-2">✓</span>
+//                             <span className="text-emerald-500 mr-2">✓</span>
 //                             <span>{feature}</span>
 //                           </li>
 //                         ))
@@ -501,9 +501,9 @@
 //                       )}
 //                     </ul>
                     
-//                     <div className="mt-6 p-3 bg-green-50 rounded-lg border border-green-200">
+//                     <div className="mt-6 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
 //                       <div className="flex items-center">
-//                         <span className="text-green-600 mr-2">⏱</span>
+//                         <span className="text-emerald-600 mr-2">⏱</span>
 //                         <span className="font-medium">Delivery Time: {selectedProject.deliveryTime} days</span>
 //                       </div>
 //                     </div>
@@ -514,13 +514,13 @@
             
 //             {/* Right Column - Info & Action */}
 //             <div className="md:w-1/2 p-6 flex flex-col">
-//               <h3 className="text-xl font-semibold text-green-600 mb-4">About {selectedProject.name}</h3>
+//               <h3 className="text-xl font-semibold text-emerald-600 mb-4">About {selectedProject.name}</h3>
 //               <p className="text-gray-600 mb-6 flex-grow">{selectedProject.description}</p>
               
 //               <div className="mt-auto">
 //                 <button
 //                   onClick={handleContinue}
-//                   className="w-full py-2 rounded-lg text-white font-semibold bg-green-500 hover:bg-green-600"
+//                   className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-500 hover:bg-emerald-600"
 //                 >
 //                   Continue to Book
 //                 </button>
@@ -554,7 +554,7 @@
 //             value={formData.name}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 //           <input
 //             name="email"
@@ -563,7 +563,7 @@
 //             value={formData.email}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 //           <input
 //             name="phone"
@@ -571,7 +571,7 @@
 //             value={formData.phone}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 //           <input
 //             name="deadline"
@@ -579,7 +579,7 @@
 //             value={formData.deadline}
 //             onChange={handleFormChange}
 //             required
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 
 //           {/* Plan Type */}
@@ -591,7 +591,7 @@
 //                 value="student"
 //                 checked={formData.planType === "student"}
 //                 onChange={handleFormChange}
-//                 className="mr-2 accent-green-500"
+//                 className="mr-2 accent-emerald-500"
 //               />
 //               Student (₹{selectedProject?.studentPrice})
 //             </label>
@@ -602,7 +602,7 @@
 //                 value="business"
 //                 checked={formData.planType === "business"}
 //                 onChange={handleFormChange}
-//                 className="mr-2 accent-green-500"
+//                 className="mr-2 accent-emerald-500"
 //               />
 //               Business (₹{selectedProject?.businessPrice})
 //             </label>
@@ -613,7 +613,7 @@
 //             placeholder="Additional Requirements"
 //             value={formData.requirements}
 //             onChange={handleFormChange}
-//             className="w-full px-4 py-2 border border-green-200 rounded-lg"
+//             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
 //           />
 
 //           <button
@@ -621,8 +621,8 @@
 //             disabled={loading}
 //             className={`w-full py-2 rounded-lg text-white font-semibold ${
 //               loading
-//                 ? "bg-green-300 cursor-not-allowed"
-//                 : "bg-green-500 hover:bg-green-600"
+//                 ? "bg-emerald-300 cursor-not-allowed"
+//                 : "bg-emerald-500 hover:bg-emerald-600"
 //             }`}
 //           >
 //             {loading ? "Processing..." : `Pay ₹${formData.planType === "student" ? selectedProject?.studentPrice : selectedProject?.businessPrice}`}
@@ -764,7 +764,7 @@ const MediumProjects = () => {
           contact: formData.phone,
         },
         theme: {
-          color: "#facc15", // green theme for medium
+          color: "#facc15", // emerald theme for medium
         },
       };
 
@@ -793,7 +793,7 @@ const MediumProjects = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-green-600 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
         🟡 Medium Projects
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -804,13 +804,13 @@ const MediumProjects = () => {
             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
           >
             <div className="text-4xl text-center mb-4">{project.icon}</div>
-            <h2 className="text-xl font-semibold text-green-600 text-center">
+            <h2 className="text-xl font-semibold text-emerald-600 text-center">
               {project.name}
             </h2>
             <div className="text-center mt-2">
-              <span className="text-green-500 font-medium">₹{project.studentPrice}</span>
+              <span className="text-emerald-500 font-medium">₹{project.studentPrice}</span>
               <span className="mx-2">|</span>
-              <span className="text-blue-500 font-medium">₹{project.businessPrice}</span>
+              <span className="text-emerald-500 font-medium">₹{project.businessPrice}</span>
             </div>
           </div>
         ))}
@@ -827,33 +827,33 @@ const MediumProjects = () => {
             {/* Left Column - Media */}
             <div className="md:w-1/2 p-6">
               <div className="mb-6">
-                <h2 className="text-2xl font-bold text-green-600 mb-2">{selectedProject.name}</h2>
+                <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
                 <div className="flex items-center gap-4 mb-4">
-                  <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                  <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
                     Student: ₹{selectedProject.studentPrice}
                   </span>
-                  <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                  <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
                     Business: ₹{selectedProject.businessPrice}
                   </span>
                 </div>
               </div>
               
               {/* Tabs for Preview/Images/Details */}
-              <div className="flex border-b border-green-200 mb-4">
+              <div className="flex border-b border-emerald-200 mb-4">
                 <button
-                  className={`py-2 px-4 font-medium ${activeTab === 'preview' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500'}`}
+                  className={`py-2 px-4 font-medium ${activeTab === 'preview' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
                   onClick={() => setActiveTab('preview')}
                 >
                   Preview
                 </button>
                 <button
-                  className={`py-2 px-4 font-medium ${activeTab === 'image' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500'}`}
+                  className={`py-2 px-4 font-medium ${activeTab === 'image' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
                   onClick={() => setActiveTab('image')}
                 >
                   Images
                 </button>
                 <button
-                  className={`py-2 px-4 font-medium ${activeTab === 'details' ? 'text-green-600 border-b-2 border-green-600' : 'text-gray-500'}`}
+                  className={`py-2 px-4 font-medium ${activeTab === 'details' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
                   onClick={() => setActiveTab('details')}
                 >
                   Details
@@ -861,7 +861,7 @@ const MediumProjects = () => {
               </div>
               
               {/* Media Content */}
-              <div className="h-80 overflow-hidden rounded-lg bg-gray-100 border border-green-200">
+              <div className="h-80 overflow-hidden rounded-lg bg-gray-100 border border-emerald-200">
                 {activeTab === 'preview' ? (
                   selectedProject.videoLink ? (
                     <div className="h-full">
@@ -887,10 +887,10 @@ const MediumProjects = () => {
                   )
                 ) : activeTab === 'images' ? (
                   <div className="p-4 h-full overflow-y-auto">
-                    <h3 className="text-lg font-semibold mb-3 text-green-600">Project Images</h3>
+                    <h3 className="text-lg font-semibold mb-3 text-emerald-600">Project Images</h3>
                     <div className="grid grid-cols-1 gap-4">
                       {sampleImages.map((img, index) => (
-                        <div key={index} className="border border-green-200 rounded-lg overflow-hidden">
+                        <div key={index} className="border border-emerald-200 rounded-lg overflow-hidden">
                           <img 
                             src={img} 
                             alt={`${selectedProject.name} ${index + 1}`}
@@ -902,12 +902,12 @@ const MediumProjects = () => {
                   </div>
                 ) : (
                   <div className="p-4 h-full overflow-y-auto">
-                    <h3 className="text-lg font-semibold mb-3 text-green-600">Project Features</h3>
+                    <h3 className="text-lg font-semibold mb-3 text-emerald-600">Project Features</h3>
                     <ul className="space-y-2">
                       {selectedProject.features && selectedProject.features.length > 0 ? (
                         selectedProject.features.map((feature, index) => (
                           <li key={index} className="flex items-start">
-                            <span className="text-green-500 mr-2">✓</span>
+                            <span className="text-emerald-500 mr-2">✓</span>
                             <span>{feature}</span>
                           </li>
                         ))
@@ -916,9 +916,9 @@ const MediumProjects = () => {
                       )}
                     </ul>
                     
-                    <div className="mt-6 p-3 bg-green-50 rounded-lg border border-green-200">
+                    <div className="mt-6 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
                       <div className="flex items-center">
-                        <span className="text-green-600 mr-2">⏱</span>
+                        <span className="text-emerald-600 mr-2">⏱</span>
                         <span className="font-medium">Delivery Time: {selectedProject.deliveryTime} days</span>
                       </div>
                     </div>
@@ -929,13 +929,13 @@ const MediumProjects = () => {
             
             {/* Right Column - Info & Action */}
             <div className="md:w-1/2 p-6 flex flex-col">
-              <h3 className="text-xl font-semibold text-green-600 mb-4">About {selectedProject.name}</h3>
+              <h3 className="text-xl font-semibold text-emerald-600 mb-4">About {selectedProject.name}</h3>
               <p className="text-gray-600 mb-6 flex-grow">{selectedProject.description}</p>
               
               <div className="mt-auto">
                 <button
                   onClick={handleContinue}
-                  className="w-full py-2 rounded-lg text-white font-semibold bg-green-500 hover:bg-green-600"
+                  className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-500 hover:bg-emerald-600"
                 >
                   Continue to Book
                 </button>
@@ -969,7 +969,7 @@ const MediumProjects = () => {
             value={formData.name}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
           <input
             name="email"
@@ -978,7 +978,7 @@ const MediumProjects = () => {
             value={formData.email}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
           <input
             name="phone"
@@ -986,7 +986,7 @@ const MediumProjects = () => {
             value={formData.phone}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
           <input
             name="deadline"
@@ -994,7 +994,7 @@ const MediumProjects = () => {
             value={formData.deadline}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
 
           {/* Plan Type */}
@@ -1006,7 +1006,7 @@ const MediumProjects = () => {
                 value="student"
                 checked={formData.planType === "student"}
                 onChange={handleFormChange}
-                className="mr-2 accent-green-500"
+                className="mr-2 accent-emerald-500"
               />
               Student (₹{selectedProject?.studentPrice})
             </label>
@@ -1017,7 +1017,7 @@ const MediumProjects = () => {
                 value="business"
                 checked={formData.planType === "business"}
                 onChange={handleFormChange}
-                className="mr-2 accent-green-500"
+                className="mr-2 accent-emerald-500"
               />
               Business (₹{selectedProject?.businessPrice})
             </label>
@@ -1028,7 +1028,7 @@ const MediumProjects = () => {
             placeholder="Additional Requirements"
             value={formData.requirements}
             onChange={handleFormChange}
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
 
           <button
@@ -1036,8 +1036,8 @@ const MediumProjects = () => {
             disabled={loading}
             className={`w-full py-2 rounded-lg text-white font-semibold ${
               loading
-                ? "bg-green-300 cursor-not-allowed"
-                : "bg-green-500 hover:bg-green-600"
+                ? "bg-emerald-300 cursor-not-allowed"
+                : "bg-emerald-500 hover:bg-emerald-600"
             }`}
           >
             {loading ? "Processing..." : `Pay ₹${formData.planType === "student" ? selectedProject?.studentPrice : selectedProject?.businessPrice}`}

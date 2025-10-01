@@ -132,7 +132,7 @@ const EasyProjects = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
         🟢 Easy Projects
       </h1>
 
@@ -148,7 +148,7 @@ const EasyProjects = () => {
             <div className="text-4xl text-center mb-4">{project.icon}</div>
 
             {/* Name */}
-            <h2 className="text-xl font-semibold text-green-600 text-center mb-2">
+            <h2 className="text-xl font-semibold text-emerald-600 text-center mb-2">
               {project.name}
             </h2>
 
@@ -173,13 +173,13 @@ const EasyProjects = () => {
             <div className="text-sm text-center mt-3">
               <p>
                 🎓 Student:{" "}
-                <span className="font-semibold text-green-600">
+                <span className="font-semibold text-emerald-600">
                   ₹{project.studentPrice}
                 </span>
               </p>
               <p>
                 🏢 Business:{" "}
-                <span className="font-semibold text-green-600">
+                <span className="font-semibold text-emerald-600">
                   ₹{project.businessPrice}
                 </span>
               </p>
@@ -202,7 +202,7 @@ const EasyProjects = () => {
             value={formData.name}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
           <input
             name="email"
@@ -211,7 +211,7 @@ const EasyProjects = () => {
             value={formData.email}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
           <input
             name="phone"
@@ -219,7 +219,7 @@ const EasyProjects = () => {
             value={formData.phone}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
           <input
             name="deadline"
@@ -227,7 +227,7 @@ const EasyProjects = () => {
             value={formData.deadline}
             onChange={handleFormChange}
             required
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
 
           {/* Plan Type */}
@@ -239,7 +239,7 @@ const EasyProjects = () => {
                 value="student"
                 checked={formData.planType === "student"}
                 onChange={handleFormChange}
-                className="mr-2 accent-green-500"
+                className="mr-2 accent-emerald-500"
               />
               Student
             </label>
@@ -250,7 +250,7 @@ const EasyProjects = () => {
                 value="business"
                 checked={formData.planType === "business"}
                 onChange={handleFormChange}
-                className="mr-2 accent-green-500"
+                className="mr-2 accent-emerald-500"
               />
               Business
             </label>
@@ -261,7 +261,7 @@ const EasyProjects = () => {
             placeholder="Additional Requirements"
             value={formData.requirements}
             onChange={handleFormChange}
-            className="w-full px-4 py-2 border border-green-200 rounded-lg"
+            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
           />
 
           <button
@@ -269,8 +269,8 @@ const EasyProjects = () => {
             disabled={loading}
             className={`w-full py-2 rounded-lg text-white font-semibold ${
               loading
-                ? "bg-green-300 cursor-not-allowed"
-                : "bg-green-600 hover:bg-green-700"
+                ? "bg-emerald-300 cursor-not-allowed"
+                : "bg-emerald-600 hover:bg-emerald-700"
             }`}
           >
             {loading ? "Processing..." : "Pay"}

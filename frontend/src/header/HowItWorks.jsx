@@ -14,17 +14,17 @@ import {
 export default function HowItWorks() {
   const steps = [
     {
-      icon: <FaUserGraduate size={28} className="text-green-600" />,
+      icon: <FaUserGraduate size={28} className="text-emerald-600" />,
       title: "Sign Up & Login",
       description: "Create your account or log in to access all features."
     },
     {
-      icon: <FaBookOpen size={28} className="text-green-600" />,
+      icon: <FaBookOpen size={28} className="text-emerald-600" />,
       title: "Select Semester",
       description: "Choose your semester to see relevant study materials."
     },
     {
-      icon: <FaDownload size={28} className="text-green-600" />,
+      icon: <FaDownload size={28} className="text-emerald-600" />,
       title: "Select Subject & Download",
       description: "Pick your subject and download the notes instantly. Enjoy your studies!"
     }
@@ -32,27 +32,27 @@ export default function HowItWorks() {
 
   const features = [
     {
-      icon: <FaRegCommentDots size={28} className="text-green-600" />,
+      icon: <FaRegCommentDots size={28} className="text-emerald-600" />,
       title: "Global Chat Room",
       description: "Chat and connect with students worldwide."
     },
     {
-      icon: <FaTasks size={28} className="text-green-600" />,
+      icon: <FaTasks size={28} className="text-emerald-600" />,
       title: "To-Do Task Manager",
       description: "Organize your tasks and stay on top of your studies."
     },
     {
-      icon: <FaHandsHelping size={28} className="text-green-600" />,
+      icon: <FaHandsHelping size={28} className="text-emerald-600" />,
       title: "Contribute With Us",
       description: "Be a part of NoteNest. Share your notes and contribute to the project."
     },
     {
-      icon: <FaRobot size={28} className="text-green-600" />,
+      icon: <FaRobot size={28} className="text-emerald-600" />,
       title: "Assignment Chatbot",
       description: "Get instant help from our AI-powered chatbot for your assignments."
     },
     {
-      icon: <FaProjectDiagram size={28} className="text-green-600" />,
+      icon: <FaProjectDiagram size={28} className="text-emerald-600" />,
       title: "Project Marketplace",
       description: "Explore and purchase Easy, Medium, and Advanced level projects."
     }
@@ -60,7 +60,7 @@ export default function HowItWorks() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-6">
-      <h1 className="text-3xl font-bold text-center text-green-700 mb-12">
+      <h1 className="text-3xl font-bold text-center text-emerald-700 mb-12">
         How It Works
       </h1>
 
@@ -69,7 +69,7 @@ export default function HowItWorks() {
         {steps.map((step, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-md p-6 text-center border-t-4 border-green-500"
+            className="bg-white rounded-2xl shadow-md p-6 text-center border-t-4 border-emerald-500"
           >
             <div className="flex justify-center mb-4">{step.icon}</div>
             <h2 className="text-lg font-semibold text-gray-800">
@@ -82,7 +82,7 @@ export default function HowItWorks() {
 
       {/* Features Section */}
       <div className="max-w-5xl mx-auto mt-16">
-        <h2 className="text-2xl font-bold text-center text-green-700 mb-8">
+        <h2 className="text-2xl font-bold text-center text-emerald-700 mb-8">
           Features for You
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -91,7 +91,7 @@ export default function HowItWorks() {
               key={index}
               className={`bg-white rounded-2xl shadow-md p-6 text-center border ${
                 feature.title.includes("Contribute")
-                  ? "border-green-600 shadow-lg scale-105"
+                  ? "border-emerald-600 shadow-lg scale-105"
                   : "border-gray-200"
               }`}
             >
@@ -107,7 +107,7 @@ export default function HowItWorks() {
 
       {/* Project Section */}
       <div className="max-w-5xl mx-auto mt-20">
-        <h2 className="text-2xl font-bold text-center text-green-700 mb-8">
+        <h2 className="text-2xl font-bold text-center text-emerald-700 mb-8">
           Project Levels
         </h2>
         <div className="grid gap-8 sm:grid-cols-3">
@@ -132,7 +132,7 @@ export default function HowItWorks() {
           href="https://www.linkedin.com/in/vishal-prajapati-445799289/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-green-700 font-medium hover:text-green-800 transition"
+          className="inline-flex items-center gap-2 text-emerald-700 font-medium hover:text-emerald-800 transition"
         >
           <FaLinkedin size={22} />
           Connect with me on LinkedIn

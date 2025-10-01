@@ -53,7 +53,7 @@ export default function MyTasks() {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h2 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
          My Tasks
       </h2>
 
@@ -63,11 +63,11 @@ export default function MyTasks() {
           value={newTask}
           onChange={(e) => setNewTask(e.target.value)}
           placeholder="Enter a new task"
-          className="flex-1 border border-green-300 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="flex-1 border border-emerald-300 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-400"
         />
         <button
           onClick={createTask}
-          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-full transition"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-full transition"
         >
           Add
         </button>
@@ -79,12 +79,12 @@ export default function MyTasks() {
         tasks.map(task => (
           <div
             key={task._id}
-            className="flex justify-between items-center bg-white px-4 py-3 rounded-xl shadow-sm border border-green-100 mb-3 hover:shadow-md transition"
+            className="flex justify-between items-center bg-white px-4 py-3 rounded-xl shadow-sm border border-emerald-100 mb-3 hover:shadow-md transition"
           >
             <div className="flex items-center gap-3">
               <button onClick={() => toggleComplete(task)}>
                 {task.completed ? (
-                  <MdCheckCircle className="text-green-600 text-2xl" />
+                  <MdCheckCircle className="text-emerald-600 text-2xl" />
                 ) : (
                   <MdOutlineCheckCircleOutline className="text-gray-400 text-2xl" />
                 )}
@@ -95,7 +95,7 @@ export default function MyTasks() {
                   type="text"
                   value={editingText}
                   onChange={(e) => setEditingText(e.target.value)}
-                  className="border px-3 py-1 rounded-lg focus:ring-2 focus:ring-green-300"
+                  className="border px-3 py-1 rounded-lg focus:ring-2 focus:ring-emerald-300"
                 />
               ) : (
                 <span
@@ -112,14 +112,14 @@ export default function MyTasks() {
               {editingId === task._id ? (
                 <button
                   onClick={saveEdit}
-                  className="text-sm text-green-700 font-semibold hover:underline"
+                  className="text-sm text-emerald-700 font-semibold hover:underline"
                 >
                   Save
                 </button>
               ) : (
                 <MdEdit
                   onClick={() => startEdit(task)}
-                  className="text-green-700 cursor-pointer text-xl"
+                  className="text-emerald-700 cursor-pointer text-xl"
                 />
               )}
               <MdDelete

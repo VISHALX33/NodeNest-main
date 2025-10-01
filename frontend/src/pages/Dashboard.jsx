@@ -18,22 +18,22 @@
 //   return (
 //     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 relative">
 //       {/* Banner */}
-//       <div className="bg-green-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-green-200">
+//       <div className="bg-emerald-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
 //         <div className="flex-1">
-//           <h2 className="text-3xl md:text-4xl font-bold text-green-800 leading-snug">
+//           <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 leading-snug">
 //             Discover Smart Study & Services with{" "}
-//             <span className="text-green-900">NoteNest</span>
+//             <span className="text-emerald-900">NoteNest</span>
 //           </h2>
-//           <p className="mt-3 text-green-700 text-sm max-w-md">
+//           <p className="mt-3 text-emerald-700 text-sm max-w-md">
 //             One platform to download notes, manage tasks, chat with peers, and
 //             book services — all in one place.
 //           </p>
 //           <br />
 //           <br />
-//           <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+//           <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
 //             Free RTU notes of all semester !!  
 //           </h2>
-//           <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+//           <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
 //             Select your semester to get free notes!
 //           </h2>
 //         </div>
@@ -52,7 +52,7 @@
 //           <div
 //             key={s._id}
 //             onClick={() => navigate(`/semesters/${s._id}`)}
-//             className="bg-green-100 rounded-xl shadow-md border border-green-100 hover:bg-green-50 hover:shadow-lg transition-all duration-200 cursor-pointer p-6 text-center"
+//             className="bg-emerald-100 rounded-xl shadow-md border border-emerald-100 hover:bg-emerald-50 hover:shadow-lg transition-all duration-200 cursor-pointer p-6 text-center"
 //           >
 //             <span className="text-lg font-semibold text-black">{s.title}</span>
 //           </div>
@@ -130,7 +130,7 @@ function WhatWeOffer() {
 
   return (
     <div className="max-w-6xl mx-auto mt-16 px-4">
-      <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
+      <h2 className="text-3xl font-bold text-center text-emerald-700 mb-6">
         Services For Students
       </h2>
       <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
@@ -143,7 +143,7 @@ function WhatWeOffer() {
             key={i}
             className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition"
           >
-            <h3 className="text-lg font-semibold text-green-700">{item.title}</h3>
+            <h3 className="text-lg font-semibold text-emerald-700">{item.title}</h3>
             <p className="text-gray-600 mt-3 text-sm">{item.desc}</p>
           </div>
         ))}
@@ -156,7 +156,7 @@ function WhatWeOffer() {
 function CustomProjects() {
   return (
     <div className="max-w-6xl mx-auto mt-20 px-4">
-      <h2 className="text-3xl font-bold text-center text-green-700 mb-6">
+      <h2 className="text-3xl font-bold text-center text-emerald-700 mb-6">
         Custom Projects
       </h2>
       <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
@@ -164,15 +164,15 @@ function CustomProjects() {
         We also build <strong>custom full-stack projects</strong> tailored for your requirements.
       </p>
 
-      <div className="bg-gradient-to-r from-green-100 to-emerald-200 p-8 rounded-3xl shadow-lg text-center">
-        <h3 className="text-xl font-semibold text-green-800 mb-3">
+      <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 p-8 rounded-3xl shadow-lg text-center">
+        <h3 className="text-xl font-semibold text-emerald-800 mb-3">
           Get Your Own Project Built
         </h3>
         <p className="text-gray-700 mb-6">
           Share your project idea and we’ll help you design, develop, and deploy it 
           within your budget and timeline.
         </p>
-        <button className="px-6 py-3 bg-green-700 text-white rounded-xl shadow hover:bg-green-800 transition">
+        <button className="px-6 py-3 bg-emerald-700 text-white rounded-xl shadow hover:bg-emerald-800 transition">
           Contact Mail :- notesea.help@gmail.com
         </button>
       </div>
@@ -192,22 +192,22 @@ export default function Dashboard() {
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 relative">
       {/* Banner */}
-      <div className="bg-green-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-green-200">
+      <div className="bg-emerald-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
         <div className="flex-1">
-          <h2 className="text-3xl md:text-4xl font-bold text-green-800 leading-snug">
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 leading-snug">
             Discover Smart Study & Services with{" "}
-            <span className="text-green-900">NoteNest</span>
+            <span className="text-emerald-900">NoteNest</span>
           </h2>
-          <p className="mt-3 text-green-700 text-sm max-w-md">
+          <p className="mt-3 text-emerald-700 text-sm max-w-md">
             One platform to download notes, manage tasks, chat with peers, and
             book services — all in one place.
           </p>
           <br />
           <br />
-          <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+          <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
             Free RTU notes of all semester !!  
           </h2>
-          <h2 className="text-xl md:text-xl font-bold text-green-800 leading-snug">
+          <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
             Select your semester to get free notes!
           </h2>
         </div>
@@ -226,7 +226,7 @@ export default function Dashboard() {
           <div
             key={s._id}
             onClick={() => navigate(`/semesters/${s._id}`)}
-            className="bg-green-100 rounded-xl shadow-md border border-green-100 hover:bg-green-50 hover:shadow-lg transition-all duration-200 cursor-pointer p-6 text-center"
+            className="bg-emerald-100 rounded-xl shadow-md border border-emerald-100 hover:bg-emerald-50 hover:shadow-lg transition-all duration-200 cursor-pointer p-6 text-center"
           >
             <span className="text-lg font-semibold text-black">{s.title}</span>
           </div>

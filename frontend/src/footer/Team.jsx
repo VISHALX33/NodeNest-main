@@ -36,7 +36,7 @@ export default function Team() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
         Contributors 
       </h1>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -48,7 +48,7 @@ export default function Team() {
             <img
               src={member.image}
               alt={member.name}
-              className="w-24 h-24 rounded-full border-4 border-green-500 mb-4"
+              className="w-24 h-24 rounded-full border-4 border-emerald-500 mb-4"
             />
             <h2 className="text-lg font-semibold text-gray-800">
               {member.name}
