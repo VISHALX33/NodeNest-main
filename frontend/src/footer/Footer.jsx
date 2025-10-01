@@ -86,10 +86,12 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2">
                 <li><Link to="/about" className="hover:text-green-600 transition-colors flex items-center">
-                  <FaInfoCircle className="mr-2" size={14} /> About Us
+                  {/* <FaInfoCircle className="mr-2" size={14} /> */}
+                   About Us
                 </Link></li>
                 <li><Link to="/contact" className="hover:text-green-600 transition-colors flex items-center">
-                  <FaEnvelope className="mr-2" size={14} /> Contact Us
+                  {/* <FaEnvelope className="mr-2" size={14} /> */}
+                   Contact Us
                 </Link></li>
                 <li><a href="#" className="hover:text-green-600 transition-colors">Help Center</a></li>
                 <li><a href="#" className="hover:text-green-600 transition-colors">Careers</a></li>

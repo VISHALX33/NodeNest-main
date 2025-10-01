@@ -1,5 +1,15 @@
 import React from "react";
-import { FaUserGraduate, FaBookOpen, FaDownload, FaRegCommentDots, FaTasks, FaHandsHelping, FaLinkedin } from "react-icons/fa";
+import {
+  FaUserGraduate,
+  FaBookOpen,
+  FaDownload,
+  FaRegCommentDots,
+  FaTasks,
+  FaHandsHelping,
+  FaLinkedin,
+  FaRobot,
+  FaProjectDiagram
+} from "react-icons/fa";
 
 export default function HowItWorks() {
   const steps = [
@@ -35,6 +45,16 @@ export default function HowItWorks() {
       icon: <FaHandsHelping size={28} className="text-green-600" />,
       title: "Contribute With Us",
       description: "Be a part of NoteNest. Share your notes and contribute to the project."
+    },
+    {
+      icon: <FaRobot size={28} className="text-green-600" />,
+      title: "Assignment Chatbot",
+      description: "Get instant help from our AI-powered chatbot for your assignments."
+    },
+    {
+      icon: <FaProjectDiagram size={28} className="text-green-600" />,
+      title: "Project Marketplace",
+      description: "Explore and purchase Easy, Medium, and Advanced level projects."
     }
   ];
 
@@ -61,7 +81,7 @@ export default function HowItWorks() {
       </div>
 
       {/* Features Section */}
-      <div className="max-w-4xl mx-auto mt-16">
+      <div className="max-w-5xl mx-auto mt-16">
         <h2 className="text-2xl font-bold text-center text-green-700 mb-8">
           Features for You
         </h2>
@@ -70,19 +90,44 @@ export default function HowItWorks() {
             <div
               key={index}
               className={`bg-white rounded-2xl shadow-md p-6 text-center border ${
-                feature.title.includes("Contribute") ? "border-green-600 shadow-lg scale-105" : "border-gray-200"
+                feature.title.includes("Contribute")
+                  ? "border-green-600 shadow-lg scale-105"
+                  : "border-gray-200"
               }`}
             >
               <div className="flex justify-center mb-4">{feature.icon}</div>
-              <h3 className="text-lg font-semibold text-gray-800">{feature.title}</h3>
+              <h3 className="text-lg font-semibold text-gray-800">
+                {feature.title}
+              </h3>
               <p className="text-gray-600 mt-2">{feature.description}</p>
             </div>
           ))}
         </div>
       </div>
 
+      {/* Project Section */}
+      <div className="max-w-5xl mx-auto mt-20">
+        <h2 className="text-2xl font-bold text-center text-green-700 mb-8">
+          Project Levels
+        </h2>
+        <div className="grid gap-8 sm:grid-cols-3">
+          {["Easy", "Medium", "Advanced"].map((level, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-md p-6 text-center border border-gray-200 hover:shadow-lg transition"
+            >
+              <h3 className="text-xl font-semibold text-gray-800">{level} Projects</h3>
+              <p className="text-gray-600 mt-2">
+                Download {level.toLowerCase()} level full-stack projects.
+              </p>
+              
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* LinkedIn Section */}
-      <div className="text-center mt-12">
+      <div className="text-center mt-16">
         <a
           href="https://www.linkedin.com/in/vishal-prajapati-445799289/"
           target="_blank"
@@ -92,7 +137,9 @@ export default function HowItWorks() {
           <FaLinkedin size={22} />
           Connect with me on LinkedIn
         </a>
-        <br /><br /><br />
+        <br />
+        <br />
+        <br />
       </div>
     </div>
   );
