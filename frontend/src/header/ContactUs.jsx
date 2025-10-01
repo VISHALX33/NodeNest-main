@@ -27,7 +27,7 @@ const ContactUs = () => {
         <p className="text-gray-700 mb-6 text-center">
           Have questions, feedback, or suggestions?  
           We’d love to hear from you! Fill out the form below or reach us at{" "}
-          <span className="text-emerald-600 font-semibold">support@notenest.com</span>
+          <span className="text-emerald-600 font-semibold">notesea.help@gmail.com</span>
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -27,7 +27,7 @@ export default function Footer() {
         <footer className="bg-white border-t border-emerald-200 mt-8">
           <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-5 gap-8 text-sm text-gray-600">
             <div className="col-span-2">
-              <h2 className="text-2xl font-bold text-emerald-700 mb-3">NoteNest</h2>
+              <h2 className="text-2xl font-bold text-emerald-700 mb-3">NoteSea</h2>
               <p className="text-gray-500 leading-relaxed">
                 All-in-one solution for students and users to download notes, manage tasks, 
                 explore blogs, book services, and connect via global chat.
@@ -49,7 +49,7 @@ export default function Footer() {
                 </a>
               </div>
               <p className="mt-6 text-xs text-gray-400">
-                &copy; {new Date().getFullYear()} NoteNest | All rights reserved.
+                &copy; {new Date().getFullYear()} NoteSea | All rights reserved.
               </p>
             </div>
 

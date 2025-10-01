@@ -60,13 +60,13 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar */}
-      <nav className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
+<nav className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
         {/* Logo */}
         <h1
           className="text-2xl font-extrabold tracking-wide cursor-pointer"
           onClick={() => navigate("/dashboard")}
         >
-          NoteNest
+          NoteSea
         </h1>
 
         {/* Desktop Menu */}

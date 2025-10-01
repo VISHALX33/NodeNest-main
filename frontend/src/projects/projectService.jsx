@@ -54,7 +54,7 @@ export default function ProjectService() {
       </h1>
 
       <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-        At <b>NoteNest</b>, we don’t just provide notes — we also <b>build full MERN projects</b> for students and businesses.
+        At <b>NoteSea</b>, we don’t just provide notes — we also <b>build full MERN projects</b> for students and businesses.
         Choose your project level and plan:
       </p>
 
@@ -131,7 +131,7 @@ export default function ProjectService() {
       </div>
 
       <p className="mt-12 text-center text-gray-500 text-sm">
-        📩 Contact us to discuss your project and get it built with <b>NoteNest</b>.
+        📩 Contact us to discuss your project and get it built with <b>NoteSea</b>.
       </p>
     </div>
   );

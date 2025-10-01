@@ -44,7 +44,7 @@ export default function HowItWorks() {
     {
       icon: <FaHandsHelping size={28} className="text-emerald-600" />,
       title: "Contribute With Us",
-      description: "Be a part of NoteNest. Share your notes and contribute to the project."
+      description: "Be a part of NoteSea. Share your notes and contribute to the project."
     },
     {
       icon: <FaRobot size={28} className="text-emerald-600" />,

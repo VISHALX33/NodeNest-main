@@ -11,6 +11,8 @@ const HardProjects = () => {
   const [isLoggedIn] = useState(!!localStorage.getItem("token"));
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [activeTab, setActiveTab] = useState("preview"); // preview | images | details
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -42,6 +44,12 @@ const HardProjects = () => {
       return;
     }
     setSelectedProject(project);
+    setShowForm(false);
+    setActiveTab("preview");
+  };
+
+  const handleContinue = () => {
+    setShowForm(true);
   };
 
   const handleFormChange = (e) => {
@@ -79,7 +87,7 @@ const HardProjects = () => {
       setCalculation({ base, total });
       setOrderId(res.data.orderId);
 
-      // Step 2: Create Razorpay Order from backend
+      // Step 2: Create Razorpay Order
       const payRes = await API.post("/orders/create-razorpay-order", {
         amount: total,
         orderId: res.data.orderId,
@@ -87,17 +95,16 @@ const HardProjects = () => {
 
       const { key, amount, currency, razorpayOrderId } = payRes.data;
 
-      // Step 3: Open Razorpay Checkout
+      // Step 3: Razorpay Checkout
       const options = {
         key,
         amount,
         currency,
-        name: "NoteNest Projects",
+        name: "NoteSea Projects",
         description: selectedProject.name,
         order_id: razorpayOrderId,
         handler: async function (response) {
           try {
-            // Step 4: Verify payment on backend
             await API.post("/orders/verify-payment", {
               orderId: res.data.orderId,
               razorpay_order_id: response.razorpay_order_id,
@@ -107,6 +114,7 @@ const HardProjects = () => {
 
             alert("✅ Payment successful! Redirecting to bookings...");
             setSelectedProject(null);
+            setShowForm(false);
             navigate("/my-bookings");
           } catch (err) {
             alert(err.response?.data?.message || "Error verifying payment");
@@ -118,7 +126,7 @@ const HardProjects = () => {
           contact: formData.phone,
         },
         theme: {
-          color: "#ef4444", // Red theme for hard
+          color: "#ef4444", // red theme for Hard Projects
         },
       };
 
@@ -131,11 +139,19 @@ const HardProjects = () => {
     }
   };
 
+  // Sample images (replace with real ones from backend later)
+  const sampleImages = [
+    "https://via.placeholder.com/600x400/ef4444/ffffff?text=Hard+Image+1",
+    "https://via.placeholder.com/600x400/7f1d1d/ffffff?text=Hard+Image+2",
+  ];
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-red-600 mb-6 text-center">
-        🔴 Advance Projects
+      <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
+        🔴 Advanced Projects
       </h1>
+
+      {/* Project Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
@@ -144,17 +160,142 @@ const HardProjects = () => {
             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
           >
             <div className="text-4xl text-center mb-4">{project.icon}</div>
-            <h2 className="text-xl font-semibold text-emerald-600 text-center">
+            <h2 className="text-xl font-semibold text-emerald-600 text-center mb-2">
               {project.name}
             </h2>
+            <p className="text-gray-600 text-sm text-center">{project.description}</p>
+            <div className="text-center mt-2">
+              <span className="text-emerald-500 font-medium">₹{project.studentPrice}</span>
+              <span className="mx-2">|</span>
+              <span className="text-emerald-500 font-medium">₹{project.businessPrice}</span>
+            </div>
           </div>
         ))}
       </div>
 
+      {/* Preview Modal */}
+      <Modal
+        isOpen={!!selectedProject && !showForm}
+        onRequestClose={() => setSelectedProject(null)}
+        className="bg-white p-8 rounded-lg max-w-4xl mx-auto mt-20"
+      >
+        {selectedProject && (
+          <div className="flex flex-col md:flex-row">
+            {/* Left Side (Tabs + Content) */}
+            <div className="md:w-1/2 p-6">
+              <h2 className="text-2xl font-bold text-emerald-600 mb-2">
+                {selectedProject.name}
+              </h2>
+
+              {/* Tabs */}
+              <div className="flex border-b border-emerald-200 mb-4">
+                <button
+                  className={`py-2 px-4 font-medium ${
+                    activeTab === "preview"
+                      ? "text-emerald-600 border-b-2 border-emerald-600"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => setActiveTab("preview")}
+                >
+                  Preview
+                </button>
+                <button
+                  className={`py-2 px-4 font-medium ${
+                    activeTab === "images"
+                      ? "text-emerald-600 border-b-2 border-emerald-600"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => setActiveTab("images")}
+                >
+                  Images
+                </button>
+                <button
+                  className={`py-2 px-4 font-medium ${
+                    activeTab === "details"
+                      ? "text-emerald-600 border-b-2 border-emerald-600"
+                      : "text-gray-500"
+                  }`}
+                  onClick={() => setActiveTab("details")}
+                >
+                  Details
+                </button>
+              </div>
+
+              {/* Tab Content */}
+              <div className="h-80 overflow-y-auto border border-emerald-200 rounded-lg p-4">
+                {activeTab === "preview" && (
+                  <p className="text-gray-600">{selectedProject.description}</p>
+                )}
+
+                {activeTab === "images" && (
+                  <div className="grid grid-cols-1 gap-4">
+                    {sampleImages.map((img, i) => (
+                      <div
+                        key={i}
+                        className="border border-emerald-200 rounded-lg overflow-hidden"
+                      >
+                        <img
+                          src={img}
+                          alt={`${selectedProject.name} ${i + 1}`}
+                          className="w-full h-40 object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {activeTab === "details" && (
+                  <ul className="space-y-2">
+                    {selectedProject.features?.length > 0 ? (
+                      selectedProject.features.map((f, i) => (
+                        <li key={i} className="flex items-start">
+                          <span className="text-emerald-500 mr-2">✓</span>
+                          <span>{f}</span>
+                        </li>
+                      ))
+                    ) : (
+                      <p className="text-gray-500">No features listed</p>
+                    )}
+                  </ul>
+                )}
+              </div>
+            </div>
+
+            {/* Right Side (About + Action) */}
+            <div className="md:w-1/2 p-6 flex flex-col">
+              <h3 className="text-xl font-semibold text-emerald-600 mb-4">
+                About {selectedProject.name}
+              </h3>
+              <p className="text-gray-600 mb-6 flex-grow">
+                {selectedProject.description}
+              </p>
+
+              <div className="mt-auto">
+                <button
+                  onClick={handleContinue}
+                  className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-500 hover:bg-emerald-600"
+                >
+                  Continue to Book
+                </button>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="w-full py-2 mt-3 rounded-lg text-gray-700 font-medium border border-gray-300 hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </Modal>
+
       {/* Booking Form Modal */}
       <Modal
-        isOpen={!!selectedProject}
-        onRequestClose={() => setSelectedProject(null)}
+        isOpen={!!selectedProject && showForm}
+        onRequestClose={() => {
+          setSelectedProject(null);
+          setShowForm(false);
+        }}
         className="bg-white p-8 rounded-lg max-w-md mx-auto mt-20"
       >
         <h2 className="text-2xl mb-4">Book {selectedProject?.name}</h2>
@@ -204,7 +345,7 @@ const HardProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Student
+              Student (₹{selectedProject?.studentPrice})
             </label>
             <label className="flex items-center text-sm text-gray-700 ml-4">
               <input
@@ -215,7 +356,7 @@ const HardProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Business
+              Business (₹{selectedProject?.businessPrice})
             </label>
           </div>
 
@@ -233,10 +374,16 @@ const HardProjects = () => {
             className={`w-full py-2 rounded-lg text-white font-semibold ${
               loading
                 ? "bg-emerald-300 cursor-not-allowed"
-                : "bg-emerald-600 hover:bg-emerald-700"
+                : "bg-emerald-500 hover:bg-emerald-600"
             }`}
           >
-            {loading ? "Processing..." : "Pay "}
+            {loading
+              ? "Processing..."
+              : `Pay ₹${
+                  formData.planType === "student"
+                    ? selectedProject?.studentPrice
+                    : selectedProject?.businessPrice
+                }`}
           </button>
         </form>
       </Modal>
