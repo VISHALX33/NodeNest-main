@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FaRobot } from "react-icons/fa";
 import NoteNestLogo from "/NoteNestLogo.png";
 import Chatbot from "./chatbot"; // ✅ import your chatbot
-import ProjectService from "../projects/projectService";
+import ProjectService from "./projectService";
+import hero from "/hero.png";
 
 // ✅ What We Offer Section
 function WhatWeOffer() {
@@ -91,7 +92,7 @@ export default function Dashboard() {
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 relative">
       {/* Banner */}
-      <div className="bg-emerald-100 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
+      <div className="bg-white rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
         <div className="flex-1">
           <h2 className="text-3xl md:text-4xl font-bold text-emerald-800 leading-snug">
             Discover Smart Study & Services with{" "}
@@ -112,9 +113,9 @@ export default function Dashboard() {
         </div>
         <div className="flex-1">
           <img
-            src={NoteNestLogo}
+            src={hero}
             alt="Study Illustration"
-            className="hidden md:block w-66 max-w-xs md:max-w-sm mx-auto"
+            className="hidden md:block w-full max-w-xs md:max-w-sm mx-auto"
           />
         </div>
       </div>
