@@ -8,15 +8,13 @@ export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-emerald-100 p-4">
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-xl border border-emerald-200 overflow-hidden flex flex-col md:flex-row">
+    <div className="">
+      <div>
         
    
         {/* Right section: auth form */}
-        <div className="flex-1 p-8 md:p-12">
-          <h1 className="text-3xl font-bold text-center text-emerald-700 mb-6">
-            {isLogin ? "Login to Your Account" : "Create a New Account"}
-          </h1>
+        <div className="">
+        
 
           {isLogin ? <LoginForm /> : <RegisterForm />}
 
