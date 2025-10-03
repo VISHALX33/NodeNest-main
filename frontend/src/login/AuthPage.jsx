@@ -2,7 +2,7 @@
 import { useState } from "react";
 import LoginForm from "../components/LoginForm";
 import RegisterForm from "../components/RegisterForm";
-import NoteNestLogo from "/NoteNestLogo.png";
+
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
