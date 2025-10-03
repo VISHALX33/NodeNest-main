@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "preinstall": "npm cache clean --force",
-    "build": "your-build-command",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
