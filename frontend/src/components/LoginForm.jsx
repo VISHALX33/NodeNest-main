@@ -85,6 +85,7 @@ export default function LandingPage({ switchToSignUp }) {
             <a href="#how" className="hover:text-emerald-600">How it Works</a>
             <a href="#login" className="hover:text-emerald-600">Login</a>
             <a href="#testimonials" className="hover:text-emerald-600">Testimonials</a>
+            <a href="/terms" className="hover:text-emerald-600">Terms & Conditions</a>
             <a href="#faq" className="hover:text-emerald-600">FAQ</a>
           </div>
           <a href="#login" className="bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">
@@ -105,7 +106,7 @@ export default function LandingPage({ switchToSignUp }) {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a href="#login" className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-700 transition">Get Notes</a>
-            <a href="#about" className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition">Learn More</a>
+            <a href="/about" className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition">Learn More</a>
           </div>
         </div>
         <div className="flex-1">
@@ -352,6 +353,7 @@ export default function LandingPage({ switchToSignUp }) {
             <ul className="space-y-2 text-gray-200 text-sm mb-4">
               <li><a href="/about" className="hover:underline">About Us</a></li>
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
+              <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="#" className="hover:underline">Help Center</a></li>
               <li><a href="#" className="hover:underline">Careers</a></li>
             </ul>

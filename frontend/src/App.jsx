@@ -26,6 +26,7 @@ import ProjectService from "./components/projectService";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import InstallButton from "./components/InstallButton";
+import TermsAndConditions from "./components/TermsAndConditions.jsx";
 
 function Layout({ children }) {
   return (
@@ -258,6 +259,7 @@ function App() {
             </Layout>
           }
         />
+        <Route path="/terms" element={<TermsAndConditions />} />
 
         <Route
           path="/team"
