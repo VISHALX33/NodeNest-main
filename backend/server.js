@@ -25,7 +25,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", // local dev
-      "https://notenests.netlify.app", // deployed frontend
+      "https://notenests.netlify.app",
+      "https://www.notesea.xyz/" // deployed frontend
     ],
     credentials: true,
   })
