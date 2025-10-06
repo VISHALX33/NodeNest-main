@@ -26,7 +26,7 @@ app.use(
     origin: [
       "http://localhost:5173", // local dev
       "https://notenests.netlify.app",
-      "https://www.notesea.xyz/" // deployed frontend
+      "https://www.notesea.xyz" // deployed frontend
     ],
     credentials: true,
   })
