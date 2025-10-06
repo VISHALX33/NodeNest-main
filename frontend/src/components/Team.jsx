@@ -13,7 +13,7 @@ export default function Team() {
     },
     {
       name: "Mohit Dad",
-      role: "Growth & Marketing",
+      role: "Developer & Growth",
       image: Mohit, 
     },
     {
