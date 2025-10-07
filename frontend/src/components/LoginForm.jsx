@@ -7,7 +7,7 @@ import login1 from "/login1.png";
 import login2 from "/login2.png";
 import FAQ from "/FAQ.png";
 import { motion } from "framer-motion";
-import { FaUserGraduate, FaBookOpen, FaDownload, FaInstagram } from "react-icons/fa";
+import { FaUserGraduate, FaBookOpen,FaLaptopCode,FaUsers, FaDownload, FaInstagram } from "react-icons/fa";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
 
 
@@ -106,13 +106,60 @@ export default function LandingPage({ switchToSignUp }) {
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a href="#login" className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-700 transition">Get Notes</a>
-            <a href="/about" className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition">Learn More</a>
+            <a href="/about-home" className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition">Learn More</a>
           </div>
         </div>
         <div className="flex-1">
           <img src={login1} alt="Hero illustration" className="w-full max-w-md mx-auto" />
         </div>
       </section>
+
+       {/* 🌟 What We Offer */}
+                  <section className="py-20 bg-white">
+                    <div className="max-w-6xl mx-auto px-6 text-center">
+                      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
+                        What We Offer
+                      </h2>
+                      <div className="grid md:grid-cols-4 gap-8">
+                        {[
+                          {
+                            icon: <FaBookOpen className="text-emerald-600 text-3xl" />,
+                            title: "Free RTU Notes",
+                            desc: "Access semester-wise notes curated by top-performing students.",
+                          },
+                          {
+                            icon: <FaLaptopCode className="text-emerald-600 text-3xl" />,
+                            title: "Affordable Projects",
+                            desc: "Learn through practical full-stack projects and codebases.",
+                          },
+                          {
+                            icon: <FaUsers className="text-emerald-600 text-3xl" />,
+                            title: "Community Support",
+                            desc: "Join peers, discuss topics, and learn collaboratively.",
+                          },
+                          {
+                            icon: <FaUserGraduate className="text-emerald-600 text-3xl" />,
+                            title: "AI Study Tools",
+                            desc: "Use our chatbot and smart utilities to boost productivity.",
+                          },
+                        ].map((item, i) => (
+                          <motion.div
+                            key={i}
+                            whileHover={{ scale: 1.05 }}
+                            className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition"
+                          >
+                            <div className="w-14 h-14 flex items-center justify-center rounded-full bg-emerald-100 mx-auto mb-4">
+                              {item.icon}
+                            </div>
+                            <h3 className="font-semibold text-gray-800 text-lg mb-2">
+                              {item.title}
+                            </h3>
+                            <p className="text-gray-600 text-sm">{item.desc}</p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
 
       {/* 🌟 How It Works */}
 
@@ -219,6 +266,8 @@ export default function LandingPage({ switchToSignUp }) {
               </form>
             </div>
 
+            
+
             {/* Image on Right */}
             <div className="flex-1">
               <img
@@ -249,6 +298,7 @@ export default function LandingPage({ switchToSignUp }) {
           </div>
         </div>
       </section>
+      
 
 
       {/* 🌟 FAQ */}
@@ -351,7 +401,7 @@ export default function LandingPage({ switchToSignUp }) {
           <div>
             <h4 className="font-semibold mb-3">Support</h4>
             <ul className="space-y-2 text-gray-200 text-sm mb-4">
-              <li><a href="/about" className="hover:underline">About Us</a></li>
+              <li><a href="/about-home" className="hover:underline">About Us</a></li>
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
               <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="#" className="hover:underline">Help Center</a></li>

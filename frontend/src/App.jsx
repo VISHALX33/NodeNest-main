@@ -27,6 +27,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import InstallButton from "./components/InstallButton";
 import TermsAndConditions from "./components/TermsAndConditions.jsx";
+import About from "./components/About";
 
 function Layout({ children }) {
   return (
@@ -125,6 +126,8 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/about-home" element={<About />} />
+
 
         <Route
           path="/chat"
