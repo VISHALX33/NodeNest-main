@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaCode, FaPenNib, FaUsers, FaLaptopCode, FaHeart } from "react-icons/fa";
-import founderImg from "../assets/vishalp.png";
+import founderImg from "../assets/Vishalp.png";
 
 export default function CareerPage() {
   const roles = [
