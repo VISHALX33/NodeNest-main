@@ -28,6 +28,7 @@ import ResetPassword from "./components/ResetPassword";
 import InstallButton from "./components/InstallButton";
 import TermsAndConditions from "./components/TermsAndConditions.jsx";
 import About from "./components/About";
+import CareerPage from "./components/CareerPage";
 
 function Layout({ children }) {
   return (
@@ -127,6 +128,9 @@ function App() {
           }
         />
         <Route path="/about-home" element={<About />} />
+        {/* <Route path="/about-home" element={<About />} /> */}
+        <Route path="/career" element={<CareerPage />} />
+
 
 
         <Route

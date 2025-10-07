@@ -405,7 +405,7 @@ export default function LandingPage({ switchToSignUp }) {
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
               <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
               <li><a href="#" className="hover:underline">Help Center</a></li>
-              <li><a href="#" className="hover:underline">Careers</a></li>
+              <li><a href="/Career" className="hover:underline">Careers</a></li>
             </ul>
 
           </div>
