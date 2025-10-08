@@ -46,15 +46,15 @@ export const registerUser = async (req, res) => {
 
 
       await transporter.sendMail({
-  from: `"NoteNest" <${process.env.EMAIL_USER}>`,
+  from: `"NoteSea" <${process.env.EMAIL_USER}>`,
   to: email,
-  subject: "Verify Your Email for NoteNest",
+  subject: "Verify Your Email for NoteSea",
   html: `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; max-width: 600px; margin: auto; padding: 20px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
       <!-- Header -->
       <h2 style="color: #16a34a; text-align: center;">Hello ${name || "User"}!</h2>
       <p style="text-align: center; font-size: 16px;">
-        Welcome to <strong>NoteNest</strong> – your smart study companion.
+        Welcome to <strong>NoteSea</strong> – your smart study companion.
       </p>
 
       <!-- OTP Section -->
@@ -72,7 +72,7 @@ export const registerUser = async (req, res) => {
 
       <!-- Footer -->
       <p style="font-size: 12px; text-align: center; color: #888;">
-        &copy; ${new Date().getFullYear()} NoteNest. All rights reserved.
+        &copy; ${new Date().getFullYear()} NoteSea. All rights reserved.
       </p>
     </div>
   `,
@@ -207,15 +207,15 @@ export const forgotPassword = async (req, res) => {
     });
 
   await transporter.sendMail({
-  from: `"NoteNest" <${process.env.EMAIL_USER}>`,
+  from: `"NoteSea" <${process.env.EMAIL_USER}>`,
   to: email,
-  subject: " Password Reset Request - NoteNest",
+  subject: " Password Reset Request - NoteSea",
   html: `
     <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
       
       <!-- Header -->
       <div style="background: #16a34a; padding: 20px; text-align: center; color: #fff;">
-        <h1 style="margin: 0; font-size: 22px;">NoteNest</h1>
+        <h1 style="margin: 0; font-size: 22px;">NoteSea</h1>
       </div>
       
       <!-- Body -->
@@ -242,7 +242,7 @@ export const forgotPassword = async (req, res) => {
       
       <!-- Footer -->
       <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-        © ${new Date().getFullYear()} NoteNest. All rights reserved.
+        © ${new Date().getFullYear()} NoteSea. All rights reserved.
       </div>
     </div>
   `,
