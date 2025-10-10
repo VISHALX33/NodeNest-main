@@ -6,6 +6,40 @@ import NoteNestLogo from "/NoteNestLogo.png";
 import Chatbot from "./chatbot"; // ✅ import your chatbot
 import ProjectService from "./projectService";
 import hero from "/hero.png";
+import NoteSeaStory from "./NoteSeaStory";
+
+
+const videos = [
+  {
+    title: "Episode 1 — Project Announcement",
+    url: "https://youtu.be/ZIcG812Gs3A?si=oYQo2ujfWL5_opxE",
+  },
+  {
+    title: "Episode 2 — Email Verification & Auth",
+    url: "https://youtu.be/lQa35-ERCQ4?si=mRbadWvXt1bPyNIu",
+  },
+  {
+    title: "Episode 3 — Chatbot Integration",
+    url: "https://youtu.be/qvVQtmvfZOU?si=dKAQaaTd7twbyVN_",
+  },
+  {
+    title: "Episode 4 — Payment Gateway Integration",
+    url: "https://youtu.be/LMJsl80XPK4?si=F1emfResKuihtlu7",
+  },
+  {
+    title: "Episode 5 — install button and UI Improvements",
+    url: "https://youtu.be/66BbL364094?si=s461MD1CV5jxhxZr",
+  },
+  {
+    title: "Episode 6 — NoteNest to NoteSea Rebranding",
+    url: "https://youtu.be/01nL7qOWzLU?si=tZDS4-zsuZ2-RNEJ",
+  },
+  {
+    title: "Episode 7 — buying domain for notesea",
+    url: "https://youtu.be/aYSamUbFhxk?si=0u54nF0QkD3ucXIo",
+  },
+];
+
 
 // ✅ What We Offer Section
 function WhatWeOffer() {
@@ -26,6 +60,7 @@ function WhatWeOffer() {
       title: "Project Deployment",
       desc: "Complete deployment solutions with domain setup and hosting configuration."
     }
+    
   ];
 
   return (
@@ -133,6 +168,29 @@ export default function Dashboard() {
         ))}
       </div>
     
+    {/* Semester Section with Image */}
+{/* <div className="flex flex-col md:flex-row items-center gap-10 mt-10">
+  <div className="flex-1 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5">
+    {semesters.map((s) => (
+      <div
+        key={s._id}
+        onClick={() => navigate(`/semesters/${s._id}`)}
+        className="bg-emerald-100 rounded-xl shadow-md border border-emerald-100 hover:bg-emerald-50 hover:shadow-lg transition-all duration-200 cursor-pointer p-6 text-center"
+      >
+        <span className="text-lg font-semibold text-black">{s.title}</span>
+      </div>
+    ))}
+  </div>
+
+  <div className="flex-1 flex justify-center">
+    <img
+      src={NoteNestLogo} 
+      alt="Semester Illustration"
+      className="w-full max-w-sm rounded-2xl shadow-lg"
+    />
+  </div>
+</div> */}
+
 
       
 
@@ -145,6 +203,7 @@ export default function Dashboard() {
 
       {/* New Sections */}
       <WhatWeOffer />
+      <NoteSeaStory videos={videos}/> 
       <CustomProjects />
 
       {/* Floating Chatbot Icon */}
