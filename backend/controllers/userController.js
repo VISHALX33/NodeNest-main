@@ -1,8 +1,9 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import nodemailer from 'nodemailer';
+// import nodemailer from 'nodemailer';
 import crypto from 'crypto';
+import { sendEmail } from "../utils/sendEmail.js"; 
 
 const generateToken = (user) => {
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -13,16 +14,12 @@ export const registerUser = async (req, res) => {
   try {
     const { name, email, phone, password, collegeStudent, gender } = req.body;
 
-    // Check if user exists
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: 'User already exists' });
+    if (existingUser) return res.status(400).json({ message: "User already exists" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Save user first
     const newUser = await User.create({
       name,
       email,
@@ -31,74 +28,40 @@ export const registerUser = async (req, res) => {
       collegeStudent,
       gender,
       emailOtp: otp,
-      emailOtpExpires: Date.now() + 15 * 60 * 1000 // 15 minutes
+      emailOtpExpires: Date.now() + 15 * 60 * 1000,
     });
 
-    // Try sending OTP via email
-    try {
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
-      });
-
-
-      await transporter.sendMail({
-  from: `"NoteSea" <${process.env.EMAIL_USER}>`,
-  to: email,
-  subject: "Verify Your Email for NoteSea",
-  html: `
-    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; max-width: 600px; margin: auto; padding: 20px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
-      <!-- Header -->
-      <h2 style="color: #16a34a; text-align: center;">Hello ${name || "User"}!</h2>
-      <p style="text-align: center; font-size: 16px;">
-        Welcome to <strong>NoteSea</strong> – your smart study companion.
-      </p>
-
-      <!-- OTP Section -->
-      <div style="background-color: #ecfdf5; padding: 20px; margin: 20px 0; border-radius: 12px; text-align: center; border: 1px solid #16a34a;">
-        <p style="margin: 0; font-size: 16px;">Your <strong>OTP</strong> to verify your email is:</p>
-        <h1 style="color: #16a34a; font-size: 32px; margin: 10px 0 0;">${otp}</h1>
+    const htmlContent = `
+      <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #333; max-width: 600px; margin: auto; padding: 20px; background-color: #f9fafb; border-radius: 12px; border: 1px solid #e5e7eb;">
+        <h2 style="color: #16a34a; text-align: center;">Hello ${name || "User"}!</h2>
+        <p style="text-align: center; font-size: 16px;">
+          Welcome to <strong>NoteSea</strong> – your smart study companion.
+        </p>
+        <div style="background-color: #ecfdf5; padding: 20px; margin: 20px 0; border-radius: 12px; text-align: center; border: 1px solid #16a34a;">
+          <p style="margin: 0; font-size: 16px;">Your <strong>OTP</strong> to verify your email is:</p>
+          <h1 style="color: #16a34a; font-size: 32px; margin: 10px 0 0;">${otp}</h1>
+        </div>
+        <p style="font-size: 14px; text-align: center; color: #555;">
+          This OTP is valid for <strong>15 minutes</strong>.
+        </p>
       </div>
+    `;
 
-      <p style="font-size: 14px; text-align: center; color: #555;">
-        This OTP is valid for <strong>15 minutes</strong>.<br />
-        If you did not request this, please ignore this email.
-      </p>
+    const emailSent = await sendEmail(email, "Verify Your Email for NoteSea", htmlContent);
 
-      <hr style="border: 0; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
-
-      <!-- Footer -->
-      <p style="font-size: 12px; text-align: center; color: #888;">
-        &copy; ${new Date().getFullYear()} NoteSea. All rights reserved.
-      </p>
-    </div>
-  `,
-});
-
-
-
-      res.status(201).json({ message: 'OTP sent to email. Please verify before login.' });
-
-    } catch (emailError) {
-      console.error('Email sending failed:', emailError);
-
-      // Fallback: log OTP to console for local testing
+    if (emailSent) {
+      res.status(201).json({ message: "OTP sent to email. Please verify before login." });
+    } else {
       console.log(`OTP for ${email}: ${otp}`);
-
       res.status(201).json({
-        message: 'User registered, but email failed. Check server logs for OTP.',
+        message: "User registered, but email failed. Check server logs for OTP.",
       });
     }
-
   } catch (error) {
-    console.error('Registration Error:', error);
-    res.status(500).json({ message: 'Server Error. Please try again later.' });
+    console.error("Registration Error:", error);
+    res.status(500).json({ message: "Server Error. Please try again later." });
   }
 };
-
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -187,71 +150,70 @@ export const forgotPassword = async (req, res) => {
 
     // Generate reset token
     const resetToken = crypto.randomBytes(32).toString("hex");
-    const resetTokenHash = crypto.createHash("sha256").update(resetToken).digest("hex");
+    const resetTokenHash = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
 
     // Save token + expiry in DB
     user.resetPasswordToken = resetTokenHash;
     user.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // 15 min
     await user.save();
 
-    // const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
-    const resetUrl = `${process.env.CLIENT_URL || "http://localhost:5000"}/reset-password/${resetToken}`;
+    // Password reset URL
+    const resetUrl = `${
+      process.env.CLIENT_URL || "http://localhost:5000"
+    }/reset-password/${resetToken}`;
 
-    // Send email
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-  await transporter.sendMail({
-  from: `"NoteSea" <${process.env.EMAIL_USER}>`,
-  to: email,
-  subject: " Password Reset Request - NoteSea",
-  html: `
-    <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-      
-      <!-- Header -->
-      <div style="background: #16a34a; padding: 20px; text-align: center; color: #fff;">
-        <h1 style="margin: 0; font-size: 22px;">NoteSea</h1>
-      </div>
-      
-      <!-- Body -->
-      <div style="padding: 30px; color: #333;">
-        <h2 style="color: #16a34a; margin-top: 0;">Reset Your Password</h2>
-        <p style="font-size: 15px; line-height: 1.6;">
-          We received a request to reset your password. Click the button below to set up a new password:
-        </p>
-        
-        <!-- Button -->
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${resetUrl}" 
-             style="display:inline-block; padding: 14px 28px; background: #16a34a; color: #ffffff; 
-                    font-weight: bold; border-radius: 6px; text-decoration: none; font-size: 16px;">
-             Reset Password
-          </a>
+    // Email content
+    const html = `
+      <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <!-- Header -->
+        <div style="background: #16a34a; padding: 20px; text-align: center; color: #fff;">
+          <h1 style="margin: 0; font-size: 22px;">NoteSea</h1>
         </div>
         
-        <p style="font-size: 14px; color: #555;">
-          If you did not request a password reset, you can safely ignore this email.  
-          This link will expire in <strong>1 hour</strong>.
-        </p>
+        <!-- Body -->
+        <div style="padding: 30px; color: #333;">
+          <h2 style="color: #16a34a; margin-top: 0;">Reset Your Password</h2>
+          <p style="font-size: 15px; line-height: 1.6;">
+            We received a request to reset your password. Click the button below to set a new password:
+          </p>
+          
+          <!-- Button -->
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetUrl}" 
+              style="display:inline-block; padding: 14px 28px; background: #16a34a; color: #ffffff; 
+                    font-weight: bold; border-radius: 6px; text-decoration: none; font-size: 16px;">
+              Reset Password
+            </a>
+          </div>
+          
+          <p style="font-size: 14px; color: #555;">
+            If you didn’t request this, please ignore this email.<br />
+            This link will expire in <strong>15 minutes</strong>.
+          </p>
+        </div>
+        
+        <!-- Footer -->
+        <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #777;">
+          © ${new Date().getFullYear()} NoteSea. All rights reserved.
+        </div>
       </div>
-      
-      <!-- Footer -->
-      <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #777;">
-        © ${new Date().getFullYear()} NoteSea. All rights reserved.
-      </div>
-    </div>
-  `,
-});
+    `;
 
+    // Send the email using Resend
+    const sent = await sendEmail(email, "Password Reset Request - NoteSea", html);
 
-    res.json({ message: "Password reset email sent!" });
+    if (sent) {
+      res.json({ message: "Password reset email sent!" });
+    } else {
+      res
+        .status(500)
+        .json({ message: "Email sending failed, please try again later." });
+    }
   } catch (error) {
-    console.error(error);
+    console.error("❌ Forgot password error:", error);
     res.status(500).json({ message: "Something went wrong" });
   }
 };
