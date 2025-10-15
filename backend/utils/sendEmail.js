@@ -10,13 +10,20 @@ const resend = new Resend(process.env.RESEND_API_KEY);
  */
 export const sendEmail = async (to, subject, html) => {
   try {
-    const data = await resend.emails.send({
+    const response = await resend.emails.send({
       from: process.env.EMAIL_FROM || "NoteSea <onboarding@resend.dev>",
       to,
       subject,
       html,
     });
-    console.log("✅ Email sent successfully:", data?.id);
+
+    // Properly log the email ID
+    if (response?.id) {
+      console.log("✅ Email sent successfully:", response.id);
+    } else {
+      console.log("✅ Email sent (no ID returned):", response);
+    }
+
     return true;
   } catch (error) {
     console.error("❌ Email sending failed:", error);
