@@ -1,5 +1,7 @@
-import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import fs from "fs";
@@ -15,8 +17,8 @@ import chatbot from "./routes/chatbot.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 
-dotenv.config();
-console.log("CLIENT_URL from env:", process.env.CLIENT_URL);
+console.log("✅ CLIENT_URL:", process.env.CLIENT_URL);
+console.log("✅ RESEND_API_KEY loaded:", !!process.env.RESEND_API_KEY);
 
 const app = express();
 
@@ -24,9 +26,9 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // local dev
+      "http://localhost:5173",
       "https://notenests.netlify.app",
-      "https://www.notesea.xyz" // deployed frontend
+      "https://www.notesea.xyz",
     ],
     credentials: true,
   })
@@ -45,18 +47,15 @@ app.use("/api/upload", uploadRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/user-pdfs", userPdfRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/api/chatbot", chatbot); 
+app.use("/api/chatbot", chatbot);
 app.use("/api/projects", projectRoutes);
 app.use("/api/orders", orderRoutes);
 
-// ✅ Health check endpoint for UptimeRobot
-// ---> NEW
-app.get("/ping", (req, res) => {
-  res.status(200).send("pong");
-});
+// ✅ Health check for uptime
+app.get("/ping", (req, res) => res.status(200).send("Notesea is alive!"));
 
 // Ensure uploads/projects folder exists
-const projectsDir = path.join(process.cwd(), 'uploads/projects');
+const projectsDir = path.join(process.cwd(), "uploads/projects");
 if (!fs.existsSync(projectsDir)) {
   fs.mkdirSync(projectsDir, { recursive: true });
 }
@@ -65,7 +64,7 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT || 5000, () => {
-      console.log("✅ Server is running on port 5000");
+      console.log("✅ Server running on port 5000");
     });
   })
   .catch((err) => console.log(err));

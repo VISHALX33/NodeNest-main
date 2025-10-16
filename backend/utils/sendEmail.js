@@ -1,4 +1,11 @@
 import { Resend } from "resend";
+import dotenv from "dotenv";
+
+// ✅ Load .env variables early
+dotenv.config();
+
+// Debug log (you can remove later)
+console.log("🔑 RESEND_API_KEY loaded:", !!process.env.RESEND_API_KEY);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -17,7 +24,6 @@ export const sendEmail = async (to, subject, html) => {
       html,
     });
 
-    // Properly log the email ID
     if (response?.id) {
       console.log("✅ Email sent successfully:", response.id);
     } else {
