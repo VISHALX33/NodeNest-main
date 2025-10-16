@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import fs from "fs";
-
 import path from "path";
+
 import userRoutes from "./routes/userRoutes.js";
 import semesterRoutes from "./routes/semesterRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
@@ -49,8 +49,13 @@ app.use("/api/chatbot", chatbot);
 app.use("/api/projects", projectRoutes);
 app.use("/api/orders", orderRoutes);
 
+// ✅ Health check endpoint for UptimeRobot
+// ---> NEW
+app.get("/ping", (req, res) => {
+  res.status(200).send("pong");
+});
 
-// Ensure uploads/projects folder exists, add in server.js after mongoose connect:
+// Ensure uploads/projects folder exists
 const projectsDir = path.join(process.cwd(), 'uploads/projects');
 if (!fs.existsSync(projectsDir)) {
   fs.mkdirSync(projectsDir, { recursive: true });
