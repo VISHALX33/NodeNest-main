@@ -129,7 +129,7 @@ export default function HowItWorks() {
       {/* LinkedIn Section */}
       <div className="text-center mt-16">
         <a
-          href="https://www.linkedin.com/in/vishal-prajapati-445799289/"
+          href="https://www.linkedin.com/in/noteseadotxyz/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-emerald-700 font-medium hover:text-emerald-800 transition"

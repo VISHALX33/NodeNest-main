@@ -359,9 +359,9 @@ export default function LandingPage({ switchToSignUp }) {
               One platform to manage notes, tasks, projects, and connect with peers worldwide.
             </p>
             <div className="mt-4 flex space-x-4 text-gray-200">
-              <a href="#" className="hover:text-gray-100 transition-colors"><FaInstagram size={20} /></a>
+              <a href="https://www.instagram.com/notesea.xyz/" className="hover:text-gray-100 transition-colors"><FaInstagram size={20} /></a>
               <a href="#" className="hover:text-gray-100 transition-colors"><FaTwitter size={20} /></a>
-              <a href="https://www.linkedin.com/in/vishal-prajapati-445799289/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100 transition-colors"><FaLinkedin size={20} /></a>
+              <a href="https://www.linkedin.com/in/noteseadotxyz/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100 transition-colors"><FaLinkedin size={20} /></a>
             </div>
           </div>
 

@@ -40,7 +40,7 @@ export default function Footer() {
                   <FaTwitter size={20} />
                 </a>
                 <a 
-                  href="https://www.linkedin.com/in/vishal-prajapati-445799289/" 
+                  href="https://www.linkedin.com/in/noteseadotxyz/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-emerald-800 transition-colors"
