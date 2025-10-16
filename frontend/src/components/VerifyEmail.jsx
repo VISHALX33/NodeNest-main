@@ -97,6 +97,7 @@ export default function VerifyEmail() {
         >
           {timeLeft <= 0 ? "OTP Expired" : loading ? "Verifying..." : "Verify Email"}
         </button>
+        <p className="text-center text-gray-600 text-sm">check your inbox or spam folder for the OTP !! </p>
       </form>
     </div>
   );

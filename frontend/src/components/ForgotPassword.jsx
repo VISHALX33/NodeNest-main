@@ -46,6 +46,8 @@ export default function ForgotPassword() {
         >
           {loading ? "Sending..." : "Send Reset Link"} {/* ✅ buffer text */}
         </button>
+        <br /> <br />
+        <p className="text-center text-gray-600 text-sm">check your inbox or spam folder for the OTP !! </p>
       </form>
     </div>
   );

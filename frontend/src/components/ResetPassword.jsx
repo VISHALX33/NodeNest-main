@@ -33,6 +33,7 @@ export default function ResetPassword() {
         <button type="submit" className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg">
           Reset Password
         </button>
+        <p className="text-center text-gray-600 text-sm">check your inbox or spam folder for the OTP !! </p>
       </form>
     </div>
   );
