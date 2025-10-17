@@ -12,7 +12,7 @@ import {
   FaEnvelope,
   FaShoppingCart,
   FaStore,
-  FaDownload
+  FaDownload,
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -60,7 +60,7 @@ export default function Navbar() {
   return (
     <>
       {/* Navbar */}
-<nav className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
+      <nav className="bg-gradient-to-r from-emerald-600 to-emerald-500 px-6 py-4 shadow-md text-white flex justify-between items-center">
         {/* Logo */}
         <h1
           className="text-2xl font-extrabold tracking-wide cursor-pointer"
@@ -71,46 +71,71 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         {user ? (
-          <div className="hidden md:flex relative items-center gap-5">
-            <Link to="/soon" title="Coming Soon">
-              <FaBell size={22} />
+          <div className="hidden md:flex relative items-center gap-6 px-6 py-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-emerald-100">
+            {/* Navigation Links */}
+            <Link
+              to="/soon"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Notification
             </Link>
-            <Link to="/project-services" title="Project Services">
-              <FaStore size={22} />
+            <Link
+              to="/project-services"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Services
             </Link>
-            <Link to="/how-it-works" title="How It Works">
-              <FaQuestionCircle size={22} />
+            <Link
+              to="/how-it-works"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              How It Works
             </Link>
-            <Link to="/tasks" title="My Tasks">
-              <FaTasks size={22} />
+            <Link
+              to="/tasks"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              My Tasks
             </Link>
-            <Link to="/chatbot" title="Chatbot">
-              <FaRobot size={22} />
+            <Link
+              to="/chatbot"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Chatbot
             </Link>
-            <Link to="/about" title="About Us">
-              <FaInfoCircle size={22} />
+            <Link
+              to="/about-home"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              About
             </Link>
-            <Link to="/contact" title="Contact Us">
-              <FaEnvelope size={22} />
+            <Link
+              to="/contact"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Contact
             </Link>
-            <Link to="/my-bookings" title="Coming Soon">
-              <FaShoppingCart size={22} />
+            <Link
+              to="/my-bookings"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              My Orders
             </Link>
 
-            {/* Download App button (Desktop) */}
+            {/* Download App Button (Desktop) */}
             {isInstallVisible && (
               <button
                 onClick={handleInstall}
-                className="bg-white text-emerald-600 text-sm px-3 py-1.5 rounded-full flex items-center gap-2 hover:bg-emerald-50 transition"
+                className="ml-2 bg-emerald-600 text-white text-sm px-4 py-1.5 rounded-full flex items-center gap-2 hover:bg-emerald-700 shadow-sm transition-all duration-200"
               >
-                <FaDownload /> Download App
+                <FaDownload className="text-white" /> Download App
               </button>
             )}
 
-            {/* Avatar */}
+            {/* Settings Icon */}
             <FaCog
-              size={28}
-              className="cursor-pointer transition duration-200 hover:rotate-90"
+              size={26}
+              className="ml-2 text-emerald-600 cursor-pointer hover:text-emerald-700 transition-transform duration-300 hover:rotate-90"
               onClick={() => setShowDropdown(!showDropdown)}
             />
 
@@ -185,7 +210,7 @@ export default function Navbar() {
           <Link to="/chatbot" onClick={() => setIsSidebarOpen(false)}>
             <FaRobot className="inline mr-2" /> Chatbot
           </Link>
-          <Link to="/about" onClick={() => setIsSidebarOpen(false)}>
+          <Link to="/about-home" onClick={() => setIsSidebarOpen(false)}>
             <FaInfoCircle className="inline mr-2" /> About
           </Link>
           <Link to="/contact" onClick={() => setIsSidebarOpen(false)}>
@@ -194,8 +219,6 @@ export default function Navbar() {
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}>
             <FaShoppingCart className="inline mr-2" /> My Orders
           </Link>
-
-          
 
           {user ? (
             <>
@@ -235,9 +258,7 @@ export default function Navbar() {
             </button>
           )}
         </div>
-        
       </div>
-      
 
       {/* Overlay when sidebar is open */}
       {isSidebarOpen && (

@@ -85,7 +85,7 @@ export default function Footer() {
                 Support
               </h3>
               <ul className="space-y-2">
-                <li><Link to="/about" className="hover:text-emerald-600 transition-colors flex items-center">
+                <li><Link to="/about-home" className="hover:text-emerald-600 transition-colors flex items-center">
                   {/* <FaInfoCircle className="mr-2" size={14} /> */}
                    About Us
                 </Link></li>
@@ -94,7 +94,7 @@ export default function Footer() {
                    Contact Us
                 </Link></li>
                 <li><a href="#" className="hover:text-emerald-600 transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-emerald-600 transition-colors">Careers</a></li>
+                <li><a href="/career" className="hover:text-emerald-600 transition-colors">Careers</a></li>
               </ul>
             </div>
           </div>

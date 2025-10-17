@@ -20,7 +20,6 @@ import EasyProjects from "./components/EasyProjects";
 import MediumProjects from "./components/MediumProjects";
 import HardProjects from "./components/HardProjects";
 import MyBookings from "./components/MyBookings";
-import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import ProjectService from "./components/projectService";
 import ForgotPassword from "./components/ForgotPassword";
@@ -117,18 +116,9 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/about"
-          element={
-            <PrivateRoute>
-              <Layout>
-                <AboutUs />
-              </Layout>
-            </PrivateRoute>
-          }
-        />
+        
         <Route path="/about-home" element={<About />} />
-        {/* <Route path="/about-home" element={<About />} /> */}
+        
         <Route path="/career" element={<CareerPage />} />
 
 
