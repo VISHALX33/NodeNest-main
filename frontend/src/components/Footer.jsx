@@ -94,7 +94,7 @@ export default function Footer() {
                    Contact Us
                 </Link></li>
                 <li><a href="#" className="hover:text-emerald-600 transition-colors">Help Center</a></li>
-                <li><a href="/career" className="hover:text-emerald-600 transition-colors">Careers</a></li>
+                <li><a href="/careers" className="hover:text-emerald-600 transition-colors">Careers</a></li>
               </ul>
             </div>
           </div>

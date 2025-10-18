@@ -38,6 +38,10 @@ const videos = [
     title: "Episode 7 — buying domain for notesea",
     url: "https://youtu.be/aYSamUbFhxk?si=0u54nF0QkD3ucXIo",
   },
+  {
+    title: "Episode 7 — Doing SEO in  notesea",
+    url: "https://youtu.be/jVTRDA4nhWM?si=1KKAZlU8XzX5BBtd",
+  },
 ];
 
 
@@ -167,32 +171,6 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
-    
-    {/* Semester Section with Image */}
-{/* <div className="flex flex-col md:flex-row items-center gap-10 mt-10">
-  <div className="flex-1 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-5">
-    {semesters.map((s) => (
-      <div
-        key={s._id}
-        onClick={() => navigate(`/semesters/${s._id}`)}
-        className="bg-emerald-100 rounded-xl shadow-md border border-emerald-100 hover:bg-emerald-50 hover:shadow-lg transition-all duration-200 cursor-pointer p-6 text-center"
-      >
-        <span className="text-lg font-semibold text-black">{s.title}</span>
-      </div>
-    ))}
-  </div>
-
-  <div className="flex-1 flex justify-center">
-    <img
-      src={NoteNestLogo} 
-      alt="Semester Illustration"
-      className="w-full max-w-sm rounded-2xl shadow-lg"
-    />
-  </div>
-</div> */}
-
-
-      
 
       <br />
       <hr />

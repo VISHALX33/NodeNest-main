@@ -13,6 +13,7 @@ import {
   FaShoppingCart,
   FaStore,
   FaDownload,
+  FaBriefcase
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -121,6 +122,12 @@ export default function Navbar() {
             >
               My Orders
             </Link>
+             <Link
+              to="/careers"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Careers
+            </Link>
 
             {/* Download App Button (Desktop) */}
             {isInstallVisible && (
@@ -218,6 +225,9 @@ export default function Navbar() {
           </Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}>
             <FaShoppingCart className="inline mr-2" /> My Orders
+          </Link>
+          <Link to="/Careers" onClick={() => setIsSidebarOpen(false)}>
+            <FaBriefcase className="inline mr-2" /> Careers
           </Link>
 
           {user ? (

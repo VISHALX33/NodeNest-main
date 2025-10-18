@@ -27,7 +27,7 @@ import ResetPassword from "./components/ResetPassword";
 import InstallButton from "./components/InstallButton";
 import TermsAndConditions from "./components/TermsAndConditions.jsx";
 import About from "./components/About";
-import CareerPage from "./components/CareerPage";
+import CareerForm from "./components/CareerForm.jsx";
 
 function Layout({ children }) {
   return (
@@ -116,10 +116,19 @@ function App() {
             </PrivateRoute>
           }
         />
-        
-        <Route path="/about-home" element={<About />} />
-        
-        <Route path="/career" element={<CareerPage />} />
+
+        <Route
+          path="/about-home"
+          element={
+            <Layout>
+              <About />
+            </Layout>}
+        />
+        <Route 
+          path="/careers" 
+          element={<Layout><CareerForm /></Layout>} />
+
+
 
 
 
@@ -247,7 +256,7 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-        
+
         <Route
           path="/install"
           element={
