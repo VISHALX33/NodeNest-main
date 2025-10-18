@@ -9,14 +9,13 @@ import path from "path";
 
 import userRoutes from "./routes/userRoutes.js";
 import semesterRoutes from "./routes/semesterRoutes.js";
-import uploadRoutes from "./routes/uploadRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import userPdfRoutes from "./routes/userPdfRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
 import chatbot from "./routes/chatbot.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
-
+import applicationRoutes from "./routes/applicationRoutes.js";
 console.log("✅ CLIENT_URL:", process.env.CLIENT_URL);
 console.log("✅ RESEND_API_KEY loaded:", !!process.env.RESEND_API_KEY);
 
@@ -36,21 +35,22 @@ app.use(
 
 // ✅ Parse JSON body
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 
-// ✅ Serve static files
-app.use("/uploads", express.static(path.join(process.cwd(), "/uploads")));
+// ensure uploads dir exists
+const uploadsDir = path.join(process.cwd(), "uploads");
+if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 
 // ✅ API routes
 app.use("/api/users", userRoutes);
 app.use("/api/semesters", semesterRoutes);
-app.use("/api/upload", uploadRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/user-pdfs", userPdfRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/chatbot", chatbot);
 app.use("/api/projects", projectRoutes);
 app.use("/api/orders", orderRoutes);
-
+app.use("/api/applications", applicationRoutes);
 // ✅ Health check for uptime
 app.get("/ping", (req, res) => res.status(200).send("Notesea is alive!"));
 
