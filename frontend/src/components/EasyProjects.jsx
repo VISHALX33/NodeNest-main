@@ -169,16 +169,21 @@ const EasyProjects = () => {
               <span className="mx-2">|</span>
               <span className="text-emerald-500 font-medium">₹{project.businessPrice}</span>
             </div>
+            
           </div>
+          
         ))}
+    
       </div>
 
       {/* Preview Modal */}
       <Modal
-        isOpen={!!selectedProject && !showForm}
-        onRequestClose={() => setSelectedProject(null)}
-        className="bg-white p-8 rounded-lg max-w-4xl mx-auto mt-20"
-      >
+  isOpen={!!selectedProject && !showForm}
+  onRequestClose={() => setSelectedProject(null)}
+  className="bg-white p-6 rounded-lg max-w-4xl w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
+  overlayClassName="fixed inset-0  bg-white/60 bg-opacity-50 flex justify-center items-center"
+>
+
         {selectedProject && (
           <div className="flex flex-col md:flex-row">
             {/* Left Side (Tabs & Content) */}
@@ -285,17 +290,22 @@ const EasyProjects = () => {
             </div>
           </div>
         )}
+        
       </Modal>
+      
+      
 
       {/* Booking Form Modal */}
       <Modal
-        isOpen={!!selectedProject && showForm}
-        onRequestClose={() => {
-          setSelectedProject(null);
-          setShowForm(false);
-        }}
-        className="bg-white p-8 rounded-lg max-w-md mx-auto mt-20"
-      >
+  isOpen={!!selectedProject && showForm}
+  onRequestClose={() => {
+    setSelectedProject(null);
+    setShowForm(false);
+  }}
+  className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
+  overlayClassName="fixed inset-0 bg-white/60 bg-opacity-50 flex justify-center items-center"
+>
+
         <h2 className="text-2xl mb-4">Book {selectedProject?.name}</h2>
         <form onSubmit={handleFormSubmit} className="space-y-4">
           <input
@@ -384,6 +394,7 @@ const EasyProjects = () => {
                 }`}
           </button>
         </form>
+        
       </Modal>
     </div>
   );
