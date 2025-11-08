@@ -47,7 +47,12 @@ export default function ForgotPassword() {
           {loading ? "Sending..." : "Send Reset Link"} {/* ✅ buffer text */}
         </button>
         <br /> <br />
-        <p className="text-center text-gray-600 text-sm">check your inbox or spam folder for the OTP !! </p>
+        {/* <p className="text-center text-gray-600 text-sm">check your inbox or spam folder for the OTP !! </p> */}
+        <p className="text-center text-gray-600 text-sm">
+  <input type="checkbox" className="mr-2 accent-blue-600" required />
+  checked inbox or spam folder for the OTP !!
+</p>
+
       </form>
     </div>
   );
