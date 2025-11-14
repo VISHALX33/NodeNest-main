@@ -39,7 +39,7 @@ const videos = [
     url: "https://youtu.be/aYSamUbFhxk?si=0u54nF0QkD3ucXIo",
   },
   {
-    title: "Episode 7 — Doing SEO in  notesea",
+    title: "Episode 8 — Doing SEO in  notesea",
     url: "https://youtu.be/jVTRDA4nhWM?si=1KKAZlU8XzX5BBtd",
   },
 ];
