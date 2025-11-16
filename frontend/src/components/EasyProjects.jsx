@@ -148,7 +148,7 @@ const EasyProjects = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
-        🟢 Easy Projects
+        🟢 Beginner friendly Projects
       </h1>
 
       {/* Project Cards */}
@@ -353,7 +353,7 @@ const EasyProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Student (₹{selectedProject?.studentPrice})
+              Frontend(₹{selectedProject?.studentPrice})
             </label>
             <label className="flex items-center text-sm text-gray-700 ml-4">
               <input
@@ -364,7 +364,7 @@ const EasyProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Business (₹{selectedProject?.businessPrice})
+              Full Stack (₹{selectedProject?.businessPrice})
             </label>
           </div>
 

@@ -347,7 +347,7 @@ const HardProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Student (₹{selectedProject?.studentPrice})
+              Frontend (₹{selectedProject?.studentPrice})
             </label>
             <label className="flex items-center text-sm text-gray-700 ml-4">
               <input
@@ -358,7 +358,7 @@ const HardProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Business (₹{selectedProject?.businessPrice})
+              Full Stack (₹{selectedProject?.businessPrice})
             </label>
           </div>
 

@@ -157,7 +157,7 @@ const MediumProjects = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
-        🟡 Medium Projects
+        🟡 Intermediate Projects
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project) => (
@@ -194,10 +194,10 @@ const MediumProjects = () => {
                 <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
                 <div className="flex items-center gap-4 mb-4">
                   <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
-                    Student: ₹{selectedProject.studentPrice}
+                    Frontend: ₹{selectedProject.studentPrice}
                   </span>
                   <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
-                    Business: ₹{selectedProject.businessPrice}
+                    Full stack: ₹{selectedProject.businessPrice}
                   </span>
                 </div>
               </div>
@@ -373,7 +373,7 @@ const MediumProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Student (₹{selectedProject?.studentPrice})
+              Frontend (₹{selectedProject?.studentPrice})
             </label>
             <label className="flex items-center text-sm text-gray-700 ml-4">
               <input
@@ -384,7 +384,7 @@ const MediumProjects = () => {
                 onChange={handleFormChange}
                 className="mr-2 accent-emerald-500"
               />
-              Business (₹{selectedProject?.businessPrice})
+              Full Stack (₹{selectedProject?.businessPrice})
             </label>
           </div>
 

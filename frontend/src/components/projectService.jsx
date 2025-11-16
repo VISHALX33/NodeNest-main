@@ -28,13 +28,13 @@ export default function ProjectService() {
 
   const projectLevels = [
     {
-      level: '🟢 Easy Projects',
+      level: '🟢 Beginner friendly  Projects',
       description: 'Basic CRUD apps – quick to build & perfect for students.',
       projects: projects.easy,
       link: '/easy-projects'
     },
     {
-      level: '🟡 Medium Projects',
+      level: '🟡 Intermediate Projects',
       description: 'Intermediate apps with authentication, dashboards & real-time features.',
       projects: projects.medium,
       link: '/medium-projects'
@@ -59,29 +59,38 @@ export default function ProjectService() {
       </p>
 
       {/* ✅ New Section: Plan Benefits */}
-      <div className="bg-emerald-50 p-6 rounded-2xl mb-10 shadow-md">
-        <h2 className="text-2xl font-semibold text-emerald-700 mb-4 text-center">Why Choose Our Plans?</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-4 bg-white rounded-xl shadow-sm">
-            <h3 className="text-xl font-semibold text-emerald-600 mb-2">🎓 Student Plan</h3>
-            <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-              <li>Affordable pricing for learners.</li>
-              <li>Focus on learning & building hands-on projects.</li>
-              <li>Quick turnaround & simple project requirements.</li>
-              <li>Ideal for practice, college assignments & portfolio building.</li>
-            </ul>
-          </div>
-          <div className="p-4 bg-white rounded-xl shadow-sm">
-            <h3 className="text-xl font-semibold text-emerald-600 mb-2">🏢 Business Plan</h3>
-            <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-              <li>Designed for startups & companies.</li>
-              <li>Advanced features with scalable architecture.</li>
-              <li>Includes project consultation & customization.</li>
-              <li>Priority delivery with professional support.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
+     <div className="bg-emerald-50 p-6 rounded-2xl mb-10 shadow-md">
+  <h2 className="text-2xl font-semibold text-emerald-700 mb-4 text-center">
+    Why Choose Our Plans?
+  </h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    {/* Frontend Only Plan */}
+    <div className="p-4 bg-white rounded-xl shadow-sm">
+      <h3 className="text-xl font-semibold text-emerald-600 mb-2">🎨 Frontend Only Plan</h3>
+      <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+        <li>Clean UI using HTML, CSS & JavaScript (or React).</li>
+        <li>Perfect for portfolio, college projects, and small apps.</li>
+        <li>Fast delivery with responsive design.</li>
+        <li>Includes animations, UI enhancements & modern layout.</li>
+      </ul>
+    </div>
+
+    {/* Full Stack (MERN) Plan */}
+    <div className="p-4 bg-white rounded-xl shadow-sm">
+      <h3 className="text-xl font-semibold text-emerald-600 mb-2">🧩 Full Stack (MERN) Plan</h3>
+      <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+        <li>Complete MERN development (MongoDB, Express, React, Node).</li>
+        <li>Backend APIs, authentication & database integration.</li>
+        <li>Advanced logic, dashboards & admin panels.</li>
+        <li>Scalable architecture with deployment support.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projectLevels.map((category, index) => (
@@ -108,13 +117,13 @@ export default function ProjectService() {
 
             <div className="border-t pt-4 text-sm">
               <p className="text-gray-600 mb-1">
-                <b>🎓 Student Plan:</b>{' '}
+                <b>🎓 Frontend (Only):</b>{' '}
                 <span className="text-emerald-600 font-semibold">
                   ₹{Math.min(...category.projects.map(p => p.studentPrice))} – ₹{Math.max(...category.projects.map(p => p.studentPrice))}
                 </span>
               </p>
               <p className="text-gray-600">
-                <b>🏢 Business Plan:</b>{' '}
+                <b>🏢 Full Stack (Full website):</b>{' '}
                 <span className="text-emerald-600 font-semibold">
                   ₹{Math.min(...category.projects.map(p => p.businessPrice))} – ₹{Math.max(...category.projects.map(p => p.businessPrice))}
                 </span>
