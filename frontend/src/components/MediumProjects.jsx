@@ -390,7 +390,7 @@ const MediumProjects = () => {
 
           <textarea
             name="requirements"
-            placeholder="Additional Requirements"
+            placeholder="Coupon code or Additional Requirements"
             value={formData.requirements}
             onChange={handleFormChange}
             className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
