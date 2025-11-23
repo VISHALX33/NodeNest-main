@@ -13,7 +13,8 @@ import {
   FaShoppingCart,
   FaStore,
   FaDownload,
-  FaBriefcase
+  FaBriefcase,
+  FaComments,
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -97,6 +98,12 @@ export default function Navbar() {
               className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
             >
               My Tasks
+            </Link>
+            <Link
+              to="/chat"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Global Chat
             </Link>
             <Link
               to="/chatbot"
@@ -214,6 +221,9 @@ export default function Navbar() {
           <Link to="/tasks" onClick={() => setIsSidebarOpen(false)}>
             <FaTasks className="inline mr-2" /> My Tasks
           </Link>
+          <Link to="/chat" onClick={() => setIsSidebarOpen(false)}>
+    <FaComments className="inline mr-2" /> Global Chat
+  </Link>
           <Link to="/chatbot" onClick={() => setIsSidebarOpen(false)}>
             <FaRobot className="inline mr-2" /> Chatbot
           </Link>
