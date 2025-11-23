@@ -6,7 +6,7 @@ import {
   FaLaptopCode,
   FaUserGraduate,
 } from "react-icons/fa";
-import founderImg from "../assets/Vishalp.png";
+import founderImg from "../assets/Vishalp.jpg";
 
 export default function About() {
   return (

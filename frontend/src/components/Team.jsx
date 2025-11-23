@@ -1,6 +1,6 @@
 import React from "react";
 // import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import vishalImg from "../assets/Vishalp.png";
+import vishalImg from "../assets/Vishalp.jpg";
 import Rishabh from "../assets/Rishabh.jpg";
 import Krishna from "../assets/Krishna.jpg";
 import Aditya from "../assets/Aditya.jpg";
