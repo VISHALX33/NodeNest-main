@@ -6,7 +6,8 @@ const isLocalhost = window.location.hostname === 'localhost';
 const API = axios.create({
   baseURL: isLocalhost
     ? 'http://localhost:5000/api'
-    : 'https://notenest-backend-zoab.onrender.com/api',
+    // : 'https://notenest-backend-zoab.onrender.com/api',
+    : 'https://nodenest-main.onrender.com/api',
 });
 
 // Attach token to every request if available
