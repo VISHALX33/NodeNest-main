@@ -13,7 +13,10 @@ import {
   FaInfoCircle,
   FaEnvelope,
   FaQuestionCircle,
-  FaStore
+  FaStore,
+  FaInstagram,
+  FaWhatsapp,
+  FaTelegram
 } from 'react-icons/fa';
 
 export default function Footer() {
@@ -33,11 +36,14 @@ export default function Footer() {
                 explore blogs, book services, and connect via global chat.
               </p>
               <div className="mt-4 flex space-x-4 text-emerald-600">
-                <a href="#" className="hover:text-emerald-800 transition-colors">
-                  <FaFacebook size={20} />
+                <a href="https://www.instagram.com/notesea.xyz/" className="hover:text-emerald-800 transition-colors">
+                  <FaInstagram size={20} />
                 </a>
-                <a href="#" className="hover:text-emerald-800 transition-colors">
-                  <FaTwitter size={20} />
+                <a href="https://www.whatsapp.com/channel/0029VbBPPUN8V0tsVVPSek0f" className="hover:text-emerald-800 transition-colors">
+                  <FaWhatsapp size={20} />
+                </a>
+                  <a href="https://t.me/noteseaxyz" className="hover:text-emerald-800 transition-colors">
+                  <FaTelegram size={20} />
                 </a>
                 <a 
                   href="https://www.linkedin.com/in/noteseadotxyz/" 

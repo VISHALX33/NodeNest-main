@@ -28,6 +28,7 @@ import InstallButton from "./components/InstallButton";
 import TermsAndConditions from "./components/TermsAndConditions.jsx";
 import About from "./components/About";
 import CareerForm from "./components/CareerForm.jsx";
+import PartnerPage from "./components/PartnerPage.jsx";
 
 function Layout({ children }) {
   return (
@@ -241,6 +242,16 @@ function App() {
             </PrivateRoute>
           }
         />
+        {/* <Route
+          path="/partners"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <PartnerPage />
+              </Layout>
+            </PrivateRoute>
+          }
+        /> */}
 
         <Route
           path="/tasks"
@@ -265,7 +276,12 @@ function App() {
             </Layout>
           }
         />
+        
         <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/partners" element={<PartnerPage />} />
+
+
+        partners
 
         <Route
           path="/team"

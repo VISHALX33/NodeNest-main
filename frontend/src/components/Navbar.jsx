@@ -81,6 +81,8 @@ export default function Navbar() {
             >
               Notification
             </Link>
+            
+
             <Link
               to="/project-services"
               className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
@@ -135,16 +137,22 @@ export default function Navbar() {
             >
               Careers
             </Link>
+             <Link
+              to="/Partners"
+              className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200"
+            >
+              Partners
+            </Link>
 
             {/* Download App Button (Desktop) */}
-            {isInstallVisible && (
+            {/* {isInstallVisible && (
               <button
                 onClick={handleInstall}
                 className="ml-2 bg-emerald-600 text-white text-sm px-4 py-1.5 rounded-full flex items-center gap-2 hover:bg-emerald-700 shadow-sm transition-all duration-200"
               >
                 <FaDownload className="text-white" /> Download App
               </button>
-            )}
+            )} */}
 
             {/* Settings Icon */}
             <FaCog

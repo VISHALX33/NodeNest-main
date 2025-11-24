@@ -87,6 +87,8 @@ export default function LandingPage({ switchToSignUp }) {
             <a href="#testimonials" className="hover:text-emerald-600">Testimonials</a>
             <a href="/terms" className="hover:text-emerald-600">Terms & Conditions</a>
             <a href="#faq" className="hover:text-emerald-600">FAQ</a>
+            <a href="/Partners" className="hover:text-emerald-600">Partners</a>
+
           </div>
           <a href="#login" className="bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">
             Get Started
@@ -189,9 +191,6 @@ export default function LandingPage({ switchToSignUp }) {
         </div>
       </section>
 
-
-
-
       {/* 🌟 Login Section */}
       <section id="login" className="">
         <div className="max-w-6xl mx-auto px-6">
@@ -281,6 +280,54 @@ export default function LandingPage({ switchToSignUp }) {
       </section>
 
 
+{/* 🌟 Our Partners */}
+<section className="py-20 bg-white">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+
+    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
+      Our Partners
+    </h2>
+
+    <div className="grid md:grid-cols-4 gap-8">
+
+      {[
+        { 
+          name: "Khushi Photocopy & Printout", 
+          logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp" 
+        },
+      ].map((partner, i) => (
+        
+        <motion.div
+          key={i}
+          whileHover={{ scale: 1.05 }}
+          className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition"
+        >
+          {/* Image */}
+          <div className="w-full h-32 flex items-center justify-center mb-4">
+            <img 
+              src={partner.logo} 
+              alt={partner.name} 
+              className="h-full object-contain"
+            />
+          </div>
+
+          {/* Title */}
+          <h3 className="font-semibold text-gray-800 text-lg">
+            {partner.name}
+          </h3>
+        </motion.div>
+
+      ))}
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
 
       {/* 🌟 Testimonials */}
       <section id="testimonials" className="py-20 bg-white">
@@ -344,8 +391,6 @@ export default function LandingPage({ switchToSignUp }) {
           </div>
         </div>
       </section>
-
-
 
 
       {/* 🌟 Footer */}
@@ -417,9 +462,6 @@ export default function LandingPage({ switchToSignUp }) {
           © {new Date().getFullYear()} NoteSea. All rights reserved.
         </div>
       </footer>
-
-
-
 
     </div>
   );
