@@ -91,33 +91,95 @@ function WhatWeOffer() {
   );
 }
 
-// ✅ Custom Projects Section
-function CustomProjects() {
+function OurAchievements() {
+  const achievements = [
+    { value: "100+", label: "Active Users" },
+    { value: "4.8★", label: "Student Satisfaction" },
+    { value: "10+", label: "Projects Delivered" },
+    { value: "98%", label: "Success Rate" },
+  ];
+
   return (
-    <div className="max-w-6xl mx-auto mt-20 px-4">
+    <div className="max-w-6xl mx-auto mt-16 px-4">
       <h2 className="text-3xl font-bold text-center text-emerald-700 mb-6">
-        Custom Projects
+        Our Achievements
       </h2>
       <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-        Didn’t find what you need in Easy, Medium, or Advanced projects?  
-        We also build <strong>custom full-stack projects</strong> tailored for your requirements.
+        Milestones and successes we have achieved through dedication, innovation, and teamwork.
       </p>
 
-      <div className="bg-gradient-to-r from-emerald-100 to-emerald-200 p-8 rounded-3xl shadow-lg text-center">
-        <h3 className="text-xl font-semibold text-emerald-800 mb-3">
-          Get Your Own Project Built
-        </h3>
-        <p className="text-gray-700 mb-6">
-          Share your project idea and we’ll help you design, develop, and deploy it 
-          within your budget and timeline.
-        </p>
-        <button className="px-6 py-3 bg-emerald-700 text-white rounded-xl shadow hover:bg-emerald-800 transition">
-          Contact Mail :- notesea.help@gmail.com
-        </button>
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {achievements.map((item, i) => (
+          <div
+            key={i}
+            className="bg-white p-6 rounded-2xl shadow-md border border-gray-200 hover:shadow-lg transition text-center"
+          >
+            <h3 className="text-2xl font-bold text-emerald-700">{item.value}</h3>
+            <p className="text-gray-600 mt-2 text-sm">{item.label}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
+
+
+
+// ✅ Custom Projects Section
+import { FaLaptopCode, FaRocket } from "react-icons/fa";
+import customProjectImg from "../assets/custom.png"; // optional illustration
+
+function CustomProjects() {
+  return (
+    <div className="max-w-6xl mx-auto mt-20 px-4">
+      <div className="grid md:grid-cols-2 items-center gap-10 bg-gradient-to-r from-emerald-100 to-emerald-200 p-10 rounded-3xl shadow-lg">
+        {/* Text Section */}
+        <div>
+          <h2 className="text-3xl font-bold text-emerald-700 mb-4">
+            Custom Projects
+          </h2>
+          <p className="text-gray-600 mb-6 max-w-md">
+            Didn’t find what you need in Easy, Medium, or Advanced projects?  
+            We also build <strong>custom full-stack projects</strong> tailored for your requirements.
+          </p>
+
+          <div className="flex items-center gap-4 mb-6">
+            <FaLaptopCode className="text-emerald-700 text-3xl" />
+            <p className="text-gray-700">
+              Design & Development: We craft projects tailored to your idea.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4 mb-6">
+            <FaRocket className="text-emerald-700 text-3xl" />
+            <p className="text-gray-700">
+              Deployment & Support: Get your project live and fully functional.
+            </p>
+          </div>
+
+          <a
+            href="mailto:notesea.help@gmail.com"
+            className="inline-block px-8 py-3 bg-emerald-700 text-white rounded-xl shadow-lg hover:bg-emerald-800 transition transform hover:-translate-y-1"
+          >
+            Contact Us
+          </a>
+        </div>
+
+        {/* Illustration/Image */}
+        <div className="hidden md:block">
+          <img
+            src={customProjectImg}
+            alt="Custom Project Illustration"
+            className="w-full rounded-2xl shadow-md"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
 
 export default function Dashboard() {
   const [semesters, setSemesters] = useState([]);
@@ -181,8 +243,10 @@ export default function Dashboard() {
 
       {/* New Sections */}
       <WhatWeOffer />
+      <OurAchievements />
       <NoteSeaStory videos={videos}/> 
       <CustomProjects />
+      
 
       {/* Floating Chatbot Icon */}
       <div

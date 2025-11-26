@@ -163,6 +163,40 @@ export default function LandingPage({ switchToSignUp }) {
                     </div>
                   </section>
 
+                  {/* 🌟 Stats Section */}
+<section className="py-20 bg-gray-50">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
+      Our Achievements
+    </h2>
+    <div className="grid md:grid-cols-4 gap-8">
+
+      {[
+        { value: "100+", label: "Active Users" },
+  { value: "4.8★", label: "Student Satisfaction" },
+  { value: "10+", label: "Projects Delivered" },
+  { value: "98%", label: "Success Rate" },
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          whileHover={{ scale: 1.05 }}
+          className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+        >
+          <h3 className="text-4xl font-bold text-emerald-700">
+            {item.value}
+          </h3>
+          <p className="text-gray-700 text-lg mt-2">
+            {item.label}
+          </p>
+        </motion.div>
+      ))}
+
+    </div>
+
+  </div>
+</section>
+
+
       {/* 🌟 How It Works */}
 
       <section id="how" className="bg-gray-50 py-20">
