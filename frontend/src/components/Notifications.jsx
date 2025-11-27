@@ -22,6 +22,36 @@ export default function Notifications() {
         🔔 Notifications & Updates
       </h1>
 
+
+   <div className="bg-white shadow-md rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 mb-10">
+        
+         {/* RIGHT SIDE — IMAGE */}
+        <div className="flex-1 flex justify-center">
+          <img
+            src="https://res.cloudinary.com/dwq5qifuk/image/upload/v1764223632/WhatsApp_Image_2025-11-27_at_11.21.56_377e55e2_sqqh3v.jpg" // Replace with your image
+            alt="100 users"
+            className="rounded-xl shadow-md w-[280px] md:w-[320px]"
+          />
+        </div>
+        {/* LEFT SIDE — DESCRIPTION */}
+        <div className="flex-1">
+          <h2 className="text-2xl font-bold text-emerald-600 mb-2">
+            📢Announcement !!!
+          </h2>
+          <p className="text-gray-700 leading-relaxed">
+      📢 <strong>Announcement for all NoteSea students:</strong>  
+      You can share your semester notes to help other students in their exams.  
+      If anyone contributes notes, we will proudly add their <strong>name and image</strong> in our Contributors section.  
+      If you're interested, connect with us through our social media platforms in the website footer,  
+      or email us at <strong>notesea.help@gmail.com</strong>.  
+      Thank you! 🙌
+    </p>
+        </div>
+
+       
+      </div>
+
+
       {/* --- NEW BLOCK: 100 Users Section --- */}
       <div className="bg-white shadow-md rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 mb-10">
         
@@ -46,6 +76,8 @@ export default function Notifications() {
           />
         </div>
       </div>
+
+   
 
       {/* --- Example Notifications List --- */}
       <div className="space-y-4">
