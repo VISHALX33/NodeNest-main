@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, ArrowRight, ChevronDown } from "lucide-react";
 import API from "../utils/axios";
@@ -17,6 +17,14 @@ export default function LandingPage({ switchToSignUp }) {
   const [showPassword, setShowPassword] = useState(false);
   const [openFAQ, setOpenFAQ] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    navigate("/dashboard");
+  }
+}, []);
+
 
   const handleChange = (e) =>
     setData({ ...data, [e.target.name]: e.target.value });
@@ -176,6 +184,7 @@ export default function LandingPage({ switchToSignUp }) {
   { value: "4.8★", label: "Student Satisfaction" },
   { value: "10+", label: "Projects Delivered" },
   { value: "98%", label: "Success Rate" },
+  { value: "6-8 Hr", label: "Delivery Time" },
       ].map((item, index) => (
         <motion.div
           key={index}

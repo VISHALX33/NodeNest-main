@@ -42,6 +42,14 @@ const videos = [
     title: "Episode 8 — Doing SEO in  notesea",
     url: "https://youtu.be/jVTRDA4nhWM?si=1KKAZlU8XzX5BBtd",
   },
+  {
+    title: "Episode 9 — Contributer section is open for everyone",
+    url: "https://youtu.be/sGV7AOVDJ8w?si=KTGcN2M41_2W0EvN",
+  },
+  {
+    title: "Episode 10 — Why students should use notesea",
+    url: "https://youtu.be/0rRc_Pa6bwk?si=DsW2RWX91x4K_otK",
+  },
 ];
 
 
