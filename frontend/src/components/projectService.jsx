@@ -99,7 +99,7 @@ export default function ProjectService() {
             className="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition flex flex-col justify-between"
           >
             <div>
-              <h2 className="text-xl font-semibold text-emerald-600 mb-3 text-center">
+              <h2 className="text-xl font-semibold text-black mb-3 text-center">
                 {category.level}
               </h2>
               <p className="text-gray-500 text-sm text-center mb-4">
