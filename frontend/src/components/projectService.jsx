@@ -28,7 +28,7 @@ export default function ProjectService() {
 
   const projectLevels = [
     {
-      level: '🟢 Grab Your Projects',
+      level: ' Grab Your Projects',
       description: 'Basic CRUD apps – quick to build & perfect for students.',
       projects: projects.easy,
       link: '/easy-projects'
