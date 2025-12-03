@@ -28,19 +28,19 @@ export default function ProjectService() {
 
   const projectLevels = [
     {
-      level: '🟢 Beginner friendly  Projects',
+      level: '🟢 Grab Your Projects',
       description: 'Basic CRUD apps – quick to build & perfect for students.',
       projects: projects.easy,
       link: '/easy-projects'
     },
     {
-      level: '🟡 Intermediate Projects',
+      level: 'Buy Great Projects',
       description: 'Intermediate apps with authentication, dashboards & real-time features.',
       projects: projects.medium,
       link: '/medium-projects'
     },
     {
-      level: '🔴 Advance Projects',
+      level: 'Discover And Buy',
       description: 'Production-ready SaaS-level apps with payments, scaling & advanced features.',
       projects: projects.hard,
       link: '/hard-projects'
