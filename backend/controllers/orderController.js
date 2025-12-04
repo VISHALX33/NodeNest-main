@@ -11,16 +11,55 @@ const razorpay = new Razorpay({
 });
 
 // ---------------- Create Order ----------------
+// export const createOrder = async (req, res) => {
+//   try {
+//     const { projectId, planType, userDetails, projectDetails } = req.body;
+
+//     const project = await Project.findById(projectId);
+//     if (!project) return res.status(404).json({ message: "Project not found" });
+
+//     const basePrice =
+//       planType === "student" ? project.studentPrice : project.businessPrice;
+//     const totalAmount = basePrice;
+
+//     const order = new Order({
+//       user: req.user._id,
+//       project: project._id,
+//       planType,
+//       basePrice,
+//       totalAmount,
+//       userDetails,
+//       projectDetails: {
+//         ...projectDetails,
+//         name: project.name,
+//         description: project.description,
+//       },
+//     });
+
+//     await order.save();
+//     res.status(201).json({ orderId: order.orderId });
+//   } catch (err) {
+//     res.status(400).json({ message: err.message });
+//   }
+// };
+
 export const createOrder = async (req, res) => {
   try {
-    const { projectId, planType, userDetails, projectDetails } = req.body;
+    const { projectId, planType, userDetails, projectDetails, couponCode } = req.body;
 
     const project = await Project.findById(projectId);
     if (!project) return res.status(404).json({ message: "Project not found" });
 
-    const basePrice =
-      planType === "student" ? project.studentPrice : project.businessPrice;
-    const totalAmount = basePrice;
+    const basePrice = planType === "student" ? project.studentPrice : project.businessPrice;
+
+    // ✅ Apply coupon logic
+    let totalAmount = basePrice;
+    let discountAmount = 0;
+
+    if (couponCode && couponCode.toUpperCase() === "KHUSHI") {
+      discountAmount = basePrice * 0.10; // 10% off
+      totalAmount = basePrice - discountAmount;
+    }
 
     const order = new Order({
       user: req.user._id,
@@ -28,6 +67,9 @@ export const createOrder = async (req, res) => {
       planType,
       basePrice,
       totalAmount,
+      couponCode: couponCode || "",
+      discountAmount,
+      finalAmount: totalAmount, // store final amount for clarity
       userDetails,
       projectDetails: {
         ...projectDetails,
@@ -37,11 +79,12 @@ export const createOrder = async (req, res) => {
     });
 
     await order.save();
-    res.status(201).json({ orderId: order.orderId });
+    res.status(201).json({ orderId: order.orderId, totalAmount });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
+
 
 // ---------------- Create Razorpay Order ----------------
 export const createRazorpayOrder = async (req, res) => {

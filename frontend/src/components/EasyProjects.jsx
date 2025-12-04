@@ -1,4 +1,3 @@
-// frontend/src/pages/EasyProjects.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../utils/axios";
@@ -12,7 +11,7 @@ const EasyProjects = () => {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const [activeTab, setActiveTab] = useState("preview"); // "preview", "images", "details"
+  const [activeTab, setActiveTab] = useState("preview"); // preview | images | details
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,8 +19,9 @@ const EasyProjects = () => {
     planType: "student",
     requirements: "",
     deadline: "",
+    couponCode: "",
   });
-  const [calculation, setCalculation] = useState({ base: 0, total: 0 });
+  const [calculation, setCalculation] = useState({ base: 0, total: 0, discount: 0 });
   const [orderId, setOrderId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -48,9 +48,7 @@ const EasyProjects = () => {
     setActiveTab("preview");
   };
 
-  const handleContinue = () => {
-    setShowForm(true);
-  };
+  const handleContinue = () => setShowForm(true);
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,9 +65,7 @@ const EasyProjects = () => {
           ? selectedProject.studentPrice
           : selectedProject.businessPrice;
 
-      const total = base;
-
-      // Step 1: Create order in DB
+      // Create order in backend with coupon
       const res = await API.post("/orders", {
         projectId: selectedProject._id,
         planType: formData.planType,
@@ -82,12 +78,15 @@ const EasyProjects = () => {
           requirements: formData.requirements,
           deadline: formData.deadline,
         },
+        couponCode: formData.couponCode,
       });
 
-      setCalculation({ base, total });
+      const total = res.data.totalAmount || base;
+      const discount = base - total;
+      setCalculation({ base, total, discount });
       setOrderId(res.data.orderId);
 
-      // Step 2: Create Razorpay Order
+      // Create Razorpay order
       const payRes = await API.post("/orders/create-razorpay-order", {
         amount: total,
         orderId: res.data.orderId,
@@ -95,7 +94,7 @@ const EasyProjects = () => {
 
       const { key, amount, currency, razorpayOrderId } = payRes.data;
 
-      // Step 3: Razorpay Checkout
+      // Razorpay checkout
       const options = {
         key,
         amount,
@@ -126,7 +125,7 @@ const EasyProjects = () => {
           contact: formData.phone,
         },
         theme: {
-          color: "#22c55e", // green theme for easy projects
+          color: "#22c55e", // green for easy projects
         },
       };
 
@@ -139,7 +138,7 @@ const EasyProjects = () => {
     }
   };
 
-  // Sample images (replace with backend data later)
+  // Sample images
   const sampleImages = [
     "https://via.placeholder.com/600x400/22c55e/ffffff?text=Easy+Image+1",
     "https://via.placeholder.com/600x400/f59e0b/ffffff?text=Easy+Image+2",
@@ -148,7 +147,7 @@ const EasyProjects = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
-         Grab Your Projects
+        Grab Your Projects
       </h1>
 
       {/* Project Cards */}
@@ -169,28 +168,22 @@ const EasyProjects = () => {
               <span className="mx-2">|</span>
               <span className="text-emerald-500 font-medium">₹{project.businessPrice}</span>
             </div>
-            
           </div>
-          
         ))}
-    
       </div>
 
       {/* Preview Modal */}
       <Modal
-  isOpen={!!selectedProject && !showForm}
-  onRequestClose={() => setSelectedProject(null)}
-  className="bg-white p-6 rounded-lg max-w-4xl w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
-  overlayClassName="fixed inset-0  bg-white/60 bg-opacity-50 flex justify-center items-center"
->
-
+        isOpen={!!selectedProject && !showForm}
+        onRequestClose={() => setSelectedProject(null)}
+        className="bg-white p-6 rounded-lg max-w-4xl w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
+        overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
+      >
         {selectedProject && (
           <div className="flex flex-col md:flex-row">
-            {/* Left Side (Tabs & Content) */}
             <div className="md:w-1/2 p-6">
               <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
 
-              {/* Tabs */}
               <div className="flex border-b border-emerald-200 mb-4">
                 <button
                   className={`py-2 px-4 font-medium ${
@@ -224,24 +217,14 @@ const EasyProjects = () => {
                 </button>
               </div>
 
-              {/* Tab Content */}
               <div className="h-80 overflow-y-auto border border-emerald-200 rounded-lg p-4">
-                {activeTab === "preview" && (
-                  <p className="text-gray-600">{selectedProject.description}</p>
-                )}
+                {activeTab === "preview" && <p className="text-gray-600">{selectedProject.description}</p>}
 
                 {activeTab === "images" && (
                   <div className="grid grid-cols-1 gap-4">
-                    {sampleImages.map((img, index) => (
-                      <div
-                        key={index}
-                        className="border border-emerald-200 rounded-lg overflow-hidden"
-                      >
-                        <img
-                          src={img}
-                          alt={`${selectedProject.name} ${index + 1}`}
-                          className="w-full h-40 object-cover"
-                        />
+                    {sampleImages.map((img, i) => (
+                      <div key={i} className="border border-emerald-200 rounded-lg overflow-hidden">
+                        <img src={img} alt={`${selectedProject.name} ${i + 1}`} className="w-full h-40 object-cover" />
                       </div>
                     ))}
                   </div>
@@ -250,10 +233,10 @@ const EasyProjects = () => {
                 {activeTab === "details" && (
                   <ul className="space-y-2">
                     {selectedProject.features?.length > 0 ? (
-                      selectedProject.features.map((feature, i) => (
+                      selectedProject.features.map((f, i) => (
                         <li key={i} className="flex items-start">
                           <span className="text-emerald-500 mr-2">✓</span>
-                          <span>{feature}</span>
+                          <span>{f}</span>
                         </li>
                       ))
                     ) : (
@@ -264,14 +247,9 @@ const EasyProjects = () => {
               </div>
             </div>
 
-            {/* Right Side (Info + Action) */}
             <div className="md:w-1/2 p-6 flex flex-col">
-              <h3 className="text-xl font-semibold text-emerald-600 mb-4">
-                About {selectedProject.name}
-              </h3>
-              <p className="text-gray-600 mb-6 flex-grow">
-                {selectedProject.description}
-              </p>
+              <h3 className="text-xl font-semibold text-emerald-600 mb-4">About {selectedProject.name}</h3>
+              <p className="text-gray-600 mb-6 flex-grow">{selectedProject.description}</p>
 
               <div className="mt-auto">
                 <button
@@ -290,111 +268,142 @@ const EasyProjects = () => {
             </div>
           </div>
         )}
-        
       </Modal>
-      
-      
 
       {/* Booking Form Modal */}
       <Modal
-  isOpen={!!selectedProject && showForm}
-  onRequestClose={() => {
-    setSelectedProject(null);
-    setShowForm(false);
-  }}
-  className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
-  overlayClassName="fixed inset-0 bg-white/60 bg-opacity-50 flex justify-center items-center"
->
-
-        <h2 className="text-2xl mb-4">Book {selectedProject?.name}</h2>
+        isOpen={!!selectedProject && showForm}
+        onRequestClose={() => {
+          setSelectedProject(null);
+          setShowForm(false);
+        }}
+        className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
+        overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
+      >
+        <h2 className="text-2xl mb-6 text-center font-semibold">Book {selectedProject?.name}</h2>
         <form onSubmit={handleFormSubmit} className="space-y-4">
-          <input
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-          <input
-            name="phone"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-          <input
-            name="deadline"
-            type="date"
-            value={formData.deadline}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Name</label>
+            <input
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Email</label>
+            <input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Phone</label>
+            <input
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Deadline</label>
+            <input
+              name="deadline"
+              type="date"
+              value={formData.deadline}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
 
           {/* Plan Type */}
           <div className="mb-2">
-            <label className="flex items-center text-sm text-gray-700">
-              <input
-                type="radio"
-                name="planType"
-                value="student"
-                checked={formData.planType === "student"}
-                onChange={handleFormChange}
-                className="mr-2 accent-emerald-500"
-              />
-              Frontend(₹{selectedProject?.studentPrice})
-            </label>
-            <label className="flex items-center text-sm text-gray-700 ml-4">
-              <input
-                type="radio"
-                name="planType"
-                value="business"
-                checked={formData.planType === "business"}
-                onChange={handleFormChange}
-                className="mr-2 accent-emerald-500"
-              />
-              Full Stack (₹{selectedProject?.businessPrice})
-            </label>
+            <label className="block text-gray-700 mb-1 font-medium">Select Plan</label>
+            <div className="flex items-center space-x-4">
+              <label className="flex items-center text-sm text-gray-700">
+                <input
+                  type="radio"
+                  name="planType"
+                  value="student"
+                  checked={formData.planType === "student"}
+                  onChange={handleFormChange}
+                  className="mr-2 accent-emerald-500"
+                />
+                Frontend (₹{selectedProject?.studentPrice})
+              </label>
+              <label className="flex items-center text-sm text-gray-700">
+                <input
+                  type="radio"
+                  name="planType"
+                  value="business"
+                  checked={formData.planType === "business"}
+                  onChange={handleFormChange}
+                  className="mr-2 accent-emerald-500"
+                />
+                Full Stack (₹{selectedProject?.businessPrice})
+              </label>
+            </div>
           </div>
 
-          <textarea
-            name="requirements"
-            placeholder="Coupon code or Additional Requirements"
-            value={formData.requirements}
-            onChange={handleFormChange}
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Additional Requirements</label>
+            <textarea
+              name="requirements"
+              placeholder="Specify any additional requirements..."
+              value={formData.requirements}
+              onChange={handleFormChange}
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Coupon Code</label>
+            <input
+              name="couponCode"
+              placeholder="Enter coupon code (if any)"
+              value={formData.couponCode}
+              onChange={handleFormChange}
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+
+          {calculation.discount > 0 && (
+            <p className="text-green-600 font-semibold">
+              Coupon applied! You saved ₹{calculation.discount}
+            </p>
+          )}
 
           <button
             type="submit"
             disabled={loading}
             className={`w-full py-2 rounded-lg text-white font-semibold ${
-              loading
-                ? "bg-emerald-300 cursor-not-allowed"
-                : "bg-emerald-500 hover:bg-emerald-600"
+              loading ? "bg-emerald-300 cursor-not-allowed" : "bg-emerald-500 hover:bg-emerald-600"
             }`}
           >
             {loading
               ? "Processing..."
               : `Pay ₹${
-                  formData.planType === "student"
+                  calculation.total || (formData.planType === "student"
                     ? selectedProject?.studentPrice
-                    : selectedProject?.businessPrice
+                    : selectedProject?.businessPrice)
                 }`}
           </button>
         </form>
-        
       </Modal>
     </div>
   );

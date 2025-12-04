@@ -7,6 +7,7 @@ import Chatbot from "./chatbot"; // ✅ import your chatbot
 import ProjectService from "./projectService";
 import hero from "/hero.png";
 import NoteSeaStory from "./NoteSeaStory";
+import DashboardPopup from "./DashboardPopup";
 
 
 const videos = [
@@ -200,6 +201,7 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 relative">
+       <DashboardPopup />
       {/* Banner */}
       <div className="bg-white rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
         <div className="flex-1">

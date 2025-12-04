@@ -12,7 +12,7 @@ const MediumProjects = () => {
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [showForm, setShowForm] = useState(false);
-  const [activeTab, setActiveTab] = useState("preview"); // "preview", "images", or "details"
+  const [activeTab, setActiveTab] = useState("preview");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,8 +20,9 @@ const MediumProjects = () => {
     planType: "student",
     requirements: "",
     deadline: "",
+    couponCode: "",
   });
-  const [calculation, setCalculation] = useState({ base: 0, total: 0 });
+  const [calculation, setCalculation] = useState({ base: 0, total: 0, discount: 0 });
   const [orderId, setOrderId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -48,9 +49,7 @@ const MediumProjects = () => {
     setActiveTab("preview");
   };
 
-  const handleContinue = () => {
-    setShowForm(true);
-  };
+  const handleContinue = () => setShowForm(true);
 
   const handleFormChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,9 +66,7 @@ const MediumProjects = () => {
           ? selectedProject.studentPrice
           : selectedProject.businessPrice;
 
-      const total = base;
-
-      // Step 1: Create order in DB
+      // Step 1: Create order in backend
       const res = await API.post("/orders", {
         projectId: selectedProject._id,
         planType: formData.planType,
@@ -82,12 +79,15 @@ const MediumProjects = () => {
           requirements: formData.requirements,
           deadline: formData.deadline,
         },
+        couponCode: formData.couponCode,
       });
 
-      setCalculation({ base, total });
+      const total = res.data.totalAmount || base;
+      const discount = base - total;
+      setCalculation({ base, total, discount });
       setOrderId(res.data.orderId);
 
-      // Step 2: Create Razorpay Order from backend
+      // Step 2: Create Razorpay Order
       const payRes = await API.post("/orders/create-razorpay-order", {
         amount: total,
         orderId: res.data.orderId,
@@ -95,7 +95,7 @@ const MediumProjects = () => {
 
       const { key, amount, currency, razorpayOrderId } = payRes.data;
 
-      // Step 3: Open Razorpay Checkout
+      // Step 3: Razorpay Checkout
       const options = {
         key,
         amount,
@@ -105,7 +105,6 @@ const MediumProjects = () => {
         order_id: razorpayOrderId,
         handler: async function (response) {
           try {
-            // Step 4: Verify payment on backend
             await API.post("/orders/verify-payment", {
               orderId: res.data.orderId,
               razorpay_order_id: response.razorpay_order_id,
@@ -127,7 +126,7 @@ const MediumProjects = () => {
           contact: formData.phone,
         },
         theme: {
-          color: "#facc15", // emerald theme for medium
+          color: "#facc15", // medium theme color
         },
       };
 
@@ -140,25 +139,24 @@ const MediumProjects = () => {
     }
   };
 
-  // Function to extract YouTube video ID from URL
   const getYouTubeId = (url) => {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
+    return match && match[2].length === 11 ? match[2] : null;
   };
 
-  // Sample images for demonstration - in real app, these would come from backend
   const sampleImages = [
     "https://via.placeholder.com/600x400/4ade80/ffffff?text=Project+Image+1",
     "https://via.placeholder.com/600x400/38bdf8/ffffff?text=Project+Image+2",
-    "https://via.placeholder.com/600x400/fbbf24/ffffff?text=Project+Image+3"
+    "https://via.placeholder.com/600x400/fbbf24/ffffff?text=Project+Image+3",
   ];
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
-        Buy Great Projects
+        Buy Medium Projects
       </h1>
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
@@ -167,9 +165,7 @@ const MediumProjects = () => {
             className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
           >
             <div className="text-4xl text-center mb-4">{project.icon}</div>
-            <h2 className="text-xl font-semibold text-emerald-600 text-center">
-              {project.name}
-            </h2>
+            <h2 className="text-xl font-semibold text-emerald-600 text-center">{project.name}</h2>
             <div className="text-center mt-2">
               <span className="text-emerald-500 font-medium">₹{project.studentPrice}</span>
               <span className="mx-2">|</span>
@@ -179,137 +175,77 @@ const MediumProjects = () => {
         ))}
       </div>
 
-      {/* Project Preview Modal */}
+      {/* Preview Modal */}
       <Modal
         isOpen={!!selectedProject && !showForm}
         onRequestClose={() => setSelectedProject(null)}
         className="bg-white p-6 rounded-lg max-w-4xl w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
-        overlayClassName="fixed inset-0 bg-white/60 bg-opacity-50 flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
       >
         {selectedProject && (
           <div className="flex flex-col md:flex-row">
-            {/* Left Column - Media */}
+            {/* Left Column */}
             <div className="md:w-1/2 p-6">
-              <div className="mb-6">
-                <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
-                <div className="flex items-center gap-4 mb-4">
-                  <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
-                    Frontend: ₹{selectedProject.studentPrice}
-                  </span>
-                  <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
-                    Full stack: ₹{selectedProject.businessPrice}
-                  </span>
-                </div>
+              <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
+              <div className="flex gap-4 mb-4">
+                <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
+                  Frontend: ₹{selectedProject.studentPrice}
+                </span>
+                <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-sm">
+                  Full Stack: ₹{selectedProject.businessPrice}
+                </span>
               </div>
-              
-              {/* Tabs for Preview/Images/Details */}
+
               <div className="flex border-b border-emerald-200 mb-4">
                 <button
-                  className={`py-2 px-4 font-medium ${activeTab === 'preview' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
-                  onClick={() => setActiveTab('preview')}
+                  className={`py-2 px-4 font-medium ${activeTab === "preview" ? "text-emerald-600 border-b-2 border-emerald-600" : "text-gray-500"}`}
+                  onClick={() => setActiveTab("preview")}
                 >
                   Preview
                 </button>
                 <button
-                  className={`py-2 px-4 font-medium ${activeTab === 'image' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
-                  onClick={() => setActiveTab('image')}
+                  className={`py-2 px-4 font-medium ${activeTab === "images" ? "text-emerald-600 border-b-2 border-emerald-600" : "text-gray-500"}`}
+                  onClick={() => setActiveTab("images")}
                 >
                   Images
                 </button>
                 <button
-                  className={`py-2 px-4 font-medium ${activeTab === 'details' ? 'text-emerald-600 border-b-2 border-emerald-600' : 'text-gray-500'}`}
-                  onClick={() => setActiveTab('details')}
+                  className={`py-2 px-4 font-medium ${activeTab === "details" ? "text-emerald-600 border-b-2 border-emerald-600" : "text-gray-500"}`}
+                  onClick={() => setActiveTab("details")}
                 >
                   Details
                 </button>
               </div>
-              
-              {/* Media Content */}
-              <div className="h-80 overflow-hidden rounded-lg bg-gray-100 border border-emerald-200">
-                {activeTab === 'preview' ? (
-                  selectedProject.videoLink ? (
-                    <div className="h-full">
-                      <iframe
-                        src={`https://www.youtube.com/embed/${getYouTubeId(selectedProject.videoLink)}`}
-                        title={selectedProject.name}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full"
-                      ></iframe>
-                    </div>
-                  ) : selectedProject.image ? (
-                    <img 
-                      src={selectedProject.image}
-                      alt={selectedProject.name}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gray-200">
-                      <span className="text-6xl">{selectedProject.icon}</span>
-                    </div>
-                  )
-                ) : activeTab === 'images' ? (
-                  <div className="p-4 h-full overflow-y-auto">
-                    <h3 className="text-lg font-semibold mb-3 text-emerald-600">Project Images</h3>
-                    <div className="grid grid-cols-1 gap-4">
-                      {sampleImages.map((img, index) => (
-                        <div key={index} className="border border-emerald-200 rounded-lg overflow-hidden">
-                          <img 
-                            src={img} 
-                            alt={`${selectedProject.name} ${index + 1}`}
-                            className="w-full h-40 object-cover"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="p-4 h-full overflow-y-auto">
-                    <h3 className="text-lg font-semibold mb-3 text-emerald-600">Project Features</h3>
-                    <ul className="space-y-2">
-                      {selectedProject.features && selectedProject.features.length > 0 ? (
-                        selectedProject.features.map((feature, index) => (
-                          <li key={index} className="flex items-start">
-                            <span className="text-emerald-500 mr-2">✓</span>
-                            <span>{feature}</span>
-                          </li>
-                        ))
-                      ) : (
-                        <p className="text-gray-500">No features listed</p>
-                      )}
-                    </ul>
-                    
-                    <div className="mt-6 p-3 bg-emerald-50 rounded-lg border border-emerald-200">
-                      <div className="flex items-center">
-                        <span className="text-emerald-600 mr-2">⏱</span>
-                        <span className="font-medium">Delivery Time: {selectedProject.deliveryTime} days</span>
+
+              <div className="h-80 overflow-y-auto border border-emerald-200 rounded-lg p-4">
+                {activeTab === "preview" && <p className="text-gray-600">{selectedProject.description}</p>}
+                {activeTab === "images" && (
+                  <div className="grid grid-cols-1 gap-4">
+                    {sampleImages.map((img, i) => (
+                      <div key={i} className="border border-emerald-200 rounded-lg overflow-hidden">
+                        <img src={img} alt={`${selectedProject.name} ${i + 1}`} className="w-full h-40 object-cover" />
                       </div>
-                    </div>
+                    ))}
                   </div>
+                )}
+                {activeTab === "details" && (
+                  <ul className="space-y-2">
+                    {selectedProject.features?.length > 0 ? selectedProject.features.map((f, i) => (
+                      <li key={i} className="flex items-start"><span className="text-emerald-500 mr-2">✓</span>{f}</li>
+                    )) : <p className="text-gray-500">No features listed</p>}
+                  </ul>
                 )}
               </div>
             </div>
-            
-            {/* Right Column - Info & Action */}
+
+            {/* Right Column */}
             <div className="md:w-1/2 p-6 flex flex-col">
               <h3 className="text-xl font-semibold text-emerald-600 mb-4">About {selectedProject.name}</h3>
               <p className="text-gray-600 mb-6 flex-grow">{selectedProject.description}</p>
-              
+
               <div className="mt-auto">
-                <button
-                  onClick={handleContinue}
-                  className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-500 hover:bg-emerald-600"
-                >
-                  Continue to Book
-                </button>
-                
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="w-full py-2 mt-3 rounded-lg text-gray-700 font-medium border border-gray-300 hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
+                <button onClick={handleContinue} className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-500 hover:bg-emerald-600">Continue to Book</button>
+                <button onClick={() => setSelectedProject(null)} className="w-full py-2 mt-3 rounded-lg text-gray-700 font-medium border border-gray-300 hover:bg-gray-50">Cancel</button>
               </div>
             </div>
           </div>
@@ -324,88 +260,140 @@ const MediumProjects = () => {
           setShowForm(false);
         }}
         className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
-        overlayClassName="fixed inset-0 bg-white/60  bg-opacity-50 flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
       >
-        <h2 className="text-2xl mb-4">Book {selectedProject?.name}</h2>
+        <h2 className="text-2xl mb-6 text-center font-semibold">Book {selectedProject?.name}</h2>
         <form onSubmit={handleFormSubmit} className="space-y-4">
-          <input
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-          <input
-            name="phone"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-          <input
-            name="deadline"
-            type="date"
-            value={formData.deadline}
-            onChange={handleFormChange}
-            required
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-
+          
+          {/* Name */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Name</label>
+            <input
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+      
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Email</label>
+            <input
+              name="email"
+              placeholder="Email"
+              type="email"
+              value={formData.email}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+      
+          {/* Phone */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Phone</label>
+            <input
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+      
+          {/* Deadline */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Deadline</label>
+            <input
+              name="deadline"
+              placeholder="Delivery Deadline"
+              type="date"
+              value={formData.deadline}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+      
           {/* Plan Type */}
           <div className="mb-2">
-            <label className="flex items-center text-sm text-gray-700">
-              <input
-                type="radio"
-                name="planType"
-                value="student"
-                checked={formData.planType === "student"}
-                onChange={handleFormChange}
-                className="mr-2 accent-emerald-500"
-              />
-              Frontend (₹{selectedProject?.studentPrice})
-            </label>
-            <label className="flex items-center text-sm text-gray-700 ml-4">
-              <input
-                type="radio"
-                name="planType"
-                value="business"
-                checked={formData.planType === "business"}
-                onChange={handleFormChange}
-                className="mr-2 accent-emerald-500"
-              />
-              Full Stack (₹{selectedProject?.businessPrice})
-            </label>
+            <label className="block text-gray-700 mb-1 font-medium">Select Plan</label>
+            <div className="flex items-center space-x-4">
+              <label className="flex items-center text-sm text-gray-700">
+                <input
+                  type="radio"
+                  name="planType"
+                  value="student"
+                  checked={formData.planType === "student"}
+                  onChange={handleFormChange}
+                  className="mr-2 accent-emerald-500"
+                />
+                Frontend (₹{selectedProject?.studentPrice})
+              </label>
+              <label className="flex items-center text-sm text-gray-700">
+                <input
+                  type="radio"
+                  name="planType"
+                  value="business"
+                  checked={formData.planType === "business"}
+                  onChange={handleFormChange}
+                  className="mr-2 accent-emerald-500"
+                />
+                Full Stack (₹{selectedProject?.businessPrice})
+              </label>
+            </div>
           </div>
-
-          <textarea
-            name="requirements"
-            placeholder="Coupon code or Additional Requirements"
-            value={formData.requirements}
-            onChange={handleFormChange}
-            className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-          />
-
+          
+      
+          {/* Requirements */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Additional Requirements</label>
+            <textarea
+              name="requirements"
+              placeholder="Specify any additional requirements..."
+              value={formData.requirements}
+              onChange={handleFormChange}
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+      
+          {/* Coupon Code */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Coupon Code</label>
+            <input
+              name="couponCode"
+              placeholder="Enter coupon code (if any)"
+              value={formData.couponCode}
+              onChange={handleFormChange}
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+      
+          {/* Discount info */}
+          {calculation.discount > 0 && (
+            <p className="text-green-600 font-semibold">
+              Coupon applied! You saved ₹{calculation.discount}
+            </p>
+          )}
+      
           <button
             type="submit"
             disabled={loading}
             className={`w-full py-2 rounded-lg text-white font-semibold ${
-              loading
-                ? "bg-emerald-300 cursor-not-allowed"
-                : "bg-emerald-500 hover:bg-emerald-600"
+              loading ? "bg-emerald-300 cursor-not-allowed" : "bg-emerald-500 hover:bg-emerald-600"
             }`}
           >
-            {loading ? "Processing..." : `Pay ₹${formData.planType === "student" ? selectedProject?.studentPrice : selectedProject?.businessPrice}`}
+            {loading
+              ? "Processing..."
+              : `Pay ₹${
+                  calculation.total || (formData.planType === "student"
+                    ? selectedProject?.studentPrice
+                    : selectedProject?.businessPrice)
+                }`}
           </button>
         </form>
       </Modal>
