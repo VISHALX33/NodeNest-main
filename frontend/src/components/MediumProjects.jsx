@@ -248,6 +248,8 @@ const MediumProjects = () => {
                 <button onClick={() => setSelectedProject(null)} className="w-full py-2 mt-3 rounded-lg text-gray-700 font-medium border border-gray-300 hover:bg-gray-50">Cancel</button>
               </div>
             </div>
+            <br /><br /><br />
+  <br /><br /><br />
           </div>
         )}
       </Modal>
@@ -396,6 +398,8 @@ const MediumProjects = () => {
                 }`}
           </button>
         </form>
+        <br /><br /><br />
+  <br /><br /><br />
       </Modal>
     </div>
   );

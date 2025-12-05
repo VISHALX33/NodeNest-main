@@ -266,6 +266,8 @@ const HardProjects = () => {
                 </button>
               </div>
             </div>
+            <br /><br /><br />
+  <br /><br /><br />
           </div>
         )}
       </Modal>
@@ -414,6 +416,8 @@ const HardProjects = () => {
           }`}
     </button>
   </form>
+  <br /><br /><br />
+  <br /><br /><br />
 </Modal>
 
     </div>

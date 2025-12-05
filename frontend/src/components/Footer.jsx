@@ -108,6 +108,8 @@ export default function Footer() {
       )}
 
       {/* Mobile Footer Navigation */}
+
+    
       {isMobile && (
         <div className="fixed bottom-0 w-full bg-white border-t border-emerald-200 flex justify-around items-center py-3 shadow-lg z-50">
           <Link

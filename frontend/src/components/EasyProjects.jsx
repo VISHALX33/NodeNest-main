@@ -404,6 +404,8 @@ const EasyProjects = () => {
                 }`}
           </button>
         </form>
+        <br /><br /><br />
+  <br /><br /><br />
       </Modal>
     </div>
   );
