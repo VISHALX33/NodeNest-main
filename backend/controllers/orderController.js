@@ -56,7 +56,7 @@ export const createOrder = async (req, res) => {
     let totalAmount = basePrice;
     let discountAmount = 0;
 
-    if (couponCode && couponCode.toUpperCase() === "KHUSHI") {
+    if (couponCode && couponCode.toUpperCase() === "KHUSHI" ) {
       discountAmount = basePrice * 0.10; // 10% off
       totalAmount = basePrice - discountAmount;
     }
