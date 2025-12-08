@@ -151,7 +151,7 @@ const HardProjects = () => {
       </h1>
 
       {/* Project Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
             key={project._id}
@@ -170,7 +170,48 @@ const HardProjects = () => {
             </div>
           </div>
         ))}
+      </div> */}
+      {/* Project Cards */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+  {projects.map((project) => (
+    <div
+      key={project._id}
+      className="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition flex flex-col"
+    >
+      {/* Top content */}
+      <div className="flex-grow">
+        <div className="text-4xl text-center mb-4">{project.icon}</div>
+
+        <h2 className="text-xl font-semibold text-emerald-600 text-center mb-2">
+          {project.name}
+        </h2>
+
+        <p className="text-gray-600 text-sm text-center">
+          {project.description}
+        </p>
+
+        <div className="text-center mt-2">
+          <span className="text-emerald-500 font-medium">
+            ₹{project.studentPrice}
+          </span>
+          <span className="mx-2">|</span>
+          <span className="text-emerald-500 font-medium">
+            ₹{project.businessPrice}
+          </span>
+        </div>
       </div>
+
+      {/* Button stays at bottom */}
+      <button
+        onClick={() => handleProjectClick(project)}
+        className="mt-4 w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600 font-medium"
+      >
+        Continue →
+      </button>
+    </div>
+  ))}
+</div>
+
 
       {/* Preview Modal */}
       <Modal
@@ -186,31 +227,28 @@ const HardProjects = () => {
 
               <div className="flex border-b border-emerald-200 mb-4">
                 <button
-                  className={`py-2 px-4 font-medium ${
-                    activeTab === "preview"
+                  className={`py-2 px-4 font-medium ${activeTab === "preview"
                       ? "text-emerald-600 border-b-2 border-emerald-600"
                       : "text-gray-500"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("preview")}
                 >
                   Preview
                 </button>
                 <button
-                  className={`py-2 px-4 font-medium ${
-                    activeTab === "images"
+                  className={`py-2 px-4 font-medium ${activeTab === "images"
                       ? "text-emerald-600 border-b-2 border-emerald-600"
                       : "text-gray-500"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("images")}
                 >
                   Images
                 </button>
                 <button
-                  className={`py-2 px-4 font-medium ${
-                    activeTab === "details"
+                  className={`py-2 px-4 font-medium ${activeTab === "details"
                       ? "text-emerald-600 border-b-2 border-emerald-600"
                       : "text-gray-500"
-                  }`}
+                    }`}
                   onClick={() => setActiveTab("details")}
                 >
                   Details
@@ -218,15 +256,35 @@ const HardProjects = () => {
               </div>
 
               <div className="h-80 overflow-y-auto border border-emerald-200 rounded-lg p-4">
-                {activeTab === "preview" && <p className="text-gray-600">{selectedProject.description}</p>}
+                {activeTab === "preview" && (
+                  <div>
+                    <p className="text-gray-600 mb-4">{selectedProject.description}</p>
+
+                    {selectedProject.videoLink && (
+                      <iframe
+                        className="w-full h-56 rounded-lg shadow-md"
+                        src={selectedProject.videoLink.replace("watch?v=", "embed/")}
+                        title="Project Video"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    )}
+                  </div>
+                )}
+
 
                 {activeTab === "images" && (
                   <div className="grid grid-cols-1 gap-4">
-                    {sampleImages.map((img, i) => (
-                      <div key={i} className="border border-emerald-200 rounded-lg overflow-hidden">
-                        <img src={img} alt={`${selectedProject.name} ${i + 1}`} className="w-full h-40 object-cover" />
-                      </div>
-                    ))}
+                    {selectedProject.images && selectedProject.images.length > 0 ? (
+                      selectedProject.images.map((img, i) => (
+                        <div key={i} className="border border-emerald-200 rounded-lg overflow-hidden">
+                          <img src={img} alt={`${selectedProject.name} ${i + 1}`} className="w-full h-40 object-cover" />
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500 text-center">No images available</p>
+                    )}
+
                   </div>
                 )}
 
@@ -267,158 +325,156 @@ const HardProjects = () => {
               </div>
             </div>
             <br /><br /><br />
-  <br /><br /><br />
+            <br /><br /><br />
           </div>
         )}
       </Modal>
 
       {/* Booking Form Modal */}
       <Modal
-  isOpen={!!selectedProject && showForm}
-  onRequestClose={() => {
-    setSelectedProject(null);
-    setShowForm(false);
-  }}
-  className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
-  overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
->
-  <h2 className="text-2xl mb-6 text-center font-semibold">Book {selectedProject?.name}</h2>
-  <form onSubmit={handleFormSubmit} className="space-y-4">
-    
-    {/* Name */}
-    <div>
-      <label className="block text-gray-700 mb-1 font-medium">Name</label>
-      <input
-        name="name"
-        placeholder="Name"
-        value={formData.name}
-        onChange={handleFormChange}
-        required
-        className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-      />
-    </div>
+        isOpen={!!selectedProject && showForm}
+        onRequestClose={() => {
+          setSelectedProject(null);
+          setShowForm(false);
+        }}
+        className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
+        overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
+      >
+        <h2 className="text-2xl mb-6 text-center font-semibold">Book {selectedProject?.name}</h2>
+        <form onSubmit={handleFormSubmit} className="space-y-4">
 
-    {/* Email */}
-    <div>
-      <label className="block text-gray-700 mb-1 font-medium">Email</label>
-      <input
-        name="email"
-        placeholder="Email"
-        type="email"
-        value={formData.email}
-        onChange={handleFormChange}
-        required
-        className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-      />
-    </div>
+          {/* Name */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Name</label>
+            <input
+              name="name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
 
-    {/* Phone */}
-    <div>
-      <label className="block text-gray-700 mb-1 font-medium">Phone</label>
-      <input
-        name="phone"
-        placeholder="Phone Number"
-        value={formData.phone}
-        onChange={handleFormChange}
-        required
-        className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-      />
-    </div>
+          {/* Email */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Email</label>
+            <input
+              name="email"
+              placeholder="Email"
+              type="email"
+              value={formData.email}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
 
-    {/* Deadline */}
-    <div>
-      <label className="block text-gray-700 mb-1 font-medium">Deadline</label>
-      <input
-        name="deadline"
-        placeholder="Delivery Deadline"
-        type="date"
-        value={formData.deadline}
-        onChange={handleFormChange}
-        required
-        className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-      />
-    </div>
+          {/* Phone */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Phone</label>
+            <input
+              name="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
 
-    {/* Plan Type */}
-    <div className="mb-2">
-      <label className="block text-gray-700 mb-1 font-medium">Select Plan</label>
-      <div className="flex items-center space-x-4">
-        <label className="flex items-center text-sm text-gray-700">
-          <input
-            type="radio"
-            name="planType"
-            value="student"
-            checked={formData.planType === "student"}
-            onChange={handleFormChange}
-            className="mr-2 accent-emerald-500"
-          />
-          Frontend (₹{selectedProject?.studentPrice})
-        </label>
-        <label className="flex items-center text-sm text-gray-700">
-          <input
-            type="radio"
-            name="planType"
-            value="business"
-            checked={formData.planType === "business"}
-            onChange={handleFormChange}
-            className="mr-2 accent-emerald-500"
-          />
-          Full Stack (₹{selectedProject?.businessPrice})
-        </label>
-      </div>
-    </div>
-    
+          {/* Deadline */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Deadline</label>
+            <input
+              name="deadline"
+              placeholder="Delivery Deadline"
+              type="date"
+              value={formData.deadline}
+              onChange={handleFormChange}
+              required
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
 
-    {/* Requirements */}
-    <div>
-      <label className="block text-gray-700 mb-1 font-medium">Additional Requirements</label>
-      <textarea
-        name="requirements"
-        placeholder="Specify any additional requirements..."
-        value={formData.requirements}
-        onChange={handleFormChange}
-        className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-      />
-    </div>
+          {/* Plan Type */}
+          <div className="mb-2">
+            <label className="block text-gray-700 mb-1 font-medium">Select Plan</label>
+            <div className="flex items-center space-x-4">
+              <label className="flex items-center text-sm text-gray-700">
+                <input
+                  type="radio"
+                  name="planType"
+                  value="student"
+                  checked={formData.planType === "student"}
+                  onChange={handleFormChange}
+                  className="mr-2 accent-emerald-500"
+                />
+                Frontend (₹{selectedProject?.studentPrice})
+              </label>
+              <label className="flex items-center text-sm text-gray-700">
+                <input
+                  type="radio"
+                  name="planType"
+                  value="business"
+                  checked={formData.planType === "business"}
+                  onChange={handleFormChange}
+                  className="mr-2 accent-emerald-500"
+                />
+                Full Stack (₹{selectedProject?.businessPrice})
+              </label>
+            </div>
+          </div>
 
-    {/* Coupon Code */}
-    <div>
-      <label className="block text-gray-700 mb-1 font-medium">Coupon Code</label>
-      <input
-        name="couponCode"
-        placeholder="Enter coupon code (if any)"
-        value={formData.couponCode}
-        onChange={handleFormChange}
-        className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-      />
-    </div>
 
-    {/* Discount info */}
-    {calculation.discount > 0 && (
-      <p className="text-green-600 font-semibold">
-        Coupon applied! You saved ₹{calculation.discount}
-      </p>
-    )}
+          {/* Requirements */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Additional Requirements</label>
+            <textarea
+              name="requirements"
+              placeholder="Specify any additional requirements..."
+              value={formData.requirements}
+              onChange={handleFormChange}
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
 
-    <button
-      type="submit"
-      disabled={loading}
-      className={`w-full py-2 rounded-lg text-white font-semibold ${
-        loading ? "bg-emerald-300 cursor-not-allowed" : "bg-emerald-500 hover:bg-emerald-600"
-      }`}
-    >
-      {loading
-        ? "Processing..."
-        : `Pay ₹${
-            calculation.total || (formData.planType === "student"
-              ? selectedProject?.studentPrice
-              : selectedProject?.businessPrice)
-          }`}
-    </button>
-  </form>
-  <br /><br /><br />
-  <br /><br /><br />
-</Modal>
+          {/* Coupon Code */}
+          <div>
+            <label className="block text-gray-700 mb-1 font-medium">Coupon Code</label>
+            <input
+              name="couponCode"
+              placeholder="Enter coupon code (if any)"
+              value={formData.couponCode}
+              onChange={handleFormChange}
+              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+            />
+          </div>
+
+          {/* Discount info */}
+          {calculation.discount > 0 && (
+            <p className="text-green-600 font-semibold">
+              Coupon applied! You saved ₹{calculation.discount}
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={`w-full py-2 rounded-lg text-white font-semibold ${loading ? "bg-emerald-300 cursor-not-allowed" : "bg-emerald-500 hover:bg-emerald-600"
+              }`}
+          >
+            {loading
+              ? "Processing..."
+              : `Pay ₹${calculation.total || (formData.planType === "student"
+                ? selectedProject?.studentPrice
+                : selectedProject?.businessPrice)
+              }`}
+          </button>
+        </form>
+        <br /><br /><br />
+        <br /><br /><br />
+      </Modal>
 
     </div>
   );
