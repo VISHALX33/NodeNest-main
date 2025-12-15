@@ -21,10 +21,15 @@ const EasyProjects = () => {
     deadline: "",
     couponCode: "",
   });
-  const [calculation, setCalculation] = useState({ base: 0, total: 0, discount: 0 });
+  const [calculation, setCalculation] = useState({
+    base: 0,
+    total: 0,
+    discount: 0,
+  });
   const [orderId, setOrderId] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  /* ================= FETCH EASY PROJECTS ================= */
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -37,6 +42,7 @@ const EasyProjects = () => {
     fetchProjects();
   }, []);
 
+  /* ================= PROJECT CLICK ================= */
   const handleProjectClick = (project) => {
     if (!isLoggedIn) {
       alert("Please login to proceed.");
@@ -50,10 +56,10 @@ const EasyProjects = () => {
 
   const handleContinue = () => setShowForm(true);
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
+  /* ================= FORM SUBMIT ================= */
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (loading) return;
@@ -65,7 +71,7 @@ const EasyProjects = () => {
           ? selectedProject.studentPrice
           : selectedProject.businessPrice;
 
-      // Create order in backend with coupon
+      // STEP 1: Create order in backend
       const res = await API.post("/orders", {
         projectId: selectedProject._id,
         planType: formData.planType,
@@ -81,12 +87,13 @@ const EasyProjects = () => {
         couponCode: formData.couponCode,
       });
 
-      const total = res.data.totalAmount || base;
+      const total = res.data.totalAmount;
       const discount = base - total;
+
       setCalculation({ base, total, discount });
       setOrderId(res.data.orderId);
 
-      // Create Razorpay order
+      // STEP 2: Create Razorpay order
       const payRes = await API.post("/orders/create-razorpay-order", {
         amount: total,
         orderId: res.data.orderId,
@@ -94,7 +101,7 @@ const EasyProjects = () => {
 
       const { key, amount, currency, razorpayOrderId } = payRes.data;
 
-      // Razorpay checkout
+      // STEP 3: Razorpay Checkout
       const options = {
         key,
         amount,
@@ -102,7 +109,7 @@ const EasyProjects = () => {
         name: "NoteSea Projects",
         description: selectedProject.name,
         order_id: razorpayOrderId,
-        handler: async function (response) {
+        handler: async (response) => {
           try {
             await API.post("/orders/verify-payment", {
               orderId: res.data.orderId,
@@ -111,12 +118,12 @@ const EasyProjects = () => {
               razorpay_signature: response.razorpay_signature,
             });
 
-            alert("✅ Payment successful! Redirecting to bookings...");
+            alert("✅ Payment successful! Redirecting...");
             setSelectedProject(null);
             setShowForm(false);
             navigate("/my-bookings");
           } catch (err) {
-            alert(err.response?.data?.message || "Error verifying payment");
+            alert(err.response?.data?.message || "Payment verification failed");
           }
         },
         prefill: {
@@ -125,54 +132,66 @@ const EasyProjects = () => {
           contact: formData.phone,
         },
         theme: {
-          color: "#22c55e", // green for easy projects
+          color: "#22c55e", // green theme
         },
       };
 
       const rzp = new window.Razorpay(options);
       rzp.open();
     } catch (err) {
-      alert(err.response?.data?.message || "Error creating order");
+      alert(err.response?.data?.message || "Order creation failed");
     } finally {
       setLoading(false);
     }
   };
 
-  // Sample images
-  const sampleImages = [
-    "https://via.placeholder.com/600x400/22c55e/ffffff?text=Easy+Image+1",
-    "https://via.placeholder.com/600x400/f59e0b/ffffff?text=Easy+Image+2",
-  ];
-
+  /* ================= UI ================= */
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
-      <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
+      <h1 className="text-3xl font-bold text-emerald-600 mb-6 text-center">
         Grab Your Projects
       </h1>
 
-      {/* Project Cards */}
+      {/* PROJECT CARDS */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {projects.map((project) => (
           <div
             key={project._id}
-            onClick={() => handleProjectClick(project)}
-            className="bg-white shadow-md rounded-2xl p-6 cursor-pointer hover:shadow-lg"
+            className="bg-white shadow-md rounded-2xl p-6 flex flex-col hover:shadow-lg"
           >
-            <div className="text-4xl text-center mb-4">{project.icon}</div>
-            <h2 className="text-xl font-semibold text-emerald-600 text-center mb-2">
-              {project.name}
-            </h2>
-            <p className="text-gray-600 text-sm text-center">{project.description}</p>
-            <div className="text-center mt-2">
-              <span className="text-emerald-500 font-medium">₹{project.studentPrice}</span>
-              <span className="mx-2">|</span>
-              <span className="text-emerald-500 font-medium">₹{project.businessPrice}</span>
+            <div className="flex-grow">
+              <div className="text-4xl text-center mb-4">{project.icon}</div>
+
+              <h2 className="text-xl font-semibold text-emerald-600 text-center mb-2">
+                {project.name}
+              </h2>
+
+              <p className="text-gray-600 text-sm text-center">
+                {project.description}
+              </p>
+
+              <div className="text-center mt-2">
+                <span className="text-emerald-500 font-medium">
+                  ₹{project.studentPrice}
+                </span>
+                <span className="mx-2">|</span>
+                <span className="text-emerald-500 font-medium">
+                  ₹{project.businessPrice}
+                </span>
+              </div>
             </div>
+
+            <button
+              onClick={() => handleProjectClick(project)}
+              className="mt-4 w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600"
+            >
+              Continue →
+            </button>
           </div>
         ))}
       </div>
 
-      {/* Preview Modal */}
+      {/* ================= PREVIEW MODAL ================= */}
       <Modal
         isOpen={!!selectedProject && !showForm}
         onRequestClose={() => setSelectedProject(null)}
@@ -182,62 +201,72 @@ const EasyProjects = () => {
         {selectedProject && (
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/2 p-6">
-              <h2 className="text-2xl font-bold text-emerald-600 mb-2">{selectedProject.name}</h2>
+              <h2 className="text-2xl font-bold text-emerald-600 mb-2">
+                {selectedProject.name}
+              </h2>
 
+              {/* TABS */}
               <div className="flex border-b border-emerald-200 mb-4">
-                <button
-                  className={`py-2 px-4 font-medium ${
-                    activeTab === "preview"
-                      ? "text-emerald-600 border-b-2 border-emerald-600"
-                      : "text-gray-500"
-                  }`}
-                  onClick={() => setActiveTab("preview")}
-                >
-                  Preview
-                </button>
-                <button
-                  className={`py-2 px-4 font-medium ${
-                    activeTab === "images"
-                      ? "text-emerald-600 border-b-2 border-emerald-600"
-                      : "text-gray-500"
-                  }`}
-                  onClick={() => setActiveTab("images")}
-                >
-                  Images
-                </button>
-                <button
-                  className={`py-2 px-4 font-medium ${
-                    activeTab === "details"
-                      ? "text-emerald-600 border-b-2 border-emerald-600"
-                      : "text-gray-500"
-                  }`}
-                  onClick={() => setActiveTab("details")}
-                >
-                  Details
-                </button>
+                {["preview", "images", "details"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`py-2 px-4 font-medium ${
+                      activeTab === tab
+                        ? "text-emerald-600 border-b-2 border-emerald-600"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
               </div>
 
               <div className="h-80 overflow-y-auto border border-emerald-200 rounded-lg p-4">
-                {activeTab === "preview" && <p className="text-gray-600">{selectedProject.description}</p>}
+                {activeTab === "preview" && (
+                  <>
+                    <p className="text-gray-600 mb-4">
+                      {selectedProject.description}
+                    </p>
+
+                    {selectedProject.videoLink && (
+                      <iframe
+                        className="w-full h-56 rounded-lg"
+                        src={selectedProject.videoLink.replace(
+                          "watch?v=",
+                          "embed/"
+                        )}
+                        allowFullScreen
+                        title="preview"
+                      />
+                    )}
+                  </>
+                )}
 
                 {activeTab === "images" && (
-                  <div className="grid grid-cols-1 gap-4">
-                    {sampleImages.map((img, i) => (
-                      <div key={i} className="border border-emerald-200 rounded-lg overflow-hidden">
-                        <img src={img} alt={`${selectedProject.name} ${i + 1}`} className="w-full h-40 object-cover" />
-                      </div>
-                    ))}
+                  <div className="grid gap-4">
+                    {selectedProject.images?.length ? (
+                      selectedProject.images.map((img, i) => (
+                        <img
+                          key={i}
+                          src={img}
+                          alt=""
+                          className="w-full h-40 object-cover rounded-lg"
+                        />
+                      ))
+                    ) : (
+                      <p className="text-center text-gray-500">
+                        No images available
+                      </p>
+                    )}
                   </div>
                 )}
 
                 {activeTab === "details" && (
                   <ul className="space-y-2">
-                    {selectedProject.features?.length > 0 ? (
+                    {selectedProject.features?.length ? (
                       selectedProject.features.map((f, i) => (
-                        <li key={i} className="flex items-start">
-                          <span className="text-emerald-500 mr-2">✓</span>
-                          <span>{f}</span>
-                        </li>
+                        <li key={i}>✓ {f}</li>
                       ))
                     ) : (
                       <p className="text-gray-500">No features listed</p>
@@ -248,165 +277,166 @@ const EasyProjects = () => {
             </div>
 
             <div className="md:w-1/2 p-6 flex flex-col">
-              <h3 className="text-xl font-semibold text-emerald-600 mb-4">About {selectedProject.name}</h3>
-              <p className="text-gray-600 mb-6 flex-grow">{selectedProject.description}</p>
+              <p className="text-gray-600 flex-grow">
+                {selectedProject.description}
+              </p>
 
-              <div className="mt-auto">
-                <button
-                  onClick={handleContinue}
-                  className="w-full py-2 rounded-lg text-white font-semibold bg-emerald-500 hover:bg-emerald-600"
-                >
-                  Continue to Book
-                </button>
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="w-full py-2 mt-3 rounded-lg text-gray-700 font-medium border border-gray-300 hover:bg-gray-50"
-                >
-                  Cancel
-                </button>
-              </div>
+              <button
+                onClick={handleContinue}
+                className="mt-4 bg-emerald-500 text-white py-2 rounded-lg"
+              >
+                Continue to Book
+              </button>
             </div>
           </div>
         )}
       </Modal>
 
-      {/* Booking Form Modal */}
-      <Modal
-        isOpen={!!selectedProject && showForm}
-        onRequestClose={() => {
-          setSelectedProject(null);
-          setShowForm(false);
-        }}
-        className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
-        overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
-      >
-        <h2 className="text-2xl mb-6 text-center font-semibold">Book {selectedProject?.name}</h2>
-        <form onSubmit={handleFormSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700 mb-1 font-medium">Name</label>
-            <input
-              name="name"
-              placeholder="Name"
-              value={formData.name}
-              onChange={handleFormChange}
-              required
-              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1 font-medium">Email</label>
-            <input
-              name="email"
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleFormChange}
-              required
-              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1 font-medium">Phone</label>
-            <input
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleFormChange}
-              required
-              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1 font-medium">Deadline</label>
-            <input
-              name="deadline"
-              type="date"
-              value={formData.deadline}
-              onChange={handleFormChange}
-              required
-              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-            />
-          </div>
-
-          {/* Plan Type */}
-          <div className="mb-2">
-            <label className="block text-gray-700 mb-1 font-medium">Select Plan</label>
-            <div className="flex items-center space-x-4">
-              <label className="flex items-center text-sm text-gray-700">
-                <input
-                  type="radio"
-                  name="planType"
-                  value="student"
-                  checked={formData.planType === "student"}
-                  onChange={handleFormChange}
-                  className="mr-2 accent-emerald-500"
-                />
-                Frontend (₹{selectedProject?.studentPrice})
-              </label>
-              <label className="flex items-center text-sm text-gray-700">
-                <input
-                  type="radio"
-                  name="planType"
-                  value="business"
-                  checked={formData.planType === "business"}
-                  onChange={handleFormChange}
-                  className="mr-2 accent-emerald-500"
-                />
-                Full Stack (₹{selectedProject?.businessPrice})
-              </label>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1 font-medium">Additional Requirements</label>
-            <textarea
-              name="requirements"
-              placeholder="Specify any additional requirements..."
-              value={formData.requirements}
-              onChange={handleFormChange}
-              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1 font-medium">Coupon Code</label>
-            <input
-              name="couponCode"
-              placeholder="Enter coupon code (if any)"
-              value={formData.couponCode}
-              onChange={handleFormChange}
-              className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
-            />
-          </div>
-
-          {calculation.discount > 0 && (
-            <p className="text-green-600 font-semibold">
-              Coupon applied! You saved ₹{calculation.discount}
-            </p>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className={`w-full py-2 rounded-lg text-white font-semibold ${
-              loading ? "bg-emerald-300 cursor-not-allowed" : "bg-emerald-500 hover:bg-emerald-600"
-            }`}
-          >
-            {loading
-              ? "Processing..."
-              : `Pay ₹${
-                  calculation.total || (formData.planType === "student"
-                    ? selectedProject?.studentPrice
-                    : selectedProject?.businessPrice)
-                }`}
-          </button>
-        </form>
-        <br /><br /><br />
-  <br /><br /><br />
-      </Modal>
+      {/* ================= BOOKING MODAL ================= */}
+     <Modal
+             isOpen={!!selectedProject && showForm}
+             onRequestClose={() => {
+               setSelectedProject(null);
+               setShowForm(false);
+             }}
+             className="bg-white p-6 rounded-lg max-w-md w-[90%] mx-auto mt-10 max-h-[90vh] overflow-y-auto shadow-lg"
+             overlayClassName="fixed inset-0 bg-white/60 flex justify-center items-center"
+           >
+             <h2 className="text-2xl mb-6 text-center font-semibold">Book {selectedProject?.name}</h2>
+             <form onSubmit={handleFormSubmit} className="space-y-4">
+     
+               {/* Name */}
+               <div>
+                 <label className="block text-gray-700 mb-1 font-medium">Name</label>
+                 <input
+                   name="name"
+                   placeholder="Name"
+                   value={formData.name}
+                   onChange={handleFormChange}
+                   required
+                   className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+                 />
+               </div>
+     
+               {/* Email */}
+               <div>
+                 <label className="block text-gray-700 mb-1 font-medium">Email</label>
+                 <input
+                   name="email"
+                   placeholder="Email"
+                   type="email"
+                   value={formData.email}
+                   onChange={handleFormChange}
+                   required
+                   className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+                 />
+               </div>
+     
+               {/* Phone */}
+               <div>
+                 <label className="block text-gray-700 mb-1 font-medium">Phone</label>
+                 <input
+                   name="phone"
+                   placeholder="Phone Number"
+                   value={formData.phone}
+                   onChange={handleFormChange}
+                   required
+                   className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+                 />
+               </div>
+     
+               {/* Deadline */}
+               <div>
+                 <label className="block text-gray-700 mb-1 font-medium">Deadline</label>
+                 <input
+                   name="deadline"
+                   placeholder="Delivery Deadline"
+                   type="date"
+                   value={formData.deadline}
+                   onChange={handleFormChange}
+                   required
+                   className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+                 />
+               </div>
+     
+               {/* Plan Type */}
+               <div className="mb-2">
+                 <label className="block text-gray-700 mb-1 font-medium">Select Plan</label>
+                 <div className="flex items-center space-x-4">
+                   <label className="flex items-center text-sm text-gray-700">
+                     <input
+                       type="radio"
+                       name="planType"
+                       value="student"
+                       checked={formData.planType === "student"}
+                       onChange={handleFormChange}
+                       className="mr-2 accent-emerald-500"
+                     />
+                     Frontend (₹{selectedProject?.studentPrice})
+                   </label>
+                   <label className="flex items-center text-sm text-gray-700">
+                     <input
+                       type="radio"
+                       name="planType"
+                       value="business"
+                       checked={formData.planType === "business"}
+                       onChange={handleFormChange}
+                       className="mr-2 accent-emerald-500"
+                     />
+                     Full Stack (₹{selectedProject?.businessPrice})
+                   </label>
+                 </div>
+               </div>
+     
+     
+               {/* Requirements */}
+               <div>
+                 <label className="block text-gray-700 mb-1 font-medium">Additional Requirements</label>
+                 <textarea
+                   name="requirements"
+                   placeholder="Specify any additional requirements..."
+                   value={formData.requirements}
+                   onChange={handleFormChange}
+                   className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+                 />
+               </div>
+     
+               {/* Coupon Code */}
+               <div>
+                 <label className="block text-gray-700 mb-1 font-medium">Coupon Code</label>
+                 <input
+                   name="couponCode"
+                   placeholder="Enter coupon code (if any)"
+                   value={formData.couponCode}
+                   onChange={handleFormChange}
+                   className="w-full px-4 py-2 border border-emerald-200 rounded-lg"
+                 />
+               </div>
+     
+               {/* Discount info */}
+               {calculation.discount > 0 && (
+                 <p className="text-green-600 font-semibold">
+                   Coupon applied! You saved ₹{calculation.discount}
+                 </p>
+               )}
+     
+               <button
+                 type="submit"
+                 disabled={loading}
+                 className={`w-full py-2 rounded-lg text-white font-semibold ${loading ? "bg-emerald-300 cursor-not-allowed" : "bg-emerald-500 hover:bg-emerald-600"
+                   }`}
+               >
+                 {loading
+                   ? "Processing..."
+                   : `Pay ₹${calculation.total || (formData.planType === "student"
+                     ? selectedProject?.studentPrice
+                     : selectedProject?.businessPrice)
+                   }`}
+               </button>
+             </form>
+             <br /><br /><br />
+             <br /><br /><br />
+           </Modal>
     </div>
   );
 };
