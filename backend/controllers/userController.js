@@ -140,47 +140,46 @@ export const deleteAccount = async (req, res) => {
   }
 };
 
-// Forgot Password - Send Reset Email
 export const forgotPassword = async (req, res) => {
   const { email } = req.body;
 
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "User not found" });
 
-    // Generate reset token
+    // ✅ Respond immediately (no waiting)
+    res.json({ message: "If the email exists, reset link has been sent" });
+
+    // If user doesn't exist, stop here (security best practice)
+    if (!user) return;
+
+    // 🔐 Generate reset token
     const resetToken = crypto.randomBytes(32).toString("hex");
     const resetTokenHash = crypto
       .createHash("sha256")
       .update(resetToken)
       .digest("hex");
 
-    // Save token + expiry in DB
+    // 💾 Save token in DB (background)
     user.resetPasswordToken = resetTokenHash;
-    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // 15 min
+    user.resetPasswordExpires = Date.now() + 15 * 60 * 1000;
     await user.save();
 
-    // Password reset URL
-    const resetUrl = `${
-      process.env.CLIENT_URL || "http://localhost:5000"
-    }/reset-password/${resetToken}`;
+    // 🔗 Reset URL
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
 
-    // Email content
+    // 📧 Email content (YOUR HTML — unchanged)
     const html = `
       <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-        <!-- Header -->
         <div style="background: #16a34a; padding: 20px; text-align: center; color: #fff;">
           <h1 style="margin: 0; font-size: 22px;">NoteSea</h1>
         </div>
         
-        <!-- Body -->
         <div style="padding: 30px; color: #333;">
           <h2 style="color: #16a34a; margin-top: 0;">Reset Your Password</h2>
           <p style="font-size: 15px; line-height: 1.6;">
             We received a request to reset your password. Click the button below to set a new password:
           </p>
           
-          <!-- Button -->
           <div style="text-align: center; margin: 30px 0;">
             <a href="${resetUrl}" 
               style="display:inline-block; padding: 14px 28px; background: #16a34a; color: #ffffff; 
@@ -195,26 +194,21 @@ export const forgotPassword = async (req, res) => {
           </p>
         </div>
         
-        <!-- Footer -->
         <div style="background: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #777;">
           © ${new Date().getFullYear()} NoteSea. All rights reserved.
         </div>
       </div>
     `;
 
-    // Send the email using Resend
-    const sent = await sendEmail(email, "Password Reset Request - NoteSea", html);
+    // 🚀 Send email (DO NOT await)
+    sendEmail(
+      user.email,
+      "Password Reset Request - NoteSea",
+      html
+    );
 
-    if (sent) {
-      res.json({ message: "Password reset email sent!" });
-    } else {
-      res
-        .status(500)
-        .json({ message: "Email sending failed, please try again later." });
-    }
   } catch (error) {
     console.error("❌ Forgot password error:", error);
-    res.status(500).json({ message: "Something went wrong" });
   }
 };
 
