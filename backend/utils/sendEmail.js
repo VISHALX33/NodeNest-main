@@ -24,11 +24,12 @@ export const sendEmail = async (to, subject, html) => {
       html,
     });
 
-    if (response?.id) {
-      console.log("✅ Email sent successfully:", response.id);
-    } else {
-      console.log("✅ Email sent (no ID returned):", response);
-    }
+   if (response?.data?.id) {
+  console.log("✅ Email sent successfully:", response.data.id);
+} else {
+  console.log("⚠️ Email sent but unexpected response:", response);
+}
+
 
     return true;
   } catch (error) {
