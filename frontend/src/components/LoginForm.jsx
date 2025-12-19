@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, ArrowRight, ChevronDown } from "lucide-react";
 import API from "../utils/axios";
@@ -7,8 +7,8 @@ import login1 from "/login1.png";
 import login2 from "/login2.png";
 import FAQ from "/FAQ.png";
 import { motion } from "framer-motion";
-import { FaUserGraduate, FaBookOpen,FaLaptopCode,FaUsers, FaDownload, FaInstagram } from "react-icons/fa";
-import { FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaUserGraduate, FaBookOpen, FaLaptopCode, FaUsers, FaDownload, FaInstagram } from "react-icons/fa";
+import { FaLinkedin, FaTelegram, FaWhatsapp  } from "react-icons/fa";
 
 
 export default function LandingPage({ switchToSignUp }) {
@@ -19,11 +19,11 @@ export default function LandingPage({ switchToSignUp }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    navigate("/dashboard");
-  }
-}, []);
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, []);
 
 
   const handleChange = (e) =>
@@ -109,7 +109,7 @@ export default function LandingPage({ switchToSignUp }) {
         <div className="flex-1 text-center md:text-left">
           <p className="text-emerald-600 font-semibold">Smart Study Platform</p>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-            Free Notes & Services for <br /> <span className="text-emerald-700">Every Semester</span>
+            Free Notes & Project Services for <br /> <span className="text-emerald-700">Every Semester</span>
           </h1>
           <p className="mt-4 text-gray-600 text-lg max-w-lg">
             Download notes, manage tasks, chat with peers, and access services — everything you need to excel.
@@ -124,86 +124,86 @@ export default function LandingPage({ switchToSignUp }) {
         </div>
       </section>
 
-       {/* 🌟 What We Offer */}
-                  <section className="py-20 bg-white">
-                    <div className="max-w-6xl mx-auto px-6 text-center">
-                      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
-                        What We Offer
-                      </h2>
-                      <div className="grid md:grid-cols-4 gap-8">
-                        {[
-                          {
-                            icon: <FaBookOpen className="text-emerald-600 text-3xl" />,
-                            title: "Free RTU Notes",
-                            desc: "Access semester-wise notes curated by top-performing students.",
-                          },
-                          {
-                            icon: <FaLaptopCode className="text-emerald-600 text-3xl" />,
-                            title: "Affordable Projects",
-                            desc: "Learn through practical full-stack projects and codebases.",
-                          },
-                          {
-                            icon: <FaUsers className="text-emerald-600 text-3xl" />,
-                            title: "Community Support",
-                            desc: "Join peers, discuss topics, and learn collaboratively.",
-                          },
-                          {
-                            icon: <FaUserGraduate className="text-emerald-600 text-3xl" />,
-                            title: "AI Study Tools",
-                            desc: "Use our chatbot and smart utilities to boost productivity.",
-                          },
-                        ].map((item, i) => (
-                          <motion.div
-                            key={i}
-                            whileHover={{ scale: 1.05 }}
-                            className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition"
-                          >
-                            <div className="w-14 h-14 flex items-center justify-center rounded-full bg-emerald-100 mx-auto mb-4">
-                              {item.icon}
-                            </div>
-                            <h3 className="font-semibold text-gray-800 text-lg mb-2">
-                              {item.title}
-                            </h3>
-                            <p className="text-gray-600 text-sm">{item.desc}</p>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </section>
+      {/* 🌟 What We Offer */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
+            What We Offer
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <FaBookOpen className="text-emerald-600 text-3xl" />,
+                title: "Free RTU Notes",
+                desc: "Access semester-wise notes curated by top-performing students.",
+              },
+              {
+                icon: <FaLaptopCode className="text-emerald-600 text-3xl" />,
+                title: "Affordable Projects",
+                desc: "Learn through practical full-stack projects and codebases.",
+              },
+              {
+                icon: <FaUsers className="text-emerald-600 text-3xl" />,
+                title: "Community Support",
+                desc: "Join peers, discuss topics, and learn collaboratively.",
+              },
+              {
+                icon: <FaUserGraduate className="text-emerald-600 text-3xl" />,
+                title: "AI Study Tools",
+                desc: "Use our chatbot and smart utilities to boost productivity.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition"
+              >
+                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-emerald-100 mx-auto mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="font-semibold text-gray-800 text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-600 text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                  {/* 🌟 Stats Section */}
-<section className="py-20 bg-gray-50">
-  <div className="max-w-6xl mx-auto px-6 text-center">
-           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
-      Our Achievements
-    </h2>
-    <div className="grid md:grid-cols-4 gap-8">
+      {/* 🌟 Stats Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
+            Our Achievements
+          </h2>
+          <div className="grid md:grid-cols-5 gap-8">
 
-      {[
-        { value: "100+", label: "Active Users" },
-  { value: "4.8★", label: "Student Satisfaction" },
-  { value: "10+", label: "Projects Delivered" },
-  { value: "98%", label: "Success Rate" },
-  { value: "6-8 Hr", label: "Delivery Time" },
-      ].map((item, index) => (
-        <motion.div
-          key={index}
-          whileHover={{ scale: 1.05 }}
-          className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
-        >
-          <h3 className="text-4xl font-bold text-emerald-700">
-            {item.value}
-          </h3>
-          <p className="text-gray-700 text-lg mt-2">
-            {item.label}
-          </p>
-        </motion.div>
-      ))}
+            {[
+              { value: "100+", label: "Active Users" },
+              { value: "4.8★", label: "Student Satisfaction" },
+              { value: "10+", label: "Projects Delivered" },
+              { value: "98%", label: "Success Rate" },
+              { value: "6-8 Hr", label: "Delivery Time" },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition"
+              >
+                <h3 className="text-4xl font-bold text-emerald-700">
+                  {item.value}
+                </h3>
+                <p className="text-gray-700 text-lg mt-2">
+                  {item.label}
+                </p>
+              </motion.div>
+            ))}
 
-    </div>
+          </div>
 
-  </div>
-</section>
+        </div>
+      </section>
 
 
       {/* 🌟 How It Works */}
@@ -286,14 +286,14 @@ export default function LandingPage({ switchToSignUp }) {
                   type="submit"
                   disabled={loading}
                   className={`w-full py-3 rounded-lg font-semibold shadow-md transition ${loading
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-emerald-600 hover:bg-emerald-700 text-white"
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-emerald-600 hover:bg-emerald-700 text-white"
                     }`}
                 >
                   {loading ? "Logging in..." : "Login"}
                 </button>
 
-               
+
                 <p className="text-sm text-center text-gray-600 mt-4">
                   Don’t have an account?{" "}
                   <button
@@ -308,7 +308,7 @@ export default function LandingPage({ switchToSignUp }) {
               </form>
             </div>
 
-            
+
 
             {/* Image on Right */}
             <div className="flex-1">
@@ -323,54 +323,49 @@ export default function LandingPage({ switchToSignUp }) {
       </section>
 
 
-{/* 🌟 Our Partners */}
-<section className="py-20 bg-white">
-  <div className="max-w-6xl mx-auto px-6 text-center">
+      {/* 🌟 Our Partners */}
+      <section className="py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-6 text-center">
 
-    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
-      Our Partners
-    </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">
+            Our Partners
+          </h2>
 
-    <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8">
 
-      {[
-        { 
-          name: "Khushi Photocopy & Printout", 
-          logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp" 
-        },
-      ].map((partner, i) => (
-        
-        <motion.div
-          key={i}
-          whileHover={{ scale: 1.05 }}
-          className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition"
-        >
-          {/* Image */}
-          <div className="w-full h-32 flex items-center justify-center mb-4">
-            <img 
-              src={partner.logo} 
-              alt={partner.name} 
-              className="h-full object-contain"
-            />
+            {[
+              {
+                name: "Khushi Photocopy & Printout",
+                logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp"
+              },
+            ].map((partner, i) => (
+
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.05 }}
+                className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition"
+              >
+                {/* Image */}
+                <div className="w-full h-32 flex items-center justify-center mb-4">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-full object-contain"
+                  />
+                </div>
+
+                {/* Title */}
+                <h3 className="font-semibold text-gray-800 text-lg">
+                  {partner.name}
+                </h3>
+              </motion.div>
+
+            ))}
+
           </div>
 
-          {/* Title */}
-          <h3 className="font-semibold text-gray-800 text-lg">
-            {partner.name}
-          </h3>
-        </motion.div>
-
-      ))}
-
-    </div>
-
-  </div>
-</section>
-
-
-
-
-
+        </div>
+      </section>
 
       {/* 🌟 Testimonials */}
       <section id="testimonials" className="py-20 bg-white">
@@ -388,7 +383,7 @@ export default function LandingPage({ switchToSignUp }) {
           </div>
         </div>
       </section>
-      
+
 
 
       {/* 🌟 FAQ */}
@@ -448,8 +443,10 @@ export default function LandingPage({ switchToSignUp }) {
             </p>
             <div className="mt-4 flex space-x-4 text-gray-200">
               <a href="https://www.instagram.com/notesea.xyz/" className="hover:text-gray-100 transition-colors"><FaInstagram size={20} /></a>
-              <a href="#" className="hover:text-gray-100 transition-colors"><FaTwitter size={20} /></a>
-              <a href="https://www.linkedin.com/in/noteseadotxyz/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100 transition-colors"><FaLinkedin size={20} /></a>
+              {/* <a href="#" className="hover:text-gray-100 transition-colors"><FaTwitter size={20} /></a> */}
+              <a href="https://www.linkedin.com/company/notesea/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-100 transition-colors"><FaLinkedin size={20} /></a>
+              <a href="https://www.whatsapp.com/channel/0029VbBPPUN8V0tsVVPSek0f" className="hover:text-gray-100 transition-colors"> <FaWhatsapp size={20} /></a>
+              <a href="https://t.me/noteseaxyz" className="hover:text-gray-100 transition-colors"><FaTelegram size={20} /></a>
             </div>
           </div>
 

@@ -106,6 +106,7 @@ function OurAchievements() {
     { value: "4.8★", label: "Student Satisfaction" },
     { value: "10+", label: "Projects Delivered" },
     { value: "98%", label: "Success Rate" },
+    { value: "6-8 Hr", label: "Delivery Time" },
   ];
 
   return (
@@ -117,7 +118,7 @@ function OurAchievements() {
         Milestones and successes we have achieved through dedication, innovation, and teamwork.
       </p>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
         {achievements.map((item, i) => (
           <div
             key={i}

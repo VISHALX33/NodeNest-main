@@ -63,6 +63,34 @@ export default function CareerForm() {
     }
   };
 
+  const openPositions = [
+  {
+    title: "UI/UX Designer",
+    desc: "Design intuitive user experiences and beautiful interfaces.",
+  },
+  {
+    title: "Frontend Developer",
+    desc: "Build modern, fast, and responsive user interfaces.",
+  },
+  {
+    title: "Full Stack Developer",
+    desc: "Work across frontend, backend, and databases.",
+  },
+  {
+    title: "Backend Developer",
+    desc: "Design scalable APIs and server-side logic.",
+  },
+  {
+    title: "Product Designer",
+    desc: "Shape product vision and user-centered solutions.",
+  },
+];
+
+const handleSelectPosition = (role) => {
+  setForm((prev) => ({ ...prev, position: role }));
+};
+
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Waves background */}
@@ -102,13 +130,37 @@ export default function CareerForm() {
         <div className="flex flex-col justify-center items-start space-y-6 animate-slideInLeft">
           <h1 className="text-5xl font-extrabold text-gray-900">Join Our Team</h1>
           <p className="text-gray-700 text-lg">Build amazing products with NoteSea and take your career to the next level. We’re looking for passionate developers, designers, and innovators.</p>
-          <div className="w-full h-[400px] rounded-2xl shadow-lg overflow-hidden animate-pulse">
-  <img
-    src={career}
-    alt="Hero Illustration"
-    className="w-full  object-cover"
-  />
+         
+{/* Open Positions */}
+<div className="w-full mt-8">
+  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+    Open Positions
+  </h3>
+
+  <div className="grid sm:grid-cols-2 gap-4">
+    {openPositions.map((role, idx) => (
+      <div
+        key={idx}
+        className="bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl p-5 shadow-md hover:shadow-xl transition cursor-pointer group"
+      >
+        <h4 className="text-lg font-semibold text-gray-800 group-hover:text-emerald-600 transition">
+          {role.title}
+        </h4>
+        <p className="text-sm text-gray-600 mt-1">
+          {role.desc}
+        </p>
+
+        <button
+          onClick={() => handleSelectPosition(role.title)}
+          className="mt-4 inline-flex items-center text-sm font-semibold text-emerald-600 hover:text-emerald-700"
+        >
+          Apply for this role →
+        </button>
+      </div>
+    ))}
+  </div>
 </div>
+
           
         </div>
 

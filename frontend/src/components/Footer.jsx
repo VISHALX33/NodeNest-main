@@ -46,7 +46,7 @@ export default function Footer() {
                   <FaTelegram size={20} />
                 </a>
                 <a 
-                  href="https://www.linkedin.com/in/noteseadotxyz/" 
+                  href="https://www.linkedin.com/company/notesea/" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-emerald-800 transition-colors"
