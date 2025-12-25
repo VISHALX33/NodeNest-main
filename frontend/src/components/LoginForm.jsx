@@ -7,7 +7,7 @@ import login1 from "/login1.png";
 import login2 from "/login2.png";
 import FAQ from "/FAQ.png";
 import { motion } from "framer-motion";
-import { FaUserGraduate, FaBookOpen, FaLaptopCode, FaUsers, FaDownload, FaInstagram } from "react-icons/fa";
+import { FaUserGraduate, FaBookOpen, FaProjectDiagram, FaUsers, FaDownload, FaInstagram } from "react-icons/fa";
 import { FaLinkedin, FaTelegram, FaWhatsapp  } from "react-icons/fa";
 
 
@@ -73,7 +73,7 @@ export default function LandingPage({ switchToSignUp }) {
     { q: "Can I access notes for any semester?", a: "Yes, you can select your semester and download notes easily." },
     { q: "Do I need to create an account?", a: "Yes, you need to login to access dashboard and save progress." },
     { q: "Can I chat with other students?", a: "Absolutely! You can join our global chat room to connect with students worldwide." },
-    { q: "Does NoteSea provide projects?", a: "Yes, we offer Easy, Medium, and Advanced level full-stack projects that you can download and learn from." },
+     { q: "Does NoteSea provide projects?", a: "Yes! Explore Easy, Medium & Advanced MERN projects, watch demo videos, and get your project delivered to your account within 6–8 hours on working days." },    // { q: "Does NoteSea provide projects?", a: "Yes, we offer Easy, Medium, and Advanced level full-stack projects that you can download and learn from." },
     { q: "What is the Assignment Chatbot?", a: "Our AI-powered chatbot helps you with assignments, doubts, and quick explanations in seconds." },
     { q: "Is my data safe?", a: "Yes, we use secure authentication and protect your personal details." },
   ];
@@ -138,10 +138,11 @@ export default function LandingPage({ switchToSignUp }) {
                 desc: "Access semester-wise notes curated by top-performing students.",
               },
               {
-                icon: <FaLaptopCode className="text-emerald-600 text-3xl" />,
-                title: "Affordable Projects",
-                desc: "Learn through practical full-stack projects and codebases.",
-              },
+  icon: <FaProjectDiagram className="text-emerald-600 text-3xl" />,
+  title: "Full-Stack Projects",
+  desc: "Buy and learn Easy, Medium & Advanced MERN projects. Delivered in 6–8 hours on working days.",
+},
+
               {
                 icon: <FaUsers className="text-emerald-600 text-3xl" />,
                 title: "Community Support",
@@ -478,7 +479,6 @@ export default function LandingPage({ switchToSignUp }) {
             <ul className="space-y-2 text-gray-200 text-sm">
               <li><a href="/easy-projects" className="hover:underline">Browse Projects</a></li>
               <li><a href="/my-bookings" className="hover:underline">My Bookings</a></li>
-              <li><a href="/blogs" className="hover:underline">Read Blogs</a></li>
             </ul>
           </div>
 

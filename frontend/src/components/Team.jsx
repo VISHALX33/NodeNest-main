@@ -48,7 +48,7 @@ export default function Team() {
     },
     {
       name: "Aditya Vaishnav",
-      role: "Documentation Support",
+      role: "Frontend Developer",
       image: Aditya,
       github: "#",
       linkedin: "#",

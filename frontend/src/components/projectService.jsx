@@ -47,6 +47,34 @@ export default function ProjectService() {
     }
   ];
 
+  const showcaseProjects = [
+  {
+    name: "Car Rental Website",
+    image: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1765369795/Screenshot_2025-12-10_175747_fw58hc.png",
+  },
+  {
+    name: "Hotel Booking Website",
+    image: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1766147229/Screenshot_2025-12-19_175403_kxdrhp.png",
+  },
+  {
+    name: "Food Delivery Website",
+    image: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1766596623/Screenshot_2025-12-24_224505_tugvg4.png",
+  },
+  {
+    name: "Personal Portfolio Website",
+    image: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1765636402/Screenshot_2025-12-13_195704_y2dguv.png",
+  },
+  {
+    name: "Gym and Fitness Website",
+    image: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1765996467/Screenshot_2025-12-18_000157_z8hsrd.png",
+  },
+  {
+    name: "Mini Social Media App",
+    image: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1766387689/Screenshot_2025-12-22_124212_ms34yv.png",
+  },
+];
+
+
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
@@ -142,6 +170,41 @@ export default function ProjectService() {
       <p className="mt-12 text-center text-gray-500 text-sm">
         📩 Contact us to discuss your project and get it built with <b>NoteSea</b>.
       </p>
+
+
+      {/* 🚀 Project Showcase Section */}
+<div className="mt-16">
+  <h2 className="text-2xl font-bold text-emerald-700 text-center mb-3">
+    Project Samples We Build
+  </h2>
+
+  <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+    Explore some of the popular websites and systems we develop for students and businesses.
+  </p>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    {showcaseProjects.map((item, index) => (
+      <div
+        key={index}
+        className="bg-white rounded-2xl shadow-md hover:shadow-xl transition overflow-hidden"
+      >
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-full h-44 object-cover"
+        />
+
+        <div className="p-4 text-center">
+          <h3 className="text-lg font-semibold text-gray-800">
+            {item.name}
+          </h3>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
     </div>
+    
   );
 }

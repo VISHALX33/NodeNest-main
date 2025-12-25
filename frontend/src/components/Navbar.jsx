@@ -15,6 +15,7 @@ import {
   FaDownload,
   FaBriefcase,
   FaComments,
+  FaUsers,
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -103,8 +104,7 @@ export default function Navbar() {
             <Link to="/contact" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Contact</Link>
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
             <Link to="/careers" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Careers</Link>
-            <Link to="/Partners" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Partners</Link>
-
+            <Link to="/team" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Partners</Link>
             <FaCog
               size={26}
               className="ml-2 text-emerald-600 cursor-pointer hover:text-emerald-700 transition-transform duration-300 hover:rotate-90"
@@ -146,6 +146,7 @@ export default function Navbar() {
           <Link to="/contact" onClick={() => setIsSidebarOpen(false)}><FaEnvelope className="inline mr-2" /> Contact</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
           <Link to="/Careers" onClick={() => setIsSidebarOpen(false)}><FaBriefcase className="inline mr-2" /> Careers</Link>
+          <Link to="/team" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Partners</Link>
 
           {user ? (
             <>
