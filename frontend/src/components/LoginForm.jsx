@@ -232,12 +232,68 @@ export default function LandingPage({ switchToSignUp }) {
               </motion.div>
             ))}
           </div>
+    <br /> <br /> <br />
+           <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-8 border-2 border-emerald-200 relative">
+        <div className="absolute -top-3 -right-3 bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+          ✨ New Feature
+        </div>
+        
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          <div className="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-4xl shadow-lg transform hover:scale-110 transition-transform">
+            🎁
+          </div>
+          
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-emerald-800 mb-2">
+              Earn Rewards & Get Discounts!
+            </h3>
+            <p className="text-gray-700 mb-3">
+              Play our interactive <span className="font-semibold text-emerald-700">SCard Game</span> daily to collect points and compete for exclusive project discounts.
+            </p>
+            
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-blue-200">
+                <span className="text-2xl">🏆</span>
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">Weekly Top 3</p>
+                  <p className="text-sm font-bold text-blue-600">10% OFF</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-orange-200">
+                <span className="text-2xl">🥇</span>
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">Monthly Top 3</p>
+                  <p className="text-sm font-bold text-orange-600">30% OFF</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-purple-200">
+                <span className="text-2xl">👑</span>
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">#1 Lifetime (400+ pts)</p>
+                  <p className="text-sm font-bold text-purple-600">FREE Project</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <a href="/#login" className="flex-shrink-0 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold px-8 py-4 rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
+            <span className="text-2xl">🎴</span>
+            <span>Start Playing</span>
+          </a>
+        </div>
+      </div>
         </div>
       </section>
 
+      
+
       {/* 🌟 Login Section */}
       <section id="login" className="">
+        
         <div className="max-w-6xl mx-auto px-6">
+          
           <h1 className="text-3xl font-bold text-center text-emerald-700 mb-12">
             Login to Your Account
           </h1>

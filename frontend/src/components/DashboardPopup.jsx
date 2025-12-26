@@ -33,7 +33,7 @@ const DashboardPopup = () => {
 
   {/* Image */}
   <img
-    src="https://res.cloudinary.com/dwq5qifuk/image/upload/v1764833310/WhatsApp_Image_2025-12-03_at_18.38.20_8f6941b1_kcw04v.jpg"
+    src="https://res.cloudinary.com/dwq5qifuk/image/upload/v1766734719/Gemini_Generated_Image_bor538bor538bor5_ftdnsm.png"
     alt="Dashboard Popup"
     className="w-full h-auto rounded-lg"
   />

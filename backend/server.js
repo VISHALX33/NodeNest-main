@@ -16,6 +16,9 @@ import chatbot from "./routes/chatbot.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
+import scard from "./routes/scardRoutes.js";
+
+
 console.log("✅ CLIENT_URL:", process.env.CLIENT_URL);
 console.log("✅ RESEND_API_KEY loaded:", !!process.env.RESEND_API_KEY);
 
@@ -51,6 +54,8 @@ app.use("/api/chatbot", chatbot);
 app.use("/api/projects", projectRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/scard", scard);
+
 // ✅ Health check for uptime
 app.get("/ping", (req, res) => res.status(200).send("Notesea is alive!"));
 

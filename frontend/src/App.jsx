@@ -29,6 +29,7 @@ import TermsAndConditions from "./components/TermsAndConditions.jsx";
 import About from "./components/About";
 import CareerForm from "./components/CareerForm.jsx";
 import PartnerPage from "./components/PartnerPage.jsx";
+import Scard from "./Scard/Scard.jsx";
 
 function Layout({ children }) {
   return (
@@ -113,6 +114,16 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <ContactUs />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/scard"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Scard />
               </Layout>
             </PrivateRoute>
           }

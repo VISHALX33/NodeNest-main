@@ -105,6 +105,10 @@ export default function Navbar() {
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
             <Link to="/careers" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Careers</Link>
             <Link to="/team" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Partners</Link>
+            <Link to="/scard" className="relative bg-gradient-to-r from-green-400 to-green-500 text-white font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 ">
+              SCard
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
+            </Link>
             <FaCog
               size={26}
               className="ml-2 text-emerald-600 cursor-pointer hover:text-emerald-700 transition-transform duration-300 hover:rotate-90"
@@ -147,6 +151,10 @@ export default function Navbar() {
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
           <Link to="/Careers" onClick={() => setIsSidebarOpen(false)}><FaBriefcase className="inline mr-2" /> Careers</Link>
           <Link to="/team" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Partners</Link>
+          <Link to="/scard" onClick={() => setIsSidebarOpen(false)} className="relative bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold px-4 py-3 rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-all shadow-lg flex items-center gap-2">
+            🎴 Play SCard
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 animate-bounce">NEW!</span>
+          </Link>
 
           {user ? (
             <>

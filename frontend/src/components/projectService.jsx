@@ -77,6 +77,59 @@ export default function ProjectService() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
+      {/* Elegant Coupon Announcement */}
+      <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-8 border-2 border-emerald-200 relative">
+        <div className="absolute -top-3 -right-3 bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+          ✨ New Feature
+        </div>
+        
+        <div className="flex flex-col md:flex-row items-center gap-6">
+          <div className="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-4xl shadow-lg transform hover:scale-110 transition-transform">
+            🎁
+          </div>
+          
+          <div className="flex-1">
+            <h3 className="text-2xl font-bold text-emerald-800 mb-2">
+              Earn Rewards & Get Discounts!
+            </h3>
+            <p className="text-gray-700 mb-3">
+              Play our interactive <span className="font-semibold text-emerald-700">SCard Game</span> daily to collect points and compete for exclusive project discounts.
+            </p>
+            
+            <div className="flex flex-wrap gap-3">
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-blue-200">
+                <span className="text-2xl">🏆</span>
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">Weekly Top 3</p>
+                  <p className="text-sm font-bold text-blue-600">10% OFF</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-orange-200">
+                <span className="text-2xl">🥇</span>
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">Monthly Top 3</p>
+                  <p className="text-sm font-bold text-orange-600">30% OFF</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-purple-200">
+                <span className="text-2xl">👑</span>
+                <div>
+                  <p className="text-xs text-gray-500 font-medium">#1 Lifetime (400+ pts)</p>
+                  <p className="text-sm font-bold text-purple-600">FREE Project</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <a href="/scard" className="flex-shrink-0 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold px-8 py-4 rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
+            <span className="text-2xl">🎴</span>
+            <span>Start Playing</span>
+          </a>
+        </div>
+      </div>
+
       <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
          Project Development Services
       </h1>
@@ -87,37 +140,7 @@ export default function ProjectService() {
       </p>
 
       {/* ✅ New Section: Plan Benefits */}
-     <div className="bg-emerald-50 p-6 rounded-2xl mb-10 shadow-md">
-  <h2 className="text-2xl font-semibold text-emerald-700 mb-4 text-center">
-    Why Choose Our Plans?
-  </h2>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-    {/* Frontend Only Plan */}
-    <div className="p-4 bg-white rounded-xl shadow-sm">
-      <h3 className="text-xl font-semibold text-emerald-600 mb-2">🎨 Frontend Only Plan</h3>
-      <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-        <li>Clean UI using HTML, CSS & JavaScript (or React).</li>
-        <li>Perfect for portfolio, college projects, and small apps.</li>
-        <li>Fast delivery with responsive design.</li>
-        <li>Includes animations, UI enhancements & modern layout.</li>
-      </ul>
-    </div>
-
-    {/* Full Stack (MERN) Plan */}
-    <div className="p-4 bg-white rounded-xl shadow-sm">
-      <h3 className="text-xl font-semibold text-emerald-600 mb-2">🧩 Full Stack (MERN) Plan</h3>
-      <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-        <li>Complete MERN development (MongoDB, Express, React, Node).</li>
-        <li>Backend APIs, authentication & database integration.</li>
-        <li>Advanced logic, dashboards & admin panels.</li>
-        <li>Scalable architecture with deployment support.</li>
-      </ul>
-    </div>
-
-  </div>
-</div>
+    
 
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
