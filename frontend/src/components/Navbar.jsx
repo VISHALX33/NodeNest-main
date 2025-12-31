@@ -16,6 +16,7 @@ import {
   FaBriefcase,
   FaComments,
   FaUsers,
+  FaIdCardAlt
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -146,15 +147,15 @@ export default function Navbar() {
           <Link to="/tasks" onClick={() => setIsSidebarOpen(false)}><FaTasks className="inline mr-2" /> My Tasks</Link>
           <Link to="/chat" onClick={() => setIsSidebarOpen(false)}><FaComments className="inline mr-2" /> Global Chat</Link>
           <Link to="/chatbot" onClick={() => setIsSidebarOpen(false)}><FaRobot className="inline mr-2" /> Chatbot</Link>
-          <Link to="/about-home" onClick={() => setIsSidebarOpen(false)}><FaInfoCircle className="inline mr-2" /> About</Link>
-          <Link to="/contact" onClick={() => setIsSidebarOpen(false)}><FaEnvelope className="inline mr-2" /> Contact</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
           <Link to="/Careers" onClick={() => setIsSidebarOpen(false)}><FaBriefcase className="inline mr-2" /> Careers</Link>
           <Link to="/team" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Partners</Link>
-          <Link to="/scard" onClick={() => setIsSidebarOpen(false)} className="relative bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold px-4 py-3 rounded-lg hover:from-yellow-500 hover:to-orange-600 transition-all shadow-lg flex items-center gap-2">
-            🎴 Play SCard
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 animate-bounce">NEW!</span>
+           <Link to="/scard" className="relative  font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 " onClick={() => setIsSidebarOpen(false)}><FaIdCardAlt className="inline mr-2 " /> SCard
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
           </Link>
+          <Link to="/about-home" onClick={() => setIsSidebarOpen(false)}><FaInfoCircle className="inline mr-2" /> About</Link>
+          <Link to="/contact" onClick={() => setIsSidebarOpen(false)}><FaEnvelope className="inline mr-2" /> Contact</Link>
+
 
           {user ? (
             <>

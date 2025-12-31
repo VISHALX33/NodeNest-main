@@ -102,6 +102,41 @@ export default function HowItWorks() {
     }
   ];
 
+ const scardPoints = [
+  {
+    icon: <FaBookOpen size={28} className="text-emerald-600" />, // Daily Cards → book icon for daily routine
+    title: "Daily Cards",
+    description: "2 scratch cards daily, return each day."
+  },
+  {
+    icon: <FaRegCommentDots size={28} className="text-emerald-600" />, // Scratch & Win → surprise/chat icon
+    title: "Scratch & Win",
+    description: "Click cards to reveal points (0–10)."
+  },
+  {
+    icon: <FaTasks size={28} className="text-emerald-600" />, // Earn Points → tasks/points accumulation
+    title: "Earn Points",
+    description: "Points add to daily, weekly, monthly, lifetime totals."
+  },
+  {
+    icon: <FaHandsHelping size={28} className="text-emerald-600" />, // Unlock Badges → help/achievement
+    title: "Unlock Badges",
+    description: "Collect points to unlock Bronze → Master badges."
+  },
+  {
+    icon: <FaUserGraduate size={28} className="text-emerald-600" />, // Compete → leaderboard/student
+    title: "Compete",
+    description: "Leaderboards for weekly/monthly competition."
+  },
+  {
+    icon: <FaProjectDiagram size={28} className="text-emerald-600" />, // Track Progress → diagram/progress
+    title: "Track Progress",
+    description: "Profile shows stats, badges, achievements."
+  }
+];
+
+
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-6">
       {/* Title */}
@@ -155,6 +190,25 @@ export default function HowItWorks() {
           ))}
         </div>
       </div>
+      <div className="max-w-5xl mx-auto mt-20">
+  <h2 className="text-2xl font-bold text-center text-emerald-700 mb-8">
+    How Scratch Cards Work
+  </h2>
+
+  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {scardPoints.map((point, index) => (
+      <div
+        key={index}
+        className="bg-white rounded-2xl shadow-md p-6 text-center border border-gray-200"
+      >
+        <div className="flex justify-center mb-4">{point.icon}</div>
+        <h3 className="text-lg font-semibold text-gray-800">{point.title}</h3>
+        <p className="text-gray-600 mt-2">{point.description}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
 
       {/* Project Flow */}
       <div className="max-w-6xl mx-auto mt-24">
@@ -217,6 +271,7 @@ export default function HowItWorks() {
           Connect with me on LinkedIn
         </a>
       </div>
+      
     </div>
   );
 }

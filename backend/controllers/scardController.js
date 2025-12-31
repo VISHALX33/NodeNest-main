@@ -29,7 +29,13 @@ const getBadge = (points) => {
   if (points < 400) return "ACE+";
   if (points < 420) return "ACE++";
   if (points < 450) return "Master";
-  return "Master"; // 450+
+  if (points < 500) return "Master+";
+  if (points < 600) return "Master++";
+  if (points < 750) return "Legend";
+  if (points < 900) return "Legend+";
+  if (points < 1100) return "Legend++";
+  if (points < 1350) return "Mythic";
+  return "Mythic+"; // 1350+ points
 };
 
 // ============================
