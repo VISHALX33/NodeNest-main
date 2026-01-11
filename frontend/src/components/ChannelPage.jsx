@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaYoutube, FaCopy, FaCheck } from "react-icons/fa";
 import bannerImage from "../assets/banner.png";
-import vishalp from "../assets/vishalp.jpg";
+import vishalp from "../assets/Vishalp.jpg";
 
 export default function ChannelPage() {
   const [copied, setCopied] = useState(false);
