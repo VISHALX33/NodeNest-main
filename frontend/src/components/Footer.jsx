@@ -16,7 +16,8 @@ import {
   FaStore,
   FaInstagram,
   FaWhatsapp,
-  FaTelegram
+  FaTelegram,
+  FaYoutube
 } from 'react-icons/fa';
 
 export default function Footer() {
@@ -36,6 +37,9 @@ export default function Footer() {
                 explore blogs, book services, and connect via global chat.
               </p>
               <div className="mt-4 flex space-x-4 text-emerald-600">
+                <a href="https://www.youtube.com/@Vishalprajapati-q7l" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-800 transition-colors">
+                  <FaYoutube size={20} />
+                </a>
                 <a href="https://www.instagram.com/notesea.xyz/" className="hover:text-emerald-800 transition-colors">
                   <FaInstagram size={20} />
                 </a>
@@ -69,6 +73,7 @@ export default function Footer() {
                 <li><Link to="/tasks" className="hover:text-emerald-600 transition-colors">My Tasks</Link></li>
                 <li><Link to="/mypdf" className="hover:text-emerald-600 transition-colors">Notes</Link></li>
                 <li><Link to="/chat" className="hover:text-emerald-600 transition-colors">Chat</Link></li>
+                <li><Link to="/channel" className="hover:text-emerald-600 transition-colors">YouTube Channel</Link></li>
                 <li><Link to="/team" className="hover:text-emerald-600 transition-colors">Contributors</Link></li>
               </ul>
             </div>

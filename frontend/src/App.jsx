@@ -30,6 +30,7 @@ import About from "./components/About";
 import CareerForm from "./components/CareerForm.jsx";
 import PartnerPage from "./components/PartnerPage.jsx";
 import Scard from "./Scard/Scard.jsx";
+import ChannelPage from "./components/ChannelPage.jsx";
 
 function Layout({ children }) {
   return (
@@ -140,9 +141,9 @@ function App() {
           path="/careers" 
           element={<Layout><CareerForm /></Layout>} />
 
-
-
-
+        <Route 
+          path="/channel" 
+          element={<Layout><ChannelPage /></Layout>} />
 
         <Route
           path="/chat"
