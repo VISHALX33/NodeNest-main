@@ -16,7 +16,15 @@ import {
   FaBriefcase,
   FaComments,
   FaUsers,
-  FaIdCardAlt
+  FaIdCardAlt,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaGithub,
+  FaTelegram,
+  FaWhatsapp
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -135,13 +143,13 @@ export default function Navbar() {
       </nav>
 
       {/* Sidebar (Mobile) */}
-      <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 z-50`}>
-        <div className="flex justify-between items-center px-6 py-4 border-b">
+      <div className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 z-50 flex flex-col`}>
+        <div className="flex justify-between items-center px-6 py-4 border-b flex-shrink-0">
           <h2 className="text-xl font-bold text-emerald-600">Menu</h2>
           <button className="text-gray-600" onClick={() => setIsSidebarOpen(false)}><FaTimes size={22} /></button>
         </div>
 
-        <div className="flex flex-col p-6 gap-6 text-gray-800">
+        <div className="flex flex-col p-6 gap-6 text-gray-800 overflow-y-auto flex-1">
           <Link to="/soon" onClick={() => setIsSidebarOpen(false)}><FaBell className="inline mr-2" /> Notifications</Link>
           <Link to="/project-services" onClick={() => setIsSidebarOpen(false)}><FaStore className="inline mr-2" /> Project Services</Link>
           <Link to="/how-it-works" onClick={() => setIsSidebarOpen(false)}><FaQuestionCircle className="inline mr-2" /> How It Works</Link>
@@ -175,6 +183,32 @@ export default function Navbar() {
               <FaDownload /> Download App
             </button>
           )}
+
+          {/* Social Media Links */}
+          <div className="mt-6 pt-6 border-t border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-600 mb-4">Follow Us</h3>
+            <div className="flex gap-4 justify-center">
+              <a href="https://www.youtube.com/@Vishalprajapati-q7l" target="_blank" rel="noopener noreferrer" className="text-red-600 hover:text-red-700 transition-colors">
+                <FaYoutube size={20} />
+              </a>
+              <a href="https://www.instagram.com/notesea.xyz/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-700 transition-colors">
+                <FaInstagram size={20} />
+              </a>
+              <a href="https://www.whatsapp.com/channel/0029VbBPPUN8V0tsVVPSek0f" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:text-green-700 transition-colors">
+                <FaWhatsapp size={20} />
+              </a>
+              <a href="https://t.me/noteseaxyz" target="_blank" rel="noopener noreferrer" className="text-sky-500 hover:text-sky-600 transition-colors">
+                <FaTelegram size={20} />
+              </a>
+              <a href="https://www.linkedin.com/company/notesea/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-800 transition-colors">
+                <FaLinkedinIn size={20} />
+              </a>
+            </div>
+          </div>
+          <br /><br /><br />
+          <br /><br /><br />
+          <br /><br /><br />
+
         </div>
       </div>
 
