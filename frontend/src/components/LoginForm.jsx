@@ -92,9 +92,8 @@ export default function LandingPage({ switchToSignUp }) {
             <a href="#home" className="hover:text-emerald-600">Home</a>
             <a href="#how" className="hover:text-emerald-600">How it Works</a>
             <a href="#login" className="hover:text-emerald-600">Login</a>
-            <a href="#testimonials" className="hover:text-emerald-600">Testimonials</a>
+            <a href="/aboutmain" className="hover:text-emerald-600">About</a>
             <a href="/terms" className="hover:text-emerald-600">Terms & Conditions</a>
-            <a href="#faq" className="hover:text-emerald-600">FAQ</a>
             <a href="/Partners" className="hover:text-emerald-600">Partners</a>
 
           </div>

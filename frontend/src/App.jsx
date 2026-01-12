@@ -31,6 +31,7 @@ import CareerForm from "./components/CareerForm.jsx";
 import PartnerPage from "./components/PartnerPage.jsx";
 import Scard from "./Scard/Scard.jsx";
 import ChannelPage from "./components/ChannelPage.jsx";
+import Aboutmain from "./components/Aboutmain.jsx";
 
 function Layout({ children }) {
   return (
@@ -279,7 +280,7 @@ function App() {
         <Route path="/verify-email" element={<VerifyEmail />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
-
+        <Route path="/aboutmain" element={<Aboutmain />} />
         <Route
           path="/install"
           element={
