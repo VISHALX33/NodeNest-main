@@ -121,6 +121,10 @@ export default function Team() {
           logo:
             "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp",
         },
+        { 
+      name: "Manglam residency", 
+      logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
+    },
         // {
         //   name: "BookMart Jaipur",
         //   logo:
