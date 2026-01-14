@@ -121,6 +121,12 @@ export default function Team() {
           logo:
             "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp",
         },
+
+        {
+          name: "Manglam Mess",
+          logo:
+            "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp",
+        },
         // {
         //   name: "BookMart Jaipur",
         //   logo:
