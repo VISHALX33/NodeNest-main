@@ -53,13 +53,26 @@ export const createOrder = async (req, res) => {
     const basePrice = planType === "student" ? project.studentPrice : project.businessPrice;
 
     // ✅ Apply coupon logic
+    // let totalAmount = basePrice;
+    // let discountAmount = 0;
+
+    // if (couponCode && couponCode.toUpperCase() === "KHUSHI" ) {
+    //   discountAmount = basePrice * 0.10; // 10% off
+    //   totalAmount = basePrice - discountAmount;
+    // }
+
+    // ✅ Apply coupon logic
     let totalAmount = basePrice;
     let discountAmount = 0;
 
-    if (couponCode && couponCode.toUpperCase() === "KHUSHI" ) {
+    if (
+      couponCode &&
+      ["KHUSHI", "MANGALAM"].includes(couponCode.toUpperCase())
+    ) {
       discountAmount = basePrice * 0.10; // 10% off
       totalAmount = basePrice - discountAmount;
     }
+
 
     const order = new Order({
       user: req.user._id,
