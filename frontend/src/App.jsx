@@ -32,6 +32,7 @@ import PartnerPage from "./components/PartnerPage.jsx";
 import Scard from "./Scard/Scard.jsx";
 import ChannelPage from "./components/ChannelPage.jsx";
 import Aboutmain from "./components/Aboutmain.jsx";
+import Gallery from "./components/Gallery.jsx";
 
 function Layout({ children }) {
   return (
@@ -145,6 +146,15 @@ function App() {
         <Route 
           path="/channel" 
           element={<Layout><ChannelPage /></Layout>} />
+
+        <Route
+          path="/gallery"
+          element={
+            <Layout>
+              <Gallery />
+            </Layout>
+          }
+        />
 
         <Route
           path="/chat"

@@ -73,7 +73,6 @@ export default function Footer() {
                 <li><Link to="/tasks" className="hover:text-emerald-600 transition-colors">My Tasks</Link></li>
                 <li><Link to="/mypdf" className="hover:text-emerald-600 transition-colors">Notes</Link></li>
                 <li><Link to="/chat" className="hover:text-emerald-600 transition-colors">Chat</Link></li>
-                <li><Link to="/channel" className="hover:text-emerald-600 transition-colors">YouTube Channel</Link></li>
                 <li><Link to="/team" className="hover:text-emerald-600 transition-colors">Contributors</Link></li>
               </ul>
             </div>
@@ -86,6 +85,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li><Link to="/easy-projects" className="hover:text-emerald-600 transition-colors">Browse Services</Link></li>
                 <li><Link to="/my-bookings" className="hover:text-emerald-600 transition-colors">My Bookings</Link></li>
+                <li><Link to="/channel" className="hover:text-emerald-600 transition-colors">YouTube Channel</Link></li>
               </ul>
             </div>
 

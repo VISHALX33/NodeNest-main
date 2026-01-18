@@ -8,7 +8,7 @@ import login2 from "/login2.png";
 import FAQ from "/FAQ.png";
 import { motion } from "framer-motion";
 import { FaUserGraduate, FaBookOpen, FaProjectDiagram, FaUsers, FaDownload, FaInstagram } from "react-icons/fa";
-import { FaLinkedin, FaTelegram, FaWhatsapp  } from "react-icons/fa";
+import { FaLinkedin, FaTelegram, FaWhatsapp } from "react-icons/fa";
 
 
 export default function LandingPage({ switchToSignUp }) {
@@ -73,7 +73,7 @@ export default function LandingPage({ switchToSignUp }) {
     { q: "Can I access notes for any semester?", a: "Yes, you can select your semester and download notes easily." },
     { q: "Do I need to create an account?", a: "Yes, you need to login to access dashboard and save progress." },
     { q: "Can I chat with other students?", a: "Absolutely! You can join our global chat room to connect with students worldwide." },
-     { q: "Does NoteSea provide projects?", a: "Yes! Explore Easy, Medium & Advanced MERN projects, watch demo videos, and get your project delivered to your account within 6–8 hours on working days." },    // { q: "Does NoteSea provide projects?", a: "Yes, we offer Easy, Medium, and Advanced level full-stack projects that you can download and learn from." },
+    { q: "Does NoteSea provide projects?", a: "Yes! Explore Easy, Medium & Advanced MERN projects, watch demo videos, and get your project delivered to your account within 6–8 hours on working days." },    // { q: "Does NoteSea provide projects?", a: "Yes, we offer Easy, Medium, and Advanced level full-stack projects that you can download and learn from." },
     { q: "What is the Assignment Chatbot?", a: "Our AI-powered chatbot helps you with assignments, doubts, and quick explanations in seconds." },
     { q: "Is my data safe?", a: "Yes, we use secure authentication and protect your personal details." },
   ];
@@ -106,22 +106,39 @@ export default function LandingPage({ switchToSignUp }) {
       {/* 🌟 Hero */}
       <section id="home" className="pt-32 md:pt-40 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10">
         <div className="flex-1 text-center md:text-left">
-          <p className="text-emerald-600 font-semibold">Smart Study Platform</p>
+          <p className="text-emerald-600 font-semibold">One Platform for RTU Students</p>
+
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-            Free Notes & Project Services for <br /> <span className="text-emerald-700">Every Semester</span>
+            Free RTU Notes, Projects & <br />
+            <span className="text-emerald-700">Student Services</span>
           </h1>
+
           <p className="mt-4 text-gray-600 text-lg max-w-lg">
-            Download notes, manage tasks, chat with peers, and access services — everything you need to excel.
+            On Notesea, we share free RTU notes, real-world projects, and student services
+            to help you learn, build, and grow faster.
           </p>
+
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a href="#login" className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-700 transition">Get Notes</a>
-            <a href="/about-home" className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition">Learn More</a>
+            <a
+              href="#login"
+              className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-emerald-700 transition"
+            >
+              Explore Notes
+            </a>
+            <a
+              href="#login"
+              className="bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition"
+            >
+              View Services
+            </a>
           </div>
         </div>
+
         <div className="flex-1">
           <img src={login1} alt="Hero illustration" className="w-full max-w-md mx-auto" />
         </div>
       </section>
+
 
       {/* 🌟 What We Offer */}
       <section className="py-20 bg-white">
@@ -137,10 +154,10 @@ export default function LandingPage({ switchToSignUp }) {
                 desc: "Access semester-wise notes curated by top-performing students.",
               },
               {
-  icon: <FaProjectDiagram className="text-emerald-600 text-3xl" />,
-  title: "Full-Stack Projects",
-  desc: "Buy and learn Easy, Medium & Advanced MERN projects. Delivered in 6–8 hours on working days.",
-},
+                icon: <FaProjectDiagram className="text-emerald-600 text-3xl" />,
+                title: "Full-Stack Projects",
+                desc: "Buy and learn Easy, Medium & Advanced MERN projects. Delivered in 6–8 hours on working days.",
+              },
 
               {
                 icon: <FaUsers className="text-emerald-600 text-3xl" />,
@@ -180,7 +197,7 @@ export default function LandingPage({ switchToSignUp }) {
           <div className="grid md:grid-cols-5 gap-8">
 
             {[
-              { value: "100+", label: "Active Users" },
+              { value: "200+", label: "Active Users" },
               { value: "4.8★", label: "Student Satisfaction" },
               { value: "10+", label: "Projects Delivered" },
               { value: "98%", label: "Success Rate" },
@@ -231,68 +248,68 @@ export default function LandingPage({ switchToSignUp }) {
               </motion.div>
             ))}
           </div>
-    <br /> <br /> <br />
-           <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-8 border-2 border-emerald-200 relative">
-        <div className="absolute -top-3 -right-3 bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
-          ✨ New Feature
-        </div>
-        
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          <div className="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-4xl shadow-lg transform hover:scale-110 transition-transform">
-            🎁
-          </div>
-          
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-emerald-800 mb-2">
-              Earn Rewards & Get Discounts!
-            </h3>
-            <p className="text-gray-700 mb-3">
-              Play our interactive <span className="font-semibold text-emerald-700">SCard Game</span> daily to collect points and compete for exclusive project discounts.
-            </p>
-            
-            <div className="flex flex-wrap gap-3">
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-blue-200">
-                <span className="text-2xl">🏆</span>
-                <div>
-                  <p className="text-xs text-gray-500 font-medium">Weekly Top 3</p>
-                  <p className="text-sm font-bold text-blue-600">10% OFF</p>
+          <br /> <br /> <br />
+          <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-8 border-2 border-emerald-200 relative">
+            <div className="absolute -top-3 -right-3 bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+              ✨ New Feature
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-shrink-0 w-20 h-20 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center text-4xl shadow-lg transform hover:scale-110 transition-transform">
+                🎁
+              </div>
+
+              <div className="flex-1">
+                <h3 className="text-2xl font-bold text-emerald-800 mb-2">
+                  Earn Rewards & Get Discounts!
+                </h3>
+                <p className="text-gray-700 mb-3">
+                  Play our interactive <span className="font-semibold text-emerald-700">SCard Game</span> daily to collect points and compete for exclusive project discounts.
+                </p>
+
+                <div className="flex flex-wrap gap-3">
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-blue-200">
+                    <span className="text-2xl">🏆</span>
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium">Weekly Top 3</p>
+                      <p className="text-sm font-bold text-blue-600">10% OFF</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-orange-200">
+                    <span className="text-2xl">🥇</span>
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium">Monthly Top 3</p>
+                      <p className="text-sm font-bold text-orange-600">30% OFF</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-purple-200">
+                    <span className="text-2xl">👑</span>
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium">#1 Lifetime (400+ pts)</p>
+                      <p className="text-sm font-bold text-purple-600">FREE Project</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-orange-200">
-                <span className="text-2xl">🥇</span>
-                <div>
-                  <p className="text-xs text-gray-500 font-medium">Monthly Top 3</p>
-                  <p className="text-sm font-bold text-orange-600">30% OFF</p>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg shadow-sm border border-purple-200">
-                <span className="text-2xl">👑</span>
-                <div>
-                  <p className="text-xs text-gray-500 font-medium">#1 Lifetime (400+ pts)</p>
-                  <p className="text-sm font-bold text-purple-600">FREE Project</p>
-                </div>
-              </div>
+
+              <a href="/#login" className="flex-shrink-0 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold px-8 py-4 rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
+                <span className="text-2xl">🎴</span>
+                <span>Start Playing</span>
+              </a>
             </div>
           </div>
-          
-          <a href="/#login" className="flex-shrink-0 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold px-8 py-4 rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
-            <span className="text-2xl">🎴</span>
-            <span>Start Playing</span>
-          </a>
-        </div>
-      </div>
         </div>
       </section>
 
-      
+
 
       {/* 🌟 Login Section */}
       <section id="login" className="">
-        
+
         <div className="max-w-6xl mx-auto px-6">
-          
+
           <h1 className="text-3xl font-bold text-center text-emerald-700 mb-12">
             Login to Your Account
           </h1>
@@ -394,6 +411,14 @@ export default function LandingPage({ switchToSignUp }) {
                 name: "Khushi Photocopy & Printout",
                 logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp"
               },
+              {
+                name: "Manglam residency",
+                logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
+              },
+              // {
+              //   name: "Manglam residency",
+              //   logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
+              // },
             ].map((partner, i) => (
 
               <motion.div
@@ -423,22 +448,7 @@ export default function LandingPage({ switchToSignUp }) {
         </div>
       </section>
 
-      {/* 🌟 Testimonials */}
-      <section id="testimonials" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-12">What Students Say</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
-              <motion.div key={i} className="bg-gray-50 rounded-xl p-6 shadow hover:shadow-lg transition"
-                whileHover={{ scale: 1.05 }}>
-                <img src={t.avatar} alt={t.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                <p className="text-gray-600 italic mb-3">"{t.text}"</p>
-                <h4 className="font-semibold text-gray-800">{t.name}</h4>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
 
 

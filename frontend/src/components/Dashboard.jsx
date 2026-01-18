@@ -102,7 +102,7 @@ function WhatWeOffer() {
 
 function OurAchievements() {
   const achievements = [
-    { value: "100+", label: "Active Users" },
+    { value: "200+", label: "Active Users" },
     { value: "4.8★", label: "Student Satisfaction" },
     { value: "10+", label: "Projects Delivered" },
     { value: "98%", label: "Success Rate" },

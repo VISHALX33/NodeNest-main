@@ -54,7 +54,7 @@ export default function Team() {
       linkedin: "#",
       instagram: "#",
     },
-    
+
   ];
 
   return (
@@ -99,70 +99,74 @@ export default function Team() {
                   </a>
                 </div> */}
 
-          
 
-                
+
+
               </div>
             </div>
           ))}
         </div>
       </div>
       {/* 🌟 Our Partners */}
-<div className="bg-white py-16 px-6 mt-20">
-  <div className="max-w-6xl mx-auto">
-    <h1 className="text-4xl font-bold text-emerald-700 mb-12 text-center">
-      Our Partners
-    </h1>
+      <div className="bg-white py-16 px-6 mt-20">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-4xl font-bold text-emerald-700 mb-12 text-center">
+            Our Partners
+          </h1>
 
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10">
-      {[
-        {
-          name: "Khushi Photocopy & Printout",
-          logo:
-            "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp",
-        },
-        { 
-      name: "Manglam residency", 
-      logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
-    },
-        // {
-        //   name: "BookMart Jaipur",
-        //   logo:
-        //     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Books-aj.svg/2048px-Books-aj.svg.png",
-        // },
-        // {
-        //   name: "TechFix Laptop Service",
-        //   logo:
-        //     "https://cdn-icons-png.flaticon.com/512/907/907717.png",
-        // },
-        // {
-        //   name: "PrintZone Digital Lab",
-        //   logo:
-        //     "https://cdn-icons-png.flaticon.com/512/3039/3039387.png",
-        // },
-      ].map((partner, index) => (
-        <div
-          key={index}
-          className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center"
-        >
-          {/* Partner Logo */}
-          <div className="w-full h-28 flex items-center justify-center mb-4">
-            <img
-              src={partner.logo}
-              alt={partner.name}
-              className="h-full object-contain"
-            />
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-10">
+            {[
+              {
+                name: "Khushi Photocopy & Printout",
+                logo:
+                  "https://res.cloudinary.com/dwq5qifuk/image/upload/v1763982004/k_qk95m1.webp",
+              },
+              {
+                name: "Manglam residency",
+                logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
+              },
+              // {
+              //   name: "Manglam residency",
+              //   logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
+              // },
+              // {
+              //   name: "BookMart Jaipur",
+              //   logo:
+              //     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Books-aj.svg/2048px-Books-aj.svg.png",
+              // },
+              // {
+              //   name: "TechFix Laptop Service",
+              //   logo:
+              //     "https://cdn-icons-png.flaticon.com/512/907/907717.png",
+              // },
+              // {
+              //   name: "PrintZone Digital Lab",
+              //   logo:
+              //     "https://cdn-icons-png.flaticon.com/512/3039/3039387.png",
+              // },
+            ].map((partner, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 p-6 rounded-2xl shadow hover:shadow-xl hover:-translate-y-2 transition-all duration-300 text-center"
+              >
+                {/* Partner Logo */}
+                <div className="w-full h-28 flex items-center justify-center mb-4">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-full object-contain"
+                  />
+                </div>
+
+                {/* Partner Name */}
+                <h3 className="font-semibold text-gray-800 text-lg">
+                  {partner.name}
+                </h3>
+              </div>
+            ))}
           </div>
-
-          {/* Partner Name */}
-          <h3 className="font-semibold text-gray-800 text-lg">
-            {partner.name}
-          </h3>
         </div>
-      ))}
-    </div>
-  </div>
-</div>
+      </div>
 
     </div>
   );

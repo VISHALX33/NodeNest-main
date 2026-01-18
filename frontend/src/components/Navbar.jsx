@@ -24,7 +24,8 @@ import {
   FaYoutube,
   FaGithub,
   FaTelegram,
-  FaWhatsapp
+  FaWhatsapp,
+  FaImage
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -103,8 +104,8 @@ export default function Navbar() {
         {/* Desktop Menu */}
         {user ? (
           <div className="hidden md:flex relative items-center gap-6 px-6 py-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-emerald-100">
-            <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notification</Link>
-            <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Services</Link>
+            <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notice</Link>
+            <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
             <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
             <Link to="/tasks" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Tasks</Link>
             <Link to="/chat" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Global Chat</Link>
@@ -112,6 +113,7 @@ export default function Navbar() {
             <Link to="/about-home" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">About</Link>
             <Link to="/contact" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Contact</Link>
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
+            <Link to="/gallery" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Gallery</Link>
             <Link to="/careers" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Careers</Link>
             <Link to="/channel" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Channel</Link>
             <Link to="/team" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Partners</Link>
@@ -157,6 +159,7 @@ export default function Navbar() {
           <Link to="/chat" onClick={() => setIsSidebarOpen(false)}><FaComments className="inline mr-2" /> Global Chat</Link>
           <Link to="/chatbot" onClick={() => setIsSidebarOpen(false)}><FaRobot className="inline mr-2" /> Chatbot</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
+          <Link to="/gallery" onClick={() => setIsSidebarOpen(false)}><FaImage className="inline mr-2" /> Gallery</Link>
           <Link to="/Careers" onClick={() => setIsSidebarOpen(false)}><FaBriefcase className="inline mr-2" /> Careers</Link>
           <Link to="/channel" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Channel</Link>
           <Link to="/team" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Partners</Link>

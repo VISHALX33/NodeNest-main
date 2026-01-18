@@ -10,6 +10,10 @@ export default function PartnerPage() {
       name: "Manglam residency", 
       logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
     },
+    // { 
+    //   name: "Manglam residency", 
+    //   logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
+    // },
     // Add more partners here...
   ];
 
