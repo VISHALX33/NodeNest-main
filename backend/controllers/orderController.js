@@ -67,7 +67,7 @@ export const createOrder = async (req, res) => {
 
     if (
       couponCode &&
-      ["KHUSHI", "MANGALAM","GUPTA10"].includes(couponCode.toUpperCase())
+      ["KHUSHI", "MANGALAM","GUPTA10","REPUBLICDAY10" ].includes(couponCode.toUpperCase())
     ) {
       discountAmount = basePrice * 0.10; // 10% off
       totalAmount = basePrice - discountAmount;
