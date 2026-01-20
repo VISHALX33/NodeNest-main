@@ -19,7 +19,7 @@ export default function Team() {
     },
     {
       name: "Mohit Dad",
-      role: "Developer & Growth",
+      role: "CEO (chief evangelist officer)",
       image: Mohit,
       github: "#",
       linkedin: "#",
