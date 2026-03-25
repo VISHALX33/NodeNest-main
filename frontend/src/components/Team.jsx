@@ -6,6 +6,7 @@ import Krishna from "../assets/Krishna.jpg";
 import Aditya from "../assets/Aditya.jpg";
 import Mohit from "../assets/Mohit.jpg";
 import Primetheorist from "../assets/Primetheorist.jpg";
+import Prashant from "../assets/Prashant.png"
 
 export default function Team() {
   const teamMembers = [
@@ -50,6 +51,14 @@ export default function Team() {
       name: "Aditya Vaishnav",
       role: "Frontend Developer",
       image: Aditya,
+      github: "#",
+      linkedin: "#",
+      instagram: "#",
+    },
+    {
+      name: "Prashant Jain",
+      role: "Full Stack Developer",
+      image: Prashant,
       github: "#",
       linkedin: "#",
       instagram: "#",
