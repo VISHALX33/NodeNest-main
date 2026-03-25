@@ -72,6 +72,7 @@ export default function Footer() {
                 <li><Link to="/dashboard" className="hover:text-emerald-600 transition-colors">Dashboard</Link></li>
                 <li><Link to="/tasks" className="hover:text-emerald-600 transition-colors">My Tasks</Link></li>
                 <li><Link to="/mypdf" className="hover:text-emerald-600 transition-colors">Notes</Link></li>
+                <li><Link to="https://calculator.notesea.xyz/" className="hover:text-emerald-600 transition-colors">CGPA Calculator</Link></li>
                 <li><Link to="/chat" className="hover:text-emerald-600 transition-colors">Chat</Link></li>
                 <li><Link to="/team" className="hover:text-emerald-600 transition-colors">Contributors</Link></li>
               </ul>
