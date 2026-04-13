@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import API from "../utils/axios";
 import { useNavigate } from "react-router-dom";
-import { FaRobot } from "react-icons/fa";
+import { FaLaptopCode, FaRocket } from "react-icons/fa";
 import NoteNestLogo from "/NoteNestLogo.png";
-import Chatbot from "./chatbot"; // ✅ import your chatbot
 import ProjectService from "./projectService";
 import hero from "/hero.png";
 import NoteSeaStory from "./NoteSeaStory";
@@ -136,7 +135,6 @@ function OurAchievements() {
 
 
 // ✅ Custom Projects Section
-import { FaLaptopCode, FaRocket } from "react-icons/fa";
 import customProjectImg from "../assets/custom.png"; // optional illustration
 
 function CustomProjects() {
@@ -193,7 +191,6 @@ function CustomProjects() {
 
 export default function Dashboard() {
   const [semesters, setSemesters] = useState([]);
-  const [showChatbot, setShowChatbot] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -257,34 +254,6 @@ export default function Dashboard() {
       <OurAchievements />
       <NoteSeaStory videos={videos}/> 
       <CustomProjects />
-      
-
-      {/* Floating Chatbot Icon */}
-      <div
-        className="fixed bottom-28 right-6 w-16 h-16 bg-emerald-600 rounded-full shadow-lg flex items-center justify-center cursor-pointer z-50 hover:scale-110 transition-transform"
-        onClick={() => setShowChatbot(!showChatbot)}
-        title="Solve your problems"
-      >
-        <FaRobot className="text-white text-xl" />
-      </div>
-
-      {/* Chatbot Popup */}
-      {showChatbot && (
-        <div className="fixed bottom-20 right-6 w-80 h-[28rem] bg-white border border-gray-200 rounded-2xl shadow-lg flex flex-col overflow-hidden">
-          <div className="bg-emerald-600 text-white px-4 py-2 flex justify-between items-center">
-            <span className="font-semibold">Solve your problems 🤖</span>
-            <button
-              onClick={() => setShowChatbot(false)}
-              className="text-white hover:text-gray-200"
-            >
-              ✖
-            </button>
-          </div>
-          <div className="flex-1 overflow-y-auto">
-            <Chatbot />
-          </div>
-        </div>
-      )}
 
       <br />
       <br />

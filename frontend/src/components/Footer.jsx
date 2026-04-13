@@ -17,7 +17,8 @@ import {
   FaInstagram,
   FaWhatsapp,
   FaTelegram,
-  FaYoutube
+  FaYoutube,
+  FaPhoneAlt
 } from 'react-icons/fa';
 
 export default function Footer() {
@@ -33,7 +34,7 @@ export default function Footer() {
             <div className="col-span-2">
               <h2 className="text-2xl font-bold text-emerald-700 mb-3">NoteSea</h2>
               <p className="text-gray-500 leading-relaxed">
-                All-in-one solution for students and users to download notes, manage tasks, 
+                All-in-one solution for students and users to download notes, manage tasks,
                 explore blogs, book services, and connect via global chat.
               </p>
               <div className="mt-4 flex space-x-4 text-emerald-600">
@@ -46,12 +47,12 @@ export default function Footer() {
                 <a href="https://www.whatsapp.com/channel/0029VbBPPUN8V0tsVVPSek0f" className="hover:text-emerald-800 transition-colors">
                   <FaWhatsapp size={20} />
                 </a>
-                  <a href="https://t.me/noteseaxyz" className="hover:text-emerald-800 transition-colors">
+                <a href="https://t.me/noteseaxyz" className="hover:text-emerald-800 transition-colors">
                   <FaTelegram size={20} />
                 </a>
-                <a 
-                  href="https://www.linkedin.com/company/notesea/" 
-                  target="_blank" 
+                <a
+                  href="https://www.linkedin.com/company/notesea/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-emerald-800 transition-colors"
                 >
@@ -73,7 +74,11 @@ export default function Footer() {
                 <li><Link to="/tasks" className="hover:text-emerald-600 transition-colors">My Tasks</Link></li>
                 <li><Link to="/mypdf" className="hover:text-emerald-600 transition-colors">Notes</Link></li>
                 <li><Link to="/chat" className="hover:text-emerald-600 transition-colors">Chat</Link></li>
-                <li><Link to="/team" className="hover:text-emerald-600 transition-colors">Contributors</Link></li>
+                <li><Link to="/team" className="hover:text-emerald-600 transition-colors">Partners</Link></li>
+                <li><Link to="/gallery" className="hover:text-emerald-600 transition-colors">Gallery</Link></li>
+                <li><Link to="/scard" className="hover:text-emerald-600 transition-colors flex items-center">
+                  SCard <span className="ml-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">NEW!</span>
+                </Link></li>
               </ul>
             </div>
 
@@ -86,6 +91,7 @@ export default function Footer() {
                 <li><Link to="/easy-projects" className="hover:text-emerald-600 transition-colors">Browse Services</Link></li>
                 <li><Link to="/my-bookings" className="hover:text-emerald-600 transition-colors">My Bookings</Link></li>
                 <li><Link to="/channel" className="hover:text-emerald-600 transition-colors">YouTube Channel</Link></li>
+                <li><Link to="/chatbot" className="hover:text-emerald-600 transition-colors">Chatbot</Link></li>
               </ul>
             </div>
 
@@ -97,14 +103,30 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li><Link to="/about-home" className="hover:text-emerald-600 transition-colors flex items-center">
                   {/* <FaInfoCircle className="mr-2" size={14} /> */}
-                   About Us
+                  About Us
                 </Link></li>
                 <li><Link to="/contact" className="hover:text-emerald-600 transition-colors flex items-center">
                   {/* <FaEnvelope className="mr-2" size={14} /> */}
-                   Contact Us
+                  Contact Us
                 </Link></li>
-                <li><a href="#" className="hover:text-emerald-600 transition-colors">Help Center</a></li>
                 <li><a href="/careers" className="hover:text-emerald-600 transition-colors">Careers</a></li>
+
+                <li><a href="#" className="hover:text-emerald-600 transition-colors">Help Center</a></li>
+                <div className="mt-4 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+                  <h4 className="text-xs font-bold text-emerald-800 uppercase mb-3 flex items-center gap-2">
+                    <FaPhoneAlt size={12} className="text-emerald-600" /> Connect With Us
+                  </h4>
+                  <div className="space-y-3">
+                    <a href="tel:+919001509419" className="flex items-center gap-2 text-emerald-700 hover:text-emerald-500 transition-colors group">
+                      <span className="bg-emerald-100 p-1.5 rounded-md text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><FaWhatsapp size={12} /></span>
+                      <span className="text-xs font-medium">+91 9001509419</span>
+                    </a>
+                    <a href="tel:+918003310994" className="flex items-center gap-2 text-emerald-700 hover:text-emerald-500 transition-colors group">
+                      <span className="bg-emerald-100 p-1.5 rounded-md text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><FaPhoneAlt size={12} /></span>
+                      <span className="text-xs font-medium">+91 8003310994</span>
+                    </a>
+                  </div>
+                </div>
               </ul>
             </div>
           </div>
@@ -113,7 +135,7 @@ export default function Footer() {
 
       {/* Mobile Footer Navigation */}
 
-    
+
       {isMobile && (
         <div className="fixed bottom-0 w-full bg-white border-t border-emerald-200 flex justify-around items-center py-3 shadow-lg z-50">
           <Link
@@ -130,7 +152,7 @@ export default function Footer() {
             <FaRegCommentDots size={20} />
             <span className="mt-1">Chat</span>
           </Link>
-         
+
           <Link
             to="/project-services"
             className={`flex flex-col items-center text-xs ${pathname === '/mypdf' ? 'text-emerald-600 font-semibold' : 'text-gray-500'} transition-colors`}
@@ -150,7 +172,7 @@ export default function Footer() {
             className={`flex flex-col items-center text-xs ${pathname === '/team' ? 'text-emerald-600 font-semibold' : 'text-gray-500'} transition-colors`}
           >
             <FaUsers size={20} />
-            <span className="mt-1">Contributors</span>
+            <span className="mt-1">Partners</span>
           </Link>
         </div>
       )}

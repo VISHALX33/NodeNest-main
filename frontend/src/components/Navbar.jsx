@@ -25,7 +25,8 @@ import {
   FaGithub,
   FaTelegram,
   FaWhatsapp,
-  FaImage
+  FaImage,
+  FaPhoneAlt
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -33,6 +34,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showSupport, setShowSupport] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   // PWA install prompt
@@ -107,20 +109,36 @@ export default function Navbar() {
             <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notice</Link>
             <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
             <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
-            <Link to="/tasks" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Tasks</Link>
             <Link to="/chat" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Global Chat</Link>
-            <Link to="/chatbot" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Chatbot</Link>
             <Link to="/about-home" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">About</Link>
-            <Link to="/contact" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Contact</Link>
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
-            <Link to="/gallery" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Gallery</Link>
-            <Link to="/careers" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Careers</Link>
             <Link to="/channel" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Channel</Link>
-            <Link to="/team" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Partners</Link>
-            <Link to="/scard" className="relative bg-gradient-to-r from-green-400 to-green-500 text-white font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 ">
-              SCard
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
-            </Link>
+            
+            {/* Support Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={() => setShowSupport(!showSupport)}
+                className="flex items-center gap-2 text-emerald-700 font-bold bg-emerald-50/50 px-4 py-1.5 rounded-full border border-emerald-200 hover:bg-emerald-100 transition-all duration-300 shadow-sm"
+              >
+                <FaPhoneAlt size={14} className="text-emerald-600" /> Connect
+              </button>
+              {showSupport && (
+                <div className="absolute top-12 left-0 bg-white p-4 rounded-xl shadow-xl border border-emerald-100 min-w-[220px] z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                  <h4 className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-3 border-b border-emerald-50 pb-2">Company Contact</h4>
+                  <div className="space-y-3">
+                    <a href="tel:+919001509419" className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors group">
+                      <div className="bg-emerald-100 p-2 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><FaWhatsapp size={14} /></div>
+                      <span className="text-sm font-medium">+91 9001509419</span>
+                    </a>
+                    <a href="tel:+918003310994" className="flex items-center gap-3 text-gray-700 hover:text-emerald-600 transition-colors group">
+                      <div className="bg-emerald-100 p-2 rounded-lg text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors"><FaPhoneAlt size={14} /></div>
+                      <span className="text-sm font-medium">+91 8003310994</span>
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <FaCog
               size={26}
               className="ml-2 text-emerald-600 cursor-pointer hover:text-emerald-700 transition-transform duration-300 hover:rotate-90"
@@ -155,19 +173,26 @@ export default function Navbar() {
           <Link to="/soon" onClick={() => setIsSidebarOpen(false)}><FaBell className="inline mr-2" /> Notifications</Link>
           <Link to="/project-services" onClick={() => setIsSidebarOpen(false)}><FaStore className="inline mr-2" /> Project Services</Link>
           <Link to="/how-it-works" onClick={() => setIsSidebarOpen(false)}><FaQuestionCircle className="inline mr-2" /> How It Works</Link>
-          <Link to="/tasks" onClick={() => setIsSidebarOpen(false)}><FaTasks className="inline mr-2" /> My Tasks</Link>
           <Link to="/chat" onClick={() => setIsSidebarOpen(false)}><FaComments className="inline mr-2" /> Global Chat</Link>
-          <Link to="/chatbot" onClick={() => setIsSidebarOpen(false)}><FaRobot className="inline mr-2" /> Chatbot</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
-          <Link to="/gallery" onClick={() => setIsSidebarOpen(false)}><FaImage className="inline mr-2" /> Gallery</Link>
-          <Link to="/Careers" onClick={() => setIsSidebarOpen(false)}><FaBriefcase className="inline mr-2" /> Careers</Link>
           <Link to="/channel" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Channel</Link>
-          <Link to="/team" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Partners</Link>
            <Link to="/scard" className="relative  font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 " onClick={() => setIsSidebarOpen(false)}><FaIdCardAlt className="inline mr-2 " /> SCard
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
           </Link>
           <Link to="/about-home" onClick={() => setIsSidebarOpen(false)}><FaInfoCircle className="inline mr-2" /> About</Link>
-          <Link to="/contact" onClick={() => setIsSidebarOpen(false)}><FaEnvelope className="inline mr-2" /> Contact</Link>
+          
+          <div className="mt-2 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+             <h4 className="text-xs font-bold text-emerald-700 uppercase mb-3">Connect</h4>
+             <div className="space-y-4">
+                <a href="tel:+919001509419" className="flex items-center gap-3 text-emerald-800" onClick={() => setIsSidebarOpen(false)}>
+                  <FaWhatsapp className="text-emerald-600" /> +91 9001509419
+                </a>
+                <a href="tel:+918003310994" className="flex items-center gap-3 text-emerald-800" onClick={() => setIsSidebarOpen(false)}>
+                  <FaPhoneAlt className="text-emerald-600" /> +91 8003310994
+                </a>
+             </div>
+          </div>
+
 
 
           {user ? (
