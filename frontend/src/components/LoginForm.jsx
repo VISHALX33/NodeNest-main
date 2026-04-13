@@ -521,6 +521,7 @@ export default function LandingPage({ switchToSignUp }) {
             <h4 className="font-semibold mb-3">Quick Links</h4>
             <ul className="space-y-2 text-gray-200 text-sm">
               <li><a href="#home" className="hover:underline">Home</a></li>
+              <li><a href="https://calculator.notesea.xyz/" target="_blank" rel="noopener noreferrer" className="hover:underline">CGPA Calculator</a></li>
               <li><a href="#how" className="hover:underline">How it Works</a></li>
               <li><a href="#faq" className="hover:underline">FAQ</a></li>
               <li><a href="#contact" className="hover:underline">Contact</a></li>
