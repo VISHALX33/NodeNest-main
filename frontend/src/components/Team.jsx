@@ -134,10 +134,10 @@ export default function Team() {
                 name: "Manglam residency",
                 logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
               },
-              // {
-              //   name: "Manglam residency",
-              //   logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1768415621/6287321978473484191_avdbd4.jpg"
-              // },
+              {
+                name: "Gupta Store",
+                logo: "https://res.cloudinary.com/dwq5qifuk/image/upload/q_auto/f_auto/v1776185917/6bfeef9d-ec20-45eb-8956-c43e7b4889b6_sxg50y.jpg"
+              },
               // {
               //   name: "BookMart Jaipur",
               //   logo:

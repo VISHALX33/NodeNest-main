@@ -30,6 +30,13 @@ export default function SubjectsPage() {
           ))}
         </div>
       )}
+
+      <footer className="mt-12 pt-6 border-t border-emerald-100 text-center">
+        <p className="text-xs text-gray-400 italic leading-relaxed">
+          Resources provided on this platform are authored by community contributors and their respective owners. 
+          For credit attribution or content removal requests, please reach out via our official communication channels.
+        </p>
+      </footer>
     </div>
   );
 }
