@@ -268,7 +268,7 @@ export default function Dashboard() {
 
       {/* Existing Projects */}
       <ProjectService />
-      {/* <ResearchDocumentation /> */}
+      <ResearchDocumentation />
 
       {/* New Sections */}
 

@@ -111,7 +111,7 @@ export default function Navbar() {
             <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notice</Link>
             <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
             <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
-            {/* <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link> */}
+            <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link>
             <Link to="/pyq" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">PYQ</Link>
             <Link to="/chat" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Global Chat</Link>
             <Link to="/about-home" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">About</Link>
