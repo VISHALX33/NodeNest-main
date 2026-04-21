@@ -36,7 +36,7 @@ export default function AdminLogin() {
       localStorage.setItem("token", res.data.token);
       
       // Check if user is admin
-      const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz'];
+      const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz','ceo@notesea.xyz'];
       if (adminEmails.includes(res.data.user.email)) {
         navigate("/admin");
       } else {

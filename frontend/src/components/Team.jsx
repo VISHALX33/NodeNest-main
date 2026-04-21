@@ -38,7 +38,7 @@ export default function Team() {
     },
     {
       name: "Lavish Singhvi",
-      role: "Data Analyst and Documentation Specialist)",
+      role: "Data Analyst and Documentation Specialist",
       image: Lavish,
       github: "#",
       linkedin: "#",
