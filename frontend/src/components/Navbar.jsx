@@ -26,7 +26,9 @@ import {
   FaTelegram,
   FaWhatsapp,
   FaImage,
-  FaPhoneAlt
+  FaPhoneAlt,
+  FaFileAlt,
+  FaBookOpen,
 } from "react-icons/fa";
 import API from "../utils/axios";
 
@@ -109,6 +111,8 @@ export default function Navbar() {
             <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notice</Link>
             <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
             <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
+            <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link>
+            <Link to="/pyq" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">PYQ</Link>
             <Link to="/chat" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Global Chat</Link>
             <Link to="/about-home" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">About</Link>
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
@@ -173,6 +177,8 @@ export default function Navbar() {
           <Link to="/soon" onClick={() => setIsSidebarOpen(false)}><FaBell className="inline mr-2" /> Notifications</Link>
           <Link to="/project-services" onClick={() => setIsSidebarOpen(false)}><FaStore className="inline mr-2" /> Project Services</Link>
           <Link to="/how-it-works" onClick={() => setIsSidebarOpen(false)}><FaQuestionCircle className="inline mr-2" /> How It Works</Link>
+          <Link to="/research-services" onClick={() => setIsSidebarOpen(false)}><FaFileAlt className="inline mr-2" /> Research Services</Link>
+          <Link to="/pyq" onClick={() => setIsSidebarOpen(false)}><FaBookOpen className="inline mr-2" /> PYQ Papers</Link>
           <Link to="/chat" onClick={() => setIsSidebarOpen(false)}><FaComments className="inline mr-2" /> Global Chat</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
           <Link to="/channel" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Channel</Link>

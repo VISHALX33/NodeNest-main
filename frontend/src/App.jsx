@@ -21,6 +21,8 @@ import MediumProjects from "./components/MediumProjects";
 import HardProjects from "./components/HardProjects";
 import MyBookings from "./components/MyBookings";
 import ContactUs from "./components/ContactUs";
+import ResearchDocumentation from "./components/ResearchDocumentation";
+import PYQPage from "./components/PYQPage";
 import ProjectService from "./components/projectService";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
@@ -33,6 +35,9 @@ import Scard from "./Scard/Scard.jsx";
 import ChannelPage from "./components/ChannelPage.jsx";
 import Aboutmain from "./components/Aboutmain.jsx";
 import Gallery from "./components/Gallery.jsx";
+import AdminPage from "./components/AdminPage.jsx";
+import AdminLogin from "./components/AdminLogin.jsx";
+
 
 function Layout({ children }) {
   return (
@@ -233,6 +238,28 @@ function App() {
           }
         />
 
+        <Route
+          path="/research-services"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ResearchDocumentation />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/pyq"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <PYQPage />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
 
         <Route
           path="/mypdf"
@@ -316,7 +343,19 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <AdminPage />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
       </Routes>
+
     </BrowserRouter>
   );
 }

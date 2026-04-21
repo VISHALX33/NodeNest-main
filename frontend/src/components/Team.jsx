@@ -7,6 +7,8 @@ import Aditya from "../assets/Aditya.jpg";
 import Mohit from "../assets/Mohit.jpg";
 import Primetheorist from "../assets/Primetheorist.jpg";
 import Prashant from "../assets/Prashant.png"
+import Harshul from "../assets/Harshul.jpeg"
+import Lavish from "../assets/Lavish.jpeg"
 
 export default function Team() {
   const teamMembers = [
@@ -27,6 +29,22 @@ export default function Team() {
       instagram: "#",
     },
     {
+      name: "Harshul Dev Prajapati",
+      role: "Innovation Manager",
+      image: Harshul,
+      github: "#",
+      linkedin: "#",
+      instagram: "#",
+    },
+    {
+      name: "Lavish Singhvi",
+      role: "Data Analyst and Documentation Specialist)",
+      image: Lavish,
+      github: "#",
+      linkedin: "#",
+      instagram: "#",
+    },
+    {
       name: "Primetheorist",
       role: "Full Stack Developer",
       image: Primetheorist,
@@ -39,6 +57,16 @@ export default function Team() {
       linkedin: "#",
       instagram: "#",
     },
+
+    {
+      name: "Prashant Jain",
+      role: "Full Stack Developer",
+      image: Prashant,
+      github: "#",
+      linkedin: "#",
+      instagram: "#",
+    },
+
     {
       name: "Krishna Sharma",
       role: "Frontend Developer",
@@ -54,15 +82,7 @@ export default function Team() {
       github: "#",
       linkedin: "#",
       instagram: "#",
-    },
-    {
-      name: "Prashant Jain",
-      role: "Full Stack Developer",
-      image: Prashant,
-      github: "#",
-      linkedin: "#",
-      instagram: "#",
-    },
+    }
 
   ];
 

@@ -90,6 +90,8 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2">
                 <li><Link to="/easy-projects" className="hover:text-emerald-600 transition-colors">Browse Services</Link></li>
+                <li><Link to="/research-services" className="hover:text-emerald-600 transition-colors">Research & Docs</Link></li>
+                <li><Link to="/pyq" className="hover:text-emerald-600 transition-colors">PYQ Papers</Link></li>
                 <li><Link to="/my-bookings" className="hover:text-emerald-600 transition-colors">My Bookings</Link></li>
                 <li><Link to="/channel" className="hover:text-emerald-600 transition-colors">YouTube Channel</Link></li>
                 <li><Link to="/chatbot" className="hover:text-emerald-600 transition-colors">Chatbot</Link></li>
@@ -162,12 +164,13 @@ export default function Footer() {
             <span className="mt-1">Projects</span>
           </Link>
           <Link
-            to="/profile"
-            className={`flex flex-col items-center text-xs ${pathname === '/profile' ? 'text-emerald-600 font-semibold' : 'text-gray-500'} transition-colors`}
+            to="/research-services"
+            className={`flex flex-col items-center text-xs ${pathname === '/research-services' ? 'text-emerald-600 font-semibold' : 'text-gray-500'} transition-colors`}
           >
-            <FaUser size={20} />
-            <span className="mt-1">Profile</span>
+            <FaFileAlt size={20} />
+            <span className="mt-1">Research</span>
           </Link>
+
           <Link
             to="/team"
             className={`flex flex-col items-center text-xs ${pathname === '/team' ? 'text-emerald-600 font-semibold' : 'text-gray-500'} transition-colors`}
@@ -175,6 +178,7 @@ export default function Footer() {
             <FaUsers size={20} />
             <span className="mt-1">Partners</span>
           </Link>
+          
         </div>
       )}
     </>
