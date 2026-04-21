@@ -7,6 +7,7 @@ import ProjectService from "./projectService";
 import hero from "/hero.png";
 import NoteSeaStory from "./NoteSeaStory";
 import DashboardPopup from "./DashboardPopup";
+import ResearchDocumentation from "./ResearchDocumentation";
 
 
 const videos = [
@@ -71,7 +72,24 @@ function WhatWeOffer() {
     {
       title: "Project Deployment",
       desc: "Complete deployment solutions with domain setup and hosting configuration."
-    }
+    },
+{
+  title: "API Development & Integration",
+  desc: "Custom REST APIs and third-party API integrations for seamless communication between systems."
+},
+{
+  title: "Maintenance & Support",
+  desc: "Ongoing support, bug fixing, and updates to keep your application running smoothly."
+},
+{
+  title: "College Reports",
+  desc: "Well-structured academic reports with proper formatting, clear content, and plagiarism-free writing."
+},
+{
+  title: "Research Papers",
+  desc: "High-quality research papers with proper citations, formatting (IEEE/APA), and original content."
+}
+
     
   ];
 
@@ -104,6 +122,7 @@ function OurAchievements() {
     { value: "200+", label: "Active Users" },
     { value: "4.8★", label: "Student Satisfaction" },
     { value: "10+", label: "Projects Delivered" },
+    { value: "5+", label: "Research Papers" },
     { value: "98%", label: "Success Rate" },
     { value: "6-8 Hr", label: "Delivery Time" },
   ];
@@ -117,7 +136,8 @@ function OurAchievements() {
         Milestones and successes we have achieved through dedication, innovation, and teamwork.
       </p>
 
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+
         {achievements.map((item, i) => (
           <div
             key={i}
@@ -248,8 +268,10 @@ export default function Dashboard() {
 
       {/* Existing Projects */}
       <ProjectService />
+      <ResearchDocumentation />
 
       {/* New Sections */}
+
       <WhatWeOffer />
       <OurAchievements />
       <NoteSeaStory videos={videos}/> 

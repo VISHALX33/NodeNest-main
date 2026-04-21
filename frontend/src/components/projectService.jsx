@@ -78,7 +78,7 @@ export default function ProjectService() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       {/* Elegant Coupon Announcement */}
-      <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-8 border-2 border-emerald-200 relative">
+      {/* <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-lg p-6 mb-8 border-2 border-emerald-200 relative">
         <div className="absolute -top-3 -right-3 bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
           ✨ New Feature
         </div>
@@ -128,7 +128,7 @@ export default function ProjectService() {
             <span>Start Playing</span>
           </a>
         </div>
-      </div>
+      </div> */}
 
       <h1 className="text-3xl font-bold text-emerald-700 mb-6 text-center">
          Project Development Services
