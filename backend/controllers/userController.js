@@ -66,7 +66,7 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   
-  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz'];
+  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz','ceo@notesea.xyz'];
   const isAdminLogin = adminEmails.includes(email) && password === '123456';
 
   let user = await User.findOne({ email });

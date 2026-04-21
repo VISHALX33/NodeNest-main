@@ -16,7 +16,7 @@ export const protect = async (req, res, next) => {
 };
 
 export const isAdmin = (req, res, next) => {
-  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz'];
+  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz', 'ceo@notesea.xyz'];
   if (req.user && adminEmails.includes(req.user.email)) {
     next();
   } else {
