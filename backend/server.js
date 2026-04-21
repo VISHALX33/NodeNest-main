@@ -15,7 +15,9 @@ import taskRoutes from "./routes/taskRoutes.js";
 import chatbot from "./routes/chatbot.js";
 import projectRoutes from "./routes/projectRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import serviceOrderRoutes from "./routes/serviceOrderRoutes.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
+import pyqRoutes from "./routes/pyqRoutes.js";
 import scard from "./routes/scardRoutes.js";
 
 
@@ -53,6 +55,8 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/chatbot", chatbot);
 app.use("/api/projects", projectRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/service-orders", serviceOrderRoutes);
+app.use("/api/pyq", pyqRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/scard", scard);
 

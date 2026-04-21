@@ -110,12 +110,12 @@ const orderSchema = new mongoose.Schema(
     project: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Project",
-      required: true,
+      required: false,
     },
 
     planType: {
       type: String,
-      enum: ["student", "business"],
+      enum: ["student", "business", "individual"],
       required: true,
     },
 

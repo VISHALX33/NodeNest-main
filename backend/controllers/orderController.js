@@ -45,21 +45,24 @@ const razorpay = new Razorpay({
 
 export const createOrder = async (req, res) => {
   try {
-    const { projectId, planType, userDetails, projectDetails, couponCode } = req.body;
+    const { projectId, serviceName, servicePrice, planType, userDetails, projectDetails, couponCode } = req.body;
 
-    const project = await Project.findById(projectId);
-    if (!project) return res.status(404).json({ message: "Project not found" });
+    let basePrice;
+    let orderName;
+    let orderDesc;
 
-    const basePrice = planType === "student" ? project.studentPrice : project.businessPrice;
-
-    // ✅ Apply coupon logic
-    // let totalAmount = basePrice;
-    // let discountAmount = 0;
-
-    // if (couponCode && couponCode.toUpperCase() === "KHUSHI" ) {
-    //   discountAmount = basePrice * 0.10; // 10% off
-    //   totalAmount = basePrice - discountAmount;
-    // }
+    if (projectId) {
+      const project = await Project.findById(projectId);
+      if (!project) return res.status(404).json({ message: "Project not found" });
+      basePrice = planType === "student" ? project.studentPrice : project.businessPrice;
+      orderName = project.name;
+      orderDesc = project.description;
+    } else {
+      // ✅ Handle Research Services (Directly from frontend)
+      basePrice = servicePrice;
+      orderName = serviceName;
+      orderDesc = projectDetails?.description || `Service order for ${serviceName}`;
+    }
 
     // ✅ Apply coupon logic
     let totalAmount = basePrice;
@@ -73,30 +76,31 @@ export const createOrder = async (req, res) => {
       totalAmount = basePrice - discountAmount;
     }
 
-
     const order = new Order({
       user: req.user._id,
-      project: project._id,
-      planType,
+      project: projectId || null,
+      planType: planType || "student",
       basePrice,
       totalAmount,
       couponCode: couponCode || "",
       discountAmount,
-      finalAmount: totalAmount, // store final amount for clarity
+      finalAmount: totalAmount,
       userDetails,
       projectDetails: {
         ...projectDetails,
-        name: project.name,
-        description: project.description,
+        name: orderName,
+        description: orderDesc,
       },
     });
 
     await order.save();
     res.status(201).json({ orderId: order.orderId, totalAmount });
   } catch (err) {
+    console.error("❌ createOrder error:", err.message);
     res.status(400).json({ message: err.message });
   }
 };
+
 
 
 // ---------------- Create Razorpay Order ----------------
@@ -226,3 +230,33 @@ export const uploadProjectFiles = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+// ---------------- Download Project File ----------------
+export const downloadProjectFile = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: "Order not found" });
+
+    // Simple security check: owner or admin
+    if (
+      order.user.toString() !== req.user._id.toString() &&
+      req.user.email !== "vishalprajapati2303@gmail.com"
+    ) {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    if (!order.projectFiles || order.projectFiles.length === 0) {
+      return res.status(404).json({ message: "No files found for this order" });
+    }
+
+    const filePath = path.join(process.cwd(), order.projectFiles[0]);
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ message: "File not found on server" });
+    }
+
+    res.download(filePath);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+

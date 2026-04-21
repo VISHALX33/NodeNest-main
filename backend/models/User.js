@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: {
-  type: String,
-  required: true,
-  unique: true,
-  index: true,   // 👈 ADD THIS LINE
-  match: [/^[\w.+\-]+@gmail\.com$/, 'Only Gmail addresses allowed'],
-},
+    type: String,
+    required: true,
+    unique: true,
+    index: true,
+    match: [/^[\w.+\-]+@(gmail\.com|notesea\.xyz)$/, 'Only Gmail or NoteSea addresses allowed'],
+  },
   phone: { type: String, required: true },
   password: { type: String, required: true },
   collegeStudent: { type: Boolean, default: false },

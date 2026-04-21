@@ -16,7 +16,8 @@ export const protect = async (req, res, next) => {
 };
 
 export const isAdmin = (req, res, next) => {
-  if (req.user && req.user.email === 'vishalprajapati2303@gmail.com') {
+  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz'];
+  if (req.user && adminEmails.includes(req.user.email)) {
     next();
   } else {
     res.status(403).json({ message: 'Forbidden: Admin only' });

@@ -9,7 +9,9 @@ import {
   getOrderById,
   updateOrderStatus,
   uploadProjectFiles,
+  downloadProjectFile,
 } from "../controllers/orderController.js";
+
 import multer from "multer";
 import path from "path";
 
@@ -28,6 +30,8 @@ router.post("/verify-payment", protect, verifyPayment);
 
 router.get("/myorders", protect, getMyOrders);
 router.get("/:id", protect, getOrderById);
+router.get("/:id/download", protect, downloadProjectFile);
+
 
 router.put("/:id/status", protect, isAdmin, updateOrderStatus);
 router.post(
