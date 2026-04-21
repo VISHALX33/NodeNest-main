@@ -111,16 +111,16 @@ export default function Navbar() {
             <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notice</Link>
             <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
             <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
-            <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link>
+            {/* <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link> */}
             <Link to="/pyq" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">PYQ</Link>
             <Link to="/chat" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Global Chat</Link>
             <Link to="/about-home" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">About</Link>
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
             <Link to="/channel" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Channel</Link>
-            
+
             {/* Support Dropdown */}
             <div className="relative">
-              <button 
+              <button
                 onClick={() => setShowSupport(!showSupport)}
                 className="flex items-center gap-2 text-emerald-700 font-bold bg-emerald-50/50 px-4 py-1.5 rounded-full border border-emerald-200 hover:bg-emerald-100 transition-all duration-300 shadow-sm"
               >
@@ -182,21 +182,21 @@ export default function Navbar() {
           <Link to="/chat" onClick={() => setIsSidebarOpen(false)}><FaComments className="inline mr-2" /> Global Chat</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
           <Link to="/channel" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Channel</Link>
-           <Link to="/scard" className="relative  font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 " onClick={() => setIsSidebarOpen(false)}><FaIdCardAlt className="inline mr-2 " /> SCard
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
+          <Link to="/scard" className="relative  font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 " onClick={() => setIsSidebarOpen(false)}><FaIdCardAlt className="inline mr-2 " /> SCard
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
           </Link>
           <Link to="/about-home" onClick={() => setIsSidebarOpen(false)}><FaInfoCircle className="inline mr-2" /> About</Link>
-          
+
           <div className="mt-2 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-             <h4 className="text-xs font-bold text-emerald-700 uppercase mb-3">Connect</h4>
-             <div className="space-y-4">
-                <a href="tel:+919001509419" className="flex items-center gap-3 text-emerald-800" onClick={() => setIsSidebarOpen(false)}>
-                  <FaWhatsapp className="text-emerald-600" /> +91 9001509419
-                </a>
-                <a href="tel:+918003310994" className="flex items-center gap-3 text-emerald-800" onClick={() => setIsSidebarOpen(false)}>
-                  <FaPhoneAlt className="text-emerald-600" /> +91 8003310994
-                </a>
-             </div>
+            <h4 className="text-xs font-bold text-emerald-700 uppercase mb-3">Connect</h4>
+            <div className="space-y-4">
+              <a href="tel:+919001509419" className="flex items-center gap-3 text-emerald-800" onClick={() => setIsSidebarOpen(false)}>
+                <FaWhatsapp className="text-emerald-600" /> +91 9001509419
+              </a>
+              <a href="tel:+918003310994" className="flex items-center gap-3 text-emerald-800" onClick={() => setIsSidebarOpen(false)}>
+                <FaPhoneAlt className="text-emerald-600" /> +91 8003310994
+              </a>
+            </div>
           </div>
 
 

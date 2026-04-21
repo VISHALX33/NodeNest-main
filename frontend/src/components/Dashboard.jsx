@@ -73,24 +73,24 @@ function WhatWeOffer() {
       title: "Project Deployment",
       desc: "Complete deployment solutions with domain setup and hosting configuration."
     },
-{
-  title: "API Development & Integration",
-  desc: "Custom REST APIs and third-party API integrations for seamless communication between systems."
-},
-{
-  title: "Maintenance & Support",
-  desc: "Ongoing support, bug fixing, and updates to keep your application running smoothly."
-},
-{
-  title: "College Reports",
-  desc: "Well-structured academic reports with proper formatting, clear content, and plagiarism-free writing."
-},
-{
-  title: "Research Papers",
-  desc: "High-quality research papers with proper citations, formatting (IEEE/APA), and original content."
-}
+    {
+      title: "API Development & Integration",
+      desc: "Custom REST APIs and third-party API integrations for seamless communication between systems."
+    },
+    {
+      title: "Maintenance & Support",
+      desc: "Ongoing support, bug fixing, and updates to keep your application running smoothly."
+    },
+    {
+      title: "College Reports",
+      desc: "Well-structured academic reports with proper formatting, clear content, and plagiarism-free writing."
+    },
+    {
+      title: "Research Papers",
+      desc: "High-quality research papers with proper citations, formatting (IEEE/APA), and original content."
+    }
 
-    
+
   ];
 
   return (
@@ -167,7 +167,7 @@ function CustomProjects() {
             Custom Projects
           </h2>
           <p className="text-gray-600 mb-6 max-w-md">
-            Didn’t find what you need in Easy, Medium, or Advanced projects?  
+            Didn’t find what you need in Easy, Medium, or Advanced projects?
             We also build <strong>custom full-stack projects</strong> tailored for your requirements.
           </p>
 
@@ -219,7 +219,7 @@ export default function Dashboard() {
 
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8 relative">
-       <DashboardPopup />
+      <DashboardPopup />
       {/* Banner */}
       <div className="bg-white rounded-3xl p-6 md:p-10 flex flex-col md:flex-row justify-between items-center gap-6 mb-10 shadow-lg border border-emerald-200">
         <div className="flex-1">
@@ -234,7 +234,7 @@ export default function Dashboard() {
           <br />
           <br />
           <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
-            Free RTU notes of all semester !!  
+            Free RTU notes of all semester !!
           </h2>
           <h2 className="text-xl md:text-xl font-bold text-emerald-800 leading-snug">
             Select your semester to get free notes!
@@ -268,13 +268,13 @@ export default function Dashboard() {
 
       {/* Existing Projects */}
       <ProjectService />
-      <ResearchDocumentation />
+      {/* <ResearchDocumentation /> */}
 
       {/* New Sections */}
 
       <WhatWeOffer />
       <OurAchievements />
-      <NoteSeaStory videos={videos}/> 
+      <NoteSeaStory videos={videos} />
       <CustomProjects />
 
       <br />

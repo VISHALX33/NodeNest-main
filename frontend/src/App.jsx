@@ -21,7 +21,7 @@ import MediumProjects from "./components/MediumProjects";
 import HardProjects from "./components/HardProjects";
 import MyBookings from "./components/MyBookings";
 import ContactUs from "./components/ContactUs";
-import ResearchDocumentation from "./components/ResearchDocumentation";
+// import ResearchDocumentation from "./components/ResearchDocumentation";
 import PYQPage from "./components/PYQPage";
 import ProjectService from "./components/projectService";
 import ForgotPassword from "./components/ForgotPassword";
@@ -238,7 +238,7 @@ function App() {
           }
         />
 
-        <Route
+        {/* <Route
           path="/research-services"
           element={
             <PrivateRoute>
@@ -247,7 +247,7 @@ function App() {
               </Layout>
             </PrivateRoute>
           }
-        />
+        /> */}
 
         <Route
           path="/pyq"
