@@ -33,7 +33,7 @@ export default function ResearchDocumentation() {
       title: "Presentation",
       price: 499,
       icon: <Monitor className="text-emerald-600" size={32} />,
-      features: ["10-15 Professional Slides", "Speaker Notes Included", "Modern Visual Design", "Only 3 updates possible"],
+      features: ["Upto 10-15 Professional Slides", "Speaker Notes Included", "Modern Visual Design", "Only 3 updates possible"],
       gradient: "from-emerald-50 to-teal-50",
       description: "Get a high-impact, professionally designed presentation tailored for your project or academic seminar."
     },
@@ -42,7 +42,7 @@ export default function ResearchDocumentation() {
       title: "Report / Research Paper",
       price: 999,
       icon: <BookOpen className="text-emerald-600" size={32} />,
-      features: ["10 Page Research Paper", "60 Page Comprehensive Report", "Plagiarism-Free", "Only 3 updates possible"],
+      features: ["Upto 10 Page Research Paper", "Upto 60 Page Comprehensive Report", "Plagiarism-Free", "Only 3 updates possible"],
       gradient: "from-blue-50 to-indigo-50",
       description: "Professional academic writing for research papers and comprehensive reports with proper formatting."
     },
@@ -51,7 +51,7 @@ export default function ResearchDocumentation() {
       title: "Report + Research Paper",
       price: 1699,
       icon: <Layers className="text-emerald-600" size={32} />,
-      features: ["60 Page Detailed Report", "10 Page Research Paper", "Academic Formatting", "Only 3 updates possible"],
+      features: ["Upto 60 Page Detailed Report", "Upto 10 Page Research Paper", "Academic Formatting", "Only 3 updates possible"],
       gradient: "from-purple-50 to-pink-50",
       description: "A complete bundle of a detailed project report and a structured research paper for your final submissions."
     },
@@ -61,7 +61,7 @@ export default function ResearchDocumentation() {
       subtitle: "Presentation, Research, Report",
       price: 2099,
       icon: <FileText className="text-emerald-600" size={32} />,
-      features: ["60 Page Report", "10 Page Research Paper", "10-15 Slides Presentation", "Only 3 updates possible"],
+      features: ["Upto 60 Page Report", "Upto 10 Page Research Paper", "Upto 10-15 Slides Presentation", "Only 3 updates possible"],
       gradient: "from-orange-50 to-amber-50",
       description: "Our complete documentation package covering every aspect of your project's submission requirements."
     },
@@ -71,7 +71,7 @@ export default function ResearchDocumentation() {
       subtitle: "Project + Full Documentation",
       price: 7599,
       icon: <Layers className="text-emerald-600" size={32} />,
-      features: ["Custom MERN Project", "60 Page Report", "10 Page Research Paper", "10-15 Slides Presentation", "Priority Support"],
+      features: ["Custom MERN Project", "Upto 60 Page Report", "Upto 10 Page Research Paper", "Upto 10-15 Slides Presentation", "Priority Support"],
       gradient: "from-emerald-900 to-teal-900",
       featured: true,
       description: "The ultimate solution: We build your full MERN stack project and handle all associated documentation."
