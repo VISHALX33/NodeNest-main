@@ -49,7 +49,20 @@ const serviceOrderSchema = new mongoose.Schema(
       phone: String,
     },
 
-    // Requirements entered by user
+    // Extended form data from the new multi-step form
+    formData: {
+      type: Object,
+      default: {},
+    },
+
+    // Files uploaded by client (e-sign, reference material)
+    clientFiles: [
+      {
+        type: String,
+      },
+    ],
+
+    // Requirements entered by user (legacy/summary)
     requirements: {
       type: String,
       default: "",

@@ -27,7 +27,7 @@ const upload = multer({ storage });
 const router = express.Router();
 
 // User routes
-router.post("/", protect, createServiceOrder);
+router.post("/", protect, upload.array("clientFiles", 5), createServiceOrder);
 router.post("/create-razorpay-order", protect, createRazorpayOrder);
 router.post("/verify-payment", protect, verifyPayment);
 router.get("/mine", protect, getMyServiceOrders);

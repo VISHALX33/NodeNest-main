@@ -13,32 +13,39 @@ const razorpay = new Razorpay({
 // ---------------- Create Service Order ----------------
 export const createServiceOrder = async (req, res) => {
   try {
-    const { serviceName, servicePrice, userDetails, requirements, couponCode } =
-      req.body;
+    let { serviceName, servicePrice, userDetails, requirements, couponCode, formData } = req.body;
 
     if (!serviceName || !servicePrice) {
       return res.status(400).json({ message: "serviceName and servicePrice are required" });
     }
 
-    let totalAmount = servicePrice;
+    // Parse stringified JSON if needed (for multipart/form-data)
+    if (typeof userDetails === "string") userDetails = JSON.parse(userDetails);
+    if (typeof formData === "string") formData = JSON.parse(formData);
+
+    const clientFiles = req.files ? req.files.map(file => `/uploads/service-orders/${file.filename}`) : [];
+
+    let totalAmount = Number(servicePrice);
     let discountAmount = 0;
 
     if (
       couponCode &&
       ["KHUSHI", "MANGALAM", "GUPTASTORE"].includes(couponCode.toUpperCase())
     ) {
-      discountAmount = servicePrice * 0.1; // 10% off
-      totalAmount = servicePrice - discountAmount;
+      discountAmount = totalAmount * 0.1; // 10% off
+      totalAmount = totalAmount - discountAmount;
     }
 
     const order = new ServiceOrder({
       user: req.user._id,
       serviceName,
-      servicePrice,
+      servicePrice: Number(servicePrice),
       couponCode: couponCode || "",
       discountAmount,
       totalAmount,
       userDetails,
+      formData: formData || {},
+      clientFiles,
       requirements: requirements || "",
     });
 
