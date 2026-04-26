@@ -192,6 +192,31 @@ export default function HowItWorks() {
       </div>
       <div className="max-w-5xl mx-auto mt-20">
   <h2 className="text-2xl font-bold text-center text-emerald-700 mb-8">
+    How to Earn ₹20 per Paper
+  </h2>
+
+  <div className="grid gap-8 lg:grid-cols-2 items-center">
+    <div className="grid gap-6 sm:grid-cols-2">
+      {[
+        { title: "Visit PYQ", desc: "Go to the PYQ section on NoteSea.xyz" },
+        { title: "Sell Now", desc: "Click the 'Sell Now' button on the page" },
+        { title: "Upload", desc: "Fill the form and upload clear images" },
+        { title: "Earn", desc: "Get ₹20 per paper via UPI instantly" }
+      ].map((item, i) => (
+        <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100">
+          <h3 className="font-bold text-emerald-600 mb-1">{item.title}</h3>
+          <p className="text-xs text-gray-600 font-medium">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-emerald-50">
+      <img src="/sellpaper.png" alt="Earn Guide" className="w-full h-auto" />
+    </div>
+  </div>
+</div>
+
+<div className="max-w-5xl mx-auto mt-20">
+  <h2 className="text-2xl font-bold text-center text-emerald-700 mb-8">
     How Scratch Cards Work
   </h2>
 
