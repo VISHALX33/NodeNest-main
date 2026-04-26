@@ -5,9 +5,9 @@ import API from "../utils/axios";
 import { CheckCircle, AlertCircle, Plus, BookOpen, FileText } from "lucide-react";
 
 const SEMESTERS = [1, 2, 3, 4, 5, 6, 7, 8];
-const BRANCHES = ["CSE", "AI & DS", "IT", "ECE", "ME", "Other"];
+const BRANCHES = ["CSE", "AI & DS", "IT", "ECE", "EE", "ME", "CE", "CHE", "Robotics", "Biomedical", "Aerospace", "Biotech", "Other"];
 
-export default function AdminPYQ() {
+export default function AdminPYQ({ filters }) {
   const [loading, setLoading] = useState(false);
   const [msg, setMsg] = useState({ type: "", text: "" });
 

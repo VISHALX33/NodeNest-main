@@ -38,6 +38,7 @@ import Aboutmain from "./components/Aboutmain.jsx";
 import Gallery from "./components/Gallery.jsx";
 import AdminPage from "./components/AdminPage.jsx";
 import AdminLogin from "./components/AdminLogin.jsx";
+import SellPaper from "./components/SellPaper";
 
 
 function Layout({ children }) {
@@ -335,6 +336,14 @@ function App() {
           element={
             <Layout>
               <InstallButton />
+            </Layout>
+          }
+        />
+        <Route
+          path="/sell-paper"
+          element={
+            <Layout>
+              <SellPaper />
             </Layout>
           }
         />

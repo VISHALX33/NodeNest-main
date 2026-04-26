@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import API from "../utils/axios";
 import { useNavigate } from "react-router-dom";
 
-const BRANCHES = ["CSE", "AI & DS", "IT", "ECE", "ME", "Other"];
+const BRANCHES = ["CSE", "AI & DS", "IT", "ECE", "EE", "ME", "CE", "CHE", "Robotics", "Biomedical", "Aerospace", "Biotech", "Other"];
 
 export default function PYQPage() {
   const navigate = useNavigate();
@@ -74,6 +74,25 @@ export default function PYQPage() {
         <p className="text-sm sm:text-base text-gray-500 font-medium px-4">
           Previous Year Question Papers — Semester-wise &amp; Branch-wise
         </p>
+      </div>
+
+      {/* Sell Paper Banner */}
+      <div 
+        onClick={() => navigate("/sell-paper")}
+        className="mb-8 p-4 sm:p-6 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-[2rem] text-white flex items-center justify-between gap-4 cursor-pointer hover:shadow-lg hover:scale-[1.01] transition-all shadow-emerald-200"
+      >
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl items-center justify-center text-3xl">
+            💰
+          </div>
+          <div>
+            <h3 className="font-black text-lg sm:text-xl leading-tight">Got a question paper?</h3>
+            <p className="text-white/80 text-xs sm:text-sm font-medium">Sell your exam papers and earn ₹20 instantly!</p>
+          </div>
+        </div>
+        <div className="px-4 py-2 bg-white text-emerald-700 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider">
+          Sell Now
+        </div>
       </div>
 
       {/* Breadcrumb */}

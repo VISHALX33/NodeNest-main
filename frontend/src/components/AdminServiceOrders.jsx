@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function AdminServiceOrders() {
+export default function AdminServiceOrders({ filters }) {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -31,6 +31,25 @@ export default function AdminServiceOrders() {
       setLoading(false);
     }
   };
+
+  const filteredOrders = orders.filter((order) => {
+    // Date filter
+    const orderDate = new Date(order.createdAt).toISOString().split('T')[0];
+    if (filters?.startDate && orderDate < filters.startDate) return false;
+    if (filters?.endDate && orderDate > filters.endDate) return false;
+
+    // Search filter
+    if (filters?.search) {
+      const s = filters.search.toLowerCase();
+      const match = 
+        order.serviceName.toLowerCase().includes(s) || 
+        order.orderId.toLowerCase().includes(s) ||
+        (order.userDetails?.name || order.user?.name || "").toLowerCase().includes(s);
+      if (!match) return false;
+    }
+
+    return true;
+  });
 
   const updateStatus = async (id, statusData) => {
     setUpdatingId(id);
@@ -75,13 +94,13 @@ export default function AdminServiceOrders() {
       </div>
 
       <div className="space-y-4">
-        {orders.length === 0 ? (
+        {filteredOrders.length === 0 ? (
           <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
             <AlertCircle size={48} className="mx-auto text-gray-300 mb-4" />
             <p className="text-gray-500 font-medium">No service orders found yet.</p>
           </div>
         ) : (
-          orders.map((order) => (
+          filteredOrders.map((order) => (
             <motion.div 
               key={order._id}
               layout

@@ -19,6 +19,7 @@ import serviceOrderRoutes from "./routes/serviceOrderRoutes.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
 import pyqRoutes from "./routes/pyqRoutes.js";
 import scard from "./routes/scardRoutes.js";
+import paperSubmissionRoutes from "./routes/paperSubmissionRoutes.js";
 
 
 console.log("✅ CLIENT_URL:", process.env.CLIENT_URL);
@@ -61,6 +62,7 @@ app.use("/api/service-orders", serviceOrderRoutes);
 app.use("/api/pyq", pyqRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/scard", scard);
+app.use("/api/paper-submissions", paperSubmissionRoutes);
 
 // ✅ Health check for uptime
 app.get("/ping", (req, res) => res.status(200).send("Notesea is alive!"));
