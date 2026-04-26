@@ -46,6 +46,8 @@ app.use(express.urlencoded({ extended: true }));
 const uploadsDir = path.join(process.cwd(), "uploads");
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
 // ✅ API routes
 app.use("/api/users", userRoutes);
 app.use("/api/semesters", semesterRoutes);

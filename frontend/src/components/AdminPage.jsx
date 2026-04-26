@@ -3,6 +3,8 @@ import API from "../utils/axios";
 import { PlusCircle, BookOpen, GraduationCap, FileText, CheckCircle, AlertCircle, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AdminPYQ from "./AdminPYQ";
+import AdminServiceOrders from "./AdminServiceOrders";
+import { Briefcase } from "lucide-react";
 
 export default function AdminPage() {
   const [semesters, setSemesters] = useState([]);
@@ -88,6 +90,7 @@ export default function AdminPage() {
     { id: "subjects", label: "Subjects", icon: BookOpen },
     { id: "notes", label: "Notes", icon: FileText },
     { id: "pyq", label: "PYQ", icon: FileText },
+    { id: "services", label: "Services", icon: Briefcase },
   ];
 
   return (
@@ -332,6 +335,16 @@ export default function AdminPage() {
               exit={{ opacity: 0, x: 20 }}
             >
               <AdminPYQ />
+            </motion.section>
+          )}
+          {activeTab === "services" && (
+            <motion.section
+              key="services"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 20 }}
+            >
+              <AdminServiceOrders />
             </motion.section>
           )}
         </AnimatePresence>

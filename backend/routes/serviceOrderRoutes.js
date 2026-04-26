@@ -9,19 +9,31 @@ import {
   createRazorpayOrder,
   verifyPayment,
   getMyServiceOrders,
+  getAllServiceOrders,
   updateServiceOrderStatus,
   uploadDeliveredFiles,
   downloadDeliveredFile,
 } from "../controllers/serviceOrderController.js";
 
-// Ensure uploads directory exists
-const uploadsDir = path.join(process.cwd(), "uploads/service-orders");
-if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+import { v2 as cloudinary } from "cloudinary";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/service-orders/"),
-  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "service-orders",
+    allowed_formats: ["jpg", "jpeg", "png", "pdf", "docx", "pptx", "xlsx"],
+    resource_type: "auto", // Crucial for non-image files like PDF/DOCX
+  },
+});
+
 const upload = multer({ storage });
 
 const router = express.Router();
@@ -42,5 +54,6 @@ router.post(
   upload.array("files", 5),
   uploadDeliveredFiles
 );
+router.get("/", protect, isAdmin, getAllServiceOrders);
 
 export default router;

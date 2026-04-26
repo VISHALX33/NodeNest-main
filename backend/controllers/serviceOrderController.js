@@ -23,7 +23,7 @@ export const createServiceOrder = async (req, res) => {
     if (typeof userDetails === "string") userDetails = JSON.parse(userDetails);
     if (typeof formData === "string") formData = JSON.parse(formData);
 
-    const clientFiles = req.files ? req.files.map(file => `/uploads/service-orders/${file.filename}`) : [];
+    const clientFiles = req.files ? req.files.map(file => file.path) : [];
 
     let totalAmount = Number(servicePrice);
     let discountAmount = 0;
@@ -117,9 +117,24 @@ export const getMyServiceOrders = async (req, res) => {
   try {
     const orders = await ServiceOrder.find({
       user: req.user._id,
-      paymentStatus: "completed",
+      $or: [
+        { paymentStatus: "completed" },
+        { "formData.orderType": "30_70_Custom" }
+      ]
     }).sort({ createdAt: -1 });
 
+    res.json(orders);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// ---------------- Get All Service Orders (Admin) ----------------
+export const getAllServiceOrders = async (req, res) => {
+  try {
+    const orders = await ServiceOrder.find({})
+      .populate("user", "name email phone")
+      .sort({ createdAt: -1 });
     res.json(orders);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -150,7 +165,7 @@ export const updateServiceOrderStatus = async (req, res) => {
 // ---------------- Upload Delivered Files (Admin) ----------------
 export const uploadDeliveredFiles = async (req, res) => {
   try {
-    const files = req.files.map((file) => `/uploads/service-orders/${file.filename}`);
+    const files = req.files.map((file) => file.path);
     const order = await ServiceOrder.findByIdAndUpdate(
       req.params.id,
       {
@@ -183,7 +198,14 @@ export const downloadDeliveredFile = async (req, res) => {
       return res.status(404).json({ message: "No files delivered yet" });
     }
 
-    const filePath = path.join(process.cwd(), order.deliveredFiles[0]);
+    const fileUrl = order.deliveredFiles[0];
+
+    // If it's a Cloudinary URL
+    if (fileUrl.startsWith("http")) {
+      return res.redirect(fileUrl);
+    }
+
+    const filePath = path.join(process.cwd(), fileUrl);
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ message: "File not found on server" });
     }

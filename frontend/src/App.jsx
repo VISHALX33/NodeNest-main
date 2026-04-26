@@ -22,6 +22,7 @@ import HardProjects from "./components/HardProjects";
 import MyBookings from "./components/MyBookings";
 import ContactUs from "./components/ContactUs";
 import ResearchDocumentation from "./components/ResearchDocumentation";
+import ResearchCustom from "./components/ResearchCustom";
 import PYQPage from "./components/PYQPage";
 import ProjectService from "./components/projectService";
 import ForgotPassword from "./components/ForgotPassword";
@@ -244,6 +245,17 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <ResearchDocumentation />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/research-services-custom"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ResearchCustom />
               </Layout>
             </PrivateRoute>
           }

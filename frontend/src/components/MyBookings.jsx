@@ -201,7 +201,7 @@ const MyBookings = () => {
 
                     {/* Action */}
                     {order.orderStatus === "delivered" &&
-                    order.projectFiles?.length > 0 ? (
+                      order.projectFiles?.length > 0 ? (
                       <button
                         onClick={() =>
                           handleDownload(order._id, order.projectFiles[0])
@@ -291,30 +291,35 @@ const MyBookings = () => {
                         ₹{order.totalAmount}
                       </span>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-800 font-medium">
-                          Paid
-                        </span>
+                        {order.formData?.orderType === "30_70_Custom" && order.paymentStatus === "pending" ? (
+                          <span className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-800 font-medium">
+                            Verifying Advance
+                          </span>
+                        ) : (
+                          <span className="text-xs px-2 py-1 rounded-full bg-emerald-100 text-emerald-800 font-medium">
+                            {order.paymentStatus === "completed" ? "Paid" : "Pending"}
+                          </span>
+                        )}
                         <span
-                          className={`text-xs px-2 py-1 rounded-full font-medium ${
-                            order.orderStatus === "delivered"
+                          className={`text-xs px-2 py-1 rounded-full font-medium ${order.orderStatus === "delivered"
                               ? "bg-blue-100 text-blue-800"
                               : order.orderStatus === "in_progress"
-                              ? "bg-yellow-100 text-yellow-800"
-                              : "bg-gray-100 text-gray-600"
-                          }`}
+                                ? "bg-yellow-100 text-yellow-800"
+                                : "bg-gray-100 text-gray-600"
+                            }`}
                         >
                           {order.orderStatus === "delivered"
                             ? "Delivered"
                             : order.orderStatus === "in_progress"
-                            ? "In Progress"
-                            : "Pending"}
+                              ? "In Progress"
+                              : "Pending"}
                         </span>
                       </div>
                     </div>
 
                     {/* Action */}
                     {order.orderStatus === "delivered" &&
-                    order.deliveredFiles?.length > 0 ? (
+                      order.deliveredFiles?.length > 0 ? (
                       <button
                         onClick={() =>
                           handleServiceDownload(
@@ -345,7 +350,9 @@ const MyBookings = () => {
                         <div className="bg-amber-50 border border-amber-200 text-amber-800 p-3 rounded-xl text-sm flex items-start gap-2">
                           <FaInfoCircle className="text-amber-500 mt-0.5 shrink-0" />
                           <span>
-                            ✅ Payment confirmed! Work will begin shortly.
+                            {order.formData?.orderType === "30_70_Custom" && order.paymentStatus === "pending"
+                              ? "✅ Proof submitted! We are verifying your 30% advance payment."
+                              : "✅ Payment confirmed! Work will begin shortly."}
                             <span className="text-xs text-amber-600 mt-1 block">
                               Contact us on WhatsApp for updates.
                             </span>
