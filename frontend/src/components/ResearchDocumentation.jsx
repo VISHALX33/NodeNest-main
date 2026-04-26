@@ -36,7 +36,7 @@ export default function ResearchDocumentation() {
     citationStyle: "IEEE",
     limit: "",
     teamSize: 1,
-    studentNames: "",
+    studentNames: [""],
     guideName: "",
     facultyInstructions: "",
     includeDiagrams: false,
@@ -62,6 +62,7 @@ export default function ResearchDocumentation() {
     {
       id: "presentation",
       title: "Presentation",
+      serviceType: "PowerPoint Presentation (PPT)",
       price: 499,
       icon: <Monitor className="text-emerald-600" size={32} />,
       features: ["Upto 10-15 Professional Slides", "Speaker Notes Included", "Modern Visual Design", "Only 3 updates possible"],
@@ -71,6 +72,7 @@ export default function ResearchDocumentation() {
     {
       id: "report_paper",
       title: "Report / Research Paper",
+      serviceType: "Report",
       price: 999,
       icon: <BookOpen className="text-emerald-600" size={32} />,
       features: ["Upto 10 Page Research Paper", "Upto 60 Page Comprehensive Report", "Plagiarism-Free", "Only 3 updates possible"],
@@ -78,8 +80,19 @@ export default function ResearchDocumentation() {
       description: "Professional academic writing for research papers and comprehensive reports with proper formatting."
     },
     {
+      id: "ppt_plus_report",
+      title: "PPT + Report",
+      serviceType: "PPT + Report",
+      price: 1499,
+      icon: <Layers className="text-emerald-600" size={32} />,
+      features: ["Upto 10-15 Professional Slides", "Upto 60 Page Detailed Report", "Professional Formatting", "Only 3 updates possible"],
+      gradient: "from-cyan-50 to-blue-50",
+      description: "A perfect blend of a visual presentation and a comprehensive project report for your academic needs."
+    },
+    {
       id: "report_plus_paper",
       title: "Report + Research Paper",
+      serviceType: "Research Paper",
       price: 1699,
       icon: <Layers className="text-emerald-600" size={32} />,
       features: ["Upto 60 Page Detailed Report", "Upto 10 Page Research Paper", "Academic Formatting", "Only 3 updates possible"],
@@ -90,6 +103,7 @@ export default function ResearchDocumentation() {
       id: "ultimate_bundle",
       title: "The Ultimate Bundle",
       subtitle: "Presentation, Research, Report",
+      serviceType: "Academic Project",
       price: 2099,
       icon: <FileText className="text-emerald-600" size={32} />,
       features: ["Upto 60 Page Report", "Upto 10 Page Research Paper", "Upto 10-15 Slides Presentation", "Only 3 updates possible"],
@@ -100,6 +114,7 @@ export default function ResearchDocumentation() {
       id: "elite_all_in_one",
       title: "Elite All-In-One",
       subtitle: "Project + Full Documentation",
+      serviceType: "Academic Project",
       price: 7599,
       icon: <Layers className="text-emerald-600" size={32} />,
       features: ["Custom MERN Project", "Upto 60 Page Report", "Upto 10 Page Research Paper", "Upto 10-15 Slides Presentation", "Priority Support"],
@@ -119,6 +134,11 @@ export default function ResearchDocumentation() {
     setSelectedPlan(plan);
     setShowForm(false);
     setCalculation({ base: plan.price, total: plan.price, discount: 0 });
+    setFormData(prev => ({ 
+      ...prev, 
+      serviceType: plan.serviceType,
+      studentNames: Array.from({ length: prev.teamSize || 1 }).map((_, i) => prev.studentNames[i] || "")
+    }));
   };
 
   const handleContinue = () => setShowForm(true);
@@ -126,6 +146,23 @@ export default function ResearchDocumentation() {
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleTeamSizeChange = (e) => {
+    const size = Math.max(1, parseInt(e.target.value) || 1);
+    const names = [...formData.studentNames];
+    if (names.length < size) {
+      for (let i = names.length; i < size; i++) names.push("");
+    } else {
+      names.length = size;
+    }
+    setFormData({ ...formData, teamSize: size, studentNames: names });
+  };
+
+  const handleStudentNameChange = (index, value) => {
+    const names = [...formData.studentNames];
+    names[index] = value;
+    setFormData({ ...formData, studentNames: names });
   };
 
   const handleCheckboxChange = (e) => {
@@ -244,13 +281,8 @@ export default function ResearchDocumentation() {
 
       {/* S-Tier Premium Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-        {plans.slice(0, 3).map((plan, index) => (
+        {plans.map((plan, index) => (
           <PricingCard key={index} plan={plan} onSelect={() => handlePlanClick(plan)} />
-        ))}
-      </div>
-      <div className="flex flex-col md:flex-row justify-center gap-8">
-        {plans.slice(3).map((plan, index) => (
-          <PricingCard key={index} plan={plan} isLarge={true} onSelect={() => handlePlanClick(plan)} />
         ))}
       </div>
 
@@ -398,7 +430,7 @@ export default function ResearchDocumentation() {
                           name="serviceType" 
                           value={formData.serviceType || selectedPlan.title} 
                           onChange={handleFormChange} 
-                          options={["Research Paper", "Report", "PowerPoint Presentation (PPT)", "Academic Project", "Other"]} 
+                          options={["Research Paper", "Report", "PPT + Report", "PowerPoint Presentation (PPT)", "Academic Project", "Other"]} 
                         />
                         <InputField label="Course / Degree" name="course" value={formData.course} onChange={handleFormChange} placeholder="e.g., B.Tech, MBA" required />
                       </div>
@@ -452,10 +484,36 @@ export default function ResearchDocumentation() {
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-5">
                       <h3 className="text-lg font-bold text-emerald-900 border-l-4 border-emerald-500 pl-3">5. Team & Faculty Details</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <InputField label="Number of Members" name="teamSize" type="number" value={formData.teamSize} onChange={handleFormChange} />
+                        <InputField 
+                          label="Number of Members" 
+                          name="teamSize" 
+                          type="number" 
+                          value={formData.teamSize} 
+                          onChange={handleTeamSizeChange} 
+                          required
+                        />
                         <InputField label="Guide / Coordinator Name" name="guideName" value={formData.guideName} onChange={handleFormChange} />
                       </div>
-                      <TextAreaField label="Names of Students (one per line)" name="studentNames" value={formData.studentNames} onChange={handleFormChange} />
+                      
+                      <div className="space-y-4">
+                        <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center gap-2">
+                          <User size={10} /> Names of Students
+                        </label>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                          {formData.studentNames.map((name, i) => (
+                            <InputField
+                              key={i}
+                              label={`Student ${i + 1} Name`}
+                              name={`studentName_${i}`}
+                              value={name}
+                              onChange={(e) => handleStudentNameChange(i, e.target.value)}
+                              placeholder={`Enter name of member ${i + 1}`}
+                              required
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      
                       <TextAreaField label="Special Instructions from Faculty" name="facultyInstructions" value={formData.facultyInstructions} onChange={handleFormChange} />
                     </motion.div>
                   )}
