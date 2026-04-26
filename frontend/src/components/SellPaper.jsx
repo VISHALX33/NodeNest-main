@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/axios";
-import { 
-  Upload, Image as ImageIcon, CheckCircle, 
+import {
+  Upload, Image as ImageIcon, CheckCircle,
   Clock, AlertCircle, Trash2, Camera, QrCode as QrIcon,
   ChevronRight, ArrowRight, Wallet
 } from "lucide-react";
@@ -79,29 +79,38 @@ export default function SellPaper() {
 
   return (
     <div className="min-h-screen bg-slate-50 pt-24 pb-20 px-4">
-      <div className="max-w-4xl mx-auto space-y-12">
+      <div className="max-w-6xl mx-auto space-y-12">
         
-        {/* Header Section */}
-        <div className="text-center space-y-4">
+        <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-8 md:p-12 rounded-[3rem] border border-slate-100 shadow-xl shadow-emerald-900/5">
+          <div className="flex-1 text-center md:text-left space-y-4">
+            <motion.div 
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-bold"
+            >
+              <Wallet size={16} /> Earn ₹20 per Paper
+            </motion.div>
+            <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+              Sell Your <span className="text-emerald-600">Exam Papers</span>
+            </h1>
+            <p className="text-slate-500 max-w-xl font-medium text-lg">
+              Help other students prepare and get paid instantly. Upload clear images of your PYQs and your payment QR code.
+            </p>
+          </div>
+
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-bold"
+            className="w-full max-w-md rounded-3xl overflow-hidden shadow-2xl border border-slate-50"
           >
-            <Wallet size={16} /> Earn ₹20 per Paper
+            <img src="/sellpaper.png" alt="How to Earn with NoteSea" className="w-full h-auto" />
           </motion.div>
-          <h1 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
-            Sell Your <span className="text-emerald-600">Exam Papers</span>
-          </h1>
-          <p className="text-slate-500 max-w-xl mx-auto font-medium">
-            Help other students prepare and get paid instantly. Upload clear images of your PYQs and your payment QR code.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
           {/* Submission Form */}
-          <motion.div 
+          <motion.div
             initial={{ x: -20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             className="bg-white rounded-[2.5rem] p-8 shadow-2xl shadow-emerald-900/5 border border-slate-100"
@@ -109,7 +118,7 @@ export default function SellPaper() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <label className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Subject Name</label>
-                <input 
+                <input
                   type="text"
                   placeholder="e.g. Data Structures & Algorithms"
                   className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl text-slate-700 font-bold placeholder:text-slate-300 focus:ring-2 focus:ring-emerald-500 transition-all"
@@ -121,7 +130,7 @@ export default function SellPaper() {
               <div className="grid grid-cols-3 gap-4">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Year (2026+)</label>
-                  <select 
+                  <select
                     className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-slate-700 font-bold focus:ring-2 focus:ring-emerald-500 transition-all text-sm"
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
@@ -132,18 +141,18 @@ export default function SellPaper() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Semester</label>
-                  <select 
+                  <select
                     className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-slate-700 font-bold focus:ring-2 focus:ring-emerald-500 transition-all text-sm"
                     value={semester}
                     onChange={(e) => setSemester(e.target.value)}
                   >
                     <option value="">Select</option>
-                    {[1,2,3,4,5,6,7,8].map(s => <option key={s} value={s}>Sem {s}</option>)}
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map(s => <option key={s} value={s}>Sem {s}</option>)}
                   </select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-1">Branch</label>
-                  <select 
+                  <select
                     className="w-full px-4 py-3 bg-slate-50 border-none rounded-xl text-slate-700 font-bold focus:ring-2 focus:ring-emerald-500 transition-all text-sm"
                     value={branch}
                     onChange={(e) => setBranch(e.target.value)}
@@ -160,7 +169,7 @@ export default function SellPaper() {
                   {paperImages.map((img, i) => (
                     <div key={i} className="relative group aspect-square rounded-xl overflow-hidden border border-slate-100">
                       <img src={URL.createObjectURL(img)} alt="Preview" className="w-full h-full object-cover" />
-                      <button 
+                      <button
                         type="button"
                         onClick={() => removePaperImage(i)}
                         className="absolute inset-0 bg-rose-500/80 text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
@@ -204,7 +213,7 @@ export default function SellPaper() {
                 <div className="flex gap-3">
                   <CheckCircle className="text-emerald-600 shrink-0" size={18} />
                   <p className="text-[11px] text-slate-600 font-bold leading-relaxed uppercase">
-                    Upload only clear, high-quality images. Ensure there is no handwriting or overwriting on the paper (Keep it clean).
+                    Upload only clear, high-quality images. Ensure there is no handwriting, overwriting, or any type of watermark on the paper.
                   </p>
                 </div>
               </div>
@@ -216,7 +225,7 @@ export default function SellPaper() {
                 </div>
               )}
 
-              <button 
+              <button
                 type="submit"
                 disabled={loading}
                 className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-black shadow-lg shadow-emerald-600/30 hover:bg-emerald-700 transition-all flex items-center justify-center gap-2 group disabled:bg-slate-300 disabled:shadow-none"
@@ -235,10 +244,10 @@ export default function SellPaper() {
             <h3 className="text-xl font-bold text-slate-800 px-2 flex items-center gap-2">
               <Clock className="text-emerald-500" size={20} /> My Submissions
             </h3>
-            
+
             <div className="space-y-4">
               {fetching ? (
-                [1,2].map(i => <div key={i} className="h-20 bg-white rounded-3xl animate-pulse" />)
+                [1, 2].map(i => <div key={i} className="h-20 bg-white rounded-3xl animate-pulse" />)
               ) : mySubmissions.length === 0 ? (
                 <div className="text-center py-12 bg-white rounded-[2rem] border border-slate-100">
                   <p className="text-slate-400 font-medium">No submissions yet.</p>
@@ -257,10 +266,9 @@ export default function SellPaper() {
                     </div>
                     <div className="text-right">
                       <p className="text-xs font-black text-slate-900">₹{sub.paymentAmount}</p>
-                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${
-                        sub.status === "paid" ? "bg-emerald-100 text-emerald-700" :
-                        sub.status === "pending" ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700"
-                      }`}>
+                      <span className={`text-[10px] font-black uppercase px-2 py-0.5 rounded-full ${sub.status === "paid" ? "bg-emerald-100 text-emerald-700" :
+                          sub.status === "pending" ? "bg-amber-100 text-amber-700" : "bg-rose-100 text-rose-700"
+                        }`}>
                         {sub.status}
                       </span>
                     </div>

@@ -110,60 +110,109 @@ export default function AdminPage() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#f1f5f9] font-sans">
+    <div className="flex min-h-screen bg-[#f1f5f9] font-sans overflow-x-hidden">
       
+      {/* Mobile Header (Hidden on Desktop) */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-20 bg-[#0f172a] text-white flex items-center justify-between px-6 z-[60] border-b border-white/5">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center font-black text-white text-xl">N</div>
+          <span className="font-black text-xl tracking-tight">NodeNest</span>
+        </div>
+        <button 
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="p-2 bg-white/10 rounded-xl transition"
+        >
+          {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
       {/* Sidebar Navigation */}
-      <motion.aside 
-        initial={false}
-        animate={{ width: isSidebarOpen ? 280 : 80 }}
-        className="fixed left-0 top-0 h-full bg-[#0f172a] text-white z-50 transition-all duration-300 shadow-2xl flex flex-col"
-      >
-        <div className="p-6 flex items-center justify-between">
-          {isSidebarOpen && (
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center font-black text-white text-xl">N</div>
-              <span className="font-black text-xl tracking-tight">NodeNest</span>
+      <AnimatePresence mode="wait">
+        {(isSidebarOpen || window.innerWidth >= 1024) && (
+          <motion.aside 
+            initial={window.innerWidth < 1024 ? { x: -300 } : false}
+            animate={{ 
+              x: 0,
+              width: isSidebarOpen ? 280 : 80,
+              transition: { type: "spring", damping: 20 }
+            }}
+            exit={{ x: -300 }}
+            className={`fixed left-0 top-0 h-full bg-[#0f172a] text-white z-50 shadow-2xl flex flex-col ${
+              !isSidebarOpen && "hidden lg:flex"
+            }`}
+          >
+            <div className="p-6 hidden lg:flex items-center justify-between">
+              {isSidebarOpen && (
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center font-black text-white text-xl">N</div>
+                  <span className="font-black text-xl tracking-tight">NodeNest</span>
+                </div>
+              )}
+              <button 
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="p-2 hover:bg-white/10 rounded-xl transition"
+              >
+                {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
             </div>
-          )}
-          <button 
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 hover:bg-white/10 rounded-xl transition"
-          >
-            {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
 
-        <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto scrollbar-hide">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`w-full flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${
-                activeTab === tab.id 
-                ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" 
-                : "text-slate-400 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              <tab.icon size={20} />
-              {isSidebarOpen && <span>{tab.label}</span>}
-            </button>
-          ))}
-        </nav>
+            {/* Mobile Sidebar Header close button */}
+            <div className="lg:hidden p-6 flex justify-end border-b border-white/5">
+              <button onClick={() => setIsSidebarOpen(false)} className="p-2 bg-white/5 rounded-xl"><X size={20} /></button>
+            </div>
 
-        <div className="p-4 border-t border-white/5">
-          <button 
-            onClick={() => navigate("/")}
-            className="w-full flex items-center gap-4 p-4 text-slate-400 font-bold hover:text-rose-400 transition"
-          >
-            <LogOut size={20} />
-            {isSidebarOpen && <span>Exit Dashboard</span>}
-          </button>
-        </div>
-      </motion.aside>
+            <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto scrollbar-hide">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id);
+                    if (window.innerWidth < 1024) setIsSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-4 p-4 rounded-2xl font-bold transition-all ${
+                    activeTab === tab.id 
+                    ? "bg-emerald-500 text-white shadow-lg shadow-emerald-500/20" 
+                    : "text-slate-400 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  <tab.icon size={20} />
+                  {(isSidebarOpen || window.innerWidth < 1024) && <span>{tab.label}</span>}
+                </button>
+              ))}
+            </nav>
+
+            <div className="p-4 border-t border-white/5">
+              <button 
+                onClick={() => navigate("/")}
+                className="w-full flex items-center gap-4 p-4 text-slate-400 font-bold hover:text-rose-400 transition"
+              >
+                <LogOut size={20} />
+                {(isSidebarOpen || window.innerWidth < 1024) && <span>Exit Dashboard</span>}
+              </button>
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
+
+      {/* Backdrop for mobile */}
+      <AnimatePresence>
+        {isSidebarOpen && window.innerWidth < 1024 && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsSidebarOpen(false)}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          />
+        )}
+      </AnimatePresence>
 
       {/* Main Content Area */}
       <main 
-        className={`flex-1 transition-all duration-300 ${isSidebarOpen ? "ml-[280px]" : "ml-[80px]"}`}
+        className={`flex-1 transition-all duration-300 min-w-0 ${
+          isSidebarOpen && window.innerWidth >= 1024 ? "ml-[280px]" : 
+          !isSidebarOpen && window.innerWidth >= 1024 ? "ml-[80px]" : "ml-0 pt-20"
+        }`}
       >
         {/* Top bar with Filters */}
         <header className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-slate-200 p-6 z-40 flex flex-wrap items-center justify-between gap-6">

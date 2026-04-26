@@ -148,7 +148,7 @@ export default function AdminServiceOrders({ filters }) {
                     className="border-t border-gray-50 bg-gray-50/30 p-6 space-y-8"
                   >
                     {/* User & Project Details Overhaul */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                       {/* Section 1: Customer Identity */}
                       <div className="space-y-4">
                         <h4 className="text-[10px] font-black text-emerald-600 uppercase tracking-[0.2em] flex items-center gap-2">
