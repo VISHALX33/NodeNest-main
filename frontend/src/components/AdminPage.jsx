@@ -101,8 +101,8 @@ export default function AdminPage() {
   };
 
   const tabs = [
-    { id: "semesters", label: "Semesters", icon: GraduationCap },
-    { id: "subjects", label: "Subjects", icon: BookOpen },
+    // { id: "semesters", label: "Semesters", icon: GraduationCap },
+    // { id: "subjects", label: "Subjects", icon: BookOpen },
     { id: "notes", label: "Notes", icon: FileText },
     { id: "pyq", label: "PYQ Papers", icon: FileText },
     { id: "services", label: "Service Orders", icon: Briefcase },

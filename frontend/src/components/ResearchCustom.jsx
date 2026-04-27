@@ -64,12 +64,15 @@ export default function ResearchCustom() {
   };
 
   const handleTeamSizeChange = (e) => {
-    const size = Math.max(1, parseInt(e.target.value) || 1);
+    const val = e.target.value;
+    const size = val === "" ? "" : parseInt(val);
+    const effectiveSize = Math.max(1, parseInt(val) || 1);
+    
     const names = [...formData.studentNames];
-    if (names.length < size) {
-      for (let i = names.length; i < size; i++) names.push("");
+    if (names.length < effectiveSize) {
+      for (let i = names.length; i < effectiveSize; i++) names.push("");
     } else {
-      names.length = size;
+      names.length = effectiveSize;
     }
     setFormData({ ...formData, teamSize: size, studentNames: names });
   };

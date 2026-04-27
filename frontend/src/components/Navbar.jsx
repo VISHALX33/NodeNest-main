@@ -108,7 +108,7 @@ export default function Navbar() {
         {/* Desktop Menu */}
         {user ? (
           <div className="hidden md:flex relative items-center gap-6 px-6 py-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-emerald-100">
-            <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Notice</Link>
+            <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Updates</Link>
             <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
             <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
             <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link>
