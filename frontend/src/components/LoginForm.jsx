@@ -197,7 +197,7 @@ export default function LandingPage({ switchToSignUp }) {
           <div className="grid md:grid-cols-5 gap-8">
 
             {[
-              { value: "200+", label: "Active Users" },
+              { value: "300+", label: "Active Users" },
               { value: "4.8★", label: "Student Satisfaction" },
               { value: "10+", label: "Projects Delivered" },
               { value: "98%", label: "Success Rate" },

@@ -31,6 +31,9 @@ export default function AdminPage() {
   const [semesterTitle, setSemesterTitle] = useState("");
   const [subjectData, setSubjectData] = useState({ semesterId: "", title: "" });
   const [noteData, setNoteData] = useState({ subjectId: "", title: "", pdfUrl: "" });
+  const [showQuickAddSubject, setShowQuickAddSubject] = useState(false);
+  const [quickSubjectTitle, setQuickSubjectTitle] = useState("");
+  const [selectedSemesterForNote, setSelectedSemesterForNote] = useState("");
 
   useEffect(() => {
     fetchSemesters();
@@ -70,12 +73,24 @@ export default function AdminPage() {
   };
 
   const handleSubjectSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     setLoading(true);
     try {
-      await API.post(`/semesters/${subjectData.semesterId}/subjects`, { title: subjectData.title });
+      const sid = e ? subjectData.semesterId : selectedSemesterForNote;
+      const title = e ? subjectData.title : quickSubjectTitle;
+      
+      const res = await API.post(`/semesters/${sid}/subjects`, { title });
       setMessage({ type: "success", text: "Subject added successfully!" });
-      setSubjectData({ ...subjectData, title: "" });
+      
+      if (e) {
+        setSubjectData({ ...subjectData, title: "" });
+      } else {
+        setQuickSubjectTitle("");
+        setShowQuickAddSubject(false);
+        fetchSubjects(sid); // Refresh subjects list
+        setNoteData({ ...noteData, subjectId: res.data._id }); // Automatically select the new subject
+      }
+      return res.data;
     } catch (err) {
       setMessage({ type: "error", text: err.response?.data?.message || "Failed to add subject" });
     } finally {
@@ -101,8 +116,8 @@ export default function AdminPage() {
   };
 
   const tabs = [
-    // { id: "semesters", label: "Semesters", icon: GraduationCap },
-    // { id: "subjects", label: "Subjects", icon: BookOpen },
+    { id: "semesters", label: "Semesters", icon: GraduationCap },
+    { id: "subjects", label: "Subjects", icon: BookOpen },
     { id: "notes", label: "Notes", icon: FileText },
     { id: "pyq", label: "PYQ Papers", icon: FileText },
     { id: "services", label: "Service Orders", icon: Briefcase },
@@ -378,7 +393,11 @@ export default function AdminPage() {
                       <label className="text-emerald-200 text-[10px] font-black uppercase tracking-[0.2em] ml-2">Choose Semester</label>
                       <select
                         className="w-full px-6 py-5 bg-white/5 border border-white/10 rounded-3xl focus:ring-2 focus:ring-emerald-400 focus:bg-white/10 transition-all outline-none text-white font-bold"
-                        onChange={(e) => e.target.value && fetchSubjects(e.target.value)}
+                        value={selectedSemesterForNote}
+                        onChange={(e) => {
+                          setSelectedSemesterForNote(e.target.value);
+                          if (e.target.value) fetchSubjects(e.target.value);
+                        }}
                         required
                       >
                         <option value="" className="bg-slate-900">Select...</option>
@@ -389,18 +408,49 @@ export default function AdminPage() {
                     </div>
 
                     <div className="space-y-3">
-                      <label className="text-emerald-200 text-[10px] font-black uppercase tracking-[0.2em] ml-2">Choose Subject</label>
-                      <select
-                        className="w-full px-6 py-5 bg-white/5 border border-white/10 rounded-3xl focus:ring-2 focus:ring-emerald-400 focus:bg-white/10 transition-all outline-none text-white font-bold"
-                        value={noteData.subjectId}
-                        onChange={(e) => setNoteData({ ...noteData, subjectId: e.target.value })}
-                        required
-                      >
-                        <option value="" className="bg-slate-900">Select...</option>
-                        {subjects.map((sub) => (
-                          <option key={sub._id} value={sub._id} className="bg-slate-900">{sub.title}</option>
-                        ))}
-                      </select>
+                      <div className="flex justify-between items-center ml-2">
+                        <label className="text-emerald-200 text-[10px] font-black uppercase tracking-[0.2em]">
+                          {showQuickAddSubject ? "New Subject Title" : "Choose Subject"}
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => setShowQuickAddSubject(!showQuickAddSubject)}
+                          className="text-emerald-400 text-[10px] font-bold uppercase hover:text-emerald-300 transition"
+                        >
+                          {showQuickAddSubject ? "Select Existing" : "Add New Subject"}
+                        </button>
+                      </div>
+                      
+                      {showQuickAddSubject ? (
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            placeholder="e.g. Operating Systems"
+                            className="flex-1 px-6 py-5 bg-white/5 border border-white/10 rounded-3xl focus:ring-2 focus:ring-emerald-400 focus:bg-white/10 transition-all outline-none text-white font-bold placeholder:text-white/20"
+                            value={quickSubjectTitle}
+                            onChange={(e) => setQuickSubjectTitle(e.target.value)}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleSubjectSubmit()}
+                            className="px-6 bg-emerald-500 text-slate-900 rounded-3xl font-bold hover:bg-emerald-400 transition"
+                          >
+                            Add
+                          </button>
+                        </div>
+                      ) : (
+                        <select
+                          className="w-full px-6 py-5 bg-white/5 border border-white/10 rounded-3xl focus:ring-2 focus:ring-emerald-400 focus:bg-white/10 transition-all outline-none text-white font-bold"
+                          value={noteData.subjectId}
+                          onChange={(e) => setNoteData({ ...noteData, subjectId: e.target.value })}
+                          required
+                        >
+                          <option value="" className="bg-slate-900">Select...</option>
+                          {subjects.map((sub) => (
+                            <option key={sub._id} value={sub._id} className="bg-slate-900">{sub.title}</option>
+                          ))}
+                        </select>
+                      )}
                     </div>
 
                     <div className="space-y-3">

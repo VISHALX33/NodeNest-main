@@ -110,13 +110,13 @@ export default function Navbar() {
           <div className="hidden md:flex relative items-center gap-6 px-6 py-2 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-emerald-100">
             <Link to="/soon" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Updates</Link>
             <Link to="/project-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Projects</Link>
-            <Link to="/how-it-works" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">How It Works</Link>
             <Link to="/research-services" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Research</Link>
+            <Link to="/resume-builder" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200 relative">
+              Resume <span className="absolute -top-3 -right-4 bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full animate-pulse">NEW</span>
+            </Link>
             <Link to="/pyq" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">PYQ</Link>
             <Link to="/chat" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Global Chat</Link>
-            <Link to="/about-home" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">About</Link>
             <Link to="/my-bookings" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">My Orders</Link>
-            <Link to="/channel" className="text-emerald-700 font-medium hover:text-emerald-500 transition duration-200">Channel</Link>
 
             {/* Support Dropdown */}
             <div className="relative">
@@ -176,16 +176,17 @@ export default function Navbar() {
         <div className="flex flex-col p-6 gap-6 text-gray-800 overflow-y-auto flex-1">
           <Link to="/soon" onClick={() => setIsSidebarOpen(false)}><FaBell className="inline mr-2" /> Notifications</Link>
           <Link to="/project-services" onClick={() => setIsSidebarOpen(false)}><FaStore className="inline mr-2" /> Project Services</Link>
-          <Link to="/how-it-works" onClick={() => setIsSidebarOpen(false)}><FaQuestionCircle className="inline mr-2" /> How It Works</Link>
           <Link to="/research-services" onClick={() => setIsSidebarOpen(false)}><FaFileAlt className="inline mr-2" /> Research Services</Link>
+          <Link to="/resume-builder" onClick={() => setIsSidebarOpen(false)} className="relative inline-block">
+            <FaFileAlt className="inline mr-2" /> Resume Builder
+            <span className="ml-2 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">NEW</span>
+          </Link>
           <Link to="/pyq" onClick={() => setIsSidebarOpen(false)}><FaBookOpen className="inline mr-2" /> PYQ Papers</Link>
           <Link to="/chat" onClick={() => setIsSidebarOpen(false)}><FaComments className="inline mr-2" /> Global Chat</Link>
           <Link to="/my-bookings" onClick={() => setIsSidebarOpen(false)}><FaShoppingCart className="inline mr-2" /> My Orders</Link>
-          <Link to="/channel" onClick={() => setIsSidebarOpen(false)}><FaUsers className="inline mr-2" /> Channel</Link>
           <Link to="/scard" className="relative  font-bold px-4 py-2 rounded-full hover:from-green-500 hover:to-green-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-110 " onClick={() => setIsSidebarOpen(false)}><FaIdCardAlt className="inline mr-2 " /> SCard
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-1 ">NEW!</span>
           </Link>
-          <Link to="/about-home" onClick={() => setIsSidebarOpen(false)}><FaInfoCircle className="inline mr-2" /> About</Link>
 
           <div className="mt-2 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
             <h4 className="text-xs font-bold text-emerald-700 uppercase mb-3">Connect</h4>

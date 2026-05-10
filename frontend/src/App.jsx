@@ -39,6 +39,7 @@ import Gallery from "./components/Gallery.jsx";
 import AdminPage from "./components/AdminPage.jsx";
 import AdminLogin from "./components/AdminLogin.jsx";
 import SellPaper from "./components/SellPaper";
+import ResumeBuilder from "./components/ResumeBuilder.jsx";
 
 
 function Layout({ children }) {
@@ -246,6 +247,17 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <ResearchDocumentation />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/resume-builder"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <ResumeBuilder />
               </Layout>
             </PrivateRoute>
           }

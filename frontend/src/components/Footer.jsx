@@ -71,10 +71,11 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2">
                 <li><Link to="/dashboard" className="hover:text-emerald-600 transition-colors">Dashboard</Link></li>
+                <li><Link to="/how-it-works" className="hover:text-emerald-600 transition-colors">How It Works</Link></li>
                 <li><Link to="/tasks" className="hover:text-emerald-600 transition-colors">My Tasks</Link></li>
-                <li><Link to="/mypdf" className="hover:text-emerald-600 transition-colors">Notes</Link></li>
+                <li><Link to="/mypdf" className="hover:text-emerald-600 transition-colors">Notes Library</Link></li>
                 <li><Link to="https://calculator.notesea.xyz/" className="hover:text-emerald-600 transition-colors">CGPA Calculator</Link></li>
-                <li><Link to="/chat" className="hover:text-emerald-600 transition-colors">Chat</Link></li>
+                <li><Link to="/chat" className="hover:text-emerald-600 transition-colors">Global Chat</Link></li>
                 <li><Link to="/team" className="hover:text-emerald-600 transition-colors">Partners</Link></li>
                 <li><Link to="/gallery" className="hover:text-emerald-600 transition-colors">Gallery</Link></li>
                 <li><Link to="/scard" className="hover:text-emerald-600 transition-colors flex items-center">
@@ -91,10 +92,13 @@ export default function Footer() {
               <ul className="space-y-2">
                 <li><Link to="/easy-projects" className="hover:text-emerald-600 transition-colors">Browse Services</Link></li>
                 <li><Link to="/research-services" className="hover:text-emerald-600 transition-colors">Research & Docs</Link></li>
+                <li><Link to="/resume-builder" className="hover:text-emerald-600 transition-colors flex items-center">
+                  Resume Builder <span className="ml-2 bg-emerald-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">NEW</span>
+                </Link></li>
                 <li><Link to="/pyq" className="hover:text-emerald-600 transition-colors">PYQ Papers</Link></li>
-                <li><Link to="/my-bookings" className="hover:text-emerald-600 transition-colors">My Bookings</Link></li>
+                <li><Link to="/my-bookings" className="hover:text-emerald-600 transition-colors">My Orders</Link></li>
                 <li><Link to="/channel" className="hover:text-emerald-600 transition-colors">YouTube Channel</Link></li>
-                <li><Link to="/chatbot" className="hover:text-emerald-600 transition-colors">Chatbot</Link></li>
+                <li><Link to="/chatbot" className="hover:text-emerald-600 transition-colors">AI Chatbot</Link></li>
               </ul>
             </div>
 
