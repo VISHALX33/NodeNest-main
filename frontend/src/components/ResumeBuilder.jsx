@@ -2,12 +2,51 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Download, Plus, Trash2, User, Briefcase, 
   GraduationCap, Code, FileText, Settings, Award, 
-  Globe, Trophy, Palette, ChevronDown, ChevronUp,
-  Image as ImageIcon, RotateCcw, Layout, Check, Sparkles
+  Globe, ChevronDown, ChevronUp,
+  Image as ImageIcon, RotateCcw, Layout, Check, Sparkles,
+  Lightbulb, ChevronRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const STORAGE_KEY = 'nodenest_resume_data';
+
+const TEMPLATE_LABELS = {
+  executive: 'Executive',
+  professional: 'Professional',
+  classic: 'Classic',
+  minimal: 'Minimal',
+  modern: 'Modern',
+  creative: 'Creative',
+};
+
+const ROLE_TEMPLATE_GUIDE = [
+  { role: 'Software Engineer / Developer', template: 'minimal', reason: 'Clean ATS-friendly layout highlights skills and projects recruiters scan first.' },
+  { role: 'Data Scientist / ML Engineer', template: 'minimal', reason: 'Structured sections make technical skills and research easy to parse.' },
+  { role: 'Fresh Graduate / Student', template: 'minimal', reason: 'Simple format puts education and projects front and center without clutter.' },
+  { role: 'Intern / Entry Level', template: 'minimal', reason: 'One-page clarity works best when experience is limited.' },
+  { role: 'Product Manager', template: 'modern', reason: 'Balanced two-column layout showcases impact and cross-functional skills.' },
+  { role: 'Business Analyst', template: 'modern', reason: 'Professional yet contemporary — ideal for stakeholder-facing roles.' },
+  { role: 'Marketing Manager', template: 'modern', reason: 'Highlights achievements and metrics in a polished corporate style.' },
+  { role: 'Digital Marketer / SEO', template: 'creative', reason: 'Visual sidebar helps you stand out in creative and growth teams.' },
+  { role: 'Graphic Designer / UI-UX', template: 'creative', reason: 'Profile photo and color sidebar reflect design sensibility.' },
+  { role: 'Content Writer / Copywriter', template: 'creative', reason: 'Personality-forward layout suits portfolio-driven creative hiring.' },
+  { role: 'CEO / Director / VP', template: 'executive', reason: 'Sidebar layout signals leadership with strong hierarchy and presence.' },
+  { role: 'Sales Manager / Account Executive', template: 'executive', reason: 'Bold structure emphasizes results, territory wins, and revenue impact.' },
+  { role: 'Management Consultant', template: 'executive', reason: 'Corporate two-column format matches top-tier consulting expectations.' },
+  { role: 'Operations / Supply Chain Manager', template: 'executive', reason: 'Organized sections communicate scale, process, and leadership.' },
+  { role: 'HR Manager / Recruiter', template: 'professional', reason: 'Formal centered layout builds trust with hiring stakeholders.' },
+  { role: 'Finance / Accountant / Auditor', template: 'professional', reason: 'Conservative serif styling fits banking, audit, and compliance roles.' },
+  { role: 'Banking / Investment Analyst', template: 'classic', reason: 'Traditional format aligns with finance industry norms.' },
+  { role: 'Lawyer / Legal Associate', template: 'classic', reason: 'Formal typography and centered headers suit legal profession standards.' },
+  { role: 'Teacher / Professor / Academic', template: 'classic', reason: 'Scholarly, timeless layout for education and research positions.' },
+  { role: 'Doctor / Nurse / Healthcare', template: 'professional', reason: 'Clear credentials, certifications, and experience in a credible format.' },
+  { role: 'Civil / Mechanical Engineer', template: 'minimal', reason: 'Technical skills and project delivery read clearly for engineering recruiters.' },
+  { role: 'Government / Public Sector', template: 'classic', reason: 'Straightforward, formal presentation for public service applications.' },
+  { role: 'MBA / General Management', template: 'executive', reason: 'Leadership-focused sidebar highlights strategy and business outcomes.' },
+  { role: 'Startup Founder / Co-founder', template: 'modern', reason: 'Flexible layout tells your story across roles, ventures, and skills.' },
+  { role: 'Architect / Interior Designer', template: 'creative', reason: 'Visual layout complements design portfolios and creative portfolios.' },
+  { role: 'Customer Success / Support Lead', template: 'professional', reason: 'Professional tone with room for metrics and client relationship wins.' },
+];
 
 const DEFAULT_DATA = {
   personal: {
@@ -59,7 +98,8 @@ const DEFAULT_DATA = {
     }
   ],
   themeColor: "emerald",
-  template: "modern" // modern, professional, creative
+  template: "executive",
+  selectedRole: "",
 };
 
 export default function ResumeBuilder() {
@@ -94,6 +134,8 @@ export default function ResumeBuilder() {
   };
 
   const currentTheme = colors[data.themeColor] || colors.emerald;
+  const TEMPLATES = ['executive', 'professional', 'classic', 'minimal', 'modern', 'creative'];
+  const activeTemplate = TEMPLATES.includes(data.template) ? data.template : 'executive';
 
   const handlePersonalChange = (e) => {
     const { name, value } = e.target;
@@ -162,6 +204,13 @@ export default function ResumeBuilder() {
             <RotateCcw size={20} />
           </button>
         </div>
+
+        <RoleSuggestionBox
+          selectedRole={data.selectedRole || ''}
+          currentTemplate={activeTemplate}
+          onRoleChange={(roleId) => setData((prev) => ({ ...prev, selectedRole: roleId }))}
+          onApplyTemplate={(template) => setData((prev) => ({ ...prev, template }))}
+        />
 
         {/* Section Accordions */}
         <div className="space-y-4">
@@ -283,6 +332,27 @@ export default function ResumeBuilder() {
             <TextAreaField label="Languages" value={data.languages} onChange={(e) => setData({...data, languages: e.target.value})} rows={2} />
             <TextAreaField label="Achievements" value={data.achievements} onChange={(e) => setData({...data, achievements: e.target.value})} rows={3} />
           </Accordion>
+
+          <Accordion 
+            title="Certifications" 
+            icon={<Award size={18} />} 
+            isOpen={activeSection === "certifications"} 
+            onClick={() => setActiveSection(activeSection === "certifications" ? "" : "certifications")}
+          >
+            {data.certifications.map((cert) => (
+              <div key={cert.id} className="relative bg-slate-50 p-5 rounded-2xl mb-4 border border-slate-100">
+                <button onClick={() => removeItem("certifications", cert.id)} className="absolute top-4 right-4 text-slate-300 hover:text-rose-500 transition-colors">
+                  <Trash2 size={16} />
+                </button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <InputField label="Certificate Name" value={cert.title} onChange={(e) => handleArrayChange("certifications", cert.id, 'title', e.target.value)} />
+                  <InputField label="Issuing Organization" value={cert.issuer} onChange={(e) => handleArrayChange("certifications", cert.id, 'issuer', e.target.value)} />
+                  <InputField label="Date" value={cert.date} onChange={(e) => handleArrayChange("certifications", cert.id, 'date', e.target.value)} />
+                </div>
+              </div>
+            ))}
+            <AddButton onClick={() => addItem("certifications", { title: "", issuer: "", date: "" })}>Add Certification</AddButton>
+          </Accordion>
         </div>
       </div>
 
@@ -298,10 +368,13 @@ export default function ResumeBuilder() {
               <select 
                 value={data.template} 
                 onChange={(e) => setData({...data, template: e.target.value})}
-                className="bg-transparent text-sm font-black text-slate-700 outline-none cursor-pointer uppercase tracking-tight"
+                className="bg-transparent text-sm font-black text-slate-700 outline-none cursor-pointer uppercase tracking-tight max-w-[140px]"
               >
-                <option value="modern">Modern</option>
+                <option value="executive">Executive</option>
                 <option value="professional">Professional</option>
+                <option value="classic">Classic</option>
+                <option value="minimal">Minimal</option>
+                <option value="modern">Modern</option>
                 <option value="creative">Creative</option>
               </select>
             </div>
@@ -329,18 +402,22 @@ export default function ResumeBuilder() {
         </div>
 
         {/* Paper Container */}
-        <div className={`bg-white shadow-2xl w-full max-w-[800px] min-h-[1131px] print:shadow-none print:w-full print:min-h-0 text-slate-800 p-8 md:p-12 lg:p-16 print:p-0 mx-auto transition-all duration-500 ${data.template === 'professional' ? 'font-serif' : 'font-sans'}`}>
+        <div className={`resume-paper bg-white shadow-2xl w-full max-w-[800px] min-h-[1131px] print:shadow-none print:w-full print:min-h-0 text-slate-800 mx-auto transition-all duration-500 overflow-hidden ${['professional', 'classic'].includes(activeTemplate) ? 'font-serif' : 'font-sans'}`}>
           <AnimatePresence mode="wait">
             <motion.div
-              key={data.template}
-              initial={{ opacity: 0, y: 20 }}
+              key={activeTemplate}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.25 }}
+              className="h-full"
             >
-              {data.template === 'modern' && <ModernTemplate data={data} theme={currentTheme} />}
-              {data.template === 'professional' && <ProfessionalTemplate data={data} theme={currentTheme} />}
-              {data.template === 'creative' && <CreativeTemplate data={data} theme={currentTheme} />}
+              {activeTemplate === 'executive' && <ExecutiveTemplate data={data} theme={currentTheme} />}
+              {activeTemplate === 'modern' && <ModernTemplate data={data} theme={currentTheme} />}
+              {activeTemplate === 'professional' && <ProfessionalTemplate data={data} theme={currentTheme} />}
+              {activeTemplate === 'classic' && <ClassicTemplate data={data} theme={currentTheme} />}
+              {activeTemplate === 'minimal' && <MinimalTemplate data={data} theme={currentTheme} />}
+              {activeTemplate === 'creative' && <CreativeTemplate data={data} theme={currentTheme} />}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -348,10 +425,11 @@ export default function ResumeBuilder() {
 
       <style dangerouslySetInnerHTML={{__html: `
         @media print {
-          @page { margin: 0; size: auto; }
+          @page { margin: 12mm; size: A4 portrait; }
           body { margin: 0; background: white; }
           nav, footer, .print\\:hidden, header { display: none !important; }
           .print\\:block { display: block !important; }
+          .resume-paper { max-width: 100% !important; box-shadow: none !important; min-height: auto !important; }
           * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         }
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
@@ -363,80 +441,508 @@ export default function ResumeBuilder() {
   );
 }
 
+// ---------------- Template helpers ----------------
+
+function parseLines(text) {
+  if (!text?.trim()) return [];
+  return text.split(/\n|•/).map(s => s.trim()).filter(Boolean);
+}
+
+function parseSkills(skills) {
+  if (!skills?.trim()) return [];
+  return skills.split(/[,;|]/).map(s => s.trim()).filter(Boolean);
+}
+
+function ContactRow({ items, className = "" }) {
+  const visible = items.filter(Boolean);
+  if (!visible.length) return null;
+  return (
+    <p className={`text-[10px] text-slate-500 tracking-wide ${className.includes('center') ? 'text-center' : ''} ${className}`}>
+      {visible.map((item, i) => (
+        <span key={i}>
+          {i > 0 && <span className="mx-2 text-slate-300">|</span>}
+          {item}
+        </span>
+      ))}
+    </p>
+  );
+}
+
+function BulletList({ text, className = "text-xs text-slate-600 leading-relaxed" }) {
+  const lines = parseLines(text);
+  if (!lines.length) return null;
+  if (lines.length === 1) return <p className={className}>{lines[0]}</p>;
+  return (
+    <ul className={`${className} list-disc pl-4 space-y-1`}>
+      {lines.map((line, i) => <li key={i}>{line}</li>)}
+    </ul>
+  );
+}
+
+function SkillPills({ skills, theme, variant = "light" }) {
+  const list = parseSkills(skills);
+  if (!list.length) return null;
+  const dark = variant === "dark";
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {list.map((s, i) => (
+        <span
+          key={i}
+          className={`px-2.5 py-1 text-[9px] font-semibold rounded tracking-wide ${dark ? 'bg-white/15 text-white' : ''}`}
+          style={dark ? {} : { backgroundColor: theme.light, color: theme.primary }}
+        >
+          {s}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function CertBlock({ certifications, className = "text-xs text-slate-600" }) {
+  if (!certifications?.length) return null;
+  return (
+    <div className="space-y-2">
+      {certifications.map((c) => (
+        <div key={c.id} className={className}>
+          <span className="font-semibold text-slate-800">{c.title}</span>
+          {c.issuer && <span className="text-slate-500"> — {c.issuer}</span>}
+          {c.date && <span className="text-slate-400"> ({c.date})</span>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProSectionTitle({ title, theme, variant = "default", align = "left" }) {
+  const alignClass = align === "center" ? "text-center" : "";
+  if (variant === "sidebar") {
+    return (
+      <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/90 border-b border-white/20 pb-2 mb-3">
+        {title}
+      </h3>
+    );
+  }
+  if (variant === "underline") {
+    return (
+      <h3
+        className={`text-[11px] font-bold uppercase tracking-[0.18em] pb-1.5 mb-4 border-b ${alignClass}`}
+        style={{ color: theme.primary, borderColor: theme.light }}
+      >
+        {title}
+      </h3>
+    );
+  }
+  return (
+    <h3 className={`text-[11px] font-bold uppercase tracking-[0.15em] text-slate-800 mb-3 flex items-center gap-2 ${alignClass}`}>
+      <span className="w-8 h-0.5 shrink-0" style={{ backgroundColor: theme.primary }} />
+      {title}
+    </h3>
+  );
+}
+
 // ---------------- Template Renderers ----------------
 
-function ModernTemplate({ data, theme }) {
+function ExecutiveTemplate({ data, theme }) {
+  const { personal } = data;
   return (
-    <div className="space-y-8">
-      <header className={`flex justify-between items-start border-b-4 pb-8`} style={{ borderColor: theme.primary }}>
-        <div>
-          <h1 className="text-5xl font-black text-slate-900 tracking-tighter uppercase mb-2 leading-none">{data.personal.name}</h1>
-          <h2 className="text-xl font-bold tracking-widest uppercase opacity-60" style={{ color: theme.primary }}>{data.personal.title}</h2>
-          <div className="flex flex-wrap gap-4 mt-6 text-[11px] font-black uppercase tracking-widest text-slate-500">
-            {data.personal.email && <span className="flex items-center gap-1"><FileText size={12} /> {data.personal.email}</span>}
-            {data.personal.phone && <span>{data.personal.phone}</span>}
-            {data.personal.location && <span>{data.personal.location}</span>}
+    <div className="flex min-h-[1050px] text-slate-800">
+      <aside className="w-[32%] shrink-0 px-7 py-10 text-white print:text-white" style={{ backgroundColor: theme.primary }}>
+        {personal.profilePic ? (
+          <img src={personal.profilePic} alt="" className="w-28 h-28 rounded-full object-cover mx-auto border-4 border-white/25 mb-6 shadow-lg" />
+        ) : (
+          <div className="w-28 h-28 rounded-full mx-auto bg-white/10 border-2 border-white/20 flex items-center justify-center mb-6">
+            <User size={36} className="text-white/50" />
+          </div>
+        )}
+        <h1 className="text-xl font-bold leading-tight text-center mb-1">{personal.name}</h1>
+        <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-center text-white/75 mb-8">{personal.title}</p>
+
+        <div className="space-y-7">
+          <div>
+            <ProSectionTitle title="Contact" variant="sidebar" />
+            <div className="space-y-2.5 text-[10px] text-white/85 leading-relaxed">
+              {personal.email && <p>{personal.email}</p>}
+              {personal.phone && <p>{personal.phone}</p>}
+              {personal.location && <p>{personal.location}</p>}
+              {personal.linkedin && <p className="break-all">{personal.linkedin}</p>}
+              {personal.github && <p className="break-all">{personal.github}</p>}
+            </div>
+          </div>
+
+          <div>
+            <ProSectionTitle title="Core Skills" variant="sidebar" />
+            <SkillPills skills={data.skills} theme={theme} variant="dark" />
+          </div>
+
+          {data.languages && (
+            <div>
+              <ProSectionTitle title="Languages" variant="sidebar" />
+              <p className="text-[10px] text-white/80 leading-relaxed">{data.languages}</p>
+            </div>
+          )}
+
+          {data.certifications?.length > 0 && (
+            <div>
+              <ProSectionTitle title="Certifications" variant="sidebar" />
+              <CertBlock certifications={data.certifications} className="text-[10px] text-white/85" />
+            </div>
+          )}
+        </div>
+      </aside>
+
+      <main className="flex-1 px-9 py-10 space-y-7 bg-white">
+        {personal.summary && (
+          <section>
+            <ProSectionTitle title="Professional Summary" theme={theme} variant="underline" />
+            <p className="text-[13px] leading-[1.65] text-slate-600 text-justify">{personal.summary}</p>
+          </section>
+        )}
+
+        {data.experience?.length > 0 && (
+          <section>
+            <ProSectionTitle title="Work Experience" theme={theme} variant="underline" />
+            <div className="space-y-5">
+              {data.experience.map((exp) => (
+                <div key={exp.id}>
+                  <div className="flex justify-between items-start gap-4 mb-1">
+                    <h4 className="text-[13px] font-bold text-slate-900">{exp.title}</h4>
+                    <span className="text-[10px] font-medium text-slate-400 whitespace-nowrap shrink-0">{exp.duration}</span>
+                  </div>
+                  <p className="text-[11px] font-semibold mb-2" style={{ color: theme.primary }}>{exp.company}</p>
+                  <BulletList text={exp.description} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {data.education?.length > 0 && (
+          <section>
+            <ProSectionTitle title="Education" theme={theme} variant="underline" />
+            <div className="space-y-3">
+              {data.education.map((edu) => (
+                <div key={edu.id} className="flex justify-between gap-4">
+                  <div>
+                    <h4 className="text-[13px] font-bold text-slate-900">{edu.degree}</h4>
+                    <p className="text-[11px] text-slate-500">{edu.university}</p>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <p className="text-[10px] text-slate-400">{edu.duration}</p>
+                    {edu.grade && <p className="text-[10px] font-medium" style={{ color: theme.primary }}>{edu.grade}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {data.projects?.length > 0 && (
+          <section>
+            <ProSectionTitle title="Projects" theme={theme} variant="underline" />
+            <div className="space-y-4">
+              {data.projects.map((p) => (
+                <div key={p.id}>
+                  <div className="flex justify-between items-baseline gap-2">
+                    <h4 className="text-[12px] font-bold text-slate-900">{p.title}</h4>
+                    {p.link && <span className="text-[9px] text-slate-400 truncate max-w-[45%]">{p.link}</span>}
+                  </div>
+                  <BulletList text={p.description} className="text-[11px] text-slate-600 mt-1" />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {data.achievements && (
+          <section>
+            <ProSectionTitle title="Achievements" theme={theme} variant="underline" />
+            <BulletList text={data.achievements} className="text-[11px] text-slate-600" />
+          </section>
+        )}
+      </main>
+    </div>
+  );
+}
+
+function ClassicTemplate({ data, theme }) {
+  const { personal } = data;
+  return (
+    <div className="px-10 py-11 space-y-7 text-slate-900">
+      <header className="text-center border-b-2 pb-6" style={{ borderColor: theme.primary }}>
+        <h1 className="text-3xl font-normal tracking-[0.12em] uppercase mb-2">{personal.name}</h1>
+        <p className="text-sm italic text-slate-600 mb-3">{personal.title}</p>
+        <ContactRow
+          className="justify-center text-[10px] uppercase tracking-wider"
+          items={[personal.location, personal.phone, personal.email, personal.linkedin, personal.github]}
+        />
+      </header>
+
+      {personal.summary && (
+        <section>
+          <ProSectionTitle title="Summary" theme={theme} align="center" variant="underline" />
+          <p className="text-sm leading-relaxed text-justify text-slate-700 px-2">{personal.summary}</p>
+        </section>
+      )}
+
+      {data.experience?.length > 0 && (
+        <section>
+          <ProSectionTitle title="Professional Experience" theme={theme} align="center" variant="underline" />
+          {data.experience.map((exp) => (
+            <div key={exp.id} className="mb-5 last:mb-0">
+              <div className="flex justify-between items-baseline">
+                <h4 className="text-sm font-bold">{exp.title}</h4>
+                <span className="text-[10px] italic text-slate-500">{exp.duration}</span>
+              </div>
+              <p className="text-xs font-semibold mb-2" style={{ color: theme.primary }}>{exp.company}</p>
+              <BulletList text={exp.description} className="text-xs text-slate-700 leading-relaxed" />
+            </div>
+          ))}
+        </section>
+      )}
+
+      {data.education?.length > 0 && (
+        <section>
+          <ProSectionTitle title="Education" theme={theme} align="center" variant="underline" />
+          {data.education.map((edu) => (
+            <div key={edu.id} className="flex justify-between mb-3 last:mb-0">
+              <div>
+                <h4 className="text-sm font-bold">{edu.degree}</h4>
+                <p className="text-xs text-slate-600 italic">{edu.university}</p>
+              </div>
+              <div className="text-right text-[10px] text-slate-500">
+                <p>{edu.duration}</p>
+                {edu.grade && <p className="font-semibold" style={{ color: theme.primary }}>{edu.grade}</p>}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      <div className="grid grid-cols-2 gap-10">
+        {data.skills && (
+          <section>
+            <ProSectionTitle title="Skills" theme={theme} variant="underline" />
+            <SkillPills skills={data.skills} theme={theme} />
+          </section>
+        )}
+        {(data.languages || data.achievements) && (
+          <section>
+            {data.languages && (
+              <>
+                <ProSectionTitle title="Languages" theme={theme} variant="underline" />
+                <p className="text-xs text-slate-700 mb-4">{data.languages}</p>
+              </>
+            )}
+            {data.achievements && (
+              <>
+                <ProSectionTitle title="Honors & Awards" theme={theme} variant="underline" />
+                <BulletList text={data.achievements} className="text-xs text-slate-700" />
+              </>
+            )}
+          </section>
+        )}
+      </div>
+
+      {data.projects?.length > 0 && (
+        <section>
+          <ProSectionTitle title="Selected Projects" theme={theme} align="center" variant="underline" />
+          {data.projects.map((p) => (
+            <div key={p.id} className="mb-4 last:mb-0">
+              <h4 className="text-sm font-bold">{p.title}{p.link && <span className="font-normal text-slate-500 text-xs"> — {p.link}</span>}</h4>
+              <BulletList text={p.description} className="text-xs text-slate-700 mt-1" />
+            </div>
+          ))}
+        </section>
+      )}
+
+      {data.certifications?.length > 0 && (
+        <section>
+          <ProSectionTitle title="Certifications" theme={theme} align="center" variant="underline" />
+          <CertBlock certifications={data.certifications} />
+        </section>
+      )}
+    </div>
+  );
+}
+
+function MinimalTemplate({ data, theme }) {
+  const { personal } = data;
+  return (
+    <div className="px-11 py-12 space-y-8 text-slate-800">
+      <header className="border-b border-slate-200 pb-6">
+        <h1 className="text-2xl font-semibold tracking-tight text-slate-900 mb-1">{personal.name}</h1>
+        <p className="text-sm text-slate-500 mb-3">{personal.title}</p>
+        <ContactRow items={[personal.email, personal.phone, personal.location, personal.linkedin, personal.github]} />
+      </header>
+
+      {personal.summary && (
+        <section>
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">About</h3>
+          <p className="text-[13px] leading-[1.7] text-slate-600 max-w-prose">{personal.summary}</p>
+        </section>
+      )}
+
+      {data.experience?.length > 0 && (
+        <section>
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-4">Experience</h3>
+          <div className="space-y-6">
+            {data.experience.map((exp) => (
+              <div key={exp.id} className="grid grid-cols-[1fr_auto] gap-x-6 gap-y-1">
+                <h4 className="text-[13px] font-semibold text-slate-900 col-span-1">{exp.title}</h4>
+                <span className="text-[11px] text-slate-400 text-right row-span-2 self-start">{exp.duration}</span>
+                <p className="text-[11px] text-slate-500 col-span-1">{exp.company}</p>
+                <div className="col-span-2 mt-1">
+                  <BulletList text={exp.description} className="text-[12px] text-slate-600 leading-relaxed" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {data.education?.length > 0 && (
+        <section>
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-4">Education</h3>
+          {data.education.map((edu) => (
+            <div key={edu.id} className="flex justify-between mb-3 last:mb-0">
+              <div>
+                <h4 className="text-[13px] font-semibold">{edu.degree}</h4>
+                <p className="text-[11px] text-slate-500">{edu.university}</p>
+              </div>
+              <div className="text-right text-[11px] text-slate-400">
+                <p>{edu.duration}</p>
+                {edu.grade && <p className="text-slate-600">{edu.grade}</p>}
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {data.skills && (
+        <section>
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-3">Skills</h3>
+          <p className="text-[12px] text-slate-600 leading-relaxed">{parseSkills(data.skills).join(' · ')}</p>
+        </section>
+      )}
+
+      {data.projects?.length > 0 && (
+        <section>
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-4">Projects</h3>
+          {data.projects.map((p) => (
+            <div key={p.id} className="mb-4 last:mb-0">
+              <h4 className="text-[13px] font-semibold">{p.title}</h4>
+              {p.link && <p className="text-[10px] text-slate-400 mb-1">{p.link}</p>}
+              <BulletList text={p.description} className="text-[12px] text-slate-600" />
+            </div>
+          ))}
+        </section>
+      )}
+
+      {(data.languages || data.achievements || data.certifications?.length > 0) && (
+        <section className="grid grid-cols-2 gap-8 pt-2 border-t border-slate-100">
+          {data.languages && (
+            <div>
+              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">Languages</h3>
+              <p className="text-[12px] text-slate-600">{data.languages}</p>
+            </div>
+          )}
+          {data.achievements && (
+            <div>
+              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">Achievements</h3>
+              <BulletList text={data.achievements} className="text-[12px] text-slate-600" />
+            </div>
+          )}
+          {data.certifications?.length > 0 && (
+            <div className="col-span-2">
+              <h3 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400 mb-2">Certifications</h3>
+              <CertBlock certifications={data.certifications} className="text-[12px] text-slate-600" />
+            </div>
+          )}
+        </section>
+      )}
+    </div>
+  );
+}
+
+function ModernTemplate({ data, theme }) {
+  const { personal } = data;
+  return (
+    <div className="px-10 py-11 space-y-8">
+      <header className="flex justify-between items-start gap-6 border-b-4 pb-7" style={{ borderColor: theme.primary }}>
+        <div className="flex-1 min-w-0">
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight mb-1">{personal.name}</h1>
+          <h2 className="text-sm font-semibold uppercase tracking-[0.12em]" style={{ color: theme.primary }}>{personal.title}</h2>
+          <div className="mt-4">
+            <ContactRow items={[personal.email, personal.phone, personal.location, personal.linkedin, personal.github]} />
           </div>
         </div>
-        {data.personal.profilePic && (
-          <img src={data.personal.profilePic} className="w-24 h-24 rounded-3xl object-cover border-4 border-white shadow-xl rotate-3" alt="Profile" />
+        {personal.profilePic && (
+          <img src={personal.profilePic} className="w-20 h-20 rounded-xl object-cover border-2 border-white shadow-md shrink-0" alt="" />
         )}
       </header>
 
-      <section>
-        <p className="text-sm leading-relaxed text-slate-600 text-justify font-medium">{data.personal.summary}</p>
-      </section>
+      {personal.summary && (
+        <section>
+          <ProSectionTitle title="Profile" theme={theme} />
+          <p className="text-[13px] leading-relaxed text-slate-600 text-justify">{personal.summary}</p>
+        </section>
+      )}
 
-      <div className="grid grid-cols-3 gap-12">
-        <div className="col-span-2 space-y-8">
-          <SectionView title="Experience" theme={theme}>
-            {data.experience.map((exp, i) => (
-              <div key={i} className="relative pl-6 border-l-2 border-slate-100 pb-6 last:pb-0">
-                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-white border-4" style={{ borderColor: theme.primary }} />
-                <div className="flex justify-between items-baseline mb-1">
-                  <h4 className="font-black text-slate-900 text-base">{exp.title}</h4>
-                  <span className="text-[10px] font-black text-slate-400 uppercase">{exp.duration}</span>
+      <div className="grid grid-cols-12 gap-10">
+        <div className="col-span-8 space-y-7">
+          <section>
+            <ProSectionTitle title="Experience" theme={theme} />
+            {data.experience.map((exp) => (
+              <div key={exp.id} className="relative pl-5 border-l-2 border-slate-100 pb-5 last:pb-0 mb-1">
+                <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-white border-2" style={{ borderColor: theme.primary }} />
+                <div className="flex justify-between items-baseline gap-2 mb-0.5">
+                  <h4 className="font-semibold text-slate-900 text-[13px]">{exp.title}</h4>
+                  <span className="text-[10px] text-slate-400 shrink-0">{exp.duration}</span>
                 </div>
-                <div className="text-xs font-bold mb-3 uppercase tracking-wider" style={{ color: theme.primary }}>{exp.company}</div>
-                <p className="text-xs text-slate-600 leading-relaxed text-justify">{exp.description}</p>
+                <p className="text-[11px] font-medium mb-2" style={{ color: theme.primary }}>{exp.company}</p>
+                <BulletList text={exp.description} />
               </div>
             ))}
-          </SectionView>
+          </section>
 
-          <SectionView title="Education" theme={theme}>
-            {data.education.map((edu, i) => (
-              <div key={i} className="mb-4 last:mb-0">
-                <div className="flex justify-between items-baseline mb-1">
-                  <h4 className="font-black text-slate-900">{edu.degree}</h4>
-                  <span className="text-[10px] font-black text-slate-400 uppercase">{edu.duration}</span>
+          <section>
+            <ProSectionTitle title="Education" theme={theme} />
+            {data.education.map((edu) => (
+              <div key={edu.id} className="mb-3 last:mb-0 flex justify-between gap-4">
+                <div>
+                  <h4 className="font-semibold text-slate-900 text-[13px]">{edu.degree}</h4>
+                  <p className="text-[11px] text-slate-500">{edu.university}</p>
                 </div>
-                <div className="flex justify-between text-xs font-bold text-slate-500 uppercase">
-                  <span>{edu.university}</span>
-                  <span style={{ color: theme.primary }}>{edu.grade}</span>
+                <div className="text-right text-[10px] text-slate-400 shrink-0">
+                  <p>{edu.duration}</p>
+                  {edu.grade && <p className="font-medium" style={{ color: theme.primary }}>{edu.grade}</p>}
                 </div>
               </div>
             ))}
-          </SectionView>
+          </section>
         </div>
 
-        <div className="space-y-8">
-          <SectionView title="Skills" theme={theme}>
-            <div className="flex flex-wrap gap-2">
-              {data.skills.split(',').map((s, i) => (
-                <span key={i} className="px-3 py-1.5 text-[10px] font-black rounded-lg uppercase tracking-tight" style={{ backgroundColor: theme.light, color: theme.primary }}>{s.trim()}</span>
-              ))}
-            </div>
-          </SectionView>
-
-          <SectionView title="Projects" theme={theme}>
-            {data.projects.map((p, i) => (
-              <div key={i} className="mb-4 last:mb-0">
-                <h4 className="font-black text-slate-900 text-sm mb-1">{p.title}</h4>
-                <p className="text-[10px] text-slate-600 leading-relaxed mb-2">{p.description}</p>
-                <div className="text-[9px] font-black uppercase tracking-tighter" style={{ color: theme.primary }}>{p.link}</div>
+        <div className="col-span-4 space-y-7">
+          <section>
+            <ProSectionTitle title="Skills" theme={theme} />
+            <SkillPills skills={data.skills} theme={theme} />
+          </section>
+          <section>
+            <ProSectionTitle title="Projects" theme={theme} />
+            {data.projects.map((p) => (
+              <div key={p.id} className="mb-4 last:mb-0">
+                <h4 className="font-semibold text-slate-900 text-[12px]">{p.title}</h4>
+                <BulletList text={p.description} className="text-[10px] text-slate-600 mt-1" />
+                {p.link && <p className="text-[9px] mt-1 truncate" style={{ color: theme.primary }}>{p.link}</p>}
               </div>
             ))}
-          </SectionView>
+          </section>
+          {data.achievements && (
+            <section>
+              <ProSectionTitle title="Achievements" theme={theme} />
+              <BulletList text={data.achievements} className="text-[10px] text-slate-600" />
+            </section>
+          )}
         </div>
       </div>
     </div>
@@ -444,139 +950,322 @@ function ModernTemplate({ data, theme }) {
 }
 
 function ProfessionalTemplate({ data, theme }) {
+  const { personal } = data;
   return (
-    <div className="space-y-8 text-slate-900">
-      <header className={`text-center border-b pb-8`} style={{ borderColor: theme.primary }}>
-        <h1 className="text-4xl font-serif font-normal uppercase tracking-[0.2em] mb-3">{data.personal.name}</h1>
-        <div className="flex justify-center gap-4 text-[10px] font-medium tracking-widest text-slate-500 uppercase">
-          <span>{data.personal.location}</span>
-          <span>•</span>
-          <span>{data.personal.phone}</span>
-          <span>•</span>
-          <span>{data.personal.email}</span>
-        </div>
-        <div className="flex justify-center gap-4 mt-2 text-[9px] font-bold text-slate-400 uppercase tracking-widest">
-          {data.personal.linkedin && <span>LinkedIn: {data.personal.linkedin}</span>}
-          {data.personal.github && <span>GitHub: {data.personal.github}</span>}
-        </div>
+    <div className="px-10 py-11 space-y-7 text-slate-900">
+      <header className="text-center border-b-2 pb-7" style={{ borderColor: theme.primary }}>
+        <h1 className="text-3xl font-serif font-normal uppercase tracking-[0.15em] mb-2">{personal.name}</h1>
+        <p className="text-sm text-slate-600 mb-3 tracking-wide">{personal.title}</p>
+        <ContactRow
+          className="text-center text-[10px] uppercase tracking-wider"
+          items={[personal.location, personal.phone, personal.email]}
+        />
+        <ContactRow
+          className="text-center text-[9px] text-slate-400 mt-1"
+          items={[personal.linkedin && `LinkedIn: ${personal.linkedin}`, personal.github && `GitHub: ${personal.github}`]}
+        />
       </header>
 
-      <section className="space-y-6">
-        <h3 className="text-sm font-bold uppercase tracking-[0.3em] text-center border-b border-slate-200 pb-2 mb-4" style={{ color: theme.primary, borderBottomColor: theme.light }}>Professional Profile</h3>
-        <p className="text-sm leading-relaxed text-justify italic font-serif text-slate-700">{data.personal.summary}</p>
+      {personal.summary && (
+        <section>
+          <ProSectionTitle title="Professional Profile" theme={theme} align="center" variant="underline" />
+          <p className="text-sm leading-[1.7] text-justify text-slate-700 px-4">{personal.summary}</p>
+        </section>
+      )}
+
+      <section>
+        <ProSectionTitle title="Professional Experience" theme={theme} align="center" variant="underline" />
+        {data.experience.map((exp) => (
+          <div key={exp.id} className="mb-6 last:mb-0">
+            <div className="flex justify-between items-baseline gap-4">
+              <h4 className="text-sm font-bold">{exp.title}</h4>
+              <span className="text-[10px] text-slate-500 italic shrink-0">{exp.duration}</span>
+            </div>
+            <p className="text-xs font-semibold uppercase tracking-wide mb-2 text-slate-600">{exp.company}</p>
+            <BulletList text={exp.description} className="text-sm text-slate-700 leading-relaxed" />
+          </div>
+        ))}
       </section>
 
-      <SectionView title="Professional Experience" theme={theme} centered>
-        {data.experience.map((exp, i) => (
-          <div key={i} className="mb-8 last:mb-0">
-            <div className="flex justify-between items-baseline mb-2">
-              <h4 className="text-base font-bold italic">{exp.title}</h4>
-              <span className="text-[10px] font-bold italic" style={{ color: theme.primary }}>{exp.duration}</span>
-            </div>
-            <div className="text-xs font-bold uppercase tracking-widest mb-3 opacity-70">{exp.company}</div>
-            <p className="text-sm leading-relaxed text-justify text-slate-700">{exp.description}</p>
-          </div>
-        ))}
-      </SectionView>
-
-      <SectionView title="Education" theme={theme} centered>
-        {data.education.map((edu, i) => (
-          <div key={i} className="mb-4 last:mb-0">
-            <div className="flex justify-between items-baseline">
+      <section>
+        <ProSectionTitle title="Education" theme={theme} align="center" variant="underline" />
+        {data.education.map((edu) => (
+          <div key={edu.id} className="flex justify-between mb-3 last:mb-0">
+            <div>
               <h4 className="text-sm font-bold">{edu.degree}</h4>
-              <span className="text-[10px] italic">{edu.duration}</span>
+              <p className="text-xs text-slate-600">{edu.university}</p>
             </div>
-            <div className="text-xs text-slate-600 font-serif italic">{edu.university} | <span style={{ color: theme.primary }}>{edu.grade}</span></div>
+            <div className="text-right text-[10px] text-slate-500">
+              <p className="italic">{edu.duration}</p>
+              {edu.grade && <p className="font-semibold" style={{ color: theme.primary }}>{edu.grade}</p>}
+            </div>
           </div>
         ))}
-      </SectionView>
+      </section>
 
-      <div className="grid grid-cols-2 gap-12">
-        <SectionView title="Technical Proficiencies" theme={theme}>
-          <p className="text-xs leading-relaxed text-slate-700 italic">{data.skills}</p>
-        </SectionView>
-        <SectionView title="Languages & Honors" theme={theme}>
-          <p className="text-xs leading-relaxed text-slate-700 italic">{data.languages}</p>
-          <div className="mt-2 text-xs leading-relaxed whitespace-pre-wrap">{data.achievements}</div>
-        </SectionView>
+      {data.projects?.length > 0 && (
+        <section>
+          <ProSectionTitle title="Key Projects" theme={theme} align="center" variant="underline" />
+          {data.projects.map((p) => (
+            <div key={p.id} className="mb-4 last:mb-0">
+              <h4 className="text-sm font-bold">{p.title}</h4>
+              <BulletList text={p.description} className="text-xs text-slate-700 mt-1" />
+            </div>
+          ))}
+        </section>
+      )}
+
+      <div className="grid grid-cols-2 gap-10">
+        <section>
+          <ProSectionTitle title="Technical Skills" theme={theme} variant="underline" />
+          <SkillPills skills={data.skills} theme={theme} />
+        </section>
+        <section>
+          <ProSectionTitle title="Languages & Honors" theme={theme} variant="underline" />
+          {data.languages && <p className="text-xs text-slate-700 mb-3">{data.languages}</p>}
+          <BulletList text={data.achievements} className="text-xs text-slate-700" />
+        </section>
       </div>
+
+      {data.certifications?.length > 0 && (
+        <section>
+          <ProSectionTitle title="Certifications" theme={theme} align="center" variant="underline" />
+          <CertBlock certifications={data.certifications} />
+        </section>
+      )}
     </div>
   );
 }
 
 function CreativeTemplate({ data, theme }) {
+  const { personal } = data;
   return (
-    <div className="flex h-full min-h-[1000px]">
-      {/* Sidebar */}
-      <aside className="w-1/3 text-white p-8 space-y-10 rounded-l-3xl -ml-16 -my-16 h-auto" style={{ backgroundColor: theme.primary }}>
-        <div className="text-center">
-          {data.personal.profilePic ? (
-            <img src={data.personal.profilePic} className="w-32 h-32 rounded-full mx-auto object-cover border-4 shadow-2xl mb-6" style={{ borderColor: 'rgba(255,255,255,0.2)' }} alt="Profile" />
+    <div className="flex min-h-[1050px]">
+      <aside className="w-[34%] shrink-0 text-white px-7 py-10" style={{ backgroundColor: theme.primary }}>
+        <div className="text-center mb-8">
+          {personal.profilePic ? (
+            <img src={personal.profilePic} className="w-28 h-28 rounded-full mx-auto object-cover border-4 border-white/25 shadow-lg mb-5" alt="" />
           ) : (
-            <div className="w-32 h-32 rounded-full mx-auto bg-white/10 border-4 border-white/20 flex items-center justify-center mb-6">
-              <User size={40} className="text-white/40" />
+            <div className="w-28 h-28 rounded-full mx-auto bg-white/10 border-2 border-white/20 flex items-center justify-center mb-5">
+              <User size={36} className="text-white/50" />
             </div>
           )}
-          <h1 className="text-2xl font-black tracking-tighter leading-tight mb-2">{data.personal.name}</h1>
-          <h2 className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">{data.personal.title}</h2>
+          <h1 className="text-xl font-bold leading-tight mb-1">{personal.name}</h1>
+          <p className="text-[10px] font-medium uppercase tracking-[0.15em] text-white/70">{personal.title}</p>
         </div>
 
-        <div className="space-y-6">
-          <SectionView title="Contact" theme={theme} dark>
-            <div className="space-y-4 text-[10px] font-bold text-white/80 tracking-wider break-all">
-              <div className="flex items-center gap-3"><FileText size={14} className="opacity-50" /> {data.personal.email}</div>
-              <div className="flex items-center gap-3"><Trophy size={14} className="opacity-50" /> {data.personal.phone}</div>
-              <div className="flex items-center gap-3"><Globe size={14} className="opacity-50" /> {data.personal.location}</div>
-              <div className="flex items-center gap-3"><Code size={14} className="opacity-50" /> {data.personal.linkedin}</div>
+        <div className="space-y-7">
+          <div>
+            <ProSectionTitle title="Contact" variant="sidebar" />
+            <div className="space-y-2.5 text-[10px] text-white/85 break-all">
+              {personal.email && <p className="flex items-center gap-2"><FileText size={12} className="opacity-50 shrink-0" /> {personal.email}</p>}
+              {personal.phone && <p>{personal.phone}</p>}
+              {personal.location && <p className="flex items-center gap-2"><Globe size={12} className="opacity-50 shrink-0" /> {personal.location}</p>}
+              {personal.linkedin && <p>{personal.linkedin}</p>}
+              {personal.github && <p>{personal.github}</p>}
             </div>
-          </SectionView>
+          </div>
 
-          <SectionView title="Skills" theme={theme} dark>
-            <div className="space-y-3">
-              {data.skills.split(',').map((s, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-                  <span className="text-[10px] font-bold text-white/70 uppercase tracking-widest">{s.trim()}</span>
-                </div>
-              ))}
+          <div>
+            <ProSectionTitle title="Skills" variant="sidebar" />
+            <SkillPills skills={data.skills} theme={theme} variant="dark" />
+          </div>
+
+          {data.languages && (
+            <div>
+              <ProSectionTitle title="Languages" variant="sidebar" />
+              <p className="text-[10px] text-white/80 leading-relaxed">{data.languages}</p>
             </div>
-          </SectionView>
-
-          <SectionView title="Languages" theme={theme} dark>
-            <p className="text-[10px] font-bold text-white/70 leading-relaxed uppercase tracking-widest">{data.languages}</p>
-          </SectionView>
+          )}
         </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="w-2/3 p-10 space-y-12 bg-white">
-        <SectionView title="About Me" theme={theme}>
-          <p className="text-sm leading-relaxed text-slate-600 text-justify">{data.personal.summary}</p>
-        </SectionView>
+      <main className="flex-1 px-9 py-10 space-y-8 bg-white">
+        {personal.summary && (
+          <section>
+            <ProSectionTitle title="About" theme={theme} variant="underline" />
+            <p className="text-[13px] leading-relaxed text-slate-600 text-justify">{personal.summary}</p>
+          </section>
+        )}
 
-        <SectionView title="Experience" theme={theme}>
-          {data.experience.map((exp, i) => (
-            <div key={i} className="mb-8 last:mb-0">
-              <div className="flex justify-between items-baseline mb-2">
-                <h4 className="text-lg font-black text-slate-900 tracking-tight">{exp.title}</h4>
-                <span className="text-[10px] font-black text-slate-400 uppercase">{exp.duration}</span>
+        <section>
+          <ProSectionTitle title="Experience" theme={theme} variant="underline" />
+          {data.experience.map((exp) => (
+            <div key={exp.id} className="mb-6 last:mb-0">
+              <div className="flex justify-between items-baseline gap-2">
+                <h4 className="text-[14px] font-bold text-slate-900">{exp.title}</h4>
+                <span className="text-[10px] text-slate-400 shrink-0">{exp.duration}</span>
               </div>
-              <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: theme.primary }}>{exp.company}</div>
-              <p className="text-xs text-slate-500 leading-relaxed text-justify">{exp.description}</p>
+              <p className="text-[11px] font-semibold mb-2" style={{ color: theme.primary }}>{exp.company}</p>
+              <BulletList text={exp.description} />
             </div>
           ))}
-        </SectionView>
+        </section>
 
-        <SectionView title="Key Projects" theme={theme}>
-          {data.projects.map((p, i) => (
-            <div key={i} className="mb-6 last:mb-0 p-4 rounded-2xl border transition-colors" style={{ backgroundColor: theme.light, borderColor: 'rgba(0,0,0,0.05)' }}>
-              <h4 className="font-black text-slate-900 text-sm mb-1">{p.title}</h4>
-              <p className="text-[11px] text-slate-600 leading-relaxed mb-2">{p.description}</p>
-              <div className="text-[9px] font-black uppercase" style={{ color: theme.primary }}>{p.link}</div>
+        {data.education?.length > 0 && (
+          <section>
+            <ProSectionTitle title="Education" theme={theme} variant="underline" />
+            {data.education.map((edu) => (
+              <div key={edu.id} className="mb-3 last:mb-0 flex justify-between">
+                <div>
+                  <h4 className="text-[13px] font-bold">{edu.degree}</h4>
+                  <p className="text-[11px] text-slate-500">{edu.university}</p>
+                </div>
+                <span className="text-[10px] text-slate-400">{edu.duration}</span>
+              </div>
+            ))}
+          </section>
+        )}
+
+        <section>
+          <ProSectionTitle title="Projects" theme={theme} variant="underline" />
+          {data.projects.map((p) => (
+            <div key={p.id} className="mb-4 last:mb-0 p-4 rounded-lg" style={{ backgroundColor: theme.light }}>
+              <h4 className="font-semibold text-slate-900 text-[12px]">{p.title}</h4>
+              <BulletList text={p.description} className="text-[11px] text-slate-600 mt-1" />
+              {p.link && <p className="text-[9px] mt-1" style={{ color: theme.primary }}>{p.link}</p>}
             </div>
           ))}
-        </SectionView>
+        </section>
+
+        {data.achievements && (
+          <section>
+            <ProSectionTitle title="Achievements" theme={theme} variant="underline" />
+            <BulletList text={data.achievements} className="text-[11px] text-slate-600" />
+          </section>
+        )}
       </main>
+    </div>
+  );
+}
+
+// ---------------- Role suggestion ----------------
+
+function RoleSuggestionBox({ selectedRole, currentTemplate, onRoleChange, onApplyTemplate }) {
+  const [showFullGuide, setShowFullGuide] = useState(false);
+  const roleIndex = selectedRole !== '' ? Number(selectedRole) : -1;
+  const suggestion = roleIndex >= 0 ? ROLE_TEMPLATE_GUIDE[roleIndex] : null;
+  const isMatch = suggestion && currentTemplate === suggestion.template;
+
+  return (
+    <div className="mb-6 rounded-[1.75rem] border border-emerald-200/80 bg-gradient-to-br from-emerald-50/90 via-white to-slate-50 shadow-sm overflow-hidden print:hidden">
+      <div className="px-5 py-4 border-b border-emerald-100/80 flex items-start gap-3">
+        <div className="p-2 bg-emerald-500 rounded-xl text-white shrink-0 mt-0.5">
+          <Lightbulb size={18} />
+        </div>
+        <div>
+          <h2 className="text-sm font-black text-slate-900 tracking-tight">Which resume fits your role?</h2>
+          <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+            Pick your target role — we&apos;ll suggest the best layout for that industry.
+          </p>
+        </div>
+      </div>
+
+      <div className="px-5 py-4 space-y-4">
+        <div className="space-y-1.5">
+          <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+            Your target role
+          </label>
+          <select
+            value={selectedRole}
+            onChange={(e) => onRoleChange(e.target.value)}
+            className="w-full px-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-semibold text-slate-800 outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+          >
+            <option value="">— Select a role —</option>
+            {ROLE_TEMPLATE_GUIDE.map((item, index) => (
+              <option key={index} value={String(index)}>
+                {item.role}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <AnimatePresence mode="wait">
+          {suggestion && (
+            <motion.div
+              key={roleIndex}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="rounded-2xl border border-emerald-100 bg-white p-4 space-y-3"
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Best fit</span>
+                <span className="px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wide">
+                  {TEMPLATE_LABELS[suggestion.template]}
+                </span>
+                {isMatch && (
+                  <span className="px-2 py-0.5 rounded-full bg-slate-100 text-[10px] font-bold text-emerald-700 uppercase">
+                    Active
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed">{suggestion.reason}</p>
+              {!isMatch && (
+                <button
+                  type="button"
+                  onClick={() => onApplyTemplate(suggestion.template)}
+                  className="w-full py-3 rounded-xl bg-slate-900 text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors"
+                >
+                  Use {TEMPLATE_LABELS[suggestion.template]} template
+                  <ChevronRight size={14} />
+                </button>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <button
+          type="button"
+          onClick={() => setShowFullGuide((v) => !v)}
+          className="w-full flex items-center justify-between text-[11px] font-bold text-emerald-700 uppercase tracking-wider py-2 hover:text-emerald-600 transition-colors"
+        >
+          {showFullGuide ? 'Hide full role guide' : 'View all roles & templates'}
+          {showFullGuide ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        </button>
+
+        <AnimatePresence>
+          {showFullGuide && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="overflow-hidden"
+            >
+              <div className="max-h-64 overflow-y-auto custom-scrollbar rounded-xl border border-slate-100 bg-slate-50/80">
+                <table className="w-full text-left text-[11px]">
+                  <thead className="sticky top-0 bg-slate-100 z-10">
+                    <tr>
+                      <th className="px-3 py-2 font-black text-slate-500 uppercase tracking-wider">Role</th>
+                      <th className="px-3 py-2 font-black text-slate-500 uppercase tracking-wider w-24">Template</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {ROLE_TEMPLATE_GUIDE.map((item, index) => (
+                      <tr
+                        key={index}
+                        className={`hover:bg-white cursor-pointer transition-colors ${String(index) === selectedRole ? 'bg-emerald-50' : ''}`}
+                        onClick={() => {
+                          onRoleChange(String(index));
+                          onApplyTemplate(item.template);
+                        }}
+                      >
+                        <td className="px-3 py-2.5 text-slate-700 font-medium">{item.role}</td>
+                        <td className="px-3 py-2.5">
+                          <span className="inline-block px-2 py-0.5 rounded-md bg-white border border-slate-200 font-bold text-emerald-700 text-[10px] uppercase">
+                            {TEMPLATE_LABELS[item.template]}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[10px] text-slate-400 mt-2 px-1">Click any row to select that role and apply its template.</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
@@ -612,19 +1301,6 @@ function Accordion({ title, icon, children, isOpen, onClick }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
-  );
-}
-
-function SectionView({ title, children, theme, dark = false, centered = false }) {
-  return (
-    <div className={`space-y-4 ${centered ? 'text-center' : ''}`}>
-      <h3 className={`text-sm font-black uppercase tracking-[0.25em] pb-2 border-b-2 ${dark ? 'text-white border-white/20' : 'text-slate-900 border-slate-100'}`} style={!dark ? { borderBottomColor: theme.light } : {}}>
-        {title}
-      </h3>
-      <div className="space-y-4">
-        {children}
-      </div>
     </div>
   );
 }
