@@ -6,11 +6,11 @@ import { createProject, getProjects, getProjectById, updateProject, deleteProjec
 const router = express.Router();
 
 router.route('/')
-  .get(getProjects)
+  .get(protect, getProjects)
   .post(protect, isAdmin, createProject);
 
 router.route('/:id')
-  .get(getProjectById)
+  .get(protect, getProjectById)
   .put(protect, isAdmin, updateProject)
   .delete(protect, isAdmin, deleteProject);
 

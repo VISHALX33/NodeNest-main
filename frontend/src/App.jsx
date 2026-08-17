@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import ChatPage from "./components/ChatPage";
 import MyPDFsPage from "./components/MyPDFsPage";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
 import MyTasks from "./components/MyTasks";
 import Team from "./components/Team";
 import HowItWorks from "./components/HowItWorks";
@@ -354,17 +355,23 @@ function App() {
         <Route
           path="/sell-paper"
           element={
+            <PrivateRoute>
+              <Layout>
+                <SellPaper />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+
+        <Route path="/terms" element={<TermsAndConditions />} />
+        <Route
+          path="/partners"
+          element={
             <Layout>
-              <SellPaper />
+              <PartnerPage />
             </Layout>
           }
         />
-        
-        <Route path="/terms" element={<TermsAndConditions />} />
-        <Route path="/partners" element={<PartnerPage />} />
-
-
-        partners
 
         <Route
           path="/team"
@@ -380,11 +387,11 @@ function App() {
         <Route
           path="/admin"
           element={
-            <PrivateRoute>
+            <AdminRoute>
               <Layout>
                 <AdminPage />
               </Layout>
-            </PrivateRoute>
+            </AdminRoute>
           }
         />
       </Routes>

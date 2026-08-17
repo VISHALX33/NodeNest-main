@@ -1,6 +1,7 @@
 // middleware/authMiddleware.js
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { isAdminEmail } from '../config/admins.js';
 
 export const protect = async (req, res, next) => {
   try {
@@ -9,6 +10,7 @@ export const protect = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(decoded.id).select('-password');
+    if (!req.user) throw new Error();
     next();
   } catch (err) {
     res.status(401).json({ message: 'Not authorized' });
@@ -16,8 +18,7 @@ export const protect = async (req, res, next) => {
 };
 
 export const isAdmin = (req, res, next) => {
-  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz', 'ceo@notesea.xyz'];
-  if (req.user && adminEmails.includes(req.user.email)) {
+  if (req.user && isAdminEmail(req.user.email)) {
     next();
   } else {
     res.status(403).json({ message: 'Forbidden: Admin only' });

@@ -22,6 +22,7 @@ import scard from "./routes/scardRoutes.js";
 import paperSubmissionRoutes from "./routes/paperSubmissionRoutes.js";
 import teamRoutes from "./routes/teamRoutes.js";
 import cmsRoutes from "./routes/cmsRoutes.js";
+import { protect } from "./middleware/authMiddleware.js";
 import { getPublicAnnouncements } from "./controllers/cmsController.js";
 
 
@@ -69,7 +70,7 @@ app.use("/api/scard", scard);
 app.use("/api/paper-submissions", paperSubmissionRoutes);
 app.use("/api/team", teamRoutes);
 app.use("/api/cms", cmsRoutes);
-app.get("/api/notifications", getPublicAnnouncements);
+app.get("/api/notifications", protect, getPublicAnnouncements);
 
 // ✅ Health check for uptime
 app.get("/ping", (req, res) => res.status(200).send("Notesea is alive!"));

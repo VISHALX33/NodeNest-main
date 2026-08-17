@@ -31,6 +31,7 @@ import {
   FaBookOpen,
 } from "react-icons/fa";
 import API from "../utils/axios";
+import { clearAuthSession } from "../utils/auth";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ export default function Navbar() {
       setUser(res.data);
     } catch (err) {
       console.error("Unauthorized:", err.response?.data);
-      localStorage.removeItem("token"); // remove invalid token
+      clearAuthSession();
       setUser(null);
     }
   };
@@ -89,7 +90,7 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    clearAuthSession();
     setUser(null);
     navigate("/");
   };

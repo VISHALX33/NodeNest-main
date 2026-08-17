@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import API from "../utils/axios";
+import { setAuthSession } from "../utils/auth";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function VerifyEmail() {
@@ -43,7 +44,7 @@ export default function VerifyEmail() {
     setLoading(true);
     try {
       const res = await API.post("/users/verify-otp", { email, otp });
-      localStorage.setItem("token", res.data.token);
+      setAuthSession(res.data.token, res.data.user);
       alert("Email verified! 🎉");
       navigate("/dashboard");
     } catch (err) {

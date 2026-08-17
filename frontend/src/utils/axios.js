@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { clearAuthSession } from './auth';
 
 // Dynamically determine baseURL
 const isLocalhost = window.location.hostname === 'localhost';
@@ -18,5 +19,16 @@ API.interceptors.request.use((config) => {
   }
   return config;
 });
+
+// Clear session on unauthorized API responses
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      clearAuthSession();
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default API;

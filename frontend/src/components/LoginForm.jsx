@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, ArrowRight, ChevronDown } from "lucide-react";
 import API from "../utils/axios";
+import { setAuthSession, clearAuthSession, isAdminEmail } from "../utils/auth";
 import NoteNestLogo from "/NoteNestLogo.png";
 import login1 from "/login1.png";
 import login2 from "/login2.png";
@@ -35,7 +36,7 @@ export default function LandingPage({ switchToSignUp }) {
     setLoading(true);
     try {
       const res = await API.post("/users/login", data);
-      localStorage.setItem("token", res.data.token);
+      setAuthSession(res.data.token, res.data.user);
       navigate("/dashboard");
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");

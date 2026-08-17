@@ -1,11 +1,12 @@
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
+import { protect } from "../middleware/authMiddleware.js";
 
 dotenv.config();
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", protect, async (req, res) => {
   try {
     const { message } = req.body;
 

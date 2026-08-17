@@ -39,7 +39,7 @@ router.put("/contact/:id", protect, isAdmin, updateContactMessage);
 router.delete("/contact/:id", protect, isAdmin, deleteContactMessage);
 
 /* Announcements (also expose as /notifications for existing frontend) */
-router.get("/announcements/public", getPublicAnnouncements);
+router.get("/announcements/public", protect, getPublicAnnouncements);
 router.get("/announcements", protect, isAdmin, getAllAnnouncements);
 router.post("/announcements", protect, isAdmin, createAnnouncement);
 router.put("/announcements/:id", protect, isAdmin, updateAnnouncement);

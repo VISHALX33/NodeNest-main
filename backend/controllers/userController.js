@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
 // import nodemailer from 'nodemailer';
 import crypto from 'crypto';
-import { sendEmail } from "../utils/sendEmail.js"; 
+import { sendEmail } from "../utils/sendEmail.js";
+import { isAdminEmail } from "../config/admins.js";
 
 const generateToken = (user) => {
   return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -65,37 +66,23 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
-  
-  const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz','ceo@notesea.xyz'];
-  const isAdminLogin = adminEmails.includes(email) && password === '123456';
 
-  let user = await User.findOne({ email });
+  const user = await User.findOne({ email });
+  if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+  if (!user.isVerified) return res.status(400).json({ message: 'Please verify your email before logging in' });
 
-  if (isAdminLogin) {
-    if (!user) {
-      // Auto-create admin if doesn't exist
-      user = await User.create({
-        name: email.split('@')[0],
-        email,
-        phone: '0000000000',
-        password: await bcrypt.hash(password, 10),
-        gender: 'Other',
-        isVerified: true
-      });
-    } else if (!user.isVerified) {
-      user.isVerified = true;
-      await user.save();
-    }
-  } else {
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
-    if (!user.isVerified) return res.status(400).json({ message: 'Please verify your email before logging in' });
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
-  }
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.json({ token, user: { ...user._doc, password: undefined } });
+  res.json({
+    token,
+    user: {
+      ...user.toObject(),
+      password: undefined,
+      isAdmin: isAdminEmail(user.email),
+    },
+  });
 };
 
 export const verifyEmailOtp = async (req, res) => {
@@ -116,12 +103,23 @@ export const verifyEmailOtp = async (req, res) => {
   await user.save();
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.json({ message: 'Email verified successfully', token });
+  res.json({
+    message: 'Email verified successfully',
+    token,
+    user: {
+      ...user.toObject(),
+      password: undefined,
+      isAdmin: isAdminEmail(user.email),
+    },
+  });
 };
 
 export const getProfile = async (req, res) => {
   if (req.user) {
-    res.status(200).json(req.user);
+    res.status(200).json({
+      ...req.user.toObject(),
+      isAdmin: isAdminEmail(req.user.email),
+    });
   } else {
     res.status(404).json({ message: 'User not found' });
   }

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Lock, User, Eye, EyeOff, ShieldCheck, ArrowLeft } from "lucide-react";
 import API from "../utils/axios";
+import { setAuthSession, clearAuthSession, isAdminEmail } from "../utils/auth";
 import { motion } from "framer-motion";
 import NoteNestLogo from "/NoteNestLogo.png";
 
@@ -33,14 +34,12 @@ export default function AdminLogin() {
 
     try {
       const res = await API.post("/users/login", data);
-      localStorage.setItem("token", res.data.token);
-      
-      // Check if user is admin
-      const adminEmails = ['vishalprajapati2303@gmail.com', 'harshul@notesea.xyz','ceo@notesea.xyz'];
-      if (adminEmails.includes(res.data.user.email)) {
+      setAuthSession(res.data.token, res.data.user);
+
+      if (res.data.user?.isAdmin || isAdminEmail(res.data.user?.email)) {
         navigate("/admin");
       } else {
-        localStorage.removeItem("token");
+        clearAuthSession();
         setError("Access Denied: You are not authorized to access the Admin Panel.");
       }
     } catch (err) {

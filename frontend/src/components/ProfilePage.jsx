@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../utils/axios';
+import { clearAuthSession } from '../utils/auth';
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -20,7 +21,7 @@ export default function ProfilePage() {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    clearAuthSession();
     navigate('/');
   };
 

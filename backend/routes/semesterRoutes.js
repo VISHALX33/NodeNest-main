@@ -7,8 +7,8 @@ import { protect, isAdmin } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-// ✅ GET all semesters
-router.get('/', async (req, res) => {
+// ✅ GET all semesters (auth required)
+router.get('/', protect, async (req, res) => {
   const semesters = await Semester.find();
   res.json(semesters);
 });
@@ -19,8 +19,8 @@ router.post('/', protect, isAdmin, async (req, res) => {
   res.status(201).json(semester);
 });
 
-// ✅ GET subjects for a semester
-router.get('/:semesterId/subjects', async (req, res) => {
+// ✅ GET subjects for a semester (auth required)
+router.get('/:semesterId/subjects', protect, async (req, res) => {
   const subjects = await Subject.find({ semesterId: req.params.semesterId });
   res.json(subjects);
 });
@@ -58,8 +58,8 @@ router.post('/subjects/:subjectId/notes', protect, isAdmin, async (req, res) => 
   }
 });
 
-// ✅ GET all notes of a subject with subject & semester info
-router.get('/subjects/:subjectId/notes', async (req, res) => {
+// ✅ GET all notes of a subject with subject & semester info (auth required)
+router.get('/subjects/:subjectId/notes', protect, async (req, res) => {
   try {
     const subject = await Subject.findById(req.params.subjectId).populate('semesterId');
 
