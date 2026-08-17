@@ -74,7 +74,7 @@ export default function LandingPage({ switchToSignUp }) {
     { q: "Can I access notes for any semester?", a: "Yes, you can select your semester and download notes easily." },
     { q: "Do I need to create an account?", a: "Yes, you need to login to access dashboard and save progress." },
     { q: "Can I chat with other students?", a: "Absolutely! You can join our global chat room to connect with students worldwide." },
-    { q: "Does NoteSea provide projects?", a: "Yes! Explore Easy, Medium & Advanced MERN projects, watch demo videos, and get your project delivered to your account within 6–8 hours on working days." },    // { q: "Does NoteSea provide projects?", a: "Yes, we offer Easy, Medium, and Advanced level full-stack projects that you can download and learn from." },
+    { q: "Does NoteSea provide projects?", a: "Yes! Explore Easy, Medium & Advanced MERN projects, watch demo videos, and get your project delivered to your account within 1–2 working days." },
     { q: "What is the Assignment Chatbot?", a: "Our AI-powered chatbot helps you with assignments, doubts, and quick explanations in seconds." },
     { q: "Is my data safe?", a: "Yes, we use secure authentication and protect your personal details." },
   ];
@@ -161,7 +161,7 @@ export default function LandingPage({ switchToSignUp }) {
               {
                 icon: <FaProjectDiagram className="text-emerald-600 text-3xl" />,
                 title: "Full-Stack Projects",
-                desc: "Buy and learn Easy, Medium & Advanced MERN projects. Delivered in 6–8 hours on working days.",
+                desc: "Buy and learn Easy, Medium & Advanced MERN projects. Delivered in 1–2 working days.",
               },
 
               {
@@ -206,7 +206,7 @@ export default function LandingPage({ switchToSignUp }) {
               { value: "4.8★", label: "Student Satisfaction" },
               { value: "10+", label: "Projects Delivered" },
               { value: "98%", label: "Success Rate" },
-              { value: "6-8 Hr", label: "Delivery Time" },
+              { value: "1-2 Days", label: "Delivery Time" },
             ].map((item, index) => (
               <motion.div
                 key={index}

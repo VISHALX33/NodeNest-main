@@ -1,74 +1,89 @@
 import { motion } from "framer-motion";
+import { Play, Sparkles } from "lucide-react";
 
 export default function NoteSeaStory({ videos = [] }) {
   const getYouTubeId = (url) => {
-    const regExp =
-      /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
     return match && match[1].length === 11 ? match[1] : null;
   };
 
   return (
     <div className="max-w-6xl mx-auto mt-20 px-4">
-      {/* Title */}
-      <motion.h2
-        initial={{ opacity: 0, y: -20 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl font-bold text-center text-emerald-700 mb-6"
+        viewport={{ once: true }}
+        className="text-center mb-8"
       >
-        See the Story of <span className="text-emerald-900">NoteSea</span>
-      </motion.h2>
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase tracking-wider mb-3">
+          <Sparkles size={12} /> YouTube Series
+        </span>
+        <h2 className="text-3xl md:text-4xl font-black text-emerald-800 tracking-tight">
+          The Story of <span className="text-emerald-600">NoteSea</span>
+        </h2>
+        <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
+          {videos.length} episodes — from idea to launch and beyond 🚀
+        </p>
+      </motion.div>
 
-      {/* Subtitle */}
-      <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-        Watch the entire journey of NoteSea — from idea to launch and beyond 🚀
-      </p>
-
-      {/* Video Grid */}
-      <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+      {/* Horizontal scroll on mobile, grid on desktop */}
+      <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 lg:grid-cols-5 md:overflow-visible">
         {videos.map((video, i) => {
           const videoId = getYouTubeId(video.url);
           const thumbnail = videoId
-            ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+            ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
             : null;
 
           return (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="relative aspect-video rounded-2xl overflow-hidden shadow-lg border border-emerald-100 cursor-pointer group"
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              whileHover={{ y: -6 }}
+              className="relative flex-shrink-0 w-56 md:w-auto snap-start aspect-video rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-100 cursor-pointer group"
               onClick={() => window.open(video.url, "_blank")}
             >
               {thumbnail && (
                 <img
                   src={thumbnail}
                   alt={video.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               )}
-              <div className="absolute inset-0 bg-opacity-40 flex items-center justify-center group-hover:bg-opacity-50 transition">
-                <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                    className="w-7 h-7 text-emerald-700"
-                  >
-                    <path d="M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l4.5-2.5a.5.5 0 0 0 0-.814l-4.5-2.5z" />
-                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4z" />
-                  </svg>
-                </div>
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+
+              <span className="absolute top-2 left-2 px-2 py-0.5 bg-emerald-600 text-white text-[10px] font-black rounded-md">
+                EP {i + 1}
+              </span>
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                  whileHover={{ scale: 1.15 }}
+                  className="w-12 h-12 bg-white/95 rounded-full flex items-center justify-center shadow-xl"
+                >
+                  <Play size={20} className="text-emerald-700 ml-0.5" fill="currentColor" />
+                </motion.div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent text-white p-3 text-sm font-medium">
-                {video.title}
+
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-3 pt-8">
+                <p className="text-white text-xs font-bold leading-snug line-clamp-2">{video.title}</p>
               </div>
             </motion.div>
           );
         })}
       </div>
+
+      <motion.p
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="text-center text-sm text-slate-400 mt-4"
+      >
+        Swipe to browse all episodes →
+      </motion.p>
     </div>
   );
 }

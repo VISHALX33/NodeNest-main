@@ -178,7 +178,7 @@ const DEFAULTS = {
   },
   dashboard_popup: {
     enabled: true,
-    imageUrl: "https://res.cloudinary.com/dwq5qifuk/image/upload/q_auto/f_auto/v1776101963/Gemini_Generated_Image_hn8u5khn8u5khn8u_b4nvqb.png",
+    imageUrl: "https://res.cloudinary.com/dwq5qifuk/image/upload/v1786958161/Untitled_design_a1dweg.png",
     link: "",
   },
   career_positions: {

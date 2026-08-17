@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileText, Monitor, BookOpen, Layers, CheckCircle,Phone, X, CreditCard, Gift, User, Mail, MessageSquare, ChevronDown } from "lucide-react";
+import { FileText, Monitor, BookOpen, Layers, CheckCircle, Phone, X, CreditCard, Gift, User, Mail, MessageSquare, ChevronDown, Sparkles, Clock, ArrowRight, Shield, FileCheck } from "lucide-react";
 import Modal from "react-modal";
 import API from "../utils/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Modal accessibility
 Modal.setAppElement("#root");
@@ -76,7 +76,7 @@ export default function ResearchDocumentation() {
       price: 999,
       icon: <BookOpen className="text-emerald-600" size={32} />,
       features: ["Upto 10 Page Research Paper", "Upto 60 Page Comprehensive Report", "Plagiarism-Free", "Only 3 updates possible"],
-      gradient: "from-blue-50 to-indigo-50",
+      gradient: "from-emerald-50 to-teal-50",
       description: "Professional academic writing for research papers and comprehensive reports with proper formatting."
     },
     {
@@ -86,7 +86,7 @@ export default function ResearchDocumentation() {
       price: 1499,
       icon: <Layers className="text-emerald-600" size={32} />,
       features: ["Upto 10-15 Professional Slides", "Upto 60 Page Detailed Report", "Professional Formatting", "Only 3 updates possible"],
-      gradient: "from-cyan-50 to-blue-50",
+      gradient: "from-emerald-50 to-green-50",
       description: "A perfect blend of a visual presentation and a comprehensive project report for your academic needs."
     },
     {
@@ -96,7 +96,7 @@ export default function ResearchDocumentation() {
       price: 1699,
       icon: <Layers className="text-emerald-600" size={32} />,
       features: ["Upto 60 Page Detailed Report", "Upto 10 Page Research Paper", "Academic Formatting", "Only 3 updates possible"],
-      gradient: "from-purple-50 to-pink-50",
+      gradient: "from-teal-50 to-emerald-50",
       description: "A complete bundle of a detailed project report and a structured research paper for your final submissions."
     },
     {
@@ -107,7 +107,7 @@ export default function ResearchDocumentation() {
       price: 2099,
       icon: <FileText className="text-emerald-600" size={32} />,
       features: ["Upto 60 Page Report", "Upto 10 Page Research Paper", "Upto 10-15 Slides Presentation", "Only 3 updates possible"],
-      gradient: "from-orange-50 to-amber-50",
+      gradient: "from-green-50 to-emerald-50",
       description: "Our complete documentation package covering every aspect of your project's submission requirements."
     },
     {
@@ -270,32 +270,125 @@ export default function ResearchDocumentation() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-20">
-      {/* Header */}
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-black text-emerald-900 tracking-tight mb-4">
-          Documentation & Research Services
-        </h2>
-        <div className="h-1.5 w-24 bg-emerald-500 mx-auto rounded-full mb-6"></div>
-        <p className="text-gray-600 max-w-2xl mx-auto font-medium">
-          High-quality academic documentation and project development services crafted by experts to help you excel.
-        </p>
-      </div>
+    <div className="relative min-h-screen bg-gradient-to-b from-emerald-50/50 via-white to-white overflow-hidden">
+      <div className="pointer-events-none absolute -top-24 -right-24 w-80 h-80 bg-emerald-200/25 rounded-full blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 -left-20 w-64 h-64 bg-teal-200/20 rounded-full blur-3xl" />
 
-      {/* S-Tier Premium Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-        {plans.map((plan, index) => (
-          <PricingCard key={index} plan={plan} onSelect={() => handlePlanClick(plan)} />
-        ))}
-      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 relative z-10">
+        {/* Hero */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-700 via-emerald-800 to-teal-900 p-8 md:p-10 mb-10 text-white shadow-xl"
+        >
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+            <div className="max-w-2xl">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-emerald-100 text-xs font-bold uppercase tracking-wider mb-4 border border-white/20">
+                <Sparkles size={12} /> Academic Services
+              </span>
+              <h1 className="text-3xl md:text-4xl font-black tracking-tight leading-tight">
+                Documentation & Research Services
+              </h1>
+              <p className="mt-4 text-emerald-50/90 text-sm md:text-base leading-relaxed">
+                Reports, research papers, PPTs, and full documentation packages — crafted by experts to help you excel in submissions.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 rounded-lg text-xs font-bold">
+                  <Clock size={14} /> Delivery in 1–2 days
+                </span>
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 rounded-lg text-xs font-bold">
+                  <FileCheck size={14} /> Plagiarism-free
+                </span>
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 rounded-lg text-xs font-bold">
+                  <Shield size={14} /> 3 revisions included
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row lg:flex-col gap-3 shrink-0">
+              <Link
+                to="/research-services-custom"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white text-emerald-800 rounded-xl font-bold text-sm hover:bg-emerald-50 transition-colors shadow-lg"
+              >
+                Custom UPI Plan <ArrowRight size={16} />
+              </Link>
+              <Link
+                to="/my-bookings"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-white/10 border border-white/25 text-white rounded-xl font-bold text-sm hover:bg-white/20 transition-colors"
+              >
+                My Orders
+              </Link>
+            </div>
+          </div>
+        </motion.div>
 
-      <div className="mt-20 text-center">
-        <div className="inline-block p-1 rounded-full bg-emerald-50 border border-emerald-100 mb-4 px-4 py-2">
-          <p className="text-emerald-700 text-xs font-bold uppercase tracking-widest">Custom Requirements?</p>
+        {/* Steps strip */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+          {[
+            { step: "01", title: "Choose a plan", desc: "Pick PPT, report, paper, or bundle" },
+            { step: "02", title: "Fill requirements", desc: "7-step form with your academic details" },
+            { step: "03", title: "Pay & relax", desc: "Secure Razorpay checkout" },
+          ].map((item, i) => (
+            <motion.div
+              key={item.step}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.08 }}
+              className="bg-white border border-emerald-100 rounded-2xl p-4 flex gap-4 items-start shadow-sm"
+            >
+              <span className="text-2xl font-black text-emerald-200">{item.step}</span>
+              <div>
+                <p className="font-bold text-slate-800 text-sm">{item.title}</p>
+                <p className="text-xs text-slate-500 mt-0.5">{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
-        <p className="text-gray-500 text-sm">
-          Need a tailored solution? <a href="mailto:notesea.help@gmail.com" className="text-emerald-600 font-black hover:underline transition-all">Contact our experts</a>
-        </p>
+
+        {/* Pricing grid */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07 } } }}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12"
+        >
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.id}
+              variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+              className={plan.featured ? "md:col-span-2 xl:col-span-1" : ""}
+            >
+              <PricingCard plan={plan} onSelect={() => handlePlanClick(plan)} />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center bg-white border border-emerald-100 rounded-3xl p-8 shadow-sm"
+        >
+          <p className="text-[10px] font-black uppercase tracking-widest text-emerald-700 mb-2">Custom Requirements?</p>
+          <p className="text-slate-600 text-sm max-w-lg mx-auto mb-4">
+            Need a tailored package or partial payment via UPI? Try our custom research flow or contact our experts directly.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              to="/research-services-custom"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm shadow-lg shadow-emerald-600/20 transition-colors"
+            >
+              Custom Research (30/70 UPI)
+            </Link>
+            <a
+              href="mailto:notesea.help@gmail.com"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-emerald-200 text-emerald-800 rounded-xl font-bold text-sm hover:bg-emerald-50 transition-colors"
+            >
+              Email Experts
+            </a>
+          </div>
+        </motion.div>
       </div>
 
       {/* ================= PREVIEW MODAL ================= */}
@@ -311,11 +404,11 @@ export default function ResearchDocumentation() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-[2.5rem] shadow-2xl max-w-2xl w-full overflow-hidden border border-emerald-50"
+              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full overflow-hidden border border-emerald-100"
             >
               <div className="flex flex-col md:flex-row h-full">
                 {/* Visual Side */}
-                <div className={`md:w-2/5 p-8 flex flex-col justify-center items-center text-center ${selectedPlan.featured ? "bg-emerald-900 text-white" : "bg-emerald-50 text-emerald-900"}`}>
+                <div className={`md:w-2/5 p-8 flex flex-col justify-center items-center text-center ${selectedPlan.featured ? "bg-gradient-to-br from-emerald-900 to-teal-900 text-white" : "bg-gradient-to-br from-emerald-50 to-teal-50 text-emerald-900"}`}>
                   <div className={`w-20 h-20 rounded-3xl flex items-center justify-center mb-6 shadow-xl ${selectedPlan.featured ? "bg-emerald-800" : "bg-white"}`}>
                     {selectedPlan.icon}
                   </div>
@@ -359,9 +452,9 @@ export default function ResearchDocumentation() {
 
                   <button
                     onClick={handleContinue}
-                    className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-black shadow-lg hover:bg-emerald-700 transition-all flex items-center justify-center gap-2 active:scale-95 shadow-emerald-200"
+                    className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-bold shadow-lg hover:bg-emerald-700 transition-all flex items-center justify-center gap-2 active:scale-95"
                   >
-                    Continue to Order <X size={16} className="rotate-45" />
+                    Continue to Order <ArrowRight size={16} />
                   </button>
                 </div>
               </div>
@@ -784,76 +877,77 @@ function TermsAndConditionsDropdown() {
     </div>
   );
 }
-function PricingCard({ plan, isLarge = false, onSelect }) {
+function PricingCard({ plan, onSelect }) {
+  const accent = plan.featured
+    ? "from-emerald-800 to-teal-900 border-emerald-600"
+    : "from-white to-emerald-50/80 border-emerald-100";
+
   return (
-    <motion.div
-      whileHover={{ y: -12, scale: 1.02 }}
-      className={`relative p-8 rounded-[2.5rem] shadow-2xl transition-all duration-500 flex flex-col ${
-        isLarge ? "w-full md:w-[calc(50%-1rem)] max-w-md" : "w-full"
-      } ${
-        plan.featured 
-          ? "bg-emerald-900 text-white border-emerald-700 ring-8 ring-emerald-500/10 shadow-emerald-900/20" 
-          : `bg-gradient-to-br ${plan.gradient} border-white shadow-emerald-900/5`
-      }`}
+    <motion.article
+      whileHover={{ y: -6 }}
+      className={`group relative h-full flex flex-col rounded-3xl border overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-gradient-to-br ${accent} ${plan.featured ? "ring-2 ring-emerald-400/30" : ""}`}
     >
       {plan.featured && (
-        <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-emerald-400 to-teal-500 text-white text-[10px] font-black px-6 py-2 rounded-full uppercase tracking-[0.2em] shadow-xl border border-emerald-300">
-          Most Popular
+        <div className="absolute top-4 right-4 z-10 px-3 py-1 rounded-full bg-emerald-400 text-emerald-950 text-[10px] font-black uppercase tracking-wider">
+          Best Value
         </div>
       )}
 
-      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-10 shadow-lg ${
-        plan.featured ? "bg-emerald-800 text-emerald-400" : "bg-white text-emerald-600"
-      }`}>
-        {plan.icon}
+      {/* Card header band */}
+      <div className={`relative h-28 flex items-center justify-center overflow-hidden ${plan.featured ? "bg-emerald-950/40" : "bg-gradient-to-br from-emerald-50 to-teal-100"}`}>
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)", backgroundSize: "16px 16px" }} />
+        <div className={`relative w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg ${plan.featured ? "bg-emerald-800 text-emerald-300" : "bg-white text-emerald-600"}`}>
+          {plan.icon}
+        </div>
       </div>
 
-      <div className="mb-6">
-        <h3 className={`text-2xl font-black leading-tight mb-1 ${plan.featured ? "text-white" : "text-emerald-950"}`}>
-          {plan.title}
-        </h3>
-        {plan.subtitle && (
-          <p className={`text-sm font-bold tracking-tight ${plan.featured ? "text-emerald-300" : "text-emerald-600/70"}`}>
-            {plan.subtitle}
-          </p>
-        )}
+      <div className="p-6 flex flex-col flex-grow">
+        <div className="mb-4">
+          <h3 className={`text-xl font-black leading-tight ${plan.featured ? "text-white" : "text-emerald-950"}`}>
+            {plan.title}
+          </h3>
+          {plan.subtitle && (
+            <p className={`text-xs font-semibold mt-1 ${plan.featured ? "text-emerald-300" : "text-emerald-600"}`}>
+              {plan.subtitle}
+            </p>
+          )}
+        </div>
+
+        <div className="flex items-baseline gap-1 mb-4">
+          <span className={`text-sm font-bold ${plan.featured ? "text-emerald-300/80" : "text-emerald-400"}`}>₹</span>
+          <span className={`text-3xl font-black tracking-tight ${plan.featured ? "text-white" : "text-emerald-900"}`}>
+            {plan.price.toLocaleString("en-IN")}
+          </span>
+          <span className={`text-[10px] font-bold uppercase ml-1 ${plan.featured ? "text-emerald-400/70" : "text-gray-400"}`}>
+            / package
+          </span>
+        </div>
+
+        <p className={`text-xs leading-relaxed mb-4 line-clamp-2 ${plan.featured ? "text-emerald-100/80" : "text-gray-500"}`}>
+          {plan.description}
+        </p>
+
+        <ul className="space-y-2.5 mb-6 flex-grow">
+          {plan.features.map((feature, i) => (
+            <li key={i} className="flex items-start gap-2.5 text-xs font-medium">
+              <CheckCircle size={14} className={`shrink-0 mt-0.5 ${plan.featured ? "text-emerald-400" : "text-emerald-500"}`} />
+              <span className={plan.featured ? "text-emerald-50/90" : "text-gray-600"}>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          type="button"
+          onClick={onSelect}
+          className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2 ${
+            plan.featured
+              ? "bg-emerald-500 hover:bg-emerald-400 text-white shadow-lg shadow-emerald-900/30"
+              : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20"
+          }`}
+        >
+          Select Plan <ArrowRight size={16} />
+        </button>
       </div>
-
-      <div className="flex items-baseline gap-1 mb-8">
-        <span className="text-sm font-bold opacity-60">₹</span>
-        <span className={`text-4xl font-black tracking-tighter ${plan.featured ? "text-white" : "text-emerald-900"}`}>
-          {plan.price}
-        </span>
-        <span className={`text-xs font-bold uppercase tracking-wider ml-1 ${plan.featured ? "text-emerald-400/60" : "text-gray-400"}`}>
-          /Project
-        </span>
-      </div>
-
-      <div className={`h-px w-full mb-10 opacity-20 ${plan.featured ? "bg-white" : "bg-emerald-900"}`}></div>
-
-      <ul className="space-y-4 mb-12 flex-grow">
-        {plan.features.map((feature, i) => (
-          <li key={i} className="flex items-start gap-3 text-sm font-medium leading-tight">
-            <div className={`mt-0.5 rounded-full p-0.5 ${plan.featured ? "bg-emerald-500 text-emerald-900" : "bg-emerald-600 text-white"}`}>
-              <CheckCircle size={12} fill="currentColor" />
-            </div>
-            <span className={plan.featured ? "text-emerald-50" : "text-emerald-900/80"}>
-              {feature}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <button
-        onClick={onSelect}
-        className={`w-full py-5 rounded-2xl font-black text-sm uppercase tracking-widest transition-all active:scale-95 shadow-xl ${
-          plan.featured 
-            ? "bg-emerald-500 text-white hover:bg-emerald-400 shadow-emerald-500/30" 
-            : "bg-white text-emerald-900 hover:bg-emerald-50 shadow-emerald-900/10"
-        }`}
-      >
-        Select Plan
-      </button>
-    </motion.div>
+    </motion.article>
   );
 }

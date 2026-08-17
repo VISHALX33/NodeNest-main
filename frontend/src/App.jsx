@@ -47,7 +47,7 @@ function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <div className="min-h-[85vh]">{children}</div>
+      <div className="min-h-[85vh] pb-20 md:pb-0">{children}</div>
       <Footer />
     </>
   );

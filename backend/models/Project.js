@@ -16,7 +16,7 @@ const projectSchema = new mongoose.Schema({
   studentPrice: { type: Number, required: true },
   businessPrice: { type: Number, required: true },
   features: [{ type: String }],
-  deliveryTime: { type: Number, default: 7 },
+  deliveryTime: { type: Number, default: 2 },
   isActive: { type: Boolean, default: true }
 
 }, { timestamps: true });

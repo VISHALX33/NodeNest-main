@@ -164,7 +164,7 @@ export function AdminGallery({ filters = {} }) {
 /* ===================== PROJECTS ===================== */
 const EMPTY_PROJECT = {
   name: "", description: "", category: "easy", icon: "📁", images: "", videoLink: "",
-  studentPrice: 999, businessPrice: 2999, features: "", deliveryTime: 7, isActive: true,
+  studentPrice: 999, businessPrice: 2999, features: "", deliveryTime: 2, isActive: true,
 };
 
 export function AdminProjects({ filters = {} }) {
@@ -274,7 +274,7 @@ export function AdminProjects({ filters = {} }) {
                   <p className="text-xs text-slate-400 uppercase">{p.category} · ₹{p.studentPrice} / ₹{p.businessPrice}</p>
                 </div>
                 <button type="button" onClick={async () => { await API.put(`/projects/${p._id}`, { isActive: !p.isActive }); load(); }} className="p-2 bg-slate-100 rounded-xl">{p.isActive ? <Eye size={16} /> : <EyeOff size={16} />}</button>
-                <button type="button" onClick={() => { setEditingId(p._id); setForm({ name: p.name, description: p.description, category: p.category, icon: p.icon || "📁", images: (p.images || []).join("\n"), videoLink: p.videoLink || "", studentPrice: p.studentPrice, businessPrice: p.businessPrice, features: (p.features || []).join("\n"), deliveryTime: p.deliveryTime || 7, isActive: p.isActive !== false }); setShowForm(true); }} className="p-2 bg-emerald-50 text-emerald-700 rounded-xl"><Pencil size={16} /></button>
+                <button type="button" onClick={() => { setEditingId(p._id); setForm({ name: p.name, description: p.description, category: p.category, icon: p.icon || "📁", images: (p.images || []).join("\n"), videoLink: p.videoLink || "", studentPrice: p.studentPrice, businessPrice: p.businessPrice, features: (p.features || []).join("\n"), deliveryTime: p.deliveryTime || 2, isActive: p.isActive !== false }); setShowForm(true); }} className="p-2 bg-emerald-50 text-emerald-700 rounded-xl"><Pencil size={16} /></button>
                 <button type="button" onClick={async () => { if (!confirm("Delete project?")) return; await API.delete(`/projects/${p._id}`); show("success", "Deleted"); load(); }} className="p-2 bg-rose-50 text-rose-600 rounded-xl"><Trash2 size={16} /></button>
               </li>
             ))}
