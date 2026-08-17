@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getBaseUrl from "../utils/getBaseUrl";
 import { FiUpload } from "react-icons/fi";
 import career from "/careers.png";
+import API from "../utils/axios";
 
 export default function CareerForm() {
   const [form, setForm] = useState({
@@ -12,8 +13,23 @@ export default function CareerForm() {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [message, setMessage] = useState(null);
+  const [openPositions, setOpenPositions] = useState([
+    { title: "UI/UX Designer", desc: "Design intuitive user experiences and beautiful interfaces." },
+    { title: "Frontend Developer", desc: "Build modern, fast, and responsive user interfaces." },
+    { title: "Full Stack Developer", desc: "Work across frontend, backend, and databases." },
+    { title: "Backend Developer", desc: "Design scalable APIs and server-side logic." },
+    { title: "Product Designer", desc: "Shape product vision and user-centered solutions." },
+  ]);
 
   const backendUrl = getBaseUrl();
+
+  useEffect(() => {
+    API.get("/cms/content/career_positions")
+      .then((res) => {
+        if (res.data?.positions?.length) setOpenPositions(res.data.positions);
+      })
+      .catch(() => {});
+  }, []);
 
   const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
@@ -63,33 +79,9 @@ export default function CareerForm() {
     }
   };
 
-  const openPositions = [
-  {
-    title: "UI/UX Designer",
-    desc: "Design intuitive user experiences and beautiful interfaces.",
-  },
-  {
-    title: "Frontend Developer",
-    desc: "Build modern, fast, and responsive user interfaces.",
-  },
-  {
-    title: "Full Stack Developer",
-    desc: "Work across frontend, backend, and databases.",
-  },
-  {
-    title: "Backend Developer",
-    desc: "Design scalable APIs and server-side logic.",
-  },
-  {
-    title: "Product Designer",
-    desc: "Shape product vision and user-centered solutions.",
-  },
-];
-
-const handleSelectPosition = (role) => {
-  setForm((prev) => ({ ...prev, position: role }));
-};
-
+  const handleSelectPosition = (role) => {
+    setForm((prev) => ({ ...prev, position: role }));
+  };
 
   return (
     <div className="relative min-h-screen overflow-hidden">

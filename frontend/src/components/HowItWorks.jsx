@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaUserGraduate,
   FaBookOpen,
@@ -13,28 +13,49 @@ import {
   FaMoneyBillWave,
   FaInstagram
 } from "react-icons/fa";
+import API from "../utils/axios";
 
 export default function HowItWorks() {
-  /* General Steps */
-  const steps = [
+  const stepIcons = [
+    <FaUserGraduate size={28} className="text-emerald-600" />,
+    <FaBookOpen size={28} className="text-emerald-600" />,
+    <FaDownload size={28} className="text-emerald-600" />,
+  ];
+
+  const [steps, setSteps] = useState([
     {
-      icon: <FaUserGraduate size={28} className="text-emerald-600" />,
+      icon: stepIcons[0],
       title: "Create Account",
       description: "Sign up or log in to access notes, tools, and project services."
     },
     {
-      icon: <FaBookOpen size={28} className="text-emerald-600" />,
+      icon: stepIcons[1],
       title: "Choose What You Need",
       description:
         "Select semester notes, explore ready-made projects, or request custom MERN development."
     },
     {
-      icon: <FaDownload size={28} className="text-emerald-600" />,
+      icon: stepIcons[2],
       title: "Access & Use",
       description:
         "Download notes, buy projects, or get your custom project built by NoteSea."
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    API.get("/cms/content/how_it_works")
+      .then((res) => {
+        if (res.data?.steps?.length) {
+          setSteps(
+            res.data.steps.map((s, i) => ({
+              ...s,
+              icon: stepIcons[i % stepIcons.length],
+            }))
+          );
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   /* Features */
   const features = [

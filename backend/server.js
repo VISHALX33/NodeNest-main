@@ -20,6 +20,9 @@ import applicationRoutes from "./routes/applicationRoutes.js";
 import pyqRoutes from "./routes/pyqRoutes.js";
 import scard from "./routes/scardRoutes.js";
 import paperSubmissionRoutes from "./routes/paperSubmissionRoutes.js";
+import teamRoutes from "./routes/teamRoutes.js";
+import cmsRoutes from "./routes/cmsRoutes.js";
+import { getPublicAnnouncements } from "./controllers/cmsController.js";
 
 
 console.log("✅ CLIENT_URL:", process.env.CLIENT_URL);
@@ -34,6 +37,7 @@ app.use(
       "http://localhost:5173",
       "https://notenests.netlify.app",
       "https://www.notesea.xyz",
+      "https://notesea.xyz",
     ],
     credentials: true,
   })
@@ -63,6 +67,9 @@ app.use("/api/pyq", pyqRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/scard", scard);
 app.use("/api/paper-submissions", paperSubmissionRoutes);
+app.use("/api/team", teamRoutes);
+app.use("/api/cms", cmsRoutes);
+app.get("/api/notifications", getPublicAnnouncements);
 
 // ✅ Health check for uptime
 app.get("/ping", (req, res) => res.status(200).send("Notesea is alive!"));

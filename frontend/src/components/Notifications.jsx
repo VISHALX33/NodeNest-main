@@ -4,17 +4,13 @@ import { Coins, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchNotifications = async () => {
-      try {
-        const res = await API.get("/notifications");
-        setNotifications(res.data);
-      } catch (err) {
-        console.error("Error fetching notifications:", err);
-      }
-    };
-    fetchNotifications();
+    API.get("/notifications")
+      .then((res) => setNotifications(Array.isArray(res.data) ? res.data : []))
+      .catch(() => setNotifications([]))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -23,85 +19,59 @@ export default function Notifications() {
         🔔 Notifications & Updates
       </h1>
 
+      {loading && <p className="text-center text-slate-400 font-medium py-10">Loading...</p>}
 
-      {/* 1. SELL PAPER (Image Right) */}
-      <div className="bg-white shadow-md rounded-[2rem] p-6 md:p-10 flex flex-col md:flex-row items-center gap-10 mb-10 border border-slate-100">
-        <div className="flex-1 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-black uppercase tracking-widest">
-            <Coins size={12} /> Earning Opportunity
-          </div>
-          <h2 className="text-3xl font-black text-slate-800 tracking-tight">Sell Your PYQs & Earn ₹20!</h2>
-          <p className="text-slate-600 font-medium leading-relaxed">
-            NoteSea is now paying students for their previous year exam papers! Upload clear, clean images of papers from <strong>2026 onwards</strong> and get paid directly via UPI.
-          </p>
-          <ul className="space-y-2">
-            {["2026+ Year Papers", "Clear & Clean Images", "No Watermarks", "Instant Payment"].map((item, i) => (
-              <li key={i} className="flex items-center gap-2 text-sm text-slate-500 font-bold">
-                <CheckCircle size={16} className="text-emerald-500" /> {item}
-              </li>
-            ))}
-          </ul>
-          <button 
-            onClick={() => window.location.href = "/pyq"}
-            className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95 mt-4"
-          >
-            Sell Now & Earn <ArrowRight size={18} />
-          </button>
+      {!loading && notifications.length === 0 && (
+        <div className="bg-white shadow-md rounded-[2rem] p-10 text-center border border-slate-100">
+          <p className="text-slate-500 font-medium">No announcements yet. Check back soon!</p>
         </div>
-        <div className="flex-1 flex justify-center">
-          <img src="/sellpaper.png" alt="Earn Guide" className="rounded-3xl shadow-2xl w-full max-w-sm" />
-        </div>
-      </div>
+      )}
 
-      {/* 2. CALL FOR CONTRIBUTORS (Image Left) */}
-      <div className="bg-white shadow-md rounded-[2rem] p-6 md:p-10 flex flex-col md:flex-row-reverse items-center gap-10 mb-10 border border-slate-100">
-        <div className="flex-1 space-y-4">
-          <h2 className="text-3xl font-black text-slate-800 tracking-tight">Call for Contributors</h2>
-          <p className="text-slate-600 font-medium leading-relaxed">
-            Join the NoteSea community as a contributor! We are looking for students from <strong>Mechanical, Electrical, and Civil</strong> branches to share their high-quality notes.
-          </p>
-          <p className="text-sm text-slate-500 font-bold bg-slate-50 p-4 rounded-xl border border-slate-100">
-            ✅ Contributors get featured with their name and photo in our elite contributors section!
-          </p>
-          <p className="text-xs text-slate-400 font-bold">Connect with us via Instagram or Email: notesea.help@gmail.com</p>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <img src="https://res.cloudinary.com/dwq5qifuk/image/upload/v1768754606/Gemini_Generated_Image_jabgg9jabgg9jabg_itgqof.png" alt="Contributors" className="rounded-3xl shadow-xl w-full max-w-sm" />
-        </div>
-      </div>
-
-      {/* 3. MILESTONE: 100 USERS (Image Right) */}
-      <div className="bg-white shadow-md rounded-[2rem] p-6 md:p-10 flex flex-col md:flex-row items-center gap-10 mb-10 border border-slate-100">
-        <div className="flex-1 space-y-4">
-          <h2 className="text-3xl font-black text-slate-800 tracking-tight">🎉 100+ Active Users!</h2>
-          <p className="text-slate-600 font-medium leading-relaxed">
-            We are thrilled to announce that NoteSea has officially crossed the 100-user milestone. Thank you for your incredible support and trust in our platform.
-          </p>
-          <div className="w-20 h-1 bg-emerald-500 rounded-full" />
-          <p className="text-sm font-bold text-emerald-600 uppercase tracking-widest">More updates coming soon!</p>
-        </div>
-        <div className="flex-1 flex justify-center">
-          <img src="https://res.cloudinary.com/dwq5qifuk/image/upload/v1763888809/Gemini_Generated_Image_s9y1jas9y1jas9y1_1_x000iz.jpg" alt="100 users" className="rounded-3xl shadow-xl w-full max-w-sm" />
-        </div>
-      </div>
-
-   
-
-      {/* --- Example Notifications List --- */}
-      <div className="space-y-4">
-        {notifications.length === 0 ? (
-          <p className="text-gray-500 text-center">No notifications yet.</p>
-        ) : (
-          notifications.map((n, i) => (
+      <div className="space-y-10">
+        {notifications.map((n) => {
+          const imageLeft = n.layout === "image-left";
+          return (
             <div
-              key={i}
-              className="bg-emerald-50 border border-emerald-200 p-4 rounded-xl shadow"
+              key={n._id}
+              className={`bg-white shadow-md rounded-[2rem] p-6 md:p-10 flex flex-col items-center gap-10 border border-slate-100 ${
+                imageLeft ? "md:flex-row-reverse" : "md:flex-row"
+              }`}
             >
-              <h3 className="font-semibold text-emerald-700">{n.title}</h3>
-              <p className="text-gray-700">{n.message}</p>
+              <div className="flex-1 space-y-4">
+                {n.badge && (
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-[10px] font-black uppercase tracking-widest">
+                    <Coins size={12} /> {n.badge}
+                  </div>
+                )}
+                <h2 className="text-3xl font-black text-slate-800 tracking-tight">{n.title}</h2>
+                <p className="text-slate-600 font-medium leading-relaxed whitespace-pre-wrap">{n.body || n.message}</p>
+                {n.bullets?.length > 0 && (
+                  <ul className="space-y-2">
+                    {n.bullets.map((item, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm text-slate-500 font-bold">
+                        <CheckCircle size={16} className="text-emerald-500 shrink-0" /> {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {n.ctaText && n.ctaLink && (
+                  <button
+                    type="button"
+                    onClick={() => { window.location.href = n.ctaLink; }}
+                    className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-3.5 rounded-2xl font-bold hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-600/20 active:scale-95 mt-4"
+                  >
+                    {n.ctaText} <ArrowRight size={18} />
+                  </button>
+                )}
+              </div>
+              {n.image && (
+                <div className="flex-1 flex justify-center">
+                  <img src={n.image} alt={n.title} className="rounded-3xl shadow-2xl w-full max-w-sm" />
+                </div>
+              )}
             </div>
-          ))
-        )}
+          );
+        })}
       </div>
     </div>
   );

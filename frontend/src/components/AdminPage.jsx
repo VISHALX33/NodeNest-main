@@ -3,13 +3,22 @@ import API from "../utils/axios";
 import { 
   PlusCircle, BookOpen, GraduationCap, FileText, 
   CheckCircle, AlertCircle, ChevronRight, Menu, X, 
-  Search, Calendar, Filter, LayoutDashboard, LogOut
+  Search, Calendar, Filter, LayoutDashboard, LogOut,
+  Briefcase, Coins, Users, Image as ImageIcon, FolderKanban, Mail, Bell, Megaphone
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import AdminPYQ from "./AdminPYQ";
 import AdminServiceOrders from "./AdminServiceOrders";
 import AdminPaperSubmissions from "./AdminPaperSubmissions";
-import { Briefcase, Coins } from "lucide-react";
+import AdminTeam from "./AdminTeam";
+import {
+  AdminGallery,
+  AdminProjects,
+  AdminCareers,
+  AdminContact,
+  AdminAnnouncements,
+  AdminSiteContent,
+} from "./AdminCMS";
 import { useNavigate } from "react-router-dom";
 
 export default function AdminPage() {
@@ -122,6 +131,13 @@ export default function AdminPage() {
     { id: "pyq", label: "PYQ Papers", icon: FileText },
     { id: "services", label: "Service Orders", icon: Briefcase },
     { id: "submissions", label: "Earn Program", icon: Coins },
+    { id: "team", label: "Team & Partners", icon: Users },
+    { id: "gallery", label: "Gallery", icon: ImageIcon },
+    { id: "projects", label: "Projects", icon: FolderKanban },
+    { id: "careers", label: "Careers", icon: FileText },
+    { id: "contact", label: "Contact Inbox", icon: Mail },
+    { id: "announcements", label: "Announcements", icon: Bell },
+    { id: "site", label: "Site Content", icon: Megaphone },
   ];
 
   return (
@@ -504,6 +520,48 @@ export default function AdminPage() {
             {activeTab === "submissions" && (
               <motion.div key="submissions" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
                 <AdminPaperSubmissions filters={filters} />
+              </motion.div>
+            )}
+
+            {activeTab === "team" && (
+              <motion.div key="team" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminTeam filters={filters} />
+              </motion.div>
+            )}
+
+            {activeTab === "gallery" && (
+              <motion.div key="gallery" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminGallery filters={filters} />
+              </motion.div>
+            )}
+
+            {activeTab === "projects" && (
+              <motion.div key="projects" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminProjects filters={filters} />
+              </motion.div>
+            )}
+
+            {activeTab === "careers" && (
+              <motion.div key="careers" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminCareers filters={filters} />
+              </motion.div>
+            )}
+
+            {activeTab === "contact" && (
+              <motion.div key="contact" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminContact filters={filters} />
+              </motion.div>
+            )}
+
+            {activeTab === "announcements" && (
+              <motion.div key="announcements" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminAnnouncements />
+              </motion.div>
+            )}
+
+            {activeTab === "site" && (
+              <motion.div key="site" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                <AdminSiteContent />
               </motion.div>
             )}
           </AnimatePresence>

@@ -118,6 +118,10 @@ export default function LandingPage({ switchToSignUp }) {
             to help you learn, build, and grow faster.
           </p>
 
+          <p className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-semibold">
+            🎉 Trusted by <span className="font-bold">400+</span> students
+          </p>
+
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
             <a
               href="#login"
@@ -197,7 +201,7 @@ export default function LandingPage({ switchToSignUp }) {
           <div className="grid md:grid-cols-5 gap-8">
 
             {[
-              { value: "300+", label: "Active Users" },
+              { value: "400+", label: "Active Users" },
               { value: "4.8★", label: "Student Satisfaction" },
               { value: "10+", label: "Projects Delivered" },
               { value: "98%", label: "Success Rate" },

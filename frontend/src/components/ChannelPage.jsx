@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaYoutube, FaCopy, FaCheck } from "react-icons/fa";
 import bannerImage from "../assets/banner.png";
-import vishalp from "../assets/Vishalp.jpg";
+import vishalp from "../assets/Vishalp.jpeg";
+import API from "../utils/axios";
 
 export default function ChannelPage() {
   const [copied, setCopied] = useState(false);
-
-  const channelData = {
+  const [channelData, setChannelData] = useState({
     name: "Vishal Prajapati",
     handle: "@Vishalprajapati-q7l",
     description:
       "Full-stack development tutorials, real projects, and coding tips. Learn by building and grow as a developer.",
     profileImage: vishalp,
+    bannerImage: bannerImage,
     youtubeChannelUrl: "https://www.youtube.com/@Vishalprajapati-q7l",
-  };
+  });
+
+  useEffect(() => {
+    API.get("/cms/content/channel")
+      .then((res) => {
+        const d = res.data || {};
+        setChannelData((prev) => ({
+          ...prev,
+          ...d,
+          profileImage: d.profileImage || prev.profileImage,
+          bannerImage: d.bannerImage || prev.bannerImage,
+        }));
+      })
+      .catch(() => {});
+  }, []);
 
   const handleCopy = async () => {
     try {
@@ -28,58 +43,30 @@ export default function ChannelPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg overflow-hidden">
-        
-        {/* Banner */}
-        <img
-          src={bannerImage}
-          alt="Banner"
-          className="w-full h-40 object-cover"
-        />
+        <img src={channelData.bannerImage} alt="Banner" className="w-full h-40 object-cover" />
 
-        {/* Profile Section */}
         <div className="flex flex-col items-center text-center px-6 pb-8 -mt-16">
-          
-          {/* Profile Image */}
           <img
             src={channelData.profileImage}
             alt={channelData.name}
             className="w-32 h-32 rounded-full border-4 border-white shadow-md object-cover"
           />
 
-          {/* Channel Name */}
-          <h1 className="mt-4 text-3xl font-extrabold text-emerald-600">
-            {channelData.name}
-          </h1>
+          <h1 className="mt-4 text-3xl font-extrabold text-emerald-600">{channelData.name}</h1>
 
-          {/* Handle + Copy */}
           <div className="flex items-center gap-2 mt-2">
             <p className="text-gray-500 text-lg">{channelData.handle}</p>
-
-            <button
-              onClick={handleCopy}
-              className="p-2 hover:bg-emerald-50 rounded-full transition-all"
-              title="Copy YouTube handle"
-            >
-              {copied ? (
-                <FaCheck className="text-emerald-600 text-sm" />
-              ) : (
-                <FaCopy className="text-gray-500 hover:text-emerald-600 text-sm" />
-              )}
+            <button onClick={handleCopy} className="p-2 hover:bg-emerald-50 rounded-full transition-all" title="Copy YouTube handle">
+              {copied ? <FaCheck className="text-emerald-600 text-sm" /> : <FaCopy className="text-gray-500 hover:text-emerald-600 text-sm" />}
             </button>
           </div>
 
           {copied && (
-            <p className="text-emerald-600 text-sm mt-1 font-medium animate-pulse">
-              Copied to clipboard!
-            </p>
+            <p className="text-emerald-600 text-sm mt-1 font-medium animate-pulse">Copied to clipboard!</p>
           )}
 
-          {/* Description */}
-          <p className="mt-5 text-gray-600 max-w-xl">
-            {channelData.description}
-          </p>
+          <p className="mt-5 text-gray-600 max-w-xl">{channelData.description}</p>
 
-          {/* CTA */}
           <a
             href={channelData.youtubeChannelUrl}
             target="_blank"

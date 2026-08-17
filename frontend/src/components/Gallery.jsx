@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaYoutube, FaImage, FaTimes } from "react-icons/fa";
+import API from "../utils/axios";
 
-export default function Gallery() {
-  // Sample gallery items - You can replace this with API calls to fetch from backend
-  const [galleryItems] = useState([
+const FALLBACK_GALLERY = [
   {
     id: 1,
     type: "image",
@@ -160,8 +159,18 @@ export default function Gallery() {
   description: "Full stack e-commerce website with product management, shopping cart, secure checkout, and order tracking"
 }
 
-]);
+];
 
+export default function Gallery() {
+  const [galleryItems, setGalleryItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    API.get("/cms/gallery/public")
+      .then((res) => setGalleryItems(res.data?.length ? res.data : FALLBACK_GALLERY))
+      .catch(() => setGalleryItems(FALLBACK_GALLERY))
+      .finally(() => setLoading(false));
+  }, []);
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [filter, setFilter] = useState("all"); // all, images, videos
@@ -229,10 +238,13 @@ export default function Gallery() {
         </div>
 
         {/* Gallery Grid */}
+        {loading ? (
+          <p className="text-center text-slate-500 py-16 font-medium">Loading gallery...</p>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredItems.map((item) => (
             <div
-              key={item.id}
+              key={item._id || item.id}
               onClick={() => openModal(item)}
               className="group relative bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:-translate-y-2"
             >
@@ -274,9 +286,10 @@ export default function Gallery() {
             </div>
           ))}
         </div>
+        )}
 
         {/* Empty State */}
-        {filteredItems.length === 0 && (
+        {!loading && filteredItems.length === 0 && (
           <div className="text-center py-20">
             <p className="text-gray-500 text-xl">No items found in this category</p>
           </div>

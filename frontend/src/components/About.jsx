@@ -6,9 +6,27 @@ import {
   FaLaptopCode,
   FaUserGraduate,
 } from "react-icons/fa";
-import founderImg from "../assets/Vishalp.jpg";
+import founderImg from "../assets/Vishalp.jpeg";
+import { useEffect, useState } from "react";
+import API from "../utils/axios";
 
 export default function About() {
+  const [hero, setHero] = useState({
+    eyebrow: "Our Story",
+    title: "About NoteSea",
+    summary:
+      "NoteSea was built with a simple goal — to make quality education and resources accessible to every student. What started as a small idea to share notes has now grown into a student-powered platform helping thousands across RTU and beyond.",
+    heroImage: "/login1.png",
+  });
+
+  useEffect(() => {
+    API.get("/cms/content/about")
+      .then((res) => {
+        if (res.data) setHero((prev) => ({ ...prev, ...res.data }));
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <div className="relative font-sans overflow-hidden bg-gray-50">
 
@@ -20,12 +38,16 @@ export default function About() {
           transition={{ duration: 0.7 }}
           className="flex-1 text-center md:text-left space-y-4"
         >
-          <p className="text-emerald-600 font-semibold">Our Story</p>
+          <p className="text-emerald-600 font-semibold">{hero.eyebrow || "Our Story"}</p>
           <h1 className="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
-            About <span className="text-emerald-700">NoteSea</span>
+            {hero.title?.includes("NoteSea") ? (
+              <>About <span className="text-emerald-700">NoteSea</span></>
+            ) : (
+              hero.title || <>About <span className="text-emerald-700">NoteSea</span></>
+            )}
           </h1>
           <p className="text-gray-600 text-lg max-w-lg mx-auto md:mx-0">
-            NoteSea was built with a simple goal — to make quality education and resources accessible to every student. What started as a small idea to share notes has now grown into a student-powered platform helping thousands across RTU and beyond.
+            {hero.summary}
           </p>
         </motion.div>
 
@@ -36,7 +58,7 @@ export default function About() {
           className="flex-1"
         >
           <img
-            src="/login1.png"
+            src={hero.heroImage || "/login1.png"}
             alt="About NoteSea"
             className="w-full max-w-md mx-auto rounded-3xl shadow-2xl hover:scale-105 transition-transform duration-500"
           />
