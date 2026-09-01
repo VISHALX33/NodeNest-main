@@ -30,6 +30,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import InstallButton from "./components/InstallButton";
 import TermsAndConditions from "./components/TermsAndConditions.jsx";
+import PrivacyPolicy from "./components/PrivacyPolicy.jsx";
 import About from "./components/About";
 import CareerForm from "./components/CareerForm.jsx";
 import PartnerPage from "./components/PartnerPage.jsx";
@@ -123,11 +124,9 @@ function App() {
         <Route
           path="/contact"
           element={
-            <PrivateRoute>
-              <Layout>
-                <ContactUs />
-              </Layout>
-            </PrivateRoute>
+            <Layout>
+              <ContactUs />
+            </Layout>
           }
         />
         <Route
@@ -364,6 +363,7 @@ function App() {
         />
 
         <Route path="/terms" element={<TermsAndConditions />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route
           path="/partners"
           element={

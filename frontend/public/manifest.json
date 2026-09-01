@@ -1,10 +1,10 @@
 {
-  "name": "NoteNest",
-  "short_name": "NoteNest",
+  "name": "NoteSea",
+  "short_name": "NoteSea",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#059669",
   "orientation": "portrait",
   "icons": [
     {

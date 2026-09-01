@@ -54,6 +54,7 @@ const SUPPORT_LINKS = [
   { to: "/contact", label: "Contact Us" },
   { to: "/careers", label: "Careers" },
   { to: "/terms", label: "Terms & Conditions" },
+  { to: "/privacy", label: "Privacy Policy" },
   { to: "/how-it-works", label: "Help Center" },
 ];
 

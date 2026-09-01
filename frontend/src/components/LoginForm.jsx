@@ -93,9 +93,11 @@ export default function LandingPage({ switchToSignUp }) {
             <a href="#home" className="hover:text-emerald-600">Home</a>
             <a href="#how" className="hover:text-emerald-600">How it Works</a>
             <a href="#login" className="hover:text-emerald-600">Login</a>
-            <a href="/aboutmain" className="hover:text-emerald-600">About</a>
-            <a href="/terms" className="hover:text-emerald-600">Terms & Conditions</a>
-            <a href="/Partners" className="hover:text-emerald-600">Partners</a>
+            <a href="/about-home" className="hover:text-emerald-600">About</a>
+            <a href="/contact" className="hover:text-emerald-600">Contact</a>
+            <a href="/terms" className="hover:text-emerald-600">Terms</a>
+            <a href="/privacy" className="hover:text-emerald-600">Privacy</a>
+            <a href="/partners" className="hover:text-emerald-600">Partners</a>
 
           </div>
           <a href="#login" className="bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition">
@@ -529,7 +531,7 @@ export default function LandingPage({ switchToSignUp }) {
               <li><a href="https://calculator.notesea.xyz/" target="_blank" rel="noopener noreferrer" className="hover:underline">CGPA Calculator</a></li>
               <li><a href="#how" className="hover:underline">How it Works</a></li>
               <li><a href="#faq" className="hover:underline">FAQ</a></li>
-              <li><a href="#contact" className="hover:underline">Contact</a></li>
+              <li><a href="/contact" className="hover:underline">Contact</a></li>
             </ul>
           </div>
 
@@ -560,7 +562,8 @@ export default function LandingPage({ switchToSignUp }) {
               <li><a href="/about-home" className="hover:underline">About Us</a></li>
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
               <li><a href="/terms" className="hover:underline">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:underline">Help Center</a></li>
+              <li><a href="/privacy" className="hover:underline">Privacy Policy</a></li>
+              <li><a href="#faq" className="hover:underline">Help Center</a></li>
               <li><a href="/careers" className="hover:underline">Careers</a></li>
             </ul>
 
